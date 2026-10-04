@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Downloads and model weights (re-created by the scripts)
+.cache/
+data/raw/
+models/
+*.safetensors
+*.bin
+*.pt
+
+# Gradio
+.gradio/
+flagged/
+
+# OS
+.DS_Store
