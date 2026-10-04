@@ -2,12 +2,14 @@
 
 Usage:
     python -m src.download            # BongoScam + Chichewa
-    python -m src.download --fasttext # also the 2.7 GB Swahili fastText model
+    python -m src.download --fasttext # also the 2.7 GB Swahili fastText model (unpacked to 3.3 GB)
 """
 from __future__ import annotations
 
 import argparse
+import gzip
 import io
+import shutil
 import urllib.request
 import zipfile
 
@@ -34,10 +36,14 @@ def main() -> None:
         config.CHICHEWA_XLSX.write_bytes(fetch(config.CHICHEWA_URL))
 
     if args.fasttext:
-        target = config.CACHE / "cc.sw.300.bin.gz"
-        if not target.exists():
+        gz, binary = config.CACHE / "cc.sw.300.bin.gz", config.CACHE / "cc.sw.300.bin"
+        if not gz.exists():
             print("fastText Swahili vectors (2.7 GB)...")
-            urllib.request.urlretrieve(config.FASTTEXT_URL, target)  # noqa: S310
+            urllib.request.urlretrieve(config.FASTTEXT_URL, gz)  # noqa: S310
+        if not binary.exists():
+            # gensim cannot read this model reliably from the .gz, so unpack it once.
+            with gzip.open(gz, "rb") as src, binary.open("wb") as dst:
+                shutil.copyfileobj(src, dst)
     print("Done:", sorted(p.name for p in config.DATA_RAW.iterdir()))
 
 
