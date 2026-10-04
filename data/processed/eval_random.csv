@@ -1,0 +1,641 @@
+set,id,label,text
+val,bongo_0013,1,FRIIMASON TIMIZA NDOTO KUMILIKI PESA MAJUMBA NA MAGARI YA KIFAHARI PIA KUZA BIASHARA VIPAJI NYOTA NA PETE. TUPIGIE SIMU <PHONE> UKIWA TAYARI KUJIUNGA
+val,bongo_0019,0,Nimetuma pesa kwa namba uliyonipa.
+val,bongo_0020,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By SALOME KALUNGA,ni grp member"
+val,bongo_0030,1,"KARIBU UJIUNGE NA CHAMA CHA (666)FREE'MASON UBADILISHE MAISHA YAKO.MILIKI MALI,PESA(UTAJIRI) MAJUMBA NA MAGARI BILA KAFALA PIGA <PHONE> au <PHONE>"
+val,bongo_0034,0,Mashindano ya CAF Champions League mwaka huu yana ushindani mkubwa sana.
+val,bongo_0044,0,"Bro, uliona VAR ilivyoamua ile offside? Nafikiri hawakuwa sahihi."
+val,bongo_0047,1,MZEE HADIJA LAI tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val,bongo_0054,0,Tafadhali nijulishe kama una muda kesho.
+val,bongo_0056,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka TUZO POINTI. Piga <PHONE> ili kupokea Pesa yako."
+val,bongo_0058,0,"Bro, umesikia Bongo Movie Awards mwaka huu wameongeza kipengele cha digital content?"
+val,bongo_0061,1,"Dear, No need to go out work, just at home to earn <AMOUNT> a day, please contact us: <URL>"
+val,bongo_0064,1,ela tuma kwa namba hii <PHONE> jina RAMATUNGU
+val,bongo_0067,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (MARIAM NDUGAI)
+val,bongo_0090,0,Ninaomba uniletee sukari kidogo ukitoka kazini.
+val,bongo_0097,0,Naomba uniunganishe na rafiki yako.
+val,bongo_0100,1,"VODA OFA hongera umepata zawadi <AMOUNT> milioni kutoka (VODA OFA) piga sim,. <PHONE> kupata zawadi asante"
+val,bongo_0101,1,Nitumie tu kwenye hii VODACOM <PHONE> jina LUKA KIMBANGU.
+val,bongo_0105,0,"Bro, uliona yule TikToker maarufu alipata dili la matangazo? Jamaa anazidi kufanikiwa."
+val,bongo_0121,0,Ninakuombea maisha marefu na yenye furaha.
+val,bongo_0128,1,Naomba unitumie iyo ela kwenye namba hii ya voda <PHONE> . jina (LUKA KIMBANGU)
+val,bongo_0159,1,Habari za asubuhi. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0160,0,"Pole na changamoto zako, usikate tamaa."
+val,bongo_0175,0,Yule beki wa Yanga anaonekana kuwa na future bright. Ameonyesha kiwango cha hali ya juu.
+val,bongo_0178,1,"Habari za mda huu,mimi Magomba Maila,hii namba yangu ya vodacom.Vp mbona shem Magomba Maila, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val,bongo_0182,0,"Mambo vipi? Mechi ya jana ilikuwa kali sana, uliona goli la mwisho?"
+val,bongo_0183,1,HABARI ZAUKO NI MIMI MWENYE NYUMBA WAKO MNA ENDEREAJE APO NYUMBANI IYO NAMBA YANGU MPYA YA AIRTEL NAKUMBUSHIA KODI YANGU MANA NAONA KIMYA SANA NAOMBA TUWA SIRIANE
+val,bongo_0186,0,Tafadhali nipatie maelezo kamili kuhusu safari ya kesho.
+val,bongo_0197,0,Watoto wanahitaji msaada wako kwa ajili ya masomo yao.
+val,bongo_0212,1,Pesa tuma kwa namba hii <PHONE> jina PETER NYANGE
+val,bongo_0218,1,Utanitumia kwa hîi halotel <PHONE> j'ina ni HADIJA LAI.
+val,bongo_0219,0,Habari za asubuhi?
+val,bongo_0223,1,Iyo hela itume humu kwenye tigo <PHONE> jina lije SALOME KALUNGA.
+val,bongo_0252,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (PEREGIA FILIPO) ile namba usitumie laini inamatatizo.
+val,bongo_0253,0,"Nimepokea barua yako, nitakujibu hivi karibuni."
+val,bongo_0254,1,Iyo Hela itume humu kwenye VODACOM <PHONE> jina lije JUMA SIKAREKO.
+val,bongo_0256,1,Naomba unitumie iyo Hela kwenye namba hii ya VODACOM <PHONE> . jina (PEREGIA FILIPO)
+val,bongo_0258,1,Iyo Pesa itume humu kwenye Halotel <PHONE> jina lije PEREGIA FILIPO.
+val,bongo_0265,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya tigo. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0270,0,Ulipata ile simu uliyokuwa unatafuta? Naweza kukusaidia kuifuatilia.
+val,bongo_0271,0,"Usisahau mkutano wa kikundi kesho saa tatu, tutakutana pale ofisini."
+val,bongo_0281,1,Utanitumia kwenye ii <PHONE> vodacom jina JENEROZA ROCK BENEDICTO namba yangu inadeni usiitumie
+val,bongo_0289,0,Nitakupigia simu baadaye tukizungumze zaidi.
+val,bongo_0291,0,Tunatafuta watu wa kujitolea kusaidia watoto yatima kwenye kituo cha karibu.
+val,bongo_0296,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja Magomba Maila
+val,bongo_0303,1,"Mpigie Mzee ALLY ISSA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+val,bongo_0306,0,Tafadhali niambie bei ya bidhaa hizo.
+val,bongo_0359,0,Kanisa litakuwa na ibada maalum Jumapili kuanzia saa tatu asubuhi.
+val,bongo_0363,0,Tafadhali uniangalizie bei ya mafuta ya kupikia sokoni.
+val,bongo_0389,0,Nasikia Nasibu ameanza biashara ya magari. Jamaa anafanya kazi kweli.
+val,bongo_0392,1,Utanitumia kwa hîi HALOTEL <PHONE> j'ina ni Magomba Maila.
+val,bongo_0394,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (PETER NYANGE)
+val,bongo_0402,0,Kesho tuna kikao saa nane.
+val,bongo_0410,0,"Kaka yangu, safiri salama. Usisahau kuniandikia ukifika!"
+val,bongo_0418,0,Tafadhali nipatie namba ya dereva wa boda.
+val,bongo_0431,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By LUKA KIMBANGU,ni grp member"
+val,bongo_0436,0,Safi mwamba kazi kwanza. Harafu sio lazima sana
+val,bongo_0439,0,"Kesho kuna kikao cha familia saa nne asubuhi, tafadhali usikose."
+val,bongo_0441,1,"Mpigie Mzee HOSEA MKUMBUKWA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+val,bongo_0451,1,Nitumie tu kwenye hii Vodacom <PHONE> jina ALLY ISSA.
+val,bongo_0456,1,Utanitumia. kwemye namba <PHONE> ya AIRTEL jina FEBU SHADI WILISON.
+val,bongo_0463,0,Nisaidie na namba ya fundi.
+val,bongo_0476,1,Utanitumia kwa hîi Airtel <PHONE> j'ina ni HADIJA LAI.
+val,bongo_0509,1,Au nitumie kwenye m-pesa Namba. <PHONE> jina litakuja NASHONI MBIRIBI
+val,bongo_0511,0,"Pole na kazi, usijisahau kula chakula."
+val,bongo_0517,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja ABDALLAH MWANAKU Ukituma unijulishe
+val,bongo_0554,0,Bado siamini Bayern Munich walishindwa kufunga hata goli moja jana.
+val,bongo_0563,0,Kumbuka kuhudhuria warsha ya maendeleo ya vijana kesho.
+val,bongo_0571,0,Kwa kweli...kutunza muda ni kila kitu!!
+val,bongo_0577,1,Nitumie tu kwenye hii HALOTEL <PHONE> jina Ester kalobelo.
+val,bongo_0580,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni ALLY ISSA.
+val,bongo_0584,0,MUNGU akubariki sana
+val,bongo_0606,1,Utanitumia kwenye ii <PHONE> tigo jina SALOME KALUNGA namba yangu inadeni usiitumie
+val,bongo_0611,0,Nitakuja na familia yangu kwa chakula cha mchana nyumbani kwako.
+val,bongo_0621,1,Samahani naomba itume kwenye TIGO <PHONE> HADIJA LAI.
+val,bongo_0628,1,Tumia namba hii ya TIGO <PHONE> kutuma hiyo ela jina SALOME KALUNGA
+val,bongo_0638,1,Iyo ela tuma humu kwenye Halotel <PHONE> Jina lije PETER NYANGE.
+val,bongo_0661,0,Nimepanga safari ya kwenda mbuga za wanyama mwezi ujao. utakuwa na mda kwende pamoja?
+val,bongo_0667,1,MZEE JUMA SIKAREKO tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val,bongo_0687,0,Tunakukumbuka sana nyumbani.
+val,bongo_0688,1,<PHONE> Jina litakuja LINUSI MALALO Nitumie kwenye hiyo AIRTEL
+val,bongo_0689,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka TUZO POINT. Piga <PHONE> ili kupokea pesa yako."
+val,bongo_0701,0,"Nakupenda zaidi ya jana, na kila siku upendo wangu unaongezeka."
+val,bongo_0702,1,"Habari za asubuhi,mimi JUMANNE YASINI MASAKA,hii namba yangu ya tigo.Vp mbona shem JUMANNE YASINI MASAKA, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val,bongo_0719,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0722,1,MZEE Ester kalobelo tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val,bongo_0724,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya Tigo. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0725,0,Umbea ni sehemu ya ndoa
+val,bongo_0726,0,Ninja ana hoja apewe muda zaidi
+val,bongo_0729,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni LINUSI MALALO.
+val,bongo_0737,1,"Habari za mchana,mimi JUMANNE YASINI MASAKA,hii namba yangu ya Airtel.Vp mbona shem JUMANNE YASINI MASAKA, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val,bongo_0741,0,Ningependa kujua kama uko tayari kwa mkutano ule wa biashara ndogo ndogo. Tafadhali nijulishe.
+val,bongo_0749,1,Habari za muda. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0751,1,tuma kwenye namba hii ya AirtelMoney <PHONE> jina litakuja SAID MTAALAM Ukituma unijulishe
+val,bongo_0755,1,Iyo hela itume humu kwenye tigo <PHONE> jina lije Ester kalobelo.
+val,bongo_0773,0,"Mambo vipi, uko poa?"
+val,bongo_0776,0,Tafadhali nitumie salio kidogo.
+val,bongo_0792,0,Asante kwa kushiriki kwenye harambee ya shule. Mchango wako umewekwa.
+val,bongo_0793,0,Uko wapi sasa hivi? Nahitaji kukuona.
+val,bongo_0804,0,"Je, unaweza kunisaidia na ada ya shule ya mtoto wangu?"
+val,bongo_0806,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya TIGO. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_0807,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja NASHONI MBIRIBI
+val,bongo_0814,0,Usisahau kufunga mlango wa mbele kabla ya kulala.
+val,bongo_0819,0,Nipigie ukiwa tayari kwa mazungumzo.
+val,bongo_0822,0,Tutaongea zaidi kuhusu hili kesho.
+val,bongo_0823,1,voda QI2J Imethibitishwa namba yako ya 067 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea Hela yako piga <PHONE> Asante
+val,bongo_0844,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA JOACHIM KAPUFI NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+val,bongo_0846,1,"Habari za siku,mimi MARIAM NDUGAI,hii namba yangu ya airtel.Vp mbona shem MARIAM NDUGAI, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val,bongo_0879,0,Mwambaa uyuu
+val,bongo_0888,0,"Nimepoteza funguo, naomba msaada wako."
+val,bongo_0904,0,Naomba unisaidie na kazi hii ngumu.
+val,bongo_0910,0,Hali ya barabara leo ilikuwa mbaya sana.
+val,bongo_0911,1,voda ZYBU Imethibitishwa namba yako ya 065 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea hela yako piga <PHONE> Asante
+val,bongo_0918,1,Nitumie tu kwenye hii Tigo <PHONE> jina SALOME KALUNGA.
+val,bongo_0929,0,Upo wapi sasa?
+val,bongo_0931,1,Utanitumia kwenye ii <PHONE> TIGO jina PEREGIA FILIPO namba yangu inadeni usiitumie
+val,bongo_0932,0,"Simba walicheza vizuri jana, lakini Yanga waliwazidi ujanja dakika za mwisho."
+val,bongo_0955,1,Tumia namba hii ya Tigo <PHONE> kutuma hiyo pesa jina PETER NYANGE
+val,bongo_0985,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka VODA OFA. Piga <PHONE> ili kupokea hela yako."
+val,bongo_1000,0,Yupo sahihi
+val,bongo_1004,1,Utanitumia kwa hîi HALOTEL <PHONE> j'ina ni JUMA SIKAREKO.
+val,bongo_1011,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja Magomba Maila
+val,bongo_1032,0,Nimefurahi kuona maendeleo yako kazini.
+val,bongo_1067,0,"Nasikia kuna show kubwa Dar es Salaam, watakuwepo mastaa wote wa muziki."
+val,bongo_1076,1,Au nitumie kwenye HaloPesa Namba. <PHONE> jina litakuja JUMA SIKAREKO
+val,bongo_1086,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By JENEROZA ROCK BENEDICTO,ni grp member"
+val,bongo_1092,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja ABDALLAH MWANAKU Ukituma unijulishe
+val,bongo_1098,0,Nitakutafuta baadaye kwa mazungumzo zaidi.
+val,bongo_1111,0,Nitakuja kukuchukua kazini saa kumi jioni.
+val,bongo_1121,0,"Mama, kuna mkutano wa wazazi shule leo jioni. Tafadhali njoo ili tuzungumze kuhusu maendeleo ya mtoto."
+val,bongo_1124,0,Tafadhali hakikisha umejiandaa kwa harusi ya Jumamosi. Tutanunua zawadi leo.
+val,bongo_1127,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya VODACOM. Mbona kimya na siku zinazidi kwenda...?
+val,bongo_1141,0,Na mwanaume je?
+val,bongo_1146,1,Tumia namba hii ya HALOTEL <PHONE> kutuma hiyo hela jina ALLY ISSA
+val,bongo_1160,0,Nimefurahi sana kupata nafasi ya kuonana nawe leo.
+val,bongo_1171,1,Tumia namba hii ya halotel <PHONE> kutuma hiyo ela jina JENEROZA ROCK BENEDICTO
+val,bongo_1174,0,"Usiku mwema, naomba uniamshie saa kumi alfajiri."
+val,bongo_1203,1,Iyo Pesa itume humu kwenye Tigo <PHONE> jina lije OLIVA MATIAS.
+val,bongo_1219,0,Yule msanii wa zamani wa Taarab amerudi kwenye game. Lazima tusikie nyimbo zake mpya.
+val,bongo_1222,0,Nitakutembelea ofisini kwako kwa mazungumzo rasmi.
+val,bongo_1226,0,Mambo vipi bro? Hivi majuzi umefanya nini kipya? Tukutane hivi karibuni!
+val,bongo_1258,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA KHADIJA SUMBAI NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+val,bongo_1268,1,Airtel 8JLS Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka TUZO POINT ilikupokea Pesa yako piga <PHONE> Asante
+val,bongo_1270,1,Au nitumie kwenye m-pesa Namba. <PHONE> jina litakuja MWANAIDI KHAMISI
+val,bongo_1273,0,"Nimechelewa kidogo, lakini nakukaribia."
+val,bongo_1274,0,Nitapanga muda mzuri wa kuja kwako.
+val,bongo_1282,0,"Ushabiki wa Liverpool ni tofauti kabisa, mashabiki wao hawakati tamaa."
+val,bongo_1284,1,Nitumie tu kwenye hii Tigo <PHONE> jina ABDALLAH MWANAKU.
+val,bongo_1288,1,Utanitumia kwenye ii <PHONE> vodacom jina FEBU SHADI WILISON namba yangu inadeni usiitumie
+val,bongo_1303,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja JENEROZA ROCK BENEDICTO Ukituma unijulishe
+val,bongo_1305,1,hela tuma kwa namba hii <PHONE> jina ALLY ISSA
+val,bongo_1308,1,tuma kwenye namba hii ya m-pesa <PHONE> jina litakuja MARIAM NDUGAI Ukituma unijulishe
+val,bongo_1309,1,Au nitumie kwenye HaloPesa Namba. <PHONE> jina litakuja KHADIJA SUMBAI
+val,bongo_1321,1,Utanitumia. kwemye namba <PHONE> ya Vodacom jina PETER NYANGE.
+val,bongo_1333,1,Samahani naomba itume kwenye TIGO <PHONE> PEREGIA FILIPO.
+val,bongo_1337,0,"Nimepata ujumbe wako, nashukuru sana kwa taarifa hiyo muhimu."
+val,bongo_1343,0,mungu aku linde kwa moyo uo
+val,bongo_1348,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka Tuzo Point. Piga <PHONE> ili kupokea ela yako."
+val,bongo_1350,1,Utanitumia. kwemye namba <PHONE> ya halotel jina ALLY ISSA.
+val,bongo_1355,1,halotel 2Z41 Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka Tuzo Point ilikupokea ela yako piga <PHONE> Asante
+val,bongo_1357,0,Naomba unipe updates kuhusu kazi yetu.
+test,bongo_0015,1,Congratulations! Your CV has passed. You can get <AMOUNT> in a day. for details: <URL>
+test,bongo_0021,1,Nitumie tu kwenye hii voda <PHONE> jina JUMANNE YASINI MASAKA.
+test,bongo_0025,1,Tigo CQGZ Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka TUZO POINTI ilikupokea Hela yako piga <PHONE> Asante
+test,bongo_0032,1,MPIGIE MZEE RAMATUNGU WA TIBA ASILI. MALI. PETE. NYOTA. UZAZI. KUPANDISHWA CHEO KAZINI. KULUDISHA MALI ILIYOPOTEA. NAMBA <PHONE>
+test,bongo_0046,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA RAMATUNGU NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+test,bongo_0048,1,Iyo Pesa itume humu kwenye TIGO <PHONE> jina lije JOACHIM KAPUFI.
+test,bongo_0050,0,"Nimepokea taarifa kuhusu malipo, nafuatilia ili kuhakikisha kila kitu kiko sawa."
+test,bongo_0055,1,Habari za asubuhi. Mimi mwenye nyumba wako hii namba yangu ya Vodacom. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_0059,1,Iyo Pesa itume humu kwenye Airtel <PHONE> jina lije JENEROZA ROCK BENEDICTO.
+test,bongo_0060,1,"Mpigie Mzee MARIAM NDUGAI kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test,bongo_0066,0,"Nitakutumia picha za tukio la jana, utazipenda."
+test,bongo_0075,1,"Mpigie Mzee JUMANNE YASINI MASAKA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test,bongo_0076,0,"Yule kipa wa Liverpool ana reflex za ajabu, amewashangaza wote."
+test,bongo_0079,1,HABARI ZAUKO NI MIMI MWENYE NYUMBA WAKO MNA ENDEREAJE APO NYUMBANI IYO NAMBA YANGU MPYA YA VODACOM NAKUMBUSHIA KODI YANGU MANA NAONA KIMYA SANA NAOMBA TUWA SIRIANE
+test,bongo_0088,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (JUMA SIKAREKO) ile namba usitumie laini inamatatizo.
+test,bongo_0096,1,Iyo ela tuma humu kwenye HALOTEL <PHONE> Jina lije JUMANNE YASINI MASAKA
+test,bongo_0108,1,Naomba unitumie iyo ela kwenye namba hii ya Vodacom <PHONE> . jina (HADIJA LAI)
+test,bongo_0110,0,Sasa kuna ubaya gani kufanya hivyo??
+test,bongo_0124,1,"Mpigie Mzee FEBU SHADI WILISON kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test,bongo_0125,1,Nitumie tu kwenye hii Halotel <PHONE> jina JOACHIM KAPUFI.
+test,bongo_0141,0,Ninashukuru sana kwa kuwa nami wakati mgumu.
+test,bongo_0144,0,Mmh hyu jamaa atari
+test,bongo_0148,0,Huyu mwakani namuona Simba au yanga
+test,bongo_0157,1,mjukuu wangu utafuta ji wako mgumu ela hazikai mkononi pakazinaisha unasota sana mpenzi hamuelewani je utatunza siri nikikusaidia pesa bila mashaliti magumu nipigie nikwelekeze NO .. <PHONE>
+test,bongo_0158,0,Mwenyezi Mungu aendelee kukulinda.
+test,bongo_0168,1,Samahani naomba itume kwenye AIRTEL <PHONE> ALLY ISSA.
+test,bongo_0173,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_0174,0,Nimefurahi kusikia habari za maendeleo yako.
+test,bongo_0195,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni KHADIJA SUMBAI.
+test,bongo_0206,0,Noma sanaaaaaaaaaaah
+test,bongo_0207,1,Iyo ela tuma humu kwenye Tigo <PHONE> Jina lije JENEROZA ROCK BENEDICTO.
+test,bongo_0232,0,Naomba unipigie nikueleze kuhusu safari ya kesho.
+test,bongo_0260,1,"Habari za muda,mimi PEREGIA FILIPO,hii namba yangu ya TIGO.Vp mbona shem PEREGIA FILIPO, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test,bongo_0264,0,Nimepata ujumbe wako.
+test,bongo_0266,0,Watu wameanza kulalamika kuhusu bei za Tiketi za Fiesta. Wewe unafikiri ni sawa?
+test,bongo_0273,0,Daaa huyu mwamba namkubali sanaaa
+test,bongo_0274,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By ALLY ISSA,ni grp member"
+test,bongo_0294,1,TIGO F134 Imethibitishwa namba yako ya 061 ... imeshinda <AMOUNT> million kutoka Tuzo point ilikupokea Hela yako piga <PHONE> Asante
+test,bongo_0298,0,Tafadhali nipatie namba ya mteja ambaye alituma maombi jana.
+test,bongo_0302,0,Ninafuraha kuwa na rafiki kama wewe maishani mwangu.
+test,bongo_0312,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA LUKA KIMBANGU NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+test,bongo_0322,0,"Bro, uliona mashabiki walivyoimba jana? Ni furaha ya kweli kuona mpira wa aina hiyo."
+test,bongo_0328,1,MZEE HOSEA MKUMBUKWA tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+test,bongo_0341,1,Utanitumia kwenye ii <PHONE> Halotel jina NASHONI MBIRIBI namba yangu inadeni usiitumie
+test,bongo_0349,1,Samahani naomba itume kwenye halotel <PHONE> HADIJA LAI.
+test,bongo_0360,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (NASHONI MBIRIBI) ile namba usitumie laini inamatatizo.
+test,bongo_0367,0,Pongezi kwa kufanikisha mradi ule!
+test,bongo_0370,1,HALOTEL AQ78 Imethibitishwa namba yako ya 068 ... imeshinda <AMOUNT> million kutoka TUZO POINTI ilikupokea hela yako piga <PHONE> Asante
+test,bongo_0380,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya airtel. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_0386,0,"Kaka, kuna chakula mezani."
+test,bongo_0391,0,"Watoto wanahitaji matibabu, naomba unisaidie na hela kidogo."
+test,bongo_0415,1,Iyo ela tuma humu kwenye voda <PHONE> Jina lije HOSEA MKUMBUKWA.
+test,bongo_0426,0,"Leo tutoke out? Kuna sehemu mpya nimegundua, najua utaipenda."
+test,bongo_0429,0,Nitahitaji invoice ya mwezi uliopita kwa ukaguzi wa hesabu.
+test,bongo_0447,0,"Nitapika wali na mboga leo jioni, unanunua nyama au mimi nibebe?"
+test,bongo_0448,1,Samahani naomba itume kwenye Tigo <PHONE> Ester kalobelo.
+test,bongo_0458,1,Nitumie tu kwenye hii HALOTEL <PHONE> jina MARIAM NDUGAI.
+test,bongo_0464,0,Asante kwa kunipa taarifa muhimu.
+test,bongo_0478,0,"Asante kwa kunikumbusha kuhusu chakula cha mchana, nimejua wakati wa kuandaa."
+test,bongo_0484,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka Tuzo Point. Piga <PHONE> ili kupokea hela yako."
+test,bongo_0500,0,Tunakupenda
+test,bongo_0525,1,Tumia namba hii ya HALOTEL <PHONE> kutuma hiyo hela jina LINUSI MALALO
+test,bongo_0542,0,Uliona outfit ya Wema jana kwenye event? Alikuwa amependeza sana.
+test,bongo_0543,0,Nina furaha kukujulisha kuwa nimefanikiwa mtihani wangu.
+test,bongo_0545,0,"Niko njiani kurudi nyumbani, nitafika saa moja usiku."
+test,bongo_0550,0,Hali ya hewa leo inafurahisha sana.
+test,bongo_0553,1,Iyo ela itume humu kwenye tigo <PHONE> jina lije PEREGIA FILIPO.
+test,bongo_0568,1,Utanitumia. kwemye namba <PHONE> ya Vodacom jina JUMA SIKAREKO.
+test,bongo_0572,1,Hela tuma kwa namba hii <PHONE> jina SAID MTAALAM
+test,bongo_0585,0,"Bro, ulifanya vipi na ile kazi uliyokuwa unafanya kwa ajili ya project?"
+test,bongo_0587,1,Naomba unitumie iyo pesa kwenye namba hii ya AIRTEL <PHONE> . jina (PEREGIA FILIPO)
+test,bongo_0601,0,"Nitachelewa kufika, tafadhali ningojee."
+test,bongo_0605,1,Naomba unitumie iyo ela kwenye namba hii ya Tigo <PHONE> . jina (MARIAM NDUGAI)
+test,bongo_0612,1,tuma kwenye namba hii ya Tigopesa <PHONE> jina litakuja JOACHIM KAPUFI Ukituma unijulishe
+test,bongo_0624,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja Ester kalobelo Ukituma unijulishe
+test,bongo_0625,1,Iyo ela itume humu kwenye HALOTEL <PHONE> jina lije SAID MTAALAM .
+test,bongo_0655,0,Naomba nikukumbushe kuhusu kikao chetu cha leo.
+test,bongo_0669,0,Ahsante kwa kunikumbusha jana kuhusu deadline ya kazi.
+test,bongo_0671,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (Magomba Maila) ile namba usitumie laini inamatatizo.
+test,bongo_0674,0,"Nimemaliza kazi niliyotumwa, naweza kurudi nyumbani?"
+test,bongo_0699,0,Umetishaaaa hya ndo mambo tunayatak mwisho wa mwaka
+test,bongo_0708,0,Kakudanganyeni nani?
+test,bongo_0735,0,Unapendelea chai au kahawa?
+test,bongo_0736,0,Kashakuwa mkubwa sasa hongera dogo
+test,bongo_0739,1,MPIGIE MZEE Magomba Maila WA TIBA ASILI. MALI. PETE. NYOTA. UZAZI. KUPANDISHWA CHEO KAZINI. KULUDISHA MALI ILIYOPOTEA. NAMBA <PHONE>
+test,bongo_0760,0,"Ulitoka wapi jana usiku? Nilikuwa nikipanga kukuona, lakini hukufika!"
+test,bongo_0764,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (JUMA SIKAREKO)
+test,bongo_0767,0,"Habari za asubuhi, mpenzi wangu? Naomba siku yako iwe nzuri kama moyo wako."
+test,bongo_0771,1,tuma kwenye namba hii ya m-pesa <PHONE> jina litakuja JOACHIM KAPUFI Ukituma unijulishe
+test,bongo_0775,0,Hakika nilifurahia mazungumzo yetu jana.
+test,bongo_0779,1,vodacom W1SD Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea Pesa yako piga <PHONE> Asante
+test,bongo_0812,0,"Watu wanaongelea kuhusu fashion ya mastaa wetu kwenye tuzo za juzi, wengine waliua!"
+test,bongo_0841,0,"Nina wazo zuri, nataka tukiongee pamoja."
+test,bongo_0853,0,Nitapenda kuungana nawe kwenye project mpya dada.
+test,bongo_0855,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya Halotel. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_0864,1,Utanitumia kwenye ii <PHONE> airtel jina PEREGIA FILIPO namba yangu inadeni usiitumie
+test,bongo_0867,0,Unajuwa kabisa man nakufatiliya sana
+test,bongo_0872,0,"Samahani, sikuweza kupokea simu yako."
+test,bongo_0875,1,hela tuma kwa namba hii <PHONE> jina SALOME KALUNGA
+test,bongo_0880,1,Utanitumia kwenye ii <PHONE> VODACOM jina HOSEA MKUMBUKWA namba yangu inadeni usiitumie
+test,bongo_0889,1,hela tuma kwa namba hii <PHONE> jina ABDALLAH MWANAKU
+test,bongo_0891,1,Utanitumia kwenye ii <PHONE> halotel jina SAID MTAALAM namba yangu inadeni usiitumie
+test,bongo_0896,0,"Kocha wa Simba ameonyesha mbinu mpya za kushambulia, timu inazidi kuimarika."
+test,bongo_0899,1,Iyo ela tuma humu kwenye Vodacom <PHONE> Jina lije PEREGIA FILIPO
+test,bongo_0920,1,Utanitumia. kwemye namba <PHONE> ya Tigo jina Magomba Maila.
+test,bongo_0922,0,"Niko njiani, nitafika ndani ya dakika 10."
+test,bongo_0923,1,"Mpigie Mzee SALOME KALUNGA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test,bongo_0924,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (SALOME KALUNGA) ile namba usitumie laini inamatatizo.
+test,bongo_0925,1,Iyo ela itume humu kwenye TIGO <PHONE> jina lije JOACHIM KAPUFI.
+test,bongo_0928,0,Umeona video ya Harmonize aliyoposti leo? Jamaa anasema anaacha muziki!
+test,bongo_0947,0,"Nimepanga chakula cha jioni kwetu leo, najua utafurahi."
+test,bongo_0964,0,Kumbuka kuwa wewe ndiye sababu ya furaha yangu kila siku.
+test,bongo_0965,0,Asante kwa kunikumbusha kuhusu shughuli hiyo.
+test,bongo_0968,0,Ningependa kujua kama uko tayari kwa kikao cha familia Jumapili. Tafadhali nijulishe.
+test,bongo_0969,1,Utanitumia. kwemye namba <PHONE> ya VODACOM jina LUKA KIMBANGU.
+test,bongo_0976,1,Iyo ela tuma humu kwenye halotel <PHONE> Jina lije MARIAM NDUGAI
+test,bongo_0977,0,"Bro, uliona collabo ya Barnaba na Rayvanny? Jamaa wameua kwenye hiyo track."
+test,bongo_0979,1,Hela tuma kwa namba hii <PHONE> jina Magomba Maila
+test,bongo_0981,1,Iyo Hela itume humu kwenye Halotel <PHONE> jina lije PETER NYANGE.
+test,bongo_0989,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja LINUSI MALALO Ukituma unijulishe
+test,bongo_0996,1,Airtel 94DY Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea ela yako piga <PHONE> Asante
+test,bongo_1009,0,Usisahau kuniletea kile nilikuagiza.
+test,bongo_1016,1,Utanitumia kwenye ii <PHONE> voda jina JOACHIM KAPUFI namba yangu inadeni usiitumie
+test,bongo_1018,0,Nimepata habari njema.
+test,bongo_1028,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja OLIVA MATIAS
+test,bongo_1031,0,Tanzania tunajivunia sana kuwa na Huyu Jamaa Anajua sana kaka
+test,bongo_1038,1,"Habari za mda huu,mimi SAID MTAALAM ,hii namba yangu ya Vodacom.Vp mbona shem SAID MTAALAM , anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test,bongo_1039,0,Tafadhali nitumie taarifa kamili kuhusu mkutano wa kesho.
+test,bongo_1060,1,Naomba unitumie iyo Pesa kwenye namba hii ya Vodacom <PHONE> . jina (RAMATUNGU)
+test,bongo_1063,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (ABDALLAH MWANAKU) ile namba usitumie laini inamatatizo.
+test,bongo_1078,0,"Bro, Arsenal wameanza vizuri msimu huu. Nafikiri wanaweza kuchukua taji."
+test,bongo_1082,0,Nitakupigia baadae.
+test,bongo_1119,1,Utanitumia kwa hîi AIRTEL <PHONE> j'ina ni JUMA SIKAREKO.
+test,bongo_1133,1,Naomba unitumie iyo ela kwenye namba hii ya Airtel <PHONE> . jina (LINUSI MALALO)
+test,bongo_1145,0,Nitapenda kujifunza zaidi kuhusu kazi unayofanya.
+test,bongo_1148,1,"Mpigie Mzee NASHONI MBIRIBI kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test,bongo_1162,0,Noma sana
+test,bongo_1169,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja MWANAIDI KHAMISI
+test,bongo_1181,1,Utanitumia kwa hîi TIGO <PHONE> j'ina ni ALLY ISSA.
+test,bongo_1185,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya voda. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_1188,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja RAMATUNGU Ukituma unijulishe
+test,bongo_1195,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya vodacom. Mbona kimya na siku zinazidi kwenda...?
+test,bongo_1221,0,"Mama, kuna mkutano wa wazazi shule leo jioni. Tafadhali njoo ili tuzungumze kuhusu maendeleo ya mtoto.Nashukuru kwa kunitumia hiyo fedha, nitaitumia kwa ajili ya gharama za matibabu."
+test,bongo_1231,1,Utanitumia kwenye ii <PHONE> Vodacom jina SALOME KALUNGA namba yangu inadeni usiitumie
+test,bongo_1243,0,Heshima na discipline ni muhimu sana
+test,bongo_1248,0,Hata wewe umesikia kuhusu skendo ya Harmonize na ule mchumba wake wa zamani?
+test,bongo_1254,1,"Habari za mchana,mimi OLIVA MATIAS,hii namba yangu ya Airtel.Vp mbona shem OLIVA MATIAS, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test,bongo_1265,0,"Mteja wetu ana swali kuhusu gharama za huduma, nitakutumia details."
+test,bongo_1267,1,ela tuma kwa namba hii <PHONE> jina OLIVA MATIAS
+test,bongo_1275,0,Leo tutakuwa na kipindi cha ziada saa mbili jioni. Tafadhali mjitokeze.Assignment ya wiki hii inapaswa kuwasilishwa kabla ya Ijumaa.
+test,bongo_1279,0,Nasikia Ray C ametoa single mpya baada ya muda mrefu. Watu wanasema ameimudu sana.
+test,bongo_1298,0,"Nimeona nafasi ya kazi inayokufaa, nitakutumia maelezo baadae."
+test,bongo_1306,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja FEBU SHADI WILISON
+test,bongo_1314,1,hela tuma kwa namba hii <PHONE> jina RAMATUNGU
+test,bongo_1319,0,Tunaweza kupanga kukutana tena mwishoni mwa wiki?
+test,bongo_1335,0,Dogo umetishaaaaa
+test,bongo_1362,0,"Niko safarini sasa hivi, nitakupigia baadaye."
+test,bongo_1369,1,<PHONE> Jina litakuja SALOME KALUNGA Nitumie kwenye hiyo TIGO
+test,bongo_1373,0,Nakupenda sana bro
+test,bongo_1376,0,Asante kwa kunielewa kila wakati. Upendo wako unamaanisha kila kitu kwangu.
+val+norm,bongo_0013,1,FRIIMASON TIMIZA NDOTO KUMILIKI PESA MAJUMBA NA MAGARI YA KIFAHARI PIA KUZA BIASHARA VIPAJI NYOTA NA PETE. TUPIGIE SIMU <PHONE> UKIWA TAYARI KUJIUNGA
+val+norm,bongo_0019,0,Nimetuma pesa kwa namba uliyonipa.
+val+norm,bongo_0020,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By SALOME KALUNGA,ni grp member"
+val+norm,bongo_0030,1,"KARIBU UJIUNGE NA CHAMA CHA (666)FREE'MASON UBADILISHE MAISHA YAKO.MILIKI MALI,PESA(UTAJIRI) MAJUMBA NA MAGARI BILA KAFALA PIGA <PHONE> au <PHONE>"
+val+norm,bongo_0034,0,Mashindano ya CAF Champions League mwaka huu yana ushindani mkubwa sana.
+val+norm,bongo_0044,0,"Bro, uliona VAR ilivyoamua ile offside? Nafikiri hawakuwa sahihi."
+val+norm,bongo_0047,1,MZEE HADIJA LAI tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val+norm,bongo_0054,0,Tafadhali nijulishe kama una muda kesho.
+val+norm,bongo_0056,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka TUZO POINTI. Piga <PHONE> ili kupokea Pesa yako."
+val+norm,bongo_0058,0,"Bro, umesikia Bongo Movie Awards mwaka huu wameongeza kipengele cha digital content?"
+val+norm,bongo_0061,1,"Dear, No need to go out work, just at home to earn <AMOUNT> a day, please contact us: <URL>"
+val+norm,bongo_0064,1,ela tuma kwa namba hii <PHONE> jina RAMATUNGU
+val+norm,bongo_0067,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (MARIAM NDUGAI)
+val+norm,bongo_0090,0,Ninaomba uniletee sukari kidogo ukitoka kazini.
+val+norm,bongo_0097,0,Naomba uniunganishe na rafiki yako.
+val+norm,bongo_0100,1,"VODA OFA hongera umepata zawadi <AMOUNT> milioni kutoka (VODA OFA) piga sim,. <PHONE> kupata zawadi asante"
+val+norm,bongo_0101,1,Nitumie tu kwenye hii VODACOM <PHONE> jina LUKA KIMBANGU.
+val+norm,bongo_0105,0,"Bro, uliona yule TikToker maarufu alipata dili la matangazo? Jamaa anazidi kufanikiwa."
+val+norm,bongo_0121,0,Ninakuombea maisha marefu na yenye furaha.
+val+norm,bongo_0128,1,Naomba unitumie iyo ela kwenye namba hii ya voda <PHONE> . jina (LUKA KIMBANGU)
+val+norm,bongo_0159,1,Habari za asubuhi. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0160,0,"Pole na changamoto zako, usikate tamaa."
+val+norm,bongo_0175,0,Yule beki wa Yanga anaonekana kuwa na future bright. Ameonyesha kiwango cha hali ya juu.
+val+norm,bongo_0178,1,"Habari za mda huu,mimi Magomba Maila,hii namba yangu ya vodacom.Vp mbona shem Magomba Maila, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val+norm,bongo_0182,0,"Mambo vipi? Mechi ya jana ilikuwa kali sana, uliona goli la mwisho?"
+val+norm,bongo_0183,1,HABARI ZAUKO NI MIMI MWENYE NYUMBA WAKO MNA ENDEREAJE APO NYUMBANI IYO NAMBA YANGU MPYA YA AIRTEL NAKUMBUSHIA KODI YANGU MANA NAONA KIMYA SANA NAOMBA TUWA SIRIANE
+val+norm,bongo_0186,0,Tafadhali nipatie maelezo kamili kuhusu safari ya kesho.
+val+norm,bongo_0197,0,Watoto wanahitaji msaada wako kwa ajili ya masomo yao.
+val+norm,bongo_0212,1,Pesa tuma kwa namba hii <PHONE> jina PETER NYANGE
+val+norm,bongo_0218,1,Utanitumia kwa hîi halotel <PHONE> j'ina ni HADIJA LAI.
+val+norm,bongo_0219,0,Habari za asubuhi?
+val+norm,bongo_0223,1,Iyo hela itume humu kwenye tigo <PHONE> jina lije SALOME KALUNGA.
+val+norm,bongo_0252,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (PEREGIA FILIPO) ile namba usitumie laini inamatatizo.
+val+norm,bongo_0253,0,"Nimepokea barua yako, nitakujibu hivi karibuni."
+val+norm,bongo_0254,1,Iyo Hela itume humu kwenye VODACOM <PHONE> jina lije JUMA SIKAREKO.
+val+norm,bongo_0256,1,Naomba unitumie iyo Hela kwenye namba hii ya VODACOM <PHONE> . jina (PEREGIA FILIPO)
+val+norm,bongo_0258,1,Iyo Pesa itume humu kwenye Halotel <PHONE> jina lije PEREGIA FILIPO.
+val+norm,bongo_0265,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya tigo. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0270,0,Ulipata ile simu uliyokuwa unatafuta? Naweza kukusaidia kuifuatilia.
+val+norm,bongo_0271,0,"Usisahau mkutano wa kikundi kesho saa tatu, tutakutana pale ofisini."
+val+norm,bongo_0281,1,Utanitumia kwenye ii <PHONE> vodacom jina JENEROZA ROCK BENEDICTO namba yangu inadeni usiitumie
+val+norm,bongo_0289,0,Nitakupigia simu baadaye tukizungumze zaidi.
+val+norm,bongo_0291,0,Tunatafuta watu wa kujitolea kusaidia watoto yatima kwenye kituo cha karibu.
+val+norm,bongo_0296,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja Magomba Maila
+val+norm,bongo_0303,1,"Mpigie Mzee ALLY ISSA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+val+norm,bongo_0306,0,Tafadhali niambie bei ya bidhaa hizo.
+val+norm,bongo_0359,0,Kanisa litakuwa na ibada maalum Jumapili kuanzia saa tatu asubuhi.
+val+norm,bongo_0363,0,Tafadhali uniangalizie bei ya mafuta ya kupikia sokoni.
+val+norm,bongo_0389,0,Nasikia Nasibu ameanza biashara ya magari. Jamaa anafanya kazi kweli.
+val+norm,bongo_0392,1,Utanitumia kwa hîi HALOTEL <PHONE> j'ina ni Magomba Maila.
+val+norm,bongo_0394,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (PETER NYANGE)
+val+norm,bongo_0402,0,Kesho tuna kikao saa nane.
+val+norm,bongo_0410,0,"Kaka yangu, safiri salama. Usisahau kuniandikia ukifika!"
+val+norm,bongo_0418,0,Tafadhali nipatie namba ya dereva wa boda.
+val+norm,bongo_0431,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By LUKA KIMBANGU,ni grp member"
+val+norm,bongo_0436,0,Safi mwamba kazi kwanza. Harafu sio lazima sana
+val+norm,bongo_0439,0,"Kesho kuna kikao cha familia saa nne asubuhi, tafadhali usikose."
+val+norm,bongo_0441,1,"Mpigie Mzee HOSEA MKUMBUKWA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+val+norm,bongo_0451,1,Nitumie tu kwenye hii Vodacom <PHONE> jina ALLY ISSA.
+val+norm,bongo_0456,1,Utanitumia. kwemye namba <PHONE> ya AIRTEL jina FEBU SHADI WILISON.
+val+norm,bongo_0463,0,Nisaidie na namba ya fundi.
+val+norm,bongo_0476,1,Utanitumia kwa hîi Airtel <PHONE> j'ina ni HADIJA LAI.
+val+norm,bongo_0509,1,Au nitumie kwenye m-pesa Namba. <PHONE> jina litakuja NASHONI MBIRIBI
+val+norm,bongo_0511,0,"Pole na kazi, usijisahau kula chakula."
+val+norm,bongo_0517,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja ABDALLAH MWANAKU Ukituma unijulishe
+val+norm,bongo_0554,0,Bado siamini Bayern Munich walishindwa kufunga hata goli moja jana.
+val+norm,bongo_0563,0,Kumbuka kuhudhuria warsha ya maendeleo ya vijana kesho.
+val+norm,bongo_0571,0,Kwa kweli...kutunza muda ni kila kitu!!
+val+norm,bongo_0577,1,Nitumie tu kwenye hii HALOTEL <PHONE> jina Ester kalobelo.
+val+norm,bongo_0580,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni ALLY ISSA.
+val+norm,bongo_0584,0,MUNGU akubariki sana
+val+norm,bongo_0606,1,Utanitumia kwenye ii <PHONE> tigo jina SALOME KALUNGA namba yangu inadeni usiitumie
+val+norm,bongo_0611,0,Nitakuja na familia yangu kwa chakula cha mchana nyumbani kwako.
+val+norm,bongo_0621,1,Samahani naomba itume kwenye TIGO <PHONE> HADIJA LAI.
+val+norm,bongo_0628,1,Tumia namba hii ya TIGO <PHONE> kutuma hiyo ela jina SALOME KALUNGA
+val+norm,bongo_0638,1,Iyo ela tuma humu kwenye Halotel <PHONE> Jina lije PETER NYANGE.
+val+norm,bongo_0661,0,Nimepanga safari ya kwenda mbuga za wanyama mwezi ujao. utakuwa na mda kwende pamoja?
+val+norm,bongo_0667,1,MZEE JUMA SIKAREKO tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val+norm,bongo_0687,0,Tunakukumbuka sana nyumbani.
+val+norm,bongo_0688,1,<PHONE> Jina litakuja LINUSI MALALO Nitumie kwenye hiyo AIRTEL
+val+norm,bongo_0689,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka TUZO POINT. Piga <PHONE> ili kupokea pesa yako."
+val+norm,bongo_0701,0,"Nakupenda zaidi ya jana, na kila siku upendo wangu unaongezeka."
+val+norm,bongo_0702,1,"Habari za asubuhi,mimi JUMANNE YASINI MASAKA,hii namba yangu ya tigo.Vp mbona shem JUMANNE YASINI MASAKA, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val+norm,bongo_0719,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0722,1,MZEE Ester kalobelo tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+val+norm,bongo_0724,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya Tigo. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0725,0,Umbea ni sehemu ya ndoa
+val+norm,bongo_0726,0,Ninja ana hoja apewe muda zaidi
+val+norm,bongo_0729,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni LINUSI MALALO.
+val+norm,bongo_0737,1,"Habari za mchana,mimi JUMANNE YASINI MASAKA,hii namba yangu ya Airtel.Vp mbona shem JUMANNE YASINI MASAKA, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val+norm,bongo_0741,0,Ningependa kujua kama uko tayari kwa mkutano ule wa biashara ndogo ndogo. Tafadhali nijulishe.
+val+norm,bongo_0749,1,Habari za muda. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0751,1,tuma kwenye namba hii ya AirtelMoney <PHONE> jina litakuja SAID MTAALAM Ukituma unijulishe
+val+norm,bongo_0755,1,Iyo hela itume humu kwenye tigo <PHONE> jina lije Ester kalobelo.
+val+norm,bongo_0773,0,"Mambo vipi, uko poa?"
+val+norm,bongo_0776,0,Tafadhali nitumie salio kidogo.
+val+norm,bongo_0792,0,Asante kwa kushiriki kwenye harambee ya shule. Mchango wako umewekwa.
+val+norm,bongo_0793,0,Uko wapi sasa hivi? Nahitaji kukuona.
+val+norm,bongo_0804,0,"Je, unaweza kunisaidia na ada ya shule ya mtoto wangu?"
+val+norm,bongo_0806,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya TIGO. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_0807,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja NASHONI MBIRIBI
+val+norm,bongo_0814,0,Usisahau kufunga mlango wa mbele kabla ya kulala.
+val+norm,bongo_0819,0,Nipigie ukiwa tayari kwa mazungumzo.
+val+norm,bongo_0822,0,Tutaongea zaidi kuhusu hili kesho.
+val+norm,bongo_0823,1,voda QI2J Imethibitishwa namba yako ya 067 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea Hela yako piga <PHONE> Asante
+val+norm,bongo_0844,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA JOACHIM KAPUFI NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+val+norm,bongo_0846,1,"Habari za siku,mimi MARIAM NDUGAI,hii namba yangu ya airtel.Vp mbona shem MARIAM NDUGAI, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+val+norm,bongo_0879,0,Mwambaa uyuu
+val+norm,bongo_0888,0,"Nimepoteza funguo, naomba msaada wako."
+val+norm,bongo_0904,0,Naomba unisaidie na kazi hii ngumu.
+val+norm,bongo_0910,0,Hali ya barabara leo ilikuwa mbaya sana.
+val+norm,bongo_0911,1,voda ZYBU Imethibitishwa namba yako ya 065 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea hela yako piga <PHONE> Asante
+val+norm,bongo_0918,1,Nitumie tu kwenye hii Tigo <PHONE> jina SALOME KALUNGA.
+val+norm,bongo_0929,0,Upo wapi sasa?
+val+norm,bongo_0931,1,Utanitumia kwenye ii <PHONE> TIGO jina PEREGIA FILIPO namba yangu inadeni usiitumie
+val+norm,bongo_0932,0,"Simba walicheza vizuri jana, lakini Yanga waliwazidi ujanja dakika za mwisho."
+val+norm,bongo_0955,1,Tumia namba hii ya Tigo <PHONE> kutuma hiyo pesa jina PETER NYANGE
+val+norm,bongo_0985,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka VODA OFA. Piga <PHONE> ili kupokea hela yako."
+val+norm,bongo_1000,0,Yupo sahihi
+val+norm,bongo_1004,1,Utanitumia kwa hîi HALOTEL <PHONE> j'ina ni JUMA SIKAREKO.
+val+norm,bongo_1011,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja Magomba Maila
+val+norm,bongo_1032,0,Nimefurahi kuona maendeleo yako kazini.
+val+norm,bongo_1067,0,"Nasikia kuna show kubwa Dar es Salaam, watakuwepo mastaa wote wa muziki."
+val+norm,bongo_1076,1,Au nitumie kwenye HaloPesa Namba. <PHONE> jina litakuja JUMA SIKAREKO
+val+norm,bongo_1086,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By JENEROZA ROCK BENEDICTO,ni grp member"
+val+norm,bongo_1092,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja ABDALLAH MWANAKU Ukituma unijulishe
+val+norm,bongo_1098,0,Nitakutafuta baadaye kwa mazungumzo zaidi.
+val+norm,bongo_1111,0,Nitakuja kukuchukua kazini saa kumi jioni.
+val+norm,bongo_1121,0,"Mama, kuna mkutano wa wazazi shule leo jioni. Tafadhali njoo ili tuzungumze kuhusu maendeleo ya mtoto."
+val+norm,bongo_1124,0,Tafadhali hakikisha umejiandaa kwa harusi ya Jumamosi. Tutanunua zawadi leo.
+val+norm,bongo_1127,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya VODACOM. Mbona kimya na siku zinazidi kwenda...?
+val+norm,bongo_1141,0,Na mwanaume je?
+val+norm,bongo_1146,1,Tumia namba hii ya HALOTEL <PHONE> kutuma hiyo hela jina ALLY ISSA
+val+norm,bongo_1160,0,Nimefurahi sana kupata nafasi ya kuonana nawe leo.
+val+norm,bongo_1171,1,Tumia namba hii ya halotel <PHONE> kutuma hiyo ela jina JENEROZA ROCK BENEDICTO
+val+norm,bongo_1174,0,"Usiku mwema, naomba uniamshie saa kumi alfajiri."
+val+norm,bongo_1203,1,Iyo Pesa itume humu kwenye Tigo <PHONE> jina lije OLIVA MATIAS.
+val+norm,bongo_1219,0,Yule msanii wa zamani wa Taarab amerudi kwenye game. Lazima tusikie nyimbo zake mpya.
+val+norm,bongo_1222,0,Nitakutembelea ofisini kwako kwa mazungumzo rasmi.
+val+norm,bongo_1226,0,Mambo vipi bro? Hivi majuzi umefanya nini kipya? Tukutane hivi karibuni!
+val+norm,bongo_1258,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA KHADIJA SUMBAI NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+val+norm,bongo_1268,1,Airtel 8JLS Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka TUZO POINT ilikupokea Pesa yako piga <PHONE> Asante
+val+norm,bongo_1270,1,Au nitumie kwenye m-pesa Namba. <PHONE> jina litakuja MWANAIDI KHAMISI
+val+norm,bongo_1273,0,"Nimechelewa kidogo, lakini nakukaribia."
+val+norm,bongo_1274,0,Nitapanga muda mzuri wa kuja kwako.
+val+norm,bongo_1282,0,"Ushabiki wa Liverpool ni tofauti kabisa, mashabiki wao hawakati tamaa."
+val+norm,bongo_1284,1,Nitumie tu kwenye hii Tigo <PHONE> jina ABDALLAH MWANAKU.
+val+norm,bongo_1288,1,Utanitumia kwenye ii <PHONE> vodacom jina FEBU SHADI WILISON namba yangu inadeni usiitumie
+val+norm,bongo_1303,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja JENEROZA ROCK BENEDICTO Ukituma unijulishe
+val+norm,bongo_1305,1,hela tuma kwa namba hii <PHONE> jina ALLY ISSA
+val+norm,bongo_1308,1,tuma kwenye namba hii ya m-pesa <PHONE> jina litakuja MARIAM NDUGAI Ukituma unijulishe
+val+norm,bongo_1309,1,Au nitumie kwenye HaloPesa Namba. <PHONE> jina litakuja KHADIJA SUMBAI
+val+norm,bongo_1321,1,Utanitumia. kwemye namba <PHONE> ya Vodacom jina PETER NYANGE.
+val+norm,bongo_1333,1,Samahani naomba itume kwenye TIGO <PHONE> PEREGIA FILIPO.
+val+norm,bongo_1337,0,"Nimepata ujumbe wako, nashukuru sana kwa taarifa hiyo muhimu."
+val+norm,bongo_1343,0,mungu aku linde kwa moyo uo
+val+norm,bongo_1348,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka Tuzo Point. Piga <PHONE> ili kupokea ela yako."
+val+norm,bongo_1350,1,Utanitumia. kwemye namba <PHONE> ya halotel jina ALLY ISSA.
+val+norm,bongo_1355,1,halotel 2Za1 Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka Tuzo Point ilikupokea ela yako piga <PHONE> Asante
+val+norm,bongo_1357,0,Naomba unipe updates kuhusu kazi yetu.
+test+norm,bongo_0015,1,Congratulations! Your CV has passed. You can get <AMOUNT> in a day. for details: <URL>
+test+norm,bongo_0021,1,Nitumie tu kwenye hii voda <PHONE> jina JUMANNE YASINI MASAKA.
+test+norm,bongo_0025,1,Tigo CQGZ Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka TUZO POINTI ilikupokea Hela yako piga <PHONE> Asante
+test+norm,bongo_0032,1,MPIGIE MZEE RAMATUNGU WA TIBA ASILI. MALI. PETE. NYOTA. UZAZI. KUPANDISHWA CHEO KAZINI. KULUDISHA MALI ILIYOPOTEA. NAMBA <PHONE>
+test+norm,bongo_0046,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA RAMATUNGU NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+test+norm,bongo_0048,1,Iyo Pesa itume humu kwenye TIGO <PHONE> jina lije JOACHIM KAPUFI.
+test+norm,bongo_0050,0,"Nimepokea taarifa kuhusu malipo, nafuatilia ili kuhakikisha kila kitu kiko sawa."
+test+norm,bongo_0055,1,Habari za asubuhi. Mimi mwenye nyumba wako hii namba yangu ya Vodacom. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_0059,1,Iyo Pesa itume humu kwenye Airtel <PHONE> jina lije JENEROZA ROCK BENEDICTO.
+test+norm,bongo_0060,1,"Mpigie Mzee MARIAM NDUGAI kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test+norm,bongo_0066,0,"Nitakutumia picha za tukio la jana, utazipenda."
+test+norm,bongo_0075,1,"Mpigie Mzee JUMANNE YASINI MASAKA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test+norm,bongo_0076,0,"Yule kipa wa Liverpool ana reflex za ajabu, amewashangaza wote."
+test+norm,bongo_0079,1,HABARI ZAUKO NI MIMI MWENYE NYUMBA WAKO MNA ENDEREAJE APO NYUMBANI IYO NAMBA YANGU MPYA YA VODACOM NAKUMBUSHIA KODI YANGU MANA NAONA KIMYA SANA NAOMBA TUWA SIRIANE
+test+norm,bongo_0088,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (JUMA SIKAREKO) ile namba usitumie laini inamatatizo.
+test+norm,bongo_0096,1,Iyo ela tuma humu kwenye HALOTEL <PHONE> Jina lije JUMANNE YASINI MASAKA
+test+norm,bongo_0108,1,Naomba unitumie iyo ela kwenye namba hii ya Vodacom <PHONE> . jina (HADIJA LAI)
+test+norm,bongo_0110,0,Sasa kuna ubaya gani kufanya hivyo??
+test+norm,bongo_0124,1,"Mpigie Mzee FEBU SHADI WILISON kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test+norm,bongo_0125,1,Nitumie tu kwenye hii Halotel <PHONE> jina JOACHIM KAPUFI.
+test+norm,bongo_0141,0,Ninashukuru sana kwa kuwa nami wakati mgumu.
+test+norm,bongo_0144,0,Mmh hyu jamaa atari
+test+norm,bongo_0148,0,Huyu mwakani namuona Simba au yanga
+test+norm,bongo_0157,1,mjukuu wangu utafuta ji wako mgumu ela hazikai mkononi pakazinaisha unasota sana mpenzi hamuelewani je utatunza siri nikikusaidia pesa bila mashaliti magumu nipigie nikwelekeze NO .. <PHONE>
+test+norm,bongo_0158,0,Mwenyezi Mungu aendelee kukulinda.
+test+norm,bongo_0168,1,Samahani naomba itume kwenye AIRTEL <PHONE> ALLY ISSA.
+test+norm,bongo_0173,1,Habari. Mimi mwenye nyumba wako hii namba yangu ya HALOTEL. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_0174,0,Nimefurahi kusikia habari za maendeleo yako.
+test+norm,bongo_0195,1,Utanitumia kwa hîi vodacom <PHONE> j'ina ni KHADIJA SUMBAI.
+test+norm,bongo_0206,0,Noma sanaaaaaaaaaaah
+test+norm,bongo_0207,1,Iyo ela tuma humu kwenye Tigo <PHONE> Jina lije JENEROZA ROCK BENEDICTO.
+test+norm,bongo_0232,0,Naomba unipigie nikueleze kuhusu safari ya kesho.
+test+norm,bongo_0260,1,"Habari za muda,mimi PEREGIA FILIPO,hii namba yangu ya TIGO.Vp mbona shem PEREGIA FILIPO, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test+norm,bongo_0264,0,Nimepata ujumbe wako.
+test+norm,bongo_0266,0,Watu wameanza kulalamika kuhusu bei za Tiketi za Fiesta. Wewe unafikiri ni sawa?
+test+norm,bongo_0273,0,Daaa huyu mwamba namkubali sanaaa
+test+norm,bongo_0274,1,"Xorry nipo xafari nina xhida kwel nakuomba unixaidie sh elfu 9 nitakurefund nikifika plx By ALLY ISSA,ni grp member"
+test+norm,bongo_0294,1,TIGO Fi34 Imethibitishwa namba yako ya 061 ... imeshinda <AMOUNT> million kutoka Tuzo point ilikupokea Hela yako piga <PHONE> Asante
+test+norm,bongo_0298,0,Tafadhali nipatie namba ya mteja ambaye alituma maombi jana.
+test+norm,bongo_0302,0,Ninafuraha kuwa na rafiki kama wewe maishani mwangu.
+test+norm,bongo_0312,1,"IYO PESA ITUME KWENYE NAMBA HII <PHONE> JINA ITALETA LUKA KIMBANGU NIMEAZIMA SIMU KWA WAKALA HAPA LAINI YANGU NATATIZO UPANDE WA KUPOKEA PESA, ASANTE"
+test+norm,bongo_0322,0,"Bro, uliona mashabiki walivyoimba jana? Ni furaha ya kweli kuona mpira wa aina hiyo."
+test+norm,bongo_0328,1,MZEE HOSEA MKUMBUKWA tiba asili biashala kazi masomo utajili kesi kuludisha mke&mume piga ( <PHONE> )( <PHONE> )
+test+norm,bongo_0341,1,Utanitumia kwenye ii <PHONE> Halotel jina NASHONI MBIRIBI namba yangu inadeni usiitumie
+test+norm,bongo_0349,1,Samahani naomba itume kwenye halotel <PHONE> HADIJA LAI.
+test+norm,bongo_0360,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (NASHONI MBIRIBI) ile namba usitumie laini inamatatizo.
+test+norm,bongo_0367,0,Pongezi kwa kufanikisha mradi ule!
+test+norm,bongo_0370,1,HALOTEL AQt8 Imethibitishwa namba yako ya 068 ... imeshinda <AMOUNT> million kutoka TUZO POINTI ilikupokea hela yako piga <PHONE> Asante
+test+norm,bongo_0380,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya airtel. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_0386,0,"Kaka, kuna chakula mezani."
+test+norm,bongo_0391,0,"Watoto wanahitaji matibabu, naomba unisaidie na hela kidogo."
+test+norm,bongo_0415,1,Iyo ela tuma humu kwenye voda <PHONE> Jina lije HOSEA MKUMBUKWA.
+test+norm,bongo_0426,0,"Leo tutoke out? Kuna sehemu mpya nimegundua, najua utaipenda."
+test+norm,bongo_0429,0,Nitahitaji invoice ya mwezi uliopita kwa ukaguzi wa hesabu.
+test+norm,bongo_0447,0,"Nitapika wali na mboga leo jioni, unanunua nyama au mimi nibebe?"
+test+norm,bongo_0448,1,Samahani naomba itume kwenye Tigo <PHONE> Ester kalobelo.
+test+norm,bongo_0458,1,Nitumie tu kwenye hii HALOTEL <PHONE> jina MARIAM NDUGAI.
+test+norm,bongo_0464,0,Asante kwa kunipa taarifa muhimu.
+test+norm,bongo_0478,0,"Asante kwa kunikumbusha kuhusu chakula cha mchana, nimejua wakati wa kuandaa."
+test+norm,bongo_0484,1,"Imethibitishwa, namba yako ya <PHONE> imejishindia <AMOUNT> kutoka Tuzo Point. Piga <PHONE> ili kupokea hela yako."
+test+norm,bongo_0500,0,Tunakupenda
+test+norm,bongo_0525,1,Tumia namba hii ya HALOTEL <PHONE> kutuma hiyo hela jina LINUSI MALALO
+test+norm,bongo_0542,0,Uliona outfit ya Wema jana kwenye event? Alikuwa amependeza sana.
+test+norm,bongo_0543,0,Nina furaha kukujulisha kuwa nimefanikiwa mtihani wangu.
+test+norm,bongo_0545,0,"Niko njiani kurudi nyumbani, nitafika saa moja usiku."
+test+norm,bongo_0550,0,Hali ya hewa leo inafurahisha sana.
+test+norm,bongo_0553,1,Iyo ela itume humu kwenye tigo <PHONE> jina lije PEREGIA FILIPO.
+test+norm,bongo_0568,1,Utanitumia. kwemye namba <PHONE> ya Vodacom jina JUMA SIKAREKO.
+test+norm,bongo_0572,1,Hela tuma kwa namba hii <PHONE> jina SAID MTAALAM
+test+norm,bongo_0585,0,"Bro, ulifanya vipi na ile kazi uliyokuwa unafanya kwa ajili ya project?"
+test+norm,bongo_0587,1,Naomba unitumie iyo pesa kwenye namba hii ya AIRTEL <PHONE> . jina (PEREGIA FILIPO)
+test+norm,bongo_0601,0,"Nitachelewa kufika, tafadhali ningojee."
+test+norm,bongo_0605,1,Naomba unitumie iyo ela kwenye namba hii ya Tigo <PHONE> . jina (MARIAM NDUGAI)
+test+norm,bongo_0612,1,tuma kwenye namba hii ya Tigopesa <PHONE> jina litakuja JOACHIM KAPUFI Ukituma unijulishe
+test+norm,bongo_0624,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja Ester kalobelo Ukituma unijulishe
+test+norm,bongo_0625,1,Iyo ela itume humu kwenye HALOTEL <PHONE> jina lije SAID MTAALAM .
+test+norm,bongo_0655,0,Naomba nikukumbushe kuhusu kikao chetu cha leo.
+test+norm,bongo_0669,0,Ahsante kwa kunikumbusha jana kuhusu deadline ya kazi.
+test+norm,bongo_0671,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (Magomba Maila) ile namba usitumie laini inamatatizo.
+test+norm,bongo_0674,0,"Nimemaliza kazi niliyotumwa, naweza kurudi nyumbani?"
+test+norm,bongo_0699,0,Umetishaaaa hya ndo mambo tunayatak mwisho wa mwaka
+test+norm,bongo_0708,0,Kakudanganyeni nani?
+test+norm,bongo_0735,0,Unapendelea chai au kahawa?
+test+norm,bongo_0736,0,Kashakuwa mkubwa sasa hongera dogo
+test+norm,bongo_0739,1,MPIGIE MZEE Magomba Maila WA TIBA ASILI. MALI. PETE. NYOTA. UZAZI. KUPANDISHWA CHEO KAZINI. KULUDISHA MALI ILIYOPOTEA. NAMBA <PHONE>
+test+norm,bongo_0760,0,"Ulitoka wapi jana usiku? Nilikuwa nikipanga kukuona, lakini hukufika!"
+test+norm,bongo_0764,1,TUMIA NAMBA HII ( <PHONE> )KUNITUMIA IYO HELA JINA LITAONYESHA (JUMA SIKAREKO)
+test+norm,bongo_0767,0,"Habari za asubuhi, mpenzi wangu? Naomba siku yako iwe nzuri kama moyo wako."
+test+norm,bongo_0771,1,tuma kwenye namba hii ya m-pesa <PHONE> jina litakuja JOACHIM KAPUFI Ukituma unijulishe
+test+norm,bongo_0775,0,Hakika nilifurahia mazungumzo yetu jana.
+test+norm,bongo_0779,1,vodacom WiSD Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea Pesa yako piga <PHONE> Asante
+test+norm,bongo_0812,0,"Watu wanaongelea kuhusu fashion ya mastaa wetu kwenye tuzo za juzi, wengine waliua!"
+test+norm,bongo_0841,0,"Nina wazo zuri, nataka tukiongee pamoja."
+test+norm,bongo_0853,0,Nitapenda kuungana nawe kwenye project mpya dada.
+test+norm,bongo_0855,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya Halotel. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_0864,1,Utanitumia kwenye ii <PHONE> airtel jina PEREGIA FILIPO namba yangu inadeni usiitumie
+test+norm,bongo_0867,0,Unajuwa kabisa man nakufatiliya sana
+test+norm,bongo_0872,0,"Samahani, sikuweza kupokea simu yako."
+test+norm,bongo_0875,1,hela tuma kwa namba hii <PHONE> jina SALOME KALUNGA
+test+norm,bongo_0880,1,Utanitumia kwenye ii <PHONE> VODACOM jina HOSEA MKUMBUKWA namba yangu inadeni usiitumie
+test+norm,bongo_0889,1,hela tuma kwa namba hii <PHONE> jina ABDALLAH MWANAKU
+test+norm,bongo_0891,1,Utanitumia kwenye ii <PHONE> halotel jina SAID MTAALAM namba yangu inadeni usiitumie
+test+norm,bongo_0896,0,"Kocha wa Simba ameonyesha mbinu mpya za kushambulia, timu inazidi kuimarika."
+test+norm,bongo_0899,1,Iyo ela tuma humu kwenye Vodacom <PHONE> Jina lije PEREGIA FILIPO
+test+norm,bongo_0920,1,Utanitumia. kwemye namba <PHONE> ya Tigo jina Magomba Maila.
+test+norm,bongo_0922,0,"Niko njiani, nitafika ndani ya dakika 10."
+test+norm,bongo_0923,1,"Mpigie Mzee SALOME KALUNGA kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test+norm,bongo_0924,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (SALOME KALUNGA) ile namba usitumie laini inamatatizo.
+test+norm,bongo_0925,1,Iyo ela itume humu kwenye TIGO <PHONE> jina lije JOACHIM KAPUFI.
+test+norm,bongo_0928,0,Umeona video ya Harmonize aliyoposti leo? Jamaa anasema anaacha muziki!
+test+norm,bongo_0947,0,"Nimepanga chakula cha jioni kwetu leo, najua utafurahi."
+test+norm,bongo_0964,0,Kumbuka kuwa wewe ndiye sababu ya furaha yangu kila siku.
+test+norm,bongo_0965,0,Asante kwa kunikumbusha kuhusu shughuli hiyo.
+test+norm,bongo_0968,0,Ningependa kujua kama uko tayari kwa kikao cha familia Jumapili. Tafadhali nijulishe.
+test+norm,bongo_0969,1,Utanitumia. kwemye namba <PHONE> ya VODACOM jina LUKA KIMBANGU.
+test+norm,bongo_0976,1,Iyo ela tuma humu kwenye halotel <PHONE> Jina lije MARIAM NDUGAI
+test+norm,bongo_0977,0,"Bro, uliona collabo ya Barnaba na Rayvanny? Jamaa wameua kwenye hiyo track."
+test+norm,bongo_0979,1,Hela tuma kwa namba hii <PHONE> jina Magomba Maila
+test+norm,bongo_0981,1,Iyo Hela itume humu kwenye Halotel <PHONE> jina lije PETER NYANGE.
+test+norm,bongo_0989,1,tuma kwenye namba hii ya HaloPesa <PHONE> jina litakuja LINUSI MALALO Ukituma unijulishe
+test+norm,bongo_0996,1,Airtel 9aDY Imethibitishwa namba yako ya 078 ... imeshinda <AMOUNT> million kutoka OFA YAKO ilikupokea ela yako piga <PHONE> Asante
+test+norm,bongo_1009,0,Usisahau kuniletea kile nilikuagiza.
+test+norm,bongo_1016,1,Utanitumia kwenye ii <PHONE> voda jina JOACHIM KAPUFI namba yangu inadeni usiitumie
+test+norm,bongo_1018,0,Nimepata habari njema.
+test+norm,bongo_1028,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja OLIVA MATIAS
+test+norm,bongo_1031,0,Tanzania tunajivunia sana kuwa na Huyu Jamaa Anajua sana kaka
+test+norm,bongo_1038,1,"Habari za mda huu,mimi SAID MTAALAM ,hii namba yangu ya Vodacom.Vp mbona shem SAID MTAALAM , anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test+norm,bongo_1039,0,Tafadhali nitumie taarifa kamili kuhusu mkutano wa kesho.
+test+norm,bongo_1060,1,Naomba unitumie iyo Pesa kwenye namba hii ya Vodacom <PHONE> . jina (RAMATUNGU)
+test+norm,bongo_1063,1,Basi iyo hela nitumie kwenye namba hii <PHONE> jina litakuja (ABDALLAH MWANAKU) ile namba usitumie laini inamatatizo.
+test+norm,bongo_1078,0,"Bro, Arsenal wameanza vizuri msimu huu. Nafikiri wanaweza kuchukua taji."
+test+norm,bongo_1082,0,Nitakupigia baadae.
+test+norm,bongo_1119,1,Utanitumia kwa hîi AIRTEL <PHONE> j'ina ni JUMA SIKAREKO.
+test+norm,bongo_1133,1,Naomba unitumie iyo ela kwenye namba hii ya Airtel <PHONE> . jina (LINUSI MALALO)
+test+norm,bongo_1145,0,Nitapenda kujifunza zaidi kuhusu kazi unayofanya.
+test+norm,bongo_1148,1,"Mpigie Mzee NASHONI MBIRIBI kwa tiba asili miliki mali,utajiri pete,kazi,kesi,masomo mapenzi,kilimo,ufugaji,biashara Piga <PHONE>"
+test+norm,bongo_1162,0,Noma sana
+test+norm,bongo_1169,1,Au nitumie kwenye M-Pesa Namba. <PHONE> jina litakuja MWANAIDI KHAMISI
+test+norm,bongo_1181,1,Utanitumia kwa hîi TIGO <PHONE> j'ina ni ALLY ISSA.
+test+norm,bongo_1185,1,Habari za mchana. Mimi mwenye nyumba wako hii namba yangu ya voda. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_1188,1,tuma kwenye namba hii ya M-Pesa <PHONE> jina litakuja RAMATUNGU Ukituma unijulishe
+test+norm,bongo_1195,1,Habari za mda huu. Mimi mwenye nyumba wako hii namba yangu ya vodacom. Mbona kimya na siku zinazidi kwenda...?
+test+norm,bongo_1221,0,"Mama, kuna mkutano wa wazazi shule leo jioni. Tafadhali njoo ili tuzungumze kuhusu maendeleo ya mtoto.Nashukuru kwa kunitumia hiyo fedha, nitaitumia kwa ajili ya gharama za matibabu."
+test+norm,bongo_1231,1,Utanitumia kwenye ii <PHONE> Vodacom jina SALOME KALUNGA namba yangu inadeni usiitumie
+test+norm,bongo_1243,0,Heshima na discipline ni muhimu sana
+test+norm,bongo_1248,0,Hata wewe umesikia kuhusu skendo ya Harmonize na ule mchumba wake wa zamani?
+test+norm,bongo_1254,1,"Habari za mchana,mimi OLIVA MATIAS,hii namba yangu ya Airtel.Vp mbona shem OLIVA MATIAS, anakupigia hupatikan tatizo mtandao nn?basi mkiwasiliana naomba nijulishe kwenye namba hii kwa meseji simu yangu imekufa maik ndugu yangu."
+test+norm,bongo_1265,0,"Mteja wetu ana swali kuhusu gharama za huduma, nitakutumia details."
+test+norm,bongo_1267,1,ela tuma kwa namba hii <PHONE> jina OLIVA MATIAS
+test+norm,bongo_1275,0,Leo tutakuwa na kipindi cha ziada saa mbili jioni. Tafadhali mjitokeze.Assignment ya wiki hii inapaswa kuwasilishwa kabla ya Ijumaa.
+test+norm,bongo_1279,0,Nasikia Ray C ametoa single mpya baada ya muda mrefu. Watu wanasema ameimudu sana.
+test+norm,bongo_1298,0,"Nimeona nafasi ya kazi inayokufaa, nitakutumia maelezo baadae."
+test+norm,bongo_1306,1,Au nitumie kwenye AirtelMoney Namba. <PHONE> jina litakuja FEBU SHADI WILISON
+test+norm,bongo_1314,1,hela tuma kwa namba hii <PHONE> jina RAMATUNGU
+test+norm,bongo_1319,0,Tunaweza kupanga kukutana tena mwishoni mwa wiki?
+test+norm,bongo_1335,0,Dogo umetishaaaaa
+test+norm,bongo_1362,0,"Niko safarini sasa hivi, nitakupigia baadaye."
+test+norm,bongo_1369,1,<PHONE> Jina litakuja SALOME KALUNGA Nitumie kwenye hiyo TIGO
+test+norm,bongo_1373,0,Nakupenda sana bro
+test+norm,bongo_1376,0,Asante kwa kunielewa kila wakati. Upendo wako unamaanisha kila kitu kwangu.
