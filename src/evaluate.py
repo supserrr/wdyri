@@ -1,0 +1,104 @@
+"""Turn every saved prediction file into one metrics table.
+
+Usage:
+    python -m src.evaluate
+
+Writes results/experiments.csv with one row per (model, variant, split, seed,
+evaluation set). Thresholds:
+  * f1, precision, recall at the default 0.5 threshold (comparable to prior work)
+  * *_op columns at the operating point: the threshold chosen on validation to
+    catch at least 95% of scams, then applied unchanged to every other set
+"""
+from __future__ import annotations
+
+import numpy as np
+import pandas as pd
+
+from . import config, runs
+from .data import load_bongo, load_chichewa
+from .metrics import bootstrap_f1, recall_threshold, scores
+
+
+def chichewa_subsets(frame: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """All 733 messages, the balanced D-CHI part, and one message per template."""
+    chi = load_chichewa().set_index("id")
+    base = frame.assign(source=frame["id"].map(chi["source"]), template=frame["id"].map(chi["template_id"]))
+    return {
+        "all": base,
+        "dchi": base[base["source"] == "D_CHI"],
+        "dedup": base.drop_duplicates("template"),
+    }
+
+
+def test_subsets(frame: pd.DataFrame, templates: pd.Series) -> dict[str, pd.DataFrame]:
+    """The test set as is, and with one message per template.
+
+    One landlord-impersonation template holds 31 of the 81 test scams, so the
+    per-template view shows whether a score rests on a single script.
+    """
+    return {"": frame, "/tpl": frame.assign(t=frame["id"].map(templates)).drop_duplicates("t")}
+
+
+def evaluate(preds: pd.DataFrame, n_boot: int = 1000) -> pd.DataFrame:
+    templates = load_bongo().set_index("id")["template_id"]
+    rows = []
+    for (model, variant, split, seed), run in preds.groupby(["model", "variant", "split", "seed"]):
+        val = run[run["set"] == "val"]
+        thr = recall_threshold(val["label"], val["prob"]) if len(val) else 0.5
+        for set_name, part in run.groupby("set"):
+            parts = {"": part}
+            if set_name.startswith("chichewa"):
+                parts = {f"/{k}": v for k, v in chichewa_subsets(part).items()}
+            elif set_name.startswith("test") and split == "template":
+                parts = test_subsets(part, templates)
+            for suffix, p in parts.items():
+                y, prob = p["label"].to_numpy(), p["prob"].to_numpy()
+                row = {"model": model, "variant": variant, "split": split, "seed": seed,
+                       "set": set_name + suffix, **scores(y, prob)}
+                op = scores(y, prob, threshold=thr)
+                row.update({"threshold_op": thr, "precision_op": op["precision"],
+                            "recall_op": op["recall"], "f1_op": op["f1"]})
+                if set_name in ("test", "chichewa") and suffix in ("", "/all", "/tpl"):
+                    row["f1_ci_low"], row["f1_ci_high"] = bootstrap_f1(y, prob, n_boot=n_boot)
+                rows.append(row)
+    out = pd.DataFrame(rows)
+    # Relative F1 drop against the same run's clean test set (Chiuseni et al.'s measure).
+    # Attacked sets are compared with the clean test set in the same view
+    # ("", "/tpl") and with the same defence ("+norm" or not).
+    def view(sets: pd.Series) -> pd.Series:
+        return sets.str.contains(r"\+norm").map({True: "+norm", False: ""}) + \
+            sets.str.endswith("/tpl").map({True: "/tpl", False: ""})
+
+    clean = out[out["set"].isin(["test", "test+norm", "test/tpl", "test+norm/tpl"])].copy()
+    clean["key"] = view(clean["set"])
+    clean = clean.set_index(["model", "variant", "split", "seed", "key"])["f1"]
+    keys = view(out["set"])
+    ref = [clean.get((m, v, s, sd, k), np.nan)
+           for m, v, s, sd, k in zip(out.model, out.variant, out.split, out.seed, keys)]
+    out["f1_clean"] = ref
+    out["rel_f1_drop"] = (out["f1_clean"] - out["f1"]) / out["f1_clean"]
+    return out
+
+
+def summarise(table: pd.DataFrame) -> pd.DataFrame:
+    """Mean and standard deviation over seeds."""
+    metrics = ["n", "n_scam", "accuracy", "precision", "recall", "f1", "pr_auc", "precision_op", "recall_op",
+               "f1_op", "rel_f1_drop", "f1_ci_low", "f1_ci_high"]
+    g = table.groupby(["model", "variant", "split", "set"])[metrics]
+    mean, std = g.mean(), g.std()
+    out = mean.join(std, rsuffix="_sd")
+    out["n_seeds"] = table.groupby(["model", "variant", "split", "set"]).size()
+    return out.reset_index()
+
+
+def main() -> None:
+    table = evaluate(runs.load_all())
+    table.to_csv(config.RESULTS / "experiments_by_seed.csv", index=False, float_format="%.4f")
+    summary = summarise(table)
+    summary.to_csv(config.RESULTS / "experiments.csv", index=False, float_format="%.4f")
+    view = summary[summary["set"] == "test"][["model", "variant", "split", "accuracy", "f1", "f1_sd", "pr_auc", "n_seeds"]]
+    print(view.to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()
