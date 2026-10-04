@@ -107,6 +107,7 @@ NOTEBOOKS = {
         ("code", "t = S[S.model.isin(['lr_char', 'afroxlmr', 'xlmr']) & S.variant.isin(['clean', 'fewshot20', 'fewshot50']) & (S.set == 'chichewa/all')]\nt.pivot_table(index='model', columns='variant', values=['f1', 'pr_auc']).round(3)"),
         ("md", "## Where transfer fails: telco service texts\n\nThe Chichewa genuine class includes telco balance and bundle messages, which carry amounts and short codes, unlike any genuine BongoScam text."),
         ("code", "chi = pd.read_csv(config.DATA_PROCESSED / 'chichewa.csv').set_index('id')\np = pd.read_csv(config.PREDICTIONS / 'afroxlmr__clean__template__s42.csv', keep_default_na=False)\np = p[p.set == 'chichewa'].assign(source=lambda d: d.id.map(chi.source), text=lambda d: d.id.map(chi.text))\np.assign(flagged=p.prob >= 0.5).groupby(['source', 'label']).flagged.mean().round(3)"),
+        ("md", "**Reading.** AfroXLMR flags 44% of genuine telco texts but only 13% of genuine personal texts: amounts and short codes look like fraud to a model that never saw a genuine service message. With 50 Chichewa examples AfroXLMR reaches F1 0.87 and XLM-R 0.78, so African pretraining (which includes Chichewa) pays off most once a little target-language data is available."),
     ],
     "07_errors": [
         ("md", "# 07 Error analysis\n\n`python -m src.errors` sorts every error of the main runs into buckets with keyword rules; this notebook reads them and explains the main failure."),

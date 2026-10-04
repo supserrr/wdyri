@@ -146,6 +146,7 @@ def rq3_transfer(summary: pd.DataFrame) -> None:
     ax1.set_xlabel(f"Fraud detection on {n_chi} Chichewa SMS (no Chichewa training)")
     ax1.set_title("Zero-shot transfer", loc="left")
     ax1.grid(axis="y", visible=False)
+    ends = []
     for m in ["lr_char", "afroxlmr", "xlmr"]:
         ys = []
         for v in ("clean", "fewshot20", "fewshot50"):
@@ -155,10 +156,16 @@ def rq3_transfer(summary: pd.DataFrame) -> None:
             continue
         ax2.plot([0, 20, 50], ys, color=MODELS[m][1], linewidth=2, marker="o", markersize=5,
                  markeredgecolor=SURFACE, markeredgewidth=1.2, label=MODELS[m][0])
-        ax2.text(51.5, ys[-1], f"{ys[-1]:.2f}", va="center", color=INK_2, fontsize=8)
+        ends.append([ys[-1], ys[-1]])
+    # End labels, nudged apart so close values stay readable.
+    ends.sort(key=lambda e: e[0])
+    for i in range(1, len(ends)):
+        ends[i][1] = max(ends[i][1], ends[i - 1][1] + 0.025)
+    for value, y in ends:
+        ax2.text(51.5, y, f"{value:.2f}", va="center", color=INK_2, fontsize=8)
     ax2.set_xticks([0, 20, 50])
     ax2.set_xlim(-3, 58)
-    ax2.set_ylim(0, 1)
+    ax2.set_ylim(0.5, 1)
     ax2.set_xlabel("Chichewa messages added to training")
     ax2.set_ylabel("Fraud F1")
     ax2.set_title("Few-shot (E9)", loc="left")

@@ -1,0 +1,81 @@
+{
+  "bongo_raw_rows": 1508,
+  "bongo_raw_labels": {
+    "scam": 1000,
+    "trust": 508
+  },
+  "bongo_exact_duplicates_dropped": 131,
+  "bongo_labels_after_exact_dedup": {
+    "scam": 880,
+    "not scam": 497
+  },
+  "bongo_identical_after_masking_dropped": 313,
+  "bongo_identical_after_masking_by_label": {
+    "scam": 313
+  },
+  "bongo_rows": 1064,
+  "bongo_labels": {
+    "scam": 567,
+    "not scam": 497
+  },
+  "bongo_words_median": 11.0,
+  "bongo_templates": 909,
+  "bongo_templates_with_2plus": 73,
+  "bongo_messages_in_shared_templates": 228,
+  "bongo_largest_template": 31,
+  "bongo_scam_messages_in_shared_templates": 226,
+  "split_random": {
+    "test": {
+      "not scam": 75,
+      "scam": 85
+    },
+    "train": {
+      "not scam": 347,
+      "scam": 397
+    },
+    "val": {
+      "not scam": 75,
+      "scam": 85
+    }
+  },
+  "split_random_templates_crossing_parts": 40,
+  "split_template": {
+    "test": {
+      "not scam": 71,
+      "scam": 81
+    },
+    "train": {
+      "not scam": 355,
+      "scam": 405
+    },
+    "val": {
+      "not scam": 71,
+      "scam": 81
+    }
+  },
+  "split_template_templates_crossing_parts": 0,
+  "chichewa_rows_raw": 824,
+  "chichewa_by_source": {
+    "D_CHI": {
+      "fraud": 338,
+      "normal": 338
+    },
+    "telcoSMS_CHI": {
+      "normal": 148
+    }
+  },
+  "chichewa_exact_duplicates": 78,
+  "chichewa_identical_after_masking_dropped": 91,
+  "chichewa_rows": 733,
+  "chichewa_by_source_after_dedup": {
+    "D_CHI": {
+      "normal": 338,
+      "fraud": 336
+    },
+    "telcoSMS_CHI": {
+      "normal": 59
+    }
+  },
+  "chichewa_templates": 670,
+  "chichewa_fraud_templates": 307
+}

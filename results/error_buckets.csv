@@ -1,0 +1,11 @@
+where,bucket,nb_word_counts,lr_char,bilstm_finetuned,xlmr,afroxlmr
+Attacked test (all words),Impersonation missed,0,5,3,31,31
+Attacked test (all words),Obfuscation missed,61,79,68,0,0
+Attacked test (all words),Other scam missed,0,10,3,0,22
+Chichewa,Ambiguous,96,6,4,11,6
+Chichewa,Genuine text flagged,67,2,58,96,5
+Chichewa,Local tactic missed,76,149,36,16,113
+Chichewa,Service text flagged,97,40,118,143,63
+Swahili test,Ambiguous,2,0,0,0,0
+Swahili test,Genuine text flagged,0,0,1,0,0
+Swahili test,Impersonation missed,0,5,3,31,31

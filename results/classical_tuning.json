@@ -1,0 +1,214 @@
+{
+ "published_accuracy": 0.9867549668874173,
+ "majority/clean/random": {
+  "params": {},
+  "val_f1": 0.6938775510204082,
+  "val_log_loss": 16.895462526148663
+ },
+ "nb_word_counts/clean/random": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9883720930232558,
+  "val_log_loss": 0.019640735532734648
+ },
+ "nb_char/clean/random": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9880952380952381,
+  "val_log_loss": 0.06640614673462272
+ },
+ "lr_word/clean/random": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 0.9880952380952381,
+  "val_log_loss": 0.025707662363095275
+ },
+ "lr_char/clean/random": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 0.9940828402366864,
+  "val_log_loss": 0.015386161259224266
+ },
+ "nb_word_counts/nomask/random": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9883720930232558,
+  "val_log_loss": 0.019506083428617
+ },
+ "nb_char/nomask/random": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9940828402366864,
+  "val_log_loss": 0.015482825376300035
+ },
+ "lr_word/nomask/random": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 0.9882352941176471,
+  "val_log_loss": 0.03602642828538102
+ },
+ "lr_char/nomask/random": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 0.9940828402366864,
+  "val_log_loss": 0.020237223037047638
+ },
+ "majority/clean/template": {
+  "params": {},
+  "val_f1": 0.6952789699570815,
+  "val_log_loss": 16.836180201495512
+ },
+ "nb_word_counts/clean/template": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9938650306748467,
+  "val_log_loss": 0.013193138126829481
+ },
+ "nb_char/clean/template": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 2.1728764714256022e-05
+ },
+ "lr_word/clean/template": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.006882094618073852
+ },
+ "lr_char/clean/template": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.00648617103057639
+ },
+ "nb_word_counts/nomask/template": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9938650306748467,
+  "val_log_loss": 0.012747508378400657
+ },
+ "nb_char/nomask/template": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 1.1126517377220752e-05
+ },
+ "lr_word/nomask/template": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.00829073903396478
+ },
+ "lr_char/nomask/template": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.00795263721073467
+ },
+ "adversarial_copies": {
+  "n_copies": 101,
+  "n_train": 760,
+  "share_of_augmented_train": 0.1173054587688734
+ },
+ "nb_word_counts/advtrain/template/s0": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9938650306748467,
+  "val_log_loss": 0.013278118933142546
+ },
+ "lr_char/advtrain/template/s0": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.007511935979887427
+ },
+ "nb_word_counts/strip/template/s0": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 0.9938650306748467,
+  "val_log_loss": 0.01499984406145302
+ },
+ "nb_char/strip/template/s0": {
+  "params": {
+   "clf__alpha": 0.01
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 3.28337475593192e-05
+ },
+ "lr_word/strip/template/s0": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.0077825674904183325
+ },
+ "lr_char/strip/template/s0": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.008250195459052997
+ },
+ "lr_char/fewshot20/template/s13": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.006093918084693626
+ },
+ "lr_char/fewshot20/template/s42": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.00671959183678062
+ },
+ "lr_char/fewshot20/template/s2026": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.006771519366714532
+ },
+ "lr_char/fewshot50/template/s13": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.0056913071231277325
+ },
+ "lr_char/fewshot50/template/s42": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.0063931528611523595
+ },
+ "lr_char/fewshot50/template/s2026": {
+  "params": {
+   "clf__C": 100.0
+  },
+  "val_f1": 1.0,
+  "val_log_loss": 0.005944970509556671
+ }
+}

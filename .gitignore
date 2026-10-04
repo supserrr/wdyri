@@ -18,3 +18,6 @@ flagged/
 
 # OS
 .DS_Store
+
+# Raw console logs (the clean per-run log is results/transformer_log.jsonl)
+results/logs_*.txt
