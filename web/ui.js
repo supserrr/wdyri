@@ -130,9 +130,6 @@ layout();
 
 // --- Links and buttons ---------------------------------------------------------------
 
-for (const el of $$("[data-top]")) {
-  el.addEventListener("click", (e) => { e.preventDefault(); scrollTo({ top: 0, behavior: smooth }); });
-}
 for (const el of $$("[data-focus]")) {
   el.addEventListener("click", (e) => {
     e.preventDefault();

@@ -75,10 +75,13 @@ function paint(el, words, res, threshold) {
   el.querySelector(".bar span").style.width = `${100 * res.p}%`;
   el.querySelector(".flagtxt").textContent = flagged ? "Flags it" : "Passes";
   el.querySelector(".flagtxt").title = `Flags at ${Math.round(100 * threshold)}% or more`;
+  explain(words.closest(".why"), res, el.querySelector("h3").textContent.toLowerCase());
   words.replaceChildren(...res.words.map(([w, e]) => {
     const s = document.createElement("span");
     s.textContent = w;
-    s.title = `effect ${e >= 0 ? "+" : ""}${e.toFixed(3)}`;
+    s.title = Math.abs(points(e)) >= 1
+      ? `${points(e) > 0 ? "Pushes towards scam" : "Pushes away from scam"}: without this word the score would be ${pct(res.p - e)}% (${signed(points(e))} points)`
+      : "Little effect on the score";
     // Vivid red pushes towards scam, vivid blue away; stronger effects get deeper colour.
     if (Math.abs(e) >= 0.01) {
       const a = Math.min(0.25 + Math.abs(e) * 2.2, 0.95);
@@ -87,6 +90,50 @@ function paint(el, words, res, threshold) {
     }
     return s;
   }).flatMap((s) => [s, document.createTextNode(" ")]));
+}
+
+// "What drove it": the words that moved each model's score most, in plain language.
+const PLACEHOLDER = { "<PHONE>": "the phone number", "<AMOUNT>": "the amount", "<URL>": "the link" };
+const points = (e) => Math.round(100 * e);
+const pct = (p) => Math.min(100, Math.max(0, Math.round(100 * p)));
+const signed = (n) => (n > 0 ? `+${n}` : `\u2212${Math.abs(n)}`);
+const wordName = (w) => PLACEHOLDER[w] ?? `\u201c${w}\u201d`;
+const bold = (text) => { const b = document.createElement("b"); b.textContent = text; return b; };
+function joinWords(items) {   // [a, b, c] -> a, b and c (as bold nodes)
+  const out = [];
+  items.forEach((x, i) => {
+    if (i) out.push(i === items.length - 1 ? " and " : ", ");
+    out.push(bold(wordName(x.w)));
+  });
+  return out;
+}
+function explain(box, res, model) {
+  const ranked = res.words.map(([w, e]) => ({ w, e })).filter((x) => Math.abs(points(x.e)) >= 1);
+  const up = ranked.filter((x) => x.e > 0).sort((a, b) => b.e - a.e).slice(0, 3);
+  const down = ranked.filter((x) => x.e < 0).sort((a, b) => a.e - b.e).slice(0, 2);
+  const sum = box.querySelector(".why-sum"), top = box.querySelector(".why-top");
+  const p = pct(res.p);
+  if (!up.length && !down.length) {
+    sum.replaceChildren(`No single word moved the ${model}'s score by a point or more: its ${p}% comes from the message as a whole.`);
+    top.replaceChildren();
+    return;
+  }
+  const parts = [];
+  if (up.length) parts.push(...joinWords(up), ` pushed the ${model} towards scam`);
+  if (down.length && up.length) parts.push("; ", ...joinWords(down), " pulled it away");
+  else if (down.length) parts.push(...joinWords(down), ` pulled the ${model} away from scam`);
+  parts.push(".");
+  if (up.length) parts.push(` Without ${wordName(up[0].w)}, its score would be ${pct(res.p - up[0].e)}% instead of ${p}%.`);
+  else parts.push(` Without ${wordName(down[0].w)}, its score would be ${pct(res.p - down[0].e)}% instead of ${p}%.`);
+  if (typeof parts[0] === "string") parts[0] = parts[0][0].toUpperCase() + parts[0].slice(1);
+  else parts[0].textContent = parts[0].textContent.replace(/^the /, "The ");
+  sum.replaceChildren(...parts);
+  top.replaceChildren(...[...up, ...down].map((x) => {
+    const f = document.createElement("span");
+    f.className = `factor ${x.e > 0 ? "up" : "down"}`;
+    f.append(PLACEHOLDER[x.w] ? PLACEHOLDER[x.w].replace(/^the /, "") : x.w, bold(`${signed(points(x.e))} pts`));
+    return f;
+  }));
 }
 
 // The check button shows that the analysis is running, for at least a moment.
@@ -133,6 +180,8 @@ async function check(raw, { reveal = true }) {
     $("#m-tf .prob").textContent = "…";
     $("#m-tf .flagtxt").textContent = "Loading";
     $("#words-tf").replaceChildren();
+    $("#why-tf .why-sum").replaceChildren();
+    $("#why-tf .why-top").replaceChildren();
   }
   const by = [];
   if (tf && tf.p >= settings.threshold_transformer) by.push("the transformer");
@@ -193,7 +242,7 @@ $("#sms").addEventListener("input", () => chips.forEach((c) => c.setAttribute("a
 // "What drove it" shows one model's word influences at a time.
 document.querySelectorAll("[data-words]").forEach((b, _, all) => b.addEventListener("click", () => {
   all.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-  $("#words-tf").hidden = b.dataset.words !== "tf";
-  $("#words-lr").hidden = b.dataset.words !== "lr";
+  $("#why-tf").hidden = b.dataset.words !== "tf";
+  $("#why-lr").hidden = b.dataset.words !== "lr";
 }));
 appReady();
