@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reproduce every result in the README, in order.
+# Reproduce every result in docs/results.md, in order.
 # Classical models take a few minutes; each transformer run took 5-14 minutes
 # on a laptop CPU (a GPU is much faster).
 set -euo pipefail
@@ -31,7 +31,7 @@ python -m src.stress                      # E10 minimal pairs (test and validati
 python -m src.significance                # paired bootstrap and rank tests
 python -m src.errors                      # error buckets
 python -m src.figures
-python -m src.tables                      # results/tables.md and the README results table
+python -m src.tables                      # results/tables.md and the docs/results.md table
 python scripts/export_app.py --variant counterfactual --baseline-variant counterfactual   # chosen on validation stress pairs
 python scripts/export_web.py              # browser model (ONNX) + JS assets, with a parity check
 node scripts/web_parity.mjs               # JavaScript preprocessing and n-gram model vs Python
