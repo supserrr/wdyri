@@ -36,7 +36,7 @@ const files = {};
       },
     });
     status.textContent = "Both models ready.";
-    if (current) run();   // re-run a message checked before the transformer finished loading
+    if (current) run({ reveal: false });   // re-run a message checked before the transformer finished loading
   } catch (err) {
     console.error(err);
     status.textContent = "The transformer could not be loaded; results use the n-gram model only.";
@@ -63,6 +63,7 @@ async function influence(text, scorer) {
 
 function paint(el, res, threshold) {
   const flagged = res.p >= threshold;
+  el.style.setProperty("--thr", threshold);
   el.querySelector(".prob").textContent = `${Math.round(100 * res.p)}%`;
   el.querySelector(".bar").classList.toggle("flag", flagged);
   el.querySelector(".bar span").style.width = `${100 * res.p}%`;
@@ -79,7 +80,7 @@ function paint(el, res, threshold) {
   }).flatMap((s) => [s, document.createTextNode(" ")]));
 }
 
-async function run() {
+async function run({ reveal = true } = {}) {
   const raw = $("#sms").value.trim();
   if (!raw) return;
   const defend = $("#defend").checked;
@@ -103,16 +104,17 @@ async function run() {
   if (lr.p >= settings.threshold_baseline) by.push("the n-gram model");
   const v = $("#verdict");
   v.className = `verdict ${by.length ? "scam" : "ok"}`;
-  v.querySelector("h2").textContent = by.length ? "⚠️ Likely scam" : "✅ Looks genuine";
+  v.querySelector("h2").textContent = by.length ? "Likely scam" : "Looks genuine";
   v.querySelector("p").textContent = by.length ? `Flagged by ${by.join(" and ")}.`
     : model ? "Neither model flags it." : "The n-gram model does not flag it (transformer still loading).";
   const ex = examples.find((e) => e.text === raw && e.defend === defend);
   v.querySelector(".note").textContent = ex ? ex.note : "";
   $("#result").hidden = false;
   $("#check").disabled = false;
+  if (reveal) $("#result").scrollIntoView({ block: "start" });
 }
 
-$("#check").addEventListener("click", run);
+$("#check").addEventListener("click", () => run());
 $("#sms").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) run(); });
 $("#examples").replaceChildren(...examples.map((ex) => {
   const b = document.createElement("button");
