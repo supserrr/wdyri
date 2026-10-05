@@ -34,10 +34,30 @@ export function note(key, text, { instant = false } = {}) {
   }
 }
 
-$$(".notes div").forEach((el, i) => {
-  el.dataset.text = el.textContent;
-  type(el, el.textContent, 500 + i * 240);
-});
+$$(".notes div").forEach((el) => { el.dataset.text = el.textContent; el.textContent = ""; });
+function typeNotes() {
+  $$(".notes div").forEach((el, i) => { if (!el.textContent) type(el, el.dataset.text, 700 + i * 240); });
+}
+
+// --- Page loader -------------------------------------------------------------------
+// The loader stays up until the fonts and the n-gram model (with the example chips) are
+// ready, so the hero appears in one piece; then the ribbon fades in and the hero rises.
+
+const loadStart = performance.now();
+let fontsLoaded = false, appLoaded = false, revealed = false;
+function reveal() {
+  if (revealed) return;
+  revealed = true;
+  setTimeout(() => {
+    document.documentElement.classList.add("ready");
+    layout();
+    typeNotes();
+  }, Math.max(0, 900 - (performance.now() - loadStart)));   // let the logo finish drawing
+}
+const maybeReveal = () => { if (fontsLoaded && appLoaded) reveal(); };
+export function appReady() { appLoaded = true; maybeReveal(); }
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fontsLoaded = true; maybeReveal(); });
+setTimeout(reveal, 6000);   // never keep anyone waiting longer than this
 
 // --- Ribbons -------------------------------------------------------------------
 

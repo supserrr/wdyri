@@ -1,13 +1,12 @@
 // WDYRI browser app: the E12 ensemble (number-balanced AfroXLMR OR number-balanced
 // char n-gram LR), running entirely client-side. The text goes through the same
 // preprocessing as training (web/preprocess.js, parity-tested against Python).
-import { AutoTokenizer, AutoModelForSequenceClassification, env }
-  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.web.min.js";
 import { preprocess } from "./preprocess.js";
 import { loadNgramModel } from "./ngram.js";
-import { note } from "./ui.js";
+import { note, appReady } from "./ui.js";
 
-env.allowLocalModels = false;
+// Loaded in the background, so the n-gram model and the page are ready without waiting for it.
+const TRANSFORMERS = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.web.min.js";
 
 const $ = (sel) => document.querySelector(sel);
 const status = $("#status");
@@ -25,6 +24,8 @@ status.textContent = "N-gram model ready. Loading the transformer.";
 const files = {};
 (async () => {
   try {
+    const { AutoTokenizer, AutoModelForSequenceClassification, env } = await import(TRANSFORMERS);
+    env.allowLocalModels = false;
     tokenizer = await AutoTokenizer.from_pretrained(settings.model_id);
     model = await AutoModelForSequenceClassification.from_pretrained(settings.model_id, {
       dtype: "q8",
@@ -153,7 +154,7 @@ async function check(raw, { reveal = true }) {
 $("#check").addEventListener("click", () => run());
 $("#sms").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) run(); });
 
-// Example chips: type the message into the box, then check it, as if pasted by hand.
+// Example chips: type the message into the box, as if pasted by hand; the user then presses Check.
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let typing = 0;
 async function typeInto(box, text) {
@@ -177,7 +178,7 @@ const chips = examples.map((ex) => {
   b.addEventListener("click", async () => {
     chips.forEach((c) => c.setAttribute("aria-pressed", String(c === b)));
     $("#defend").checked = ex.defend;
-    if (await typeInto($("#sms"), ex.text)) run();
+    await typeInto($("#sms"), ex.text);
   });
   return b;
 });
@@ -191,3 +192,4 @@ document.querySelectorAll("[data-words]").forEach((b, _, all) => b.addEventListe
   $("#words-tf").hidden = b.dataset.words !== "tf";
   $("#words-lr").hidden = b.dataset.words !== "lr";
 }));
+appReady();
