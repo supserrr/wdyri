@@ -6,11 +6,13 @@ import random
 import unittest
 
 import numpy as np
+import pandas as pd
 
 from src.metrics import recall_threshold
 from src.perturb import CYRILLIC, ZWSP, attack, codeswitch, structural
-from src.preprocess import mask, normalise, preprocess
+from src.preprocess import mask, normalise, preprocess, strip_placeholders
 from src.split import template_ids, template_split
+from src.variants import number_balanced
 
 
 class MaskingTest(unittest.TestCase):
@@ -91,9 +93,25 @@ class AttackTest(unittest.TestCase):
         self.assertEqual(codeswitch("Tuma PESA kwenye namba hii", [], [], "all"), "Send MONEY to this number")
 
 
+class ShortcutTest(unittest.TestCase):
+    def test_strip_placeholders(self):
+        self.assertEqual(strip_placeholders("tuma <AMOUNT> kwa <PHONE> sasa <URL>"), "tuma kwa sasa")
+
+    def test_number_balanced_keeps_words_and_labels(self):
+        texts = [f"tuma pesa kwa <PHONE> {i}" for i in range(200)] + [f"habari ya leo {i}" for i in range(200)]
+        frame = pd.DataFrame({"text": texts, "label": [1] * 200 + [0] * 200})
+        out, info = number_balanced(frame, seed=0)
+        self.assertTrue((out["label"] == frame["label"]).all())
+        self.assertEqual(out["text"].map(strip_placeholders).tolist(), frame["text"].map(strip_placeholders).tolist())
+        self.assertLess(abs(info["number_share_scam"] - info["number_share_genuine"]), 0.15)
+
+
 class ThresholdTest(unittest.TestCase):
     def test_never_above_half(self):
         self.assertEqual(recall_threshold(np.array([1, 1, 0]), np.array([0.99, 0.98, 0.01])), 0.5)
+
+    def test_hard_decisions_keep_half(self):
+        self.assertEqual(recall_threshold(np.array([1, 1, 1, 0]), np.array([0.0, 1.0, 1.0, 0.0])), 0.5)
 
     def test_lowered_to_reach_recall(self):
         y = np.ones(20, dtype=int)

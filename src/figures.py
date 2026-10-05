@@ -12,6 +12,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import numpy as np
 import pandas as pd
 
@@ -86,7 +87,7 @@ def rq2_attacks(summary: pd.DataFrame) -> None:
         ax.set_title(title, loc="left")
     axes[0].set_ylabel("Relative F1 drop (%)")
     axes[0].legend(loc="upper left", fontsize=7.5)
-    fig.suptitle("RQ2: word-based models break under disguise; transformers read it as suspicious",
+    fig.suptitle("RQ2: disguise breaks word-based models; transformers are not hurt (see the E6 control for why)",
                  x=0.01, ha="left", fontweight="bold", fontsize=10.5)
     fig.tight_layout()
     save(fig, "rq2_attacks")
@@ -176,6 +177,45 @@ def rq3_transfer(summary: pd.DataFrame) -> None:
     save(fig, "rq3_transfer")
 
 
+def e10_stress(stress: pd.DataFrame) -> None:
+    """Minimal pairs: how far one placeholder moves each model (before = grey, after = orange)."""
+    rows = [("phone_rule", "clean", "Phone rule"), ("nb_word_counts", "clean", "Naive Bayes (word counts)"),
+            ("lr_word", "clean", "Log. regression (words)"), ("lr_char", "clean", "Log. regression (char 2-5)"),
+            ("bilstm_finetuned", "clean", "BiLSTM + fastText"), ("xlmr", "clean", "XLM-R base"),
+            ("afroxlmr", "clean", "AfroXLMR base"), ("afroxlmr", "counterfactual", "AfroXLMR, number-balanced"),
+            ("ensemble", "clean", "Ensemble (char LR OR AfroXLMR)"),
+            ("ensemble_cf", "clean", "Ensemble with number-balanced AfroXLMR"),
+            ("ensemble_cf2", "clean", "Ensemble, both members number-balanced")]
+    rows = [r for r in rows if not stress[(stress.model == r[0]) & (stress.variant == r[1])].empty]
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 0.42 * len(rows) + 1.2), sharey=True)
+    panels = [("false_alarm_clean", "false_alarm_+phone", "Genuine text + a phone number\n(share wrongly flagged)"),
+              ("miss_clean", "miss_-number", "Scam with its number deleted\n(share missed)")]
+    after_colour = "#eb6834"
+    for ax, (before, after, title) in zip(axes, panels):
+        for i, (m, v, _) in enumerate(rows):
+            r = stress[(stress.model == m) & (stress.variant == v)].iloc[0]
+            ax.plot([r[before], r[after]], [i, i], color=AXIS, linewidth=2, zorder=2)
+            ax.scatter(r[before], i, s=40, color=MUTED, edgecolor=SURFACE, linewidth=1.2, zorder=3,
+                       label="As written" if i == 0 else None)
+            ax.scatter(r[after], i, s=40, color=after_colour, edgecolor=SURFACE, linewidth=1.2, zorder=4,
+                       label="After the one-token edit" if i == 0 else None)
+            if r[after] > 0.85:  # label inside the line, left of the dot, so it never collides
+                ax.text(r[after] - 0.03, i - 0.32, f"{r[after]:.0%}", ha="right", va="center", color=INK_2, fontsize=7.5)
+            else:
+                ax.text(r[after] + 0.03, i, f"{r[after]:.0%}", va="center", color=INK_2, fontsize=7.5)
+        ax.set_xlim(-0.02, 1.08)
+        ax.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
+        ax.set_title(title, loc="left", fontsize=9.5)
+        ax.grid(axis="y", visible=False)
+    axes[0].set_yticks(range(len(rows)), [r[2] for r in rows])
+    axes[0].invert_yaxis()
+    axes[1].legend(loc="lower right", fontsize=7.5)
+    fig.suptitle("E10: one placeholder flips AfroXLMR; number-balanced training (E11) removes the shortcut",
+                 x=0.01, ha="left", fontweight="bold", fontsize=10.5)
+    fig.tight_layout()
+    save(fig, "e10_stress_tests")
+
+
 def main() -> None:
     summary = pd.read_csv(config.RESULTS / "experiments.csv")
     by_seed = pd.read_csv(config.RESULTS / "experiments_by_seed.csv")
@@ -183,6 +223,9 @@ def main() -> None:
     rq2_attacks(summary)
     rq2_defences(summary)
     rq3_transfer(summary)
+    stress = config.RESULTS / "stress_tests.csv"
+    if stress.exists():
+        e10_stress(pd.read_csv(stress))
     print("figures:", sorted(p.name for p in config.FIGURES.glob("*.png")))
 
 

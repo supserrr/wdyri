@@ -2,7 +2,8 @@
 
 Data flow for one SMS:
     text -> SentencePiece sub-word ids (max 128) -> 12-layer Transformer encoder
-         -> vector of the first token (<s>) -> dropout + linear head -> 2 logits
+         -> vector of the first token (<s>) -> dense + tanh -> linear -> 2 logits
+            (the standard XLMRobertaForSequenceClassification head, with dropout)
          -> softmax -> P(scam)
 
 Training: AdamW, linear warm-up (10%) then decay, batch 16, up to 5 epochs,
@@ -11,6 +12,8 @@ class-weighted cross-entropy, early stopping on validation scam F1.
 Usage:
     python -m src.train_transformer --model afroxlmr --variant clean --seeds 13 42 2026
     python -m src.train_transformer --model afroxlmr --seeds 42 --save   # keeps the weights in models/
+    python -m src.train_transformer --model afroxlmr --seeds 42 --only-sets stress_ --from-saved
+        # adds the stress-test sets to an existing run, using its saved weights
 """
 from __future__ import annotations
 
@@ -52,11 +55,24 @@ def predict(model, tokenizer, texts, max_len: int = 128, batch: int = 64) -> np.
 
 
 def train_one(model_key: str, variant: str, split: str, seed: int, lr: float, epochs: int = 5,
-              batch: int = 16, max_len: int = 128, patience: int = 2, save: bool = False) -> dict:
+              batch: int = 16, max_len: int = 128, patience: int = 2, save: bool = False,
+              only_sets: str | None = None, from_saved: bool = False) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
     name = config.TRANSFORMERS[model_key]
     train, val, rows = variants.frames(split, variant, seed)
+    tag = None
+    if only_sets:
+        # Extra sets for an existing run go to their own file; the run's main file is untouched.
+        prefixes = tuple(p for p in only_sets.split(",") if p)
+        rows = rows[rows["set"].str.startswith(prefixes)]
+        tag = "+".join(p.strip("_") for p in prefixes)
+    saved = config.MODELS / runs.run_name(model_key, variant, split, seed)
+    if from_saved and saved.exists():
+        tokenizer = AutoTokenizer.from_pretrained(saved)
+        model = AutoModelForSequenceClassification.from_pretrained(saved).to(DEVICE)
+        runs.save(model_key, variant, split, seed, rows, predict(model, tokenizer, rows.text, max_len), tag=tag)
+        return {"history": [], "best_val_f1": None, "from_saved": True}
     tokenizer = AutoTokenizer.from_pretrained(name)
     model = AutoModelForSequenceClassification.from_pretrained(name, num_labels=2).to(DEVICE)
 
@@ -95,11 +111,10 @@ def train_one(model_key: str, variant: str, split: str, seed: int, lr: float, ep
                 break
     model.load_state_dict(best)
     runs.save(model_key, variant if lr == DEFAULT_LR else f"{variant}_lr{lr:g}", split, seed,
-              rows, predict(model, tokenizer, rows.text, max_len))
+              rows, predict(model, tokenizer, rows.text, max_len), tag=tag)
     if save:
-        out = config.MODELS / runs.run_name(model_key, variant, split, seed)
-        model.save_pretrained(out)
-        tokenizer.save_pretrained(out)
+        model.save_pretrained(saved)
+        tokenizer.save_pretrained(saved)
     del model, best
     if DEVICE.type == "mps":
         torch.mps.empty_cache()
@@ -117,6 +132,9 @@ def main() -> None:
     parser.add_argument("--seeds", nargs="+", type=int, default=list(config.SEEDS))
     parser.add_argument("--lr", nargs="+", type=float, default=[DEFAULT_LR])
     parser.add_argument("--save", action="store_true", help="save each trained model under models/")
+    parser.add_argument("--only-sets", default=None,
+                        help="predict only sets with these comma-separated prefixes (e.g. stress_ or ctrl_,valstress_)")
+    parser.add_argument("--from-saved", action="store_true", help="reuse saved weights instead of training")
     args = parser.parse_args()
     log = config.RESULTS / "transformer_log.jsonl"
     print("device:", DEVICE, flush=True)
@@ -126,11 +144,13 @@ def main() -> None:
                 for lr in args.lr:
                     for seed in args.seeds:
                         start = time.time()
-                        info = train_one(model_key, variant, split, seed, lr, save=args.save)
+                        info = train_one(model_key, variant, split, seed, lr, save=args.save,
+                                         only_sets=args.only_sets, from_saved=args.from_saved)
                         info.update(model=model_key, variant=variant, split=split, seed=seed, lr=lr,
-                                    seconds=round(time.time() - start))
-                        with log.open("a") as fh:
-                            fh.write(json.dumps(info) + "\n")
+                                    seconds=round(time.time() - start), only_sets=args.only_sets)
+                        if not info.get("from_saved"):
+                            with log.open("a") as fh:
+                                fh.write(json.dumps(info) + "\n")
                         print(json.dumps(info), flush=True)
 
 

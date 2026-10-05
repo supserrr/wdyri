@@ -8,17 +8,37 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
+import http.client
 import io
 import shutil
+import time
 import urllib.request
 import zipfile
 
 from . import config
 
 
-def fetch(url: str) -> bytes:
-    with urllib.request.urlopen(url) as resp:  # noqa: S310 (fixed, trusted URLs)
-        return resp.read()
+def fetch(url: str, attempts: int = 4) -> bytes:
+    """Download with retries: a dropped connection should not stop a reproduction."""
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(url, timeout=120) as resp:  # noqa: S310 (fixed, trusted URLs)
+                return resp.read()
+        except (OSError, http.client.HTTPException) as err:
+            if attempt == attempts:
+                raise
+            print(f"  retry {attempt} after: {err}")
+            time.sleep(2 * attempt)
+    raise RuntimeError("unreachable")
+
+
+def verify(path) -> None:
+    """Check the file is byte-identical to the one behind the reported results."""
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    expected = config.SHA256.get(path.name)
+    status = "ok" if digest == expected else f"MISMATCH (expected {expected}, got {digest})"
+    print(f"  sha256 {path.name}: {status}")
 
 
 def main() -> None:
@@ -44,6 +64,8 @@ def main() -> None:
             # gensim cannot read this model reliably from the .gz, so unpack it once.
             with gzip.open(gz, "rb") as src, binary.open("wb") as dst:
                 shutil.copyfileobj(src, dst)
+    for path in (config.BONGO_CSV, config.CHICHEWA_XLSX):
+        verify(path)
     print("Done:", sorted(p.name for p in config.DATA_RAW.iterdir()))
 
 

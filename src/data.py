@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 
 import pandas as pd
+from sklearn.metrics import f1_score
 
 from . import config
 from .preprocess import preprocess
@@ -66,6 +67,15 @@ def build() -> dict:
     stats["bongo_rows"] = len(bongo)
     stats["bongo_labels"] = bongo["label"].map(config.LABEL_NAMES).value_counts().to_dict()
     stats["bongo_words_median"] = float(bongo["text"].str.split().str.len().median())
+    # Descriptive only (a fixed rule needs no training): how far the number shortcut goes.
+    has_number = bongo["text"].str.contains("<PHONE>|<URL>", regex=True)
+    stats["share_with_phone_or_link"] = {
+        "scam": float(has_number[bongo.label == 1].mean()), "not scam": float(has_number[bongo.label == 0].mean())}
+    stats["phone_rule_f1_all_messages"] = float(f1_score(bongo["label"], has_number))
+    words = bongo["text"].str.split().str.len()
+    stats["words_min_scam"] = int(words[bongo.label == 1].min())
+    stats["words_median"] = {"scam": float(words[bongo.label == 1].median()),
+                             "not scam": float(words[bongo.label == 0].median())}
 
     bongo["template_id"] = template_ids(bongo["text"].tolist())
     sizes = bongo.groupby("template_id").size()
@@ -144,7 +154,16 @@ def fewshot_ids(chichewa: pd.DataFrame, n: int, seed: int) -> set[str]:
 
 
 def split_frames(df: pd.DataFrame, split: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Train, validation and test frames for split 'random' or 'template'."""
+    """Train, validation and test frames for split 'random', 'template' or 'template_r<k>'.
+
+    'template_r<k>' is a fresh template-disjoint split drawn with seed k (the same
+    draw as repeat k of E2); it checks the E12 ensemble on test sets that played
+    no part in designing it.
+    """
+    if split.startswith("template_r"):
+        assignment = template_split(df["label"].to_numpy(), df["template_id"].to_numpy(),
+                                    seed=int(split.removeprefix("template_r")))
+        return tuple(df[assignment == part].reset_index(drop=True) for part in ("train", "val", "test"))
     col = f"split_{split}"
     return tuple(df[df[col] == part].reset_index(drop=True) for part in ("train", "val", "test"))
 

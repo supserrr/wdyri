@@ -34,8 +34,11 @@ def recall_threshold(y_val: np.ndarray, prob_val: np.ndarray, target: float = co
     validation scams; it is never raised, because a perfectly separated
     validation set would otherwise push it to ~1.0 and overfit.
     """
-    scam_probs = np.sort(np.asarray(prob_val)[np.asarray(y_val) == 1])
-    if len(scam_probs) == 0:
+    prob_val = np.asarray(prob_val, dtype=float)
+    scam_probs = np.sort(prob_val[np.asarray(y_val) == 1])
+    if len(scam_probs) == 0 or np.isin(prob_val, (0.0, 1.0)).all():
+        # Hard 0/1 decisions (e.g. the phone rule) have no threshold to tune:
+        # lowering it would only mean "flag everything".
         return 0.5
     # Allow at most floor((1 - target) * n) scams below the threshold.
     k = int(np.floor((1 - target) * len(scam_probs)))
@@ -45,12 +48,11 @@ def recall_threshold(y_val: np.ndarray, prob_val: np.ndarray, target: float = co
 def bootstrap_f1(y: np.ndarray, prob: np.ndarray, threshold: float = 0.5,
                  n_boot: int = 1000, seed: int = 0) -> tuple[float, float]:
     """95% percentile bootstrap interval for scam F1 (resampling test messages)."""
-    rng = np.random.default_rng(seed)
-    y = np.asarray(y)
-    pred = (np.asarray(prob) >= threshold).astype(int)
-    stats = []
-    for _ in range(n_boot):
-        idx = rng.integers(0, len(y), len(y))
-        stats.append(f1_score(y[idx], pred[idx], zero_division=0))
-    low, high = np.percentile(stats, [2.5, 97.5])
+    y = np.asarray(y) == 1
+    pred = np.asarray(prob) >= threshold
+    idx = np.random.default_rng(seed).integers(0, len(y), (n_boot, len(y)))
+    yy, pp = y[idx], pred[idx]
+    tp, fp, fn = (pp & yy).sum(1), (pp & ~yy).sum(1), (~pp & yy).sum(1)
+    f1 = np.where(2 * tp + fp + fn > 0, 2 * tp / np.maximum(2 * tp + fp + fn, 1), 0.0)
+    low, high = np.percentile(f1, [2.5, 97.5])
     return float(low), float(high)

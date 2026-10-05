@@ -6,14 +6,17 @@ Usage:
 Writes results/error_examples.csv (every error with its bucket) and
 results/error_buckets.csv (counts per model and bucket).
 
-Buckets, checked in this order:
-    Ambiguous              five words or fewer: needs sender or conversation context
-    Service text flagged   a genuine text full of money or telco words marked as scam
-    Genuine text flagged   any other false alarm
-    Local tactic missed    a Chichewa fraud the Swahili-trained model let through
-    Obfuscation missed     an attacked scam whose clean version the model caught
-    Impersonation missed   a scam that poses as a landlord, relative or boss
-    Other scam missed      any other missed scam
+Buckets, checked in this order. Names describe the message, not a proven cause:
+    Ambiguous                  five words or fewer: needs sender or conversation context
+    Telco service text flagged a genuine Chichewa telco message (balance, bundle) marked as scam
+    Service-like text flagged  another genuine text with money or telco words marked as scam
+    Genuine text flagged       any other false alarm
+    Chichewa fraud missed      a Chichewa fraud the Swahili-trained model let through
+                               (local_scheme marks Malawi-specific scripts: DODMA relief,
+                               "Foundation" grants, Miracle Money)
+    Obfuscation missed         an attacked scam whose clean version the model caught
+    Impersonation missed       a scam that poses as a landlord, relative or boss
+    Other scam missed          any other missed scam
 """
 from __future__ import annotations
 
@@ -42,13 +45,18 @@ MAIN_RUNS = [
 ATTACK_SETS = [f"test_{a}_all" for a in ("lookalike", "structural", "codeswitch")]
 
 
-def bucket(text: str, label: int, set_name: str, clean_correct: bool) -> str:
+LOCAL_SCHEME = re.compile(r"dodma|foundation|miracle money|mtukula|grant|thandizo", re.IGNORECASE)
+
+
+def bucket(text: str, label: int, set_name: str, clean_correct: bool, source: str = "") -> str:
     if len(text.split()) <= 5:
         return "Ambiguous"
     if label == 0:
-        return "Service text flagged" if SERVICE.search(text) else "Genuine text flagged"
+        if source == "telcoSMS_CHI":
+            return "Telco service text flagged"
+        return "Service-like text flagged" if SERVICE.search(text) else "Genuine text flagged"
     if set_name == "chichewa":
-        return "Local tactic missed"
+        return "Chichewa fraud missed"
     if set_name.startswith("test_") and clean_correct:
         return "Obfuscation missed"
     return "Impersonation missed" if IMPERSONATION.search(text) else "Other scam missed"
@@ -57,6 +65,7 @@ def bucket(text: str, label: int, set_name: str, clean_correct: bool) -> str:
 def main() -> None:
     ev = pd.read_csv(config.DATA_PROCESSED / "eval_template.csv", keep_default_na=False)
     text = ev.set_index(["set", "id"])["text"]
+    source = pd.read_csv(config.DATA_PROCESSED / "chichewa.csv").set_index("id")["source"]
     rows = []
     for model, variant, seed in MAIN_RUNS:
         path = config.PREDICTIONS / f"{runs.run_name(model, variant, 'template', seed)}.csv"
@@ -75,9 +84,12 @@ def main() -> None:
             for r in part.itertuples():
                 t = text[(set_name, r.id)]
                 ok = bool(clean_ok.get(r.id, False))
+                src = source.get(r.id, "") if set_name == "chichewa" else ""
                 rows.append({"model": model, "set": set_name, "id": r.id, "label": r.label,
                              "prob": round(r.prob, 3), "threshold": round(thr, 3),
-                             "bucket": bucket(t, r.label, set_name, ok), "text": t})
+                             "bucket": bucket(t, r.label, set_name, ok, src),
+                             "local_scheme": bool(set_name == "chichewa" and r.label == 1 and LOCAL_SCHEME.search(t)),
+                             "text": t})
     errors = pd.DataFrame(rows)
     errors["where"] = errors["set"].map(lambda s: "Swahili test" if s == "test"
                                         else "Chichewa" if s == "chichewa" else "Attacked test (all words)")

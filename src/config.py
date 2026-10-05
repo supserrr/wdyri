@@ -16,6 +16,11 @@ CHICHEWA_XLSX = DATA_RAW / "SMS_Fraud_Chichewa_Dataset_SM.xlsx"
 BONGO_URL = "https://www.kaggle.com/api/v1/datasets/download/henrydioniz/swahili-sms-detection-dataset"
 CHICHEWA_URL = "https://zenodo.org/api/records/14607454/files/SMS_Fraud_Chichewa_Dataset_SM.xlsx/content"
 FASTTEXT_URL = "https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.sw.300.bin.gz"
+# SHA-256 of the raw files used for every reported result.
+SHA256 = {
+    "bongo_scam.csv": "7675f7646395367f068c16789ce23e5d6bee4f11e92ee3bdfff42b8c168b7f44",
+    "SMS_Fraud_Chichewa_Dataset_SM.xlsx": "4f83cfaab196f8fab3bdbf9c89e15313ddaa889da066335fcc2f35cc6b3f487a",
+}
 
 # One fixed seed builds the data splits; neural models are trained with all three.
 SPLIT_SEED = 42

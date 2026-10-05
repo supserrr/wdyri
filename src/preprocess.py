@@ -113,3 +113,11 @@ def preprocess(text: str, *, do_mask: bool = True, defend: bool = False) -> str:
     if defend:
         text = normalise(text)
     return text
+
+
+_PLACEHOLDER_TOKEN_RE = re.compile(r"\s*<(?:PHONE|AMOUNT|URL)>\s*")
+
+
+def strip_placeholders(text: str) -> str:
+    """Delete <PHONE>, <AMOUNT> and <URL>: the text without any trace of a number or link."""
+    return _SPACES_RE.sub(" ", _PLACEHOLDER_TOKEN_RE.sub(" ", text)).strip()

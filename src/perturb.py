@@ -173,7 +173,8 @@ def codeswitch(text: str, targets: list[int], effects: list[tuple[int, float]], 
     return text
 
 
-def adversarial_copies(texts: list[str], scorer: Scorer, share: float = 0.25, seed: int = 0) -> list[str]:
+def adversarial_copies(texts: list[str], scorer: Scorer, share: float = 0.25, seed: int = 0,
+                       return_sources: bool = False):
     """Perturbed copies of a random `share` of training scams (defence 2 in E7).
 
     Each copy gets a random attack and intensity. The copies are machine-made,
@@ -185,7 +186,7 @@ def adversarial_copies(texts: list[str], scorer: Scorer, share: float = 0.25, se
     for i in picked:
         kind, k = rng.choice(ATTACKS), rng.choice(INTENSITIES)
         copies.append(attack(texts[i], kind, k, scorer, seed=seed))
-    return copies
+    return (copies, picked) if return_sources else copies
 
 
 def attack(text: str, kind: str, intensity: str, scorer: Scorer, seed: int = 0,

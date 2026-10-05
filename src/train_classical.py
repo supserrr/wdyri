@@ -19,13 +19,14 @@ import json
 
 import joblib
 import pandas as pd
+from sklearn.metrics import average_precision_score, f1_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 
 from . import config, eval_sets, runs, variants
-from .classical import fit_tuned, scam_proba, top_features
+from .classical import GRIDS, build, fit_tuned, scam_proba, top_features
 from .data import load_bongo, load_bongo_raw, split_frames
 from .perturb import adversarial_copies
 from .preprocess import preprocess
@@ -73,9 +74,22 @@ def main() -> None:
             for model, features in CONFIGS:
                 if model == "majority" and not masked:
                     continue
-                pipe, info = fit_tuned(model, features, train.text, train.label, val.text, val.label)
+                # Template split: template-disjoint CV folds. Random split: plain folds, as in prior work.
+                cv_groups = train.template_id if split == "template" else None
+                pipe, info = fit_tuned(model, features, train.text, train.label, val.text, val.label, cv_groups)
                 key = name(model, features)
                 tuning[f"{key}/{variant}/{split}"] = info
+                if masked and split == "template" and model != "majority":
+                    # Sensitivity, for reporting only (selection never sees the test set):
+                    # test F1 of every grid value, refit on the full training set.
+                    (param, values), = GRIDS[model].items()
+                    info["test_by_value"] = {}
+                    for v in values:
+                        m = build(model, features).set_params(**{param: v}).fit(train.text, train.label)
+                        prob = scam_proba(m, test.text)
+                        info["test_by_value"][str(v)] = {
+                            "f1": round(f1_score(test.label, prob >= 0.5), 4),
+                            "pr_auc": round(average_precision_score(test.label, prob), 4)}
                 frame = pd.concat([val.assign(set="val"), test.assign(set="test")], ignore_index=True)
                 runs.save(key, variant, split, SEED, frame, scam_proba(pipe, frame.text))
                 if masked:
@@ -92,16 +106,26 @@ def main() -> None:
         for split, assignment in parts.items():
             train, val, test = (bongo[assignment == p] for p in ("train", "val", "test"))
             for model, features in CONFIGS:
-                pipe, _ = fit_tuned(model, features, train.text, train.label, val.text, val.label)
+                cv_groups = train.template_id if split == "template" else None
+                pipe, _ = fit_tuned(model, features, train.text, train.label, val.text, val.label, cv_groups)
                 runs.save(name(model, features), "repeat", split, split_seed, test.assign(set="test"),
                           scam_proba(pipe, test.text))
     print("repeated splits: 10 seeds x 2 split types")
 
-    # 2. Attacked and Chichewa evaluation sets, ranked by rung 2 on the template split
+    # 2. Attacked and Chichewa evaluation sets. Trigger words come from a fixed
+    #    "attacker": char LR with C=100, trained on the template split's training
+    #    data. It is kept separate from the tuned models so the attack text never
+    #    changes when a grid changes (it is white-box only for a char LR with C=100).
     lr_char = fitted[("lr_char", "template")]
-    scorer = lambda texts: scam_proba(lr_char, texts)  # noqa: E731
+    train_t, _, _ = split_frames(bongo, "template")
+    attacker = build("lr", "char").set_params(clf__C=100.0).fit(train_t.text, train_t.label)
+    joblib.dump(attacker, config.MODELS / "attacker_lr_char.joblib")
+    scorer = lambda texts: scam_proba(attacker, texts)  # noqa: E731
+    # A second, different attacker (word-count Naive Bayes, alpha 1) for the transfer-attack check.
+    attacker_nb = build("nb", "word_counts").set_params(clf__alpha=1.0).fit(train_t.text, train_t.label)
     eval_sets.build("random")
-    ev = eval_sets.build("template", scorer=scorer)
+    ev = eval_sets.build("template", scorer=scorer,
+                         transfer_scorer=lambda texts: scam_proba(attacker_nb, texts))
     print("evaluation sets:", ev["set"].nunique(), "sets,", len(ev), "rows")
 
     # 3. Every masked template-split model on every evaluation set
@@ -113,26 +137,48 @@ def main() -> None:
     #    Saved so the BiLSTM and transformers train on exactly the same copies.
     train, _, _ = split_frames(bongo, "template")
     scams = train[train.label == 1].text.tolist()
-    copies = adversarial_copies(scams, scorer, share=0.25, seed=config.SPLIT_SEED)
+    copies, sources = adversarial_copies(scams, scorer, share=0.25, seed=config.SPLIT_SEED, return_sources=True)
+    source_templates = train[train.label == 1].template_id.to_numpy()[sources]
     tmp = variants.ADV_COPIES.with_suffix(".tmp")
-    pd.DataFrame({"text": copies, "label": 1}).to_csv(tmp, index=False)
+    pd.DataFrame({"text": copies, "label": 1, "template_id": source_templates}).to_csv(tmp, index=False)
     tmp.replace(variants.ADV_COPIES)
     tuning["adversarial_copies"] = {"n_copies": len(copies), "n_train": len(train),
                                     "share_of_augmented_train": len(copies) / (len(train) + len(copies))}
 
-    # E3b shortcut check: does "contains a phone number or link" already solve the task?
+    # E3b shortcut checks: does a one-line rule already solve the task?
+    #   phone rule:  "contains a phone number or link"
+    #   length rule: "has at least k words", k chosen on the training set
     rule = ev["text"].str.contains("<PHONE>|<URL>", regex=True).astype(float)
     runs.save("phone_rule", "clean", "template", SEED, ev, rule.to_numpy())
+    train_t, _, _ = split_frames(bongo, "template")
+    words = train_t.text.str.split().str.len()
+    k_best = max(range(1, 61), key=lambda k: (f1_score(train_t.label, words >= k), -k))
+    tuning["length_rule_k"] = k_best
+    runs.save("length_rule", "clean", "template", SEED, ev,
+              (ev["text"].str.split().str.len() >= k_best).astype(float).to_numpy())
 
-    # 4-5. E7 adversarial training (NB, LR), E9 few-shot Chichewa (LR), E3b placeholders removed
+    # 4-5. E7 adversarial training (NB, LR), E9 few-shot Chichewa (LR), E3b placeholders removed,
+    #      E11 number-balanced counterfactual training
     jobs = [("nb", "word_counts", "advtrain", SEED), ("lr", "char", "advtrain", SEED)]
     jobs += [(m, f, "strip", SEED) for m, f in CONFIGS if m != "majority"]
+    jobs += [(m, f, "counterfactual", SEED) for m, f in CONFIGS if m != "majority"]  # E11
     jobs += [("lr", "char", f"fewshot{n}", seed) for n in (20, 50) for seed in config.SEEDS]
     for model, features, variant, seed in jobs:
         train, val, rows = variants.frames("template", variant, seed)
-        pipe, info = fit_tuned(model, features, train.text, train.label, val.text, val.label)
+        pipe, info = fit_tuned(model, features, train.text, train.label, val.text, val.label, train.template_id)
         tuning[f"{name(model, features)}/{variant}/template/s{seed}"] = info
         runs.save(name(model, features), variant, "template", seed, rows, scam_proba(pipe, rows.text))
+        if variant == "counterfactual":
+            joblib.dump(pipe, config.MODELS / f"{name(model, features)}__counterfactual__template.joblib")
+
+    # E12 check on fresh splits: char LR (plain and number-balanced) on two new template-disjoint splits
+    for split in ("template_r1", "template_r2"):
+        eval_sets.build(split)
+        for variant in ("clean", "counterfactual"):
+            train, val, ev_r = variants.frames(split, variant, SEED)
+            pipe, info = fit_tuned("lr", "char", train.text, train.label, val.text, val.label, train.template_id)
+            tuning[f"lr_char/{variant}/{split}"] = info
+            runs.save("lr_char", variant, split, SEED, ev_r, scam_proba(pipe, ev_r.text))
 
     # Interpretability: rung 2's strongest features, for the report and DECISIONS.md
     feats = {key: top_features(fitted[(key, "template")], k=25) for key in ("lr_char", "lr_word")}
@@ -140,9 +186,7 @@ def main() -> None:
     (config.RESULTS / "classical_tuning.json").write_text(json.dumps(tuning, indent=1, default=str))
     print("done; tuning:", json.dumps({k: v.get("params") for k, v in tuning.items() if isinstance(v, dict) and "params" in v}))
 
-    # The app's baseline: rung 2 trained on the template split.
-    (config.ROOT / "app").mkdir(exist_ok=True)
-    joblib.dump(lr_char, config.ROOT / "app" / "baseline_lr_char.joblib")
+    # The app's n-gram model is copied into app/ by scripts/export_app.py (plain or number-balanced).
 
 
 if __name__ == "__main__":
