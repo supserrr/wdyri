@@ -93,7 +93,7 @@
   .mark { display: block; width: 58px; height: 58px; transition: transform 0.45s var(--ease); }
   .mark-btn:hover .mark { transform: rotate(-10deg) scale(1.06); }
   h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 5.6vw, 78px); line-height: 1.05; letter-spacing: -0.015em;
-       margin: 0 0 26px; color: var(--ink); text-wrap: balance; }
+       margin: 0 0 16px; color: var(--ink); text-wrap: balance; }
 
   .glass { width: min(640px, 100%); text-align: left; border-radius: 24px; padding: 6px;
            background: rgba(255, 255, 255, 0.62); backdrop-filter: blur(22px) saturate(1.5); -webkit-backdrop-filter: blur(22px) saturate(1.5);
@@ -123,7 +123,7 @@
   .link:hover { color: var(--ink); }
   .link svg { width: 12px; height: 12px; transition: transform 0.25s var(--ease); }
   .link:hover svg { transform: translateX(2px); }
-  .sub { margin: 22px 0 0; font-size: 16px; font-weight: 400; color: var(--ink); line-height: 1.95; }
+  .sub { margin: 0 0 40px; font-size: 16px; font-weight: 400; color: var(--ink); line-height: 1.6; text-wrap: balance; }
   .sub span { display: block; color: var(--ink-2); }
   .status-line { display: none; margin-top: 14px; color: var(--ink-3); gap: 4px 14px; flex-wrap: wrap; justify-content: center; }
   .learn { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -272,14 +272,14 @@
     .learn { display: none; }
     .hero { padding-bottom: 32px; }
     .mark-btn { margin-bottom: 16px; }
-    .sub { margin-top: 18px; }
+    .sub { margin-bottom: 28px; }
   }
   @media (max-width: 640px) {
     .dots { display: none; }
     .hero { padding: 64px 16px 24px; }
     .mark { width: 48px; height: 48px; }
     .glass-bar .pill { flex: 1; }
-    .sub { font-size: 15px; margin-top: 20px; }
+    .sub { font-size: 15px; margin-bottom: 30px; }
     .learn { display: none; }
     .story { font-size: 16px; }
     .story-card { inset: 9vh 12px; border-radius: 28px; }
@@ -341,7 +341,8 @@
           </svg>
         </button>
         <h1 class="rise" style="--i:1">Why did you<br>redeem it?</h1>
-        <div class="glass rise" style="--i:2">
+        <p class="sub rise" style="--i:2">Check a Swahili SMS for mobile-money scam patterns, before you send money.</p>
+        <div class="glass rise" style="--i:3">
           <label for="sms" class="sr-only">SMS text</label>
           <textarea id="sms" placeholder="Paste an SMS, e.g. Iyo pesa itume kwenye namba hii ..."></textarea>
           <div class="glass-bar">
@@ -351,12 +352,11 @@
               Check message</button>
           </div>
         </div>
-        <div class="examples rise" style="--i:3">
+        <div class="examples rise" style="--i:4">
           <div class="mono">Try an example</div>
           <div class="chips" id="examples" role="group" aria-label="Example messages"></div>
         </div>
-        <div class="status-line mono rise" style="--i:3" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
-        <p class="sub rise" style="--i:4">Check a Swahili SMS for mobile-money scam patterns, before you send money.</p>
+        <div class="status-line mono rise" style="--i:4" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
         <a class="learn mono rise" style="--i:5" href="#story">Learn more<i aria-hidden="true"></i></a>
       </div>
     </div>
