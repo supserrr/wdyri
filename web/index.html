@@ -62,23 +62,11 @@
   .pill:disabled { opacity: 0.5; cursor: wait; }
   .ribbon { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 
-  /* Corner dots and the floating island nav */
+  /* Corner dots */
   .dots { position: fixed; z-index: 60; left: 22px; top: 22px; width: 32px; height: 32px; padding: 0; border: 0; background: none;
           cursor: pointer; display: grid; place-items: center; mix-blend-mode: difference; }
   .dots span { display: grid; grid-template-columns: 5px 5px; gap: 4px; }
   .dots i { width: 5px; height: 5px; border-radius: 50%; background: #fff; }
-  .island-nav { position: fixed; z-index: 50; top: 16px; left: 50%; display: flex; align-items: center; gap: 4px;
-                padding: 4px 4px 4px 14px; border-radius: 999px; background: #161616;
-                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 12px 30px -8px rgba(0, 0, 0, 0.45);
-                transform: translate(-50%, -16px); opacity: 0; pointer-events: none;
-                transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
-  .island-nav.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
-  .island-nav a { text-decoration: none; color: rgba(255, 255, 255, 0.55); font-size: 15px; padding: 0 9px; line-height: 34px; white-space: nowrap; }
-  .island-nav a:hover { color: #fff; }
-  .island-nav .brand { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 17px; padding-left: 0; }
-  .island-nav .brand svg { width: 18px; height: 18px; }
-  .island-nav .cta { background: #fff; color: #17181a; border-radius: 999px; font-weight: 500; padding: 0 13px; margin-left: 4px; }
-  .island-nav .cta:hover { color: #000; background: #f2f2f2; }
 
   /* Hero: the checker over the light ribbon; it shrinks into a card as it scrolls away */
   .hero-wrap { position: relative; height: 100vh; height: 100svh; min-height: 820px; }
@@ -201,13 +189,6 @@
   .words:empty::before { content: "The transformer is still loading; its words appear when it is ready."; color: var(--ink-3); }
   .again { margin-top: 18px; display: flex; justify-content: center; }
 
-  /* Call to action card */
-  .cta-wrap { padding: 32px 16px; }
-  .cta-card { position: relative; overflow: hidden; isolation: isolate; max-width: 960px; min-height: min(540px, 80vh); margin: 0 auto;
-              border-radius: 40px; background: var(--hero-bg); display: flex; flex-direction: column; align-items: center; justify-content: center;
-              text-align: center; gap: 30px; padding: 48px 24px; }
-  .cta-card .ribbon { z-index: -1; }
-
   /* FAQ */
   .faq { max-width: 620px; margin: 0 auto; display: grid; gap: 10px; }
   details { background: var(--card); border-radius: 16px; padding: 0 22px; transition: background-color 0.2s; }
@@ -295,8 +276,6 @@
   }
   @media (max-width: 640px) {
     .dots { display: none; }
-    .island-nav { top: 10px; padding-left: 12px; }
-    .island-nav a:not(.brand):not(.cta) { display: none; }
     .hero { padding: 64px 16px 24px; }
     .mark { width: 48px; height: 48px; }
     .glass-bar .pill { flex: 1; }
@@ -315,7 +294,6 @@
     .prob { font-size: 44px; }
     .drivers { padding: 16px; }
     .legend { margin-left: 0; }
-    .cta-card { border-radius: 28px; }
     details { padding: 0 16px; }
     details > div { padding-left: 0; }
     .egg-stage { height: 220px; place-items: center; padding-right: 0; }
@@ -325,21 +303,12 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
-    .island-nav, .mark, .bar span { transition: none; }
+    .mark, .bar span { transition: none; }
   }
 </style>
 </head>
 <body>
 <button class="dots" type="button" data-top aria-label="Back to the top"><span><i></i><i></i><i></i><i></i></span></button>
-
-<nav class="island-nav" id="nav" aria-label="Main">
-  <a class="brand" href="#top" data-top>
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>
-    WDYRI</a>
-  <a href="#how">How it works</a>
-  <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub</a>
-  <a class="cta" href="#top" data-focus>Check a message</a>
-</nav>
 
 <header class="hero-wrap" id="top">
     <div class="hero-card" id="hero-card">
@@ -443,15 +412,6 @@
     </div>
   </section>
 
-  <section class="cta-wrap" aria-label="Check a message">
-    <div class="cta-card">
-      <canvas class="ribbon" id="ribbon-cta"></canvas>
-      <h2 class="display">Got a message<br>you're not sure about?</h2>
-      <a class="pill dark" href="#top" data-focus>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 2.5 3.6v4.1c0 3.2 2.3 5.9 5.5 6.8 3.2-.9 5.5-3.6 5.5-6.8V3.6L8 1.5Z"/><path d="m5.6 8 1.7 1.7 3.2-3.4"/></svg>
-        Check a message</a>
-    </div>
-  </section>
 
   <section id="how" class="wrap">
     <div class="head">

@@ -1,5 +1,5 @@
 // Page behaviour that does not involve the models: the light ribbons, the hero that
-// shrinks away as you scroll, the story card, the floating nav, the typed status notes,
+// shrinks away as you scroll, the story card, the typed status notes,
 // in-page links and the easter egg. app.js reports model status through note().
 import { mountRibbon } from "./ribbon.js";
 
@@ -45,7 +45,6 @@ let heroRibbonY = 0.5;
 try {
   mountRibbon($("#ribbon-hero"), { y: () => heroRibbonY, start: 3 });
   mountRibbon($("#ribbon-story"), { y: 0.5, start: 9 });
-  mountRibbon($("#ribbon-cta"), { y: 0.47, start: 11 });
   mountRibbon($("#ribbon-end"), { dark: true, y: 0.42, start: 7 });
 } catch (err) {
   console.warn("Light ribbon unavailable:", err);   // the page still works on its plain background
@@ -55,7 +54,7 @@ try {
 
 const heroWrap = $(".hero-wrap"), heroCard = $("#hero-card"), hero = $("#hero"), glass = $(".glass");
 const notes = $$(".notes");
-const stage = $("#story"), storyCard = $(".story-card"), story = $("#story-text"), nav = $("#nav");
+const stage = $("#story"), storyCard = $(".story-card"), story = $("#story-text");
 let vw = innerWidth, vh = innerHeight;
 
 function layout() {
@@ -84,7 +83,6 @@ function update() {
   const h = storyCard.offsetHeight, top = h * 0.85, end = h * 0.12 - story.offsetHeight;
   story.style.transform = `translateY(${top + (end - top) * q}px)`;
 
-  nav.classList.toggle("show", scrollY > vh * 0.3);
 }
 
 let queued = false;
