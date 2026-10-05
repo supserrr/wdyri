@@ -21,3 +21,6 @@ flagged/
 
 # Raw console logs (the clean per-run log is results/transformer_log.jsonl)
 results/logs_*.txt
+
+# ONNX Runtime telemetry session files
+*.ses
