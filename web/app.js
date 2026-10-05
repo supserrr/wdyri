@@ -23,6 +23,7 @@ note("tf", "Transformer · 0%");
 status.textContent = "N-gram model ready. Loading the transformer.";
 
 const files = {};
+let shown = 0;
 (async () => {
   try {
     await settled;
@@ -33,9 +34,14 @@ const files = {};
       dtype: "q8",
       progress_callback: (p) => {
         if (p.status === "progress" && p.total) {
+          // Count only the weight files (small config files finish first and would read as
+          // 100% before the real download starts), and never let the number go backwards.
           files[p.file] = [p.loaded, p.total];
-          const [l, t] = Object.values(files).reduce((a, [x, y]) => [a[0] + x, a[1] + y], [0, 0]);
-          note("tf", `Transformer · ${Math.floor((100 * l) / t)}%`, { instant: true });
+          const big = Object.values(files).filter(([, total]) => total > 5e6);
+          if (!big.length) return;
+          const [l, t] = big.reduce((a, [x, y]) => [a[0] + x, a[1] + y], [0, 0]);
+          shown = Math.max(shown, Math.min(99, Math.floor((100 * l) / t)));
+          note("tf", `Transformer · ${shown}%`, { instant: true });
         }
       },
     });
