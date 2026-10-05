@@ -38,13 +38,16 @@ datasets: [henrydioniz/swahili-sms-detection-dataset]
 
 {base} fine-tuned to flag Tanzanian Swahili SMS that try to steal money
 ("ni tumie kwa namba hii" scams, fake prizes, fake agents, landlord impersonation).
+Trained with number-balanced counterfactual edits so that the presence of a phone
+number is not, by itself, evidence of a scam (experiment E11 in the repository).
 
 * Labels: `0` = not scam, `1` = scam. Use the decision threshold {threshold} (chosen on validation to
   catch at least 95% of scams), not 0.5, to match the reported results.
 * Input must go through the project's `preprocess()` (phone numbers, amounts and links are masked).
 * Training data: the BongoScam dataset (MIT licence), template-disjoint split, {n_train} messages.
 * Known blind spots: impersonation scams with no money words (landlord "this is my new number"),
-  Chichewa and other languages. See the repository for the full evaluation.
+  which the companion character n-gram model catches; Chichewa and other languages.
+  See the repository for the full evaluation.
 
 Code and results: https://github.com/supserrr/wdyri
 """
@@ -56,6 +59,7 @@ colorFrom: blue
 colorTo: red
 sdk: gradio
 sdk_version: 6.29.1
+python_version: "3.12"
 app_file: app.py
 pinned: false
 license: mit
@@ -80,6 +84,8 @@ def main() -> None:
 
     model_id = f"{args.user}/{args.model_repo}"
     api.create_repo(model_id, exist_ok=True)
+    # Marker the app checks, so it never serves an older upload under the wrong name.
+    (model_dir / "wdyri_run.json").write_text(json.dumps({"run": settings["transformer_run"]}) + "\n")
     (model_dir / "README.md").write_text(MODEL_CARD.format(
         base=base, threshold=settings["threshold_transformer"], n_train=train["scam"] + train["not scam"]))
     api.upload_folder(repo_id=model_id, folder_path=model_dir, commit_message="Upload fine-tuned model")
