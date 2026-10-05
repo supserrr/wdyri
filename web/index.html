@@ -17,16 +17,20 @@
     --ink-2: rgba(0, 0, 0, 0.61);
     --ink-3: rgba(23, 24, 26, 0.42);
     --card: #f4f5f7;
-    --tile: #ffffff;
     --chip: rgba(0, 0, 0, 0.05);
     --track: rgba(10, 11, 13, 0.07);
     --dark: #202020;
+    --night: #0f0e0d;
+    --orange: #e4572e;
+    --blue: #2f6fd6;
+    --teal: #1f9d77;
     --scam: #c63d2f;
     --scam-soft: rgba(198, 61, 47, 0.1);
     --ok: #1e7a4c;
     --ok-soft: rgba(30, 122, 76, 0.1);
     --ring: 0 0 0 0.5px rgba(10, 11, 13, 0.09), 0 2px 6px rgba(10, 11, 13, 0.08);
     --ring-soft: 0 0 0 0.5px rgba(0, 0, 0, 0.07);
+    --hero-bg: linear-gradient(180deg, #dcdfe4 0%, #e6e8ec 42%, #edeef1 78%);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --sans: Inter, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -34,373 +38,419 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--canvas); color: var(--ink);
-         font: 350 15px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--canvas); color: var(--ink); font: 350 15px/1.6 var(--sans);
+         -webkit-font-smoothing: antialiased; overflow-x: clip; }
   a { color: inherit; }
   button, input, textarea { font: inherit; color: inherit; }
   [hidden] { display: none !important; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 2px solid rgba(10, 11, 13, 0.55); outline-offset: 2px; }
 
-  /* Mono labels and chips */
   .mono { font-family: var(--mono); font-weight: 350; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .chip { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px;
-          background: var(--chip); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
-          text-transform: uppercase; color: var(--ink); }
-
-  /* Pill buttons */
-  .pill { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px;
-          border: 0; font-size: 14.5px; font-weight: 500; text-decoration: none; cursor: pointer;
+  .chip { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px; background: var(--chip);
+          font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+  .pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 14px;
+          border: 0; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer; white-space: nowrap;
           transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.2s; }
   .pill:active { transform: scale(0.97); }
+  .pill svg { width: 16px; height: 16px; flex: none; }
   .pill.dark { background: var(--dark); color: #fcfcfc; box-shadow: 0 6px 16px -10px rgba(10, 11, 13, 0.6); }
   .pill.dark:hover { background: #000; }
   .pill.light { background: #fff; color: var(--ink); box-shadow: var(--ring); }
   .pill.light:hover { box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.14), 0 4px 12px rgba(10, 11, 13, 0.1); }
+  .pill.small { height: 32px; padding: 0 12px; font-size: 14px; }
   .pill:disabled { opacity: 0.5; cursor: wait; }
-  .pill svg { width: 15px; height: 15px; flex: none; }
-  kbd { font-family: var(--mono); font-size: 11px; opacity: 0.6; }
+  .ribbon { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 
-  /* Hero */
-  .hero { position: relative; margin: 8px; border-radius: 40px; overflow: hidden; isolation: isolate;
-          background: linear-gradient(180deg, #dcdfe4 0%, #e6e8ec 42%, #edeef1 78%); padding: 0 24px 56px; }
-  .topbar { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;
-            max-width: 1180px; margin: 0 auto; padding: 20px 0; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-  .brand .dots { display: grid; grid-template-columns: 4px 4px; gap: 3px; }
-  .brand .dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
-  .topbar nav { display: flex; gap: 8px; }
-  .prism { position: absolute; left: -5%; width: 110%; top: 300px; height: 420px; z-index: -1; pointer-events: none;
-           animation: drift 16s ease-in-out infinite alternate; }
-  .guides { position: absolute; left: 50%; top: 40px; width: 760px; height: 760px; margin-left: -380px; z-index: -1;
-            pointer-events: none; opacity: 0.9; }
-  @keyframes drift { from { transform: translateX(-2%) scaleY(1); } to { transform: translateX(2%) scaleY(1.08); } }
-  .hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding-top: 40px; text-align: center; }
-  .mark-btn { display: block; margin: 0 auto 28px; padding: 4px; border: 0; border-radius: 14px; background: none;
-              color: var(--ink); cursor: pointer; }
-  .mark-btn:focus-visible { outline: 2px solid var(--ink-2); outline-offset: 2px; }
-  .mark { display: block; width: 46px; height: 46px; transition: transform 0.45s var(--ease); }
+  /* Corner dots and the floating island nav */
+  .dots { position: fixed; z-index: 60; left: 22px; top: 22px; width: 32px; height: 32px; padding: 0; border: 0; background: none;
+          cursor: pointer; display: grid; place-items: center; mix-blend-mode: difference; }
+  .dots span { display: grid; grid-template-columns: 5px 5px; gap: 4px; }
+  .dots i { width: 5px; height: 5px; border-radius: 50%; background: #fff; }
+  .island-nav { position: fixed; z-index: 50; top: 16px; left: 50%; display: flex; align-items: center; gap: 4px;
+                padding: 4px 4px 4px 14px; border-radius: 999px; background: #161616;
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 12px 30px -8px rgba(0, 0, 0, 0.45);
+                transform: translate(-50%, -16px); opacity: 0; pointer-events: none;
+                transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+  .island-nav.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  .island-nav a { text-decoration: none; color: rgba(255, 255, 255, 0.55); font-size: 15px; padding: 0 9px; line-height: 34px; white-space: nowrap; }
+  .island-nav a:hover { color: #fff; }
+  .island-nav .brand { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 17px; padding-left: 0; }
+  .island-nav .brand svg { width: 18px; height: 18px; }
+  .island-nav .cta { background: #fff; color: #17181a; border-radius: 999px; font-weight: 500; padding: 0 13px; margin-left: 4px; }
+  .island-nav .cta:hover { color: #000; background: #f2f2f2; }
+
+  /* Stage: the hero, which shrinks into the story card as you scroll */
+  .stage { position: relative; height: 300vh; }
+  .stage-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .stage-card { position: absolute; inset: 0; background: var(--hero-bg); will-change: clip-path; }
+  .shapes { position: absolute; left: 50%; top: 46%; width: min(135vmin, 1100px); aspect-ratio: 1; translate: -50% -50%;
+            pointer-events: none; opacity: 0.85;
+            mask-image: radial-gradient(closest-side, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.45) 42%, transparent 70%);
+            -webkit-mask-image: radial-gradient(closest-side, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.45) 42%, transparent 70%); }
+  .shapes g { transform-origin: 50% 50%; transform-box: view-box; animation: spin 90s linear infinite; }
+  .shapes g:nth-child(even) { animation-direction: reverse; animation-duration: 120s; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .notes { position: absolute; z-index: 2; color: var(--ink-3); font-size: 11.5px; line-height: 2.05; pointer-events: none; }
+  .notes div { white-space: pre; min-height: 1em; }
+  .notes-top { left: 64px; top: 58px; }
+  .notes-bottom { left: 64px; bottom: 56px; }
+  .hero { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center;
+          text-align: center; padding: 72px 24px 120px; will-change: transform, opacity; }
+  .mark-btn { display: block; margin: 0 0 26px; padding: 4px; border: 0; border-radius: 14px; background: none; color: var(--ink); cursor: pointer; }
+  .mark { display: block; width: 58px; height: 58px; transition: transform 0.45s var(--ease); }
   .mark-btn:hover .mark { transform: rotate(-10deg) scale(1.06); }
-  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(46px, 7.2vw, 80px); line-height: 1.05;
-       letter-spacing: -0.015em; margin: 0 0 22px; color: var(--ink); text-wrap: balance; }
-  .lede { margin: 0 auto 32px; max-width: 560px; font-size: 15px; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 5.6vw, 78px); line-height: 1.05; letter-spacing: -0.015em;
+       margin: 0 0 26px; color: var(--ink); text-wrap: balance; }
 
-  /* Checker island */
-  .island { text-align: left; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(18px) saturate(1.4);
-            -webkit-backdrop-filter: blur(18px) saturate(1.4); border-radius: 24px; box-shadow: var(--ring), 0 24px 48px -28px rgba(10, 11, 13, 0.35);
-            padding: 6px; }
-  textarea { display: block; width: 100%; min-height: 120px; resize: vertical; border: 0; outline: none; background: transparent;
-             padding: 16px 16px 8px; font-size: 16px; line-height: 1.55; font-weight: 400; color: var(--ink); }
-  textarea::placeholder { color: var(--ink-3); }
-  .island-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
-                padding: 10px 10px 10px 14px; border-top: 1px dashed rgba(10, 11, 13, 0.1); }
-  .island:focus-within { box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.18), 0 0 0 4px rgba(10, 11, 13, 0.05), 0 24px 48px -28px rgba(10, 11, 13, 0.35); }
-  label.toggle { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: var(--ink-2); font-size: 13.5px; }
-  label.toggle input { appearance: none; -webkit-appearance: none; flex: none; width: 34px; height: 20px; border-radius: 999px;
-                       background: rgba(10, 11, 13, 0.14); position: relative; cursor: pointer; margin: 0; transition: background 0.25s var(--ease); }
-  label.toggle input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%;
-                              background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); transition: transform 0.25s var(--ease); }
+  .glass { width: min(640px, 100%); text-align: left; border-radius: 24px; padding: 6px;
+           background: rgba(255, 255, 255, 0.62); backdrop-filter: blur(22px) saturate(1.5); -webkit-backdrop-filter: blur(22px) saturate(1.5);
+           box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.7) inset, var(--ring), 0 30px 60px -32px rgba(10, 11, 13, 0.35); }
+  .glass:focus-within { box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.2), 0 0 0 4px rgba(10, 11, 13, 0.05), 0 30px 60px -32px rgba(10, 11, 13, 0.35); }
+  textarea { display: block; width: 100%; min-height: 104px; resize: vertical; border: 0; outline: none; background: transparent;
+             padding: 14px 16px 6px; font-size: 16px; line-height: 1.55; font-weight: 400; color: var(--ink); }
+  textarea::placeholder { color: rgba(23, 24, 26, 0.45); }
+  .glass-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 8px; }
+  label.toggle { gap: 10px; padding: 0 14px 0 10px; font-weight: 450; font-size: 14.5px; }
+  label.toggle input { appearance: none; -webkit-appearance: none; flex: none; width: 30px; height: 18px; margin: 0; border-radius: 999px;
+                       background: rgba(10, 11, 13, 0.16); position: relative; cursor: pointer; transition: background 0.25s var(--ease); }
+  label.toggle input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+                              background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: transform 0.25s var(--ease); }
   label.toggle input:checked { background: var(--dark); }
-  label.toggle input:checked::after { transform: translateX(14px); }
-  label.toggle input:focus-visible { outline: 2px solid var(--ink-2); outline-offset: 2px; }
-  label.toggle small { display: block; color: var(--ink-3); font-size: 12px; line-height: 1.3; }
-  .status { margin: 18px 0 0; color: var(--ink-3); min-height: 22px; }
-  progress { appearance: none; -webkit-appearance: none; width: 120px; height: 3px; border: 0; border-radius: 99px;
-             vertical-align: middle; margin-left: 8px; background: var(--track); overflow: hidden; }
-  progress::-webkit-progress-bar { background: var(--track); }
-  progress::-webkit-progress-value { background: var(--ink-2); }
-  progress::-moz-progress-bar { background: var(--ink-2); }
-  .examples-wrap { margin-top: 30px; }
-  .examples-wrap .mono { color: var(--ink-3); margin-bottom: 12px; }
-  .examples { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .examples button { height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.9);
-                     box-shadow: var(--ring); font-size: 13.5px; font-weight: 450; cursor: pointer;
-                     transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease); }
-  .examples button:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.14), 0 6px 14px rgba(10, 11, 13, 0.1); }
+  label.toggle input:checked::after { transform: translateX(12px); }
+  .link { margin-top: 18px; border: 0; background: none; padding: 0; cursor: pointer; font-size: 14px; line-height: 24px; color: var(--ink-2);
+          display: inline-flex; align-items: center; gap: 4px; }
+  .link:hover { color: var(--ink); }
+  .link svg { width: 12px; height: 12px; transition: transform 0.25s var(--ease); }
+  .link:hover svg { transform: translateX(2px); }
+  .sub { margin: 22px 0 0; font-size: 16px; font-weight: 400; color: var(--ink); line-height: 1.95; }
+  .sub span { display: block; color: var(--ink-2); }
+  .status-line { display: none; margin-top: 14px; color: var(--ink-3); gap: 4px 14px; flex-wrap: wrap; justify-content: center; }
+  .learn { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 12px;
+           font-size: 12.5px; letter-spacing: 0.08em; color: rgba(23, 24, 26, 0.66); text-decoration: none; }
+  .learn i { width: 1px; height: 38px; background-image: radial-gradient(circle, rgba(8, 0, 0, 0.4) 0.6px, transparent 0.8px); background-size: 1px 4px; }
+
+  .story-window { position: absolute; z-index: 3; inset: 0; overflow: hidden; pointer-events: none;
+                  mask-image: linear-gradient(transparent 0, #000 16%, #000 80%, transparent 100%);
+                  -webkit-mask-image: linear-gradient(transparent 0, #000 16%, #000 80%, transparent 100%); }
+  .story { position: absolute; left: 50%; top: 0; width: min(600px, calc(100vw - 64px)); translate: -50% 0; opacity: 0;
+           font-size: 17px; line-height: 1.75; font-weight: 400; color: rgba(0, 0, 0, 0.8); will-change: transform; }
+  .story p { margin: 0 0 22px; }
+  .story .dropcap { float: left; font-family: var(--display); font-size: 116px; line-height: 0.82; margin: 8px 18px 0 -4px;
+                    background: linear-gradient(180deg, #9a9a9a, #111 70%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .story b { font-weight: 550; }
 
   /* Sections */
-  .wrap { max-width: 1048px; margin: 0 auto; padding: 72px 16px; }
-  .section-head { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 28px; }
-  h2.display { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 48px); line-height: 1.12;
-               letter-spacing: -0.015em; margin: 0; }
-  .card { background: var(--card); border-radius: 24px; padding: 32px; }
-  .tile { background: var(--tile); border-radius: 16px; box-shadow: var(--ring-soft); padding: 24px; }
-  .rule-dots { height: 1px; margin: 20px 0 16px; background-image: radial-gradient(circle, rgba(8, 0, 0, 0.27) 0.55px, transparent 0.7px);
-               background-size: 4px 1px; }
+  .wrap { max-width: 1048px; margin: 0 auto; padding: 96px 16px; }
+  .head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 40px; }
+  .head p { margin: 0; color: var(--ink-2); max-width: 520px; }
+  h2.display, .verdict h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 48px); line-height: 1.15;
+                            letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 
-  /* Verdict */
-  .verdict { margin-bottom: 16px; position: relative; overflow: hidden; }
-  .verdict-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .verdict .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-3); }
-  .verdict .tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px;
-                  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
-  .verdict.scam .dot { background: var(--scam); box-shadow: 0 0 0 5px var(--scam-soft); }
-  .verdict.scam .tag { background: var(--scam-soft); color: var(--scam); }
-  .verdict.scam .tag::after { content: "Flagged"; }
-  .verdict.ok .dot { background: var(--ok); box-shadow: 0 0 0 5px var(--ok-soft); }
-  .verdict.ok .tag { background: var(--ok-soft); color: var(--ok); }
-  .verdict.ok .tag::after { content: "Not flagged"; }
-  .verdict h2 { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 5.4vw, 56px); line-height: 1.08;
-                letter-spacing: -0.015em; margin: 0 0 8px; }
-  .verdict p { margin: 0; color: var(--ink-2); font-size: 15px; }
-  .verdict .note:not(:empty) { margin-top: 18px; padding-top: 16px; font-size: 14px; color: var(--ink-2);
-                               background-image: radial-gradient(circle, rgba(8, 0, 0, 0.27) 0.55px, transparent 0.7px);
-                               background-size: 4px 1px; background-repeat: repeat-x; }
-  .verdict .note:not(:empty)::before { content: "// About this example"; display: block; margin-bottom: 4px;
-                                       font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
-
-  /* Model cards */
-  .models { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-  .model { display: flex; flex-direction: column; }
-  .model h3 { font-weight: 350; font-size: 24px; line-height: 1.2; margin: 20px 0 4px; }
-  .model .what { font-size: 14px; color: var(--ink-2); margin-bottom: 22px; min-height: 22px; }
-  .model .tile { flex: 1; }
-  .prob-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .prob { font-family: var(--display); font-size: 56px; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .prob-row .mono { color: var(--ink-3); }
-  .bar { position: relative; height: 6px; border-radius: 99px; background: var(--track); margin: 18px 0 10px; }
-  .bar span { display: block; height: 100%; width: 0; border-radius: 99px; background: rgba(10, 11, 13, 0.45);
-              transition: width 0.7s var(--ease); }
+  /* Result: verdict plus one card per model */
+  .verdict { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: 40px; }
+  .verdict h2 { display: inline-flex; align-items: center; gap: 16px; }
+  .verdict h2::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--ink-3); flex: none; }
+  .verdict.scam h2::before { background: var(--scam); box-shadow: 0 0 0 6px var(--scam-soft); }
+  .verdict.ok h2::before { background: var(--ok); box-shadow: 0 0 0 6px var(--ok-soft); }
+  .verdict p { margin: 0; color: var(--ink-2); }
+  .verdict .note:not(:empty) { font-size: 14px; color: var(--ink-2); max-width: 520px; }
+  .verdict .note:not(:empty)::before { content: "// "; font-family: var(--mono); color: var(--ink-3); }
+  .models { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+  .model { display: flex; flex-direction: column; background: var(--card); border-radius: 24px; padding: 32px 32px 8px; }
+  .model .ico { width: 40px; height: 40px; border-radius: 50%; background: #fff; box-shadow: var(--ring-soft); display: grid; place-items: center; }
+  .model .ico svg { width: 17px; height: 17px; }
+  .model h3 { font-family: var(--display); font-weight: 400; font-size: 27px; line-height: 1.2; margin: 26px 0 8px; }
+  .model.tf h3, .model.tf .ico, .model.tf .rows svg { color: var(--orange); }
+  .model.lr h3, .model.lr .ico, .model.lr .rows svg { color: var(--blue); }
+  .stmt { margin: 0 0 22px; font-size: 24px; line-height: 1.2; font-weight: 350; color: rgba(0, 0, 0, 0.88); }
+  .rows { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 10px; color: var(--ink-2); font-size: 15px; }
+  .rows li { display: flex; align-items: flex-start; gap: 12px; }
+  .rows li > span:first-child { flex: none; width: 22px; height: 22px; border-radius: 7px; background: #fff; box-shadow: var(--ring-soft);
+                                display: grid; place-items: center; margin-top: 1px; }
+  .rows svg { width: 12px; height: 12px; }
+  .rows b { font-weight: 500; color: var(--ink); }
+  .model .pill { align-self: flex-start; margin-bottom: 28px; }
+  .tile { background: #fff; border-radius: 16px; box-shadow: var(--ring-soft); padding: 22px 24px; margin: 0 -24px 0; flex: 1; }
+  .tile .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--ink-3); margin-bottom: 18px; }
+  .tile .legend b { font-weight: inherit; display: inline-flex; align-items: center; gap: 7px; }
+  .tile .legend i { width: 7px; height: 7px; border-radius: 50%; }
+  .bar { position: relative; height: 6px; border-radius: 99px; background: var(--track); margin: 4px 0 18px; }
+  .bar span { display: block; height: 100%; width: 0; border-radius: 99px; background: rgba(10, 11, 13, 0.45); transition: width 0.7s var(--ease); }
   .bar.flag span { background: var(--scam); }
-  .bar .thr { position: absolute; top: -5px; bottom: -5px; width: 1px; left: calc(var(--thr, 0.5) * 100%);
-              background: rgba(10, 11, 13, 0.35); }
-  .flagtxt { font-size: 13.5px; color: var(--ink-2); }
+  .bar .thr { position: absolute; top: -5px; bottom: -5px; width: 1px; left: calc(var(--thr, 0.5) * 100%); background: rgba(10, 11, 13, 0.35); }
   .words { line-height: 2.15; word-break: break-word; font-size: 15px; font-weight: 400; }
   .words span { padding: 2px 4px; border-radius: 5px; }
-  .tile .mono { color: var(--ink-3); }
-  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin: 18px 4px 0; color: var(--ink-3); }
-  .legend b { font-weight: inherit; display: inline-flex; align-items: center; gap: 6px; }
-  .legend i { width: 10px; height: 10px; border-radius: 3px; }
-  .seen-card { margin-top: 16px; }
-  .seen { font-family: var(--mono); font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink); word-break: break-word; }
+  .seen-tile { margin-top: 16px; background: var(--card); border-radius: 24px; padding: 24px 32px; }
+  .seen-tile .mono { color: var(--ink-3); margin-bottom: 8px; }
+  .seen { font-family: var(--mono); font-size: 13px; font-weight: 400; line-height: 1.7; word-break: break-word; }
+  .again { margin-top: 18px; display: flex; justify-content: center; }
+
+  /* Call to action card */
+  .cta-wrap { padding: 32px 16px; }
+  .cta-card { position: relative; overflow: hidden; isolation: isolate; max-width: 960px; min-height: min(540px, 80vh); margin: 0 auto;
+              border-radius: 40px; background: var(--hero-bg); display: flex; flex-direction: column; align-items: center; justify-content: center;
+              text-align: center; gap: 30px; padding: 48px 24px; }
+  .cta-card .ribbon { z-index: -1; }
 
   /* FAQ */
-  .faq-head { text-align: center; align-items: center; }
-  .faq-head p { margin: 0; color: var(--ink-2); max-width: 460px; }
-  .faq { max-width: 720px; margin: 0 auto; display: grid; gap: 8px; }
-  details { background: var(--card); border-radius: 16px; padding: 0 24px; transition: background-color 0.2s; }
+  .faq { max-width: 620px; margin: 0 auto; display: grid; gap: 10px; }
+  details { background: var(--card); border-radius: 16px; padding: 0 22px; transition: background-color 0.2s; }
   details:hover { background: #eff0f3; }
-  summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-            padding: 20px 0; cursor: pointer; font-size: 15px; font-weight: 400; }
+  summary { list-style: none; display: flex; align-items: center; gap: 14px; padding: 19px 0; cursor: pointer; font-size: 15px; font-weight: 450; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: ""; flex: none; width: 12px; height: 12px; transition: transform 0.3s var(--ease);
-                   background: linear-gradient(var(--ink-2), var(--ink-2)) center / 12px 1.2px no-repeat,
-                               linear-gradient(var(--ink-2), var(--ink-2)) center / 1.2px 12px no-repeat; }
-  details[open] summary::after { transform: rotate(45deg); }
-  details > div { padding: 0 0 22px; color: var(--ink-2); max-width: 620px; }
+  summary .q-ico { flex: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: var(--ring-soft);
+                   display: grid; place-items: center; color: var(--teal); }
+  summary .q-ico svg { width: 13px; height: 13px; }
+  summary .chev { margin-left: auto; width: 14px; height: 14px; color: var(--ink-3); transition: transform 0.3s var(--ease); flex: none; }
+  details[open] summary .chev { transform: rotate(180deg); }
+  details > div { padding: 0 0 22px 38px; color: var(--ink-2); max-width: 600px; }
   details > div p { margin: 0 0 10px; }
   details > div p:last-child { margin: 0; }
 
-  /* Footer */
-  footer { max-width: 1048px; margin: 0 auto; padding: 0 16px 48px; }
-  footer .rule-dots { margin: 0 0 24px; }
-  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; color: var(--ink-3); }
-  .foot nav { display: flex; flex-wrap: wrap; gap: 20px; }
-  .foot a { text-decoration: none; color: rgba(23, 24, 26, 0.66); }
-  .foot a:hover { color: var(--ink); }
-  .foot button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none;
-                 border: 0; padding: 0; cursor: pointer; }
-  .foot button:hover { color: var(--ink); }
+  /* Dark ending */
+  .end { position: relative; overflow: hidden; isolation: isolate; background: var(--night); color: #f4f3ee; margin-top: 96px; }
+  .end-top { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22vh 16px 0; }
+  .end .mark { width: 76px; height: 76px; color: #fff; filter: drop-shadow(0 8px 24px rgba(255, 255, 255, 0.12)); }
+  .end h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.6vw, 72px); line-height: 1.12; letter-spacing: -0.015em;
+            margin: 64px 0 0; text-wrap: balance; }
+  .end p { margin: 22vh 0 0; max-width: 440px; color: rgba(244, 243, 238, 0.55); font-size: 16px; line-height: 1.65; }
+  .end .pill.light { margin-top: 30px; }
+  .horizon { position: relative; height: min(70vh, 640px); margin-top: 4vh; }
+  .horizon .ribbon { z-index: -1; }
+  .wordmark { position: absolute; left: 50%; top: 52%; translate: -50% -50%; font-family: var(--display); font-size: clamp(120px, 27vw, 400px);
+              line-height: 1; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+              white-space: nowrap; user-select: none; border: 0; background: none; padding: 0; cursor: pointer; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; padding: 0 16px 40px; color: rgba(244, 243, 238, 0.5); }
+  .foot a, .foot button { color: inherit; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer;
+                          font: inherit; letter-spacing: inherit; text-transform: inherit; }
+  .foot a:hover, .foot button:hover { color: #fff; }
 
   /* Easter egg: where the name comes from */
-  dialog.egg { width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 0;
-               border-radius: 28px; background: var(--card); color: var(--ink);
-               box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.08), 0 40px 80px -24px rgba(10, 11, 13, 0.45); }
+  dialog.egg { width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: 28px;
+               background: var(--card); color: var(--ink); box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.08), 0 40px 80px -24px rgba(10, 11, 13, 0.45); }
   dialog.egg::backdrop { background: rgba(220, 223, 228, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   dialog.egg[open] { animation: rise 0.55s var(--ease) both; }
   .egg-inner { display: grid; gap: 16px; padding: 28px; }
   .egg-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .egg-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: #fff; box-shadow: var(--ring);
-               cursor: pointer; font-size: 18px; line-height: 1; color: var(--ink-2); }
-  .egg-close:hover { color: var(--ink); }
-  .giftcard { position: relative; overflow: hidden; height: 150px; border-radius: 16px; padding: 18px 20px;
-              background: linear-gradient(135deg, #202020 0%, #3b3e46 100%); color: #f4f4f2;
-              display: flex; flex-direction: column; justify-content: space-between; font-family: var(--mono); }
+  .egg-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: #fff; box-shadow: var(--ring); cursor: pointer;
+               font-size: 18px; line-height: 1; color: var(--ink-2); }
+  .giftcard { position: relative; overflow: hidden; height: 150px; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column;
+              justify-content: space-between; background: linear-gradient(135deg, #202020 0%, #3b3e46 100%); color: #f4f4f2; font-family: var(--mono); }
   .giftcard .mono { color: rgba(244, 244, 242, 0.6); }
   .giftcard .value { font-family: var(--display); font-size: 44px; line-height: 1; }
   .giftcard .code { font-size: 13px; letter-spacing: 0.14em; color: rgba(244, 244, 242, 0.75); }
   .stamp { position: absolute; right: 18px; top: 50%; padding: 6px 12px; border: 2.5px solid var(--scam); border-radius: 8px;
-           background: rgba(255, 255, 255, 0.92); color: var(--scam); font-family: var(--mono); font-weight: 500;
-           font-size: 15px; letter-spacing: 0.16em; transform: translateY(-50%) rotate(-11deg); }
+           background: rgba(255, 255, 255, 0.92); color: var(--scam); font-family: var(--mono); font-weight: 500; font-size: 15px;
+           letter-spacing: 0.16em; transform: translateY(-50%) rotate(-11deg); }
   dialog.egg[open] .stamp { animation: stamp 0.5s 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
   @keyframes stamp { from { opacity: 0; transform: translateY(-50%) rotate(-11deg) scale(2.4); } to { opacity: 1; } }
-  .egg h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6vw, 40px); line-height: 1.1;
-            letter-spacing: -0.015em; margin: 4px 0 0; text-wrap: balance; }
+  .egg h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6vw, 40px); line-height: 1.1; letter-spacing: -0.015em; margin: 4px 0 0; }
   .egg p { margin: 0; color: var(--ink-2); }
   .egg .links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
 
   /* Entrance */
-  .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms + 150ms); }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
   #result:not([hidden]) { animation: rise 0.7s var(--ease) both; }
+
+  @media (max-width: 1100px) {
+    .notes { display: none; }
+    .status-line { display: flex; }
+  }
+  @media (max-height: 760px) and (min-width: 641px) {
+    .learn { display: none; }
+    .hero { padding-bottom: 32px; }
+    .mark-btn { margin-bottom: 16px; }
+    .sub { margin-top: 18px; }
+  }
+  @media (max-width: 640px) {
+    .dots { display: none; }
+    .island-nav { top: 10px; padding-left: 12px; }
+    .island-nav a:not(.brand):not(.cta) { display: none; }
+    .hero { padding: 64px 16px 24px; }
+    .mark { width: 48px; height: 48px; }
+    .glass-bar .pill { flex: 1; }
+    .sub { font-size: 15px; margin-top: 20px; }
+    .learn { display: none; }
+    .story { font-size: 16px; }
+    .story .dropcap { font-size: 92px; }
+    .wrap { padding: 64px 16px; }
+    .model { padding: 24px 22px 8px; }
+    .tile { margin: 0 -14px; padding: 18px; }
+    .seen-tile { padding: 20px 22px; }
+    .cta-card { border-radius: 28px; }
+    details { padding: 0 16px; }
+    details > div { padding-left: 0; }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .rise, #result:not([hidden]), .prism, dialog.egg[open], dialog.egg[open] .stamp { animation: none; }
-    .mark { transition: none; }
-  }
-
-  @media (max-width: 640px) {
-    .hero { margin: 6px; border-radius: 28px; padding: 0 12px 40px; }
-    .topbar { padding: 14px 4px; }
-    .hero-inner { padding-top: 24px; }
-    .mark-btn { margin-bottom: 20px; }
-    .egg-inner { padding: 22px; }
-    .prism { top: 240px; height: 300px; }
-    .island-bar { padding: 10px 8px 8px 10px; }
-    .island-bar .pill { width: 100%; justify-content: center; }
-    .wrap { padding: 48px 16px; }
-    .card { padding: 22px; border-radius: 20px; }
-    .tile { padding: 18px; }
-    details { padding: 0 18px; }
+    .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, .shapes g { animation: none; }
+    .island-nav, .mark, .bar span { transition: none; }
   }
 </style>
 </head>
 <body>
-<header class="hero">
-  <svg class="guides" viewBox="0 0 760 760" aria-hidden="true">
-    <g fill="none" stroke="rgba(10,11,13,0.09)" stroke-width="1" stroke-dasharray="2 6">
-      <circle cx="380" cy="380" r="200"/><circle cx="380" cy="380" r="290"/><circle cx="380" cy="380" r="375"/>
-    </g>
-  </svg>
-  <svg class="prism" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="prism-grad" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="#7d97ff" stop-opacity="0"/>
-        <stop offset="0.08" stop-color="#7d97ff" stop-opacity="0.85"/>
-        <stop offset="0.22" stop-color="#4f6cf5"/>
-        <stop offset="0.36" stop-color="#ffffff"/>
-        <stop offset="0.48" stop-color="#fff0b0"/>
-        <stop offset="0.58" stop-color="#ffb877"/>
-        <stop offset="0.7" stop-color="#f5a0b2"/>
-        <stop offset="0.84" stop-color="#c4b3f6"/>
-        <stop offset="1" stop-color="#a8bbff" stop-opacity="0"/>
-      </linearGradient>
-      <filter id="prism-wide" x="-10%" y="-150%" width="120%" height="400%"><feGaussianBlur stdDeviation="26"/></filter>
-      <filter id="prism-core" x="-10%" y="-150%" width="120%" height="400%"><feGaussianBlur stdDeviation="3.5"/></filter>
-    </defs>
-    <path d="M-60 250 C 220 160 430 330 730 245 S 1190 150 1500 215" fill="none" stroke="url(#prism-grad)"
-          stroke-width="120" filter="url(#prism-wide)" opacity="0.7"/>
-    <path d="M-60 250 C 220 160 430 330 730 245 S 1190 150 1500 215" fill="none" stroke="url(#prism-grad)"
-          stroke-width="14" filter="url(#prism-core)" opacity="0.9"/>
-  </svg>
+<button class="dots" type="button" data-top aria-label="Back to the top"><span><i></i><i></i><i></i><i></i></span></button>
 
-  <div class="topbar">
-    <a class="brand" href="#top" aria-label="WDYRI home"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mono">WDYRI</span></a>
-    <nav>
-      <a class="pill light" href="#how">How it works</a>
-      <a class="pill light" href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub</a>
-    </nav>
-  </div>
+<nav class="island-nav" id="nav" aria-label="Main">
+  <a class="brand" href="#top" data-top>
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>
+    WDYRI</a>
+  <a href="#how">How it works</a>
+  <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub</a>
+  <a class="cta" href="#top" data-focus>Check a message</a>
+</nav>
 
-  <div class="hero-inner" id="top">
-    <button class="mark-btn rise" style="--i:0" type="button" data-egg aria-label="Why is it called WDYRI?" title="Why the name?">
-      <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z"
-              stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
+<section class="stage" id="top" aria-label="Check a message">
+  <span id="story" style="position:absolute;top:110vh"></span>
+  <div class="stage-pin">
+    <div class="stage-card" id="stage-card">
+      <canvas class="ribbon" id="ribbon-hero"></canvas>
+      <svg class="shapes" viewBox="0 0 1000 1000" aria-hidden="true">
+        <g><polygon points="500,320 641,388 675,540 578,662 422,662 325,540 359,388" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.2"/></g>
+        <g><polygon points="500,230 711,332 763,560 617,743 383,743 237,560 289,332" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"/></g>
+        <g><polygon points="500,130 789,269 860,582 660,833 340,833 140,582 211,269" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/></g>
+        <g><polygon points="500,30 867,207 958,604 704,922 296,922 42,604 133,207" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1"/></g>
       </svg>
-    </button>
-    <h1 class="rise" style="--i:1">Why did you<br>redeem it?</h1>
-    <p class="lede rise" style="--i:2">Check a Swahili SMS for mobile-money scam patterns before you send money.</p>
 
-    <div class="island rise" style="--i:3">
-      <label for="sms" class="sr-only">SMS text</label>
-      <textarea id="sms" placeholder="Paste an SMS, e.g. Iyo pesa itume kwenye namba hii ..."></textarea>
-      <div class="island-bar">
-        <label class="toggle"><input type="checkbox" id="defend">
-          <span>Undo disguise tricks first<small>lookalike letters, s p a c e d words</small></span></label>
-        <button id="check" class="pill dark" disabled>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 2.5 3.6v4.1c0 3.2 2.3 5.9 5.5 6.8 3.2-.9 5.5-3.6 5.5-6.8V3.6L8 1.5Z"/><path d="m5.6 8 1.7 1.7 3.2-3.4"/></svg>
-          Check message <kbd>⌘↵</kbd></button>
+      <div class="notes notes-top mono" aria-hidden="true">
+        <div>// Live model status</div>
+        <div data-note="ngram">N-gram model · loading</div>
+        <div data-note="tf">Transformer · waiting</div>
+        <div data-note="count">Checks this visit · 0</div>
+      </div>
+      <div class="notes notes-bottom mono" aria-hidden="true">
+        <div>// Last check</div>
+        <div data-note="l1">None yet</div>
+        <div data-note="l2">Paste an SMS to begin</div>
+        <div data-note="l3"></div>
+        <div data-note="l4"></div>
+      </div>
+
+      <div class="hero" id="hero">
+        <button class="mark-btn rise" style="--i:0" type="button" data-egg aria-label="Why is it called WDYRI?" title="Why the name?">
+          <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <h1 class="rise" style="--i:1">Why did you<br>redeem it?</h1>
+        <div class="glass rise" style="--i:2">
+          <label for="sms" class="sr-only">SMS text</label>
+          <textarea id="sms" placeholder="Paste an SMS, e.g. Iyo pesa itume kwenye namba hii ..."></textarea>
+          <div class="glass-bar">
+            <label class="pill light toggle"><input type="checkbox" id="defend"> Undo disguise tricks</label>
+            <button id="check" class="pill dark" disabled>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 2.5 3.6v4.1c0 3.2 2.3 5.9 5.5 6.8 3.2-.9 5.5-3.6 5.5-6.8V3.6L8 1.5Z"/><path d="m5.6 8 1.7 1.7 3.2-3.4"/></svg>
+              Check message</button>
+          </div>
+        </div>
+        <button class="link rise" style="--i:3" type="button" data-example>Try an example
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+        <div class="status-line mono rise" style="--i:3" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
+        <p class="sub rise" style="--i:4">Check a Swahili SMS for mobile-money scam patterns.<span>Before you send money, not after.</span></p>
+        <a class="learn mono rise" style="--i:5" href="#story">Learn more<i aria-hidden="true"></i></a>
+      </div>
+
+      <div class="story-window" id="story-window">
+        <article class="story" id="story-text" aria-label="Why this project exists">
+          <p><span class="dropcap" aria-hidden="true">M</span>obile-money scams arrive as text messages. A relative needs help, an agent sent money by mistake, a landlord has a new number. In Tanzania a common hook is <i>"ni tumie kwa namba hii"</i>: send it to me on this number.</p>
+          <p>Published Swahili scam detectors report 98.7% to 99.86% accuracy. That sounds solved. We rebuilt them and asked a simpler question: what are they actually reading?</p>
+          <p>Mostly, the numbers. In the BongoScam data 86% of scams, and no genuine texts, contain a phone number or link. Add a phone number to a harmless message and a fine-tuned transformer called it a scam 96% of the time.</p>
+          <p><b>A detector that only reads numbers is easy to fool and quick to cry wolf.</b></p>
+          <p>So WDYRI masks every number, trains its models on messages where numbers appear on both sides, and pairs a transformer with a character model that fail on different messages. The phone-number false alarms fell from 96% to 0%.</p>
+          <p>It is still a research demo. When in doubt, call your provider on its official number.</p>
+        </article>
       </div>
     </div>
-    <div class="status mono rise" style="--i:4" id="status" role="status">Loading the n-gram model...</div>
-
-    <div class="examples-wrap rise" style="--i:5">
-      <div class="mono">Try an example</div>
-      <div class="examples" id="examples"></div>
-    </div>
   </div>
-</header>
+</section>
 
 <main>
   <section id="result" class="wrap" hidden>
-    <div class="section-head"><span class="chip">Result</span></div>
-    <article class="card verdict" id="verdict" aria-live="polite">
-      <div class="verdict-top"><span class="dot"></span><span class="tag"></span></div>
-      <h2></h2><p></p><div class="note"></div>
-    </article>
+    <div class="verdict" id="verdict" aria-live="polite"><span class="chip">Result</span><h2></h2><p></p><div class="note"></div></div>
     <div class="models">
-      <article class="card model" id="m-tf">
-        <div><span class="chip">Model 01 · Transformer</span></div>
-        <h3>Transformer</h3><div class="what" id="tf-name"></div>
+      <article class="model tf" id="m-tf">
+        <span class="ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 1.5v3M8 11.5v3M1.5 8h3M11.5 8h3M3.4 3.4l2.1 2.1M10.5 10.5l2.1 2.1M3.4 12.6l2.1-2.1M10.5 5.5l2.1-2.1"/></svg></span>
+        <h3>Transformer</h3>
+        <p class="stmt"><span class="prob">…</span> scam probability.</p>
+        <ul class="rows">
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 14V2.5M3.5 3h8l-1.5 3 1.5 3h-8"/></svg></span><span class="flagtxt"></span></li>
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M6 1.5V4M10 1.5V4M6 12v2.5M10 12v2.5M1.5 6H4M1.5 10H4M12 6h2.5M12 10h2.5"/></svg></span><span><b>Model</b> <span id="tf-name"></span></span></li>
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></span><span><b>Reads</b> whole words in context</span></li>
+        </ul>
+        <a class="pill light small" href="https://huggingface.co/supserrr/wdyri-afroxlmr" target="_blank" rel="noopener">Model card ↗</a>
         <div class="tile">
-          <div class="prob-row"><div class="prob"></div><div class="mono">Scam probability</div></div>
+          <div class="legend mono"><b><i style="background:rgba(214,69,55,.8)"></i>Pushes towards scam</b><b><i style="background:rgba(42,111,219,.7)"></i>Pushes away</b></div>
           <div class="bar"><span></span><i class="thr" title="Flag threshold"></i></div>
-          <div class="flagtxt"></div>
-          <div class="rule-dots"></div>
-          <div class="mono">Word influence</div>
           <div class="words"></div>
         </div>
       </article>
-      <article class="card model" id="m-lr">
-        <div><span class="chip">Model 02 · N-gram</span></div>
-        <h3>Character n-gram model</h3><div class="what">Logistic regression on character 2-5-grams, number-balanced</div>
+      <article class="model lr" id="m-lr">
+        <span class="ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 13V8M6.5 13V4M10 13V6.5M13.5 13V3"/></svg></span>
+        <h3>N-gram model</h3>
+        <p class="stmt"><span class="prob">…</span> scam probability.</p>
+        <ul class="rows">
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 14V2.5M3.5 3h8l-1.5 3 1.5 3h-8"/></svg></span><span class="flagtxt"></span></li>
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M6 1.5V4M10 1.5V4M6 12v2.5M10 12v2.5M1.5 6H4M1.5 10H4M12 6h2.5M12 10h2.5"/></svg></span><span><b>Model</b> logistic regression on character 2-5-grams, number-balanced</span></li>
+          <li><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></span><span><b>Reads</b> short runs of letters</span></li>
+        </ul>
+        <a class="pill light small" href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">Source code ↗</a>
         <div class="tile">
-          <div class="prob-row"><div class="prob"></div><div class="mono">Scam probability</div></div>
+          <div class="legend mono"><b><i style="background:rgba(214,69,55,.8)"></i>Pushes towards scam</b><b><i style="background:rgba(42,111,219,.7)"></i>Pushes away</b></div>
           <div class="bar"><span></span><i class="thr" title="Flag threshold"></i></div>
-          <div class="flagtxt"></div>
-          <div class="rule-dots"></div>
-          <div class="mono">Word influence</div>
           <div class="words"></div>
         </div>
       </article>
     </div>
-    <div class="legend mono">
-      <span>Remove a word and watch the scam probability:</span>
-      <b><i style="background:rgba(214,69,55,.55)"></i>pushes towards scam</b>
-      <b><i style="background:rgba(42,111,219,.45)"></i>pushes away</b>
+    <div class="seen-tile"><div class="mono">What the models see · numbers, amounts and links masked</div><div class="seen" id="seen"></div></div>
+    <div class="again"><button class="link" type="button" data-example>Try another example
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button></div>
+  </section>
+
+  <section class="cta-wrap" aria-label="Check a message">
+    <div class="cta-card">
+      <canvas class="ribbon" id="ribbon-cta"></canvas>
+      <h2 class="display">Got a message<br>you're not sure about?</h2>
+      <a class="pill dark" href="#top" data-focus>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 2.5 3.6v4.1c0 3.2 2.3 5.9 5.5 6.8 3.2-.9 5.5-3.6 5.5-6.8V3.6L8 1.5Z"/><path d="m5.6 8 1.7 1.7 3.2-3.4"/></svg>
+        Check a message</a>
     </div>
-    <article class="card seen-card">
-      <div class="section-head" style="margin-bottom:16px"><span class="chip">Model input</span></div>
-      <div class="tile"><div class="mono" style="margin-bottom:8px">What the models see · numbers, amounts and links masked</div>
-        <div class="seen" id="seen"></div></div>
-    </article>
   </section>
 
   <section id="how" class="wrap">
-    <div class="section-head faq-head">
+    <div class="head">
       <span class="chip">FAQ</span>
       <h2 class="display">How it works</h2>
       <p>What happens to your message, how the check works and how far to trust it.</p>
     </div>
     <div class="faq">
       <details>
-        <summary>How does it decide if a message is a scam?</summary>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v11M4.5 13.5h7M2.5 5.5h11M4.5 5.5 3 9.5h3l-1.5-4ZM11.5 5.5 10 9.5h3l-1.5-4Z"/></svg></span>How does it decide if a message is a scam?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
         <div><p>Two models read your message and each gives the chance that it is a scam. One is a transformer fine-tuned on Swahili SMS (AfroXLMR), which reads the words in context. The other is a character n-gram model, which looks at short runs of letters.</p>
           <p>They tend to be wrong on different messages, so the message is flagged if either one flags it. That is why the result shows both of them, and why they sometimes disagree.</p></div>
       </details>
       <details id="privacy">
-        <summary>Is my message sent anywhere?</summary>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></span>Is my message sent anywhere?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
         <div><p>No. Everything runs in your browser: your message is never sent anywhere or stored.</p>
           <p>The transformer (about 360 MB) downloads once and your browser caches it. The n-gram model answers immediately while it loads.</p></div>
       </details>
       <details>
-        <summary>What does "Undo disguise tricks" do?</summary>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></span>What does "Undo disguise tricks" do?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
         <div><p>Scammers disguise words so filters miss them. This removes invisible characters, turns lookalike Cyrillic and Greek letters back into Latin ones, undoes digit swaps such as 4 for a, and rejoins s p a c e d words before the models read the text.</p></div>
       </details>
       <details>
-        <summary>Why are numbers replaced with &lt;PHONE&gt; and &lt;AMOUNT&gt;?</summary>
-        <div><p>Before reading, the models replace phone numbers, amounts and links with &lt;PHONE&gt;, &lt;AMOUNT&gt; and &lt;URL&gt;.</p>
-          <p>In the training data 86% of scams, and no genuine texts, contain a phone number or link, so a model can learn that any number means scam. A transformer trained without a fix for this called a genuine message a scam 96% of the time once a phone number was added. Both models here were trained with numbers in both kinds of message, which brought that to 0%.</p></div>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2.5 5 13.5M11 2.5l-1 11M2.5 6h11M2 10.5h11"/></svg></span>Why are numbers replaced with &lt;PHONE&gt; and &lt;AMOUNT&gt;?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
+        <div><p>Before reading, the models replace phone numbers, amounts and links with &lt;PHONE&gt;, &lt;AMOUNT&gt; and &lt;URL&gt;, so they judge the words rather than whether a number is there.</p>
+          <p>Most scams in the training data carried a number, and models trained on them learned that shortcut. Both models here were trained with numbers in both kinds of message, so a number alone no longer decides.</p></div>
       </details>
       <details>
-        <summary>Does it work in other languages?</summary>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.7 3.7 2.7 6S9.8 12.3 8 14M8 2C6.2 3.7 5.3 5.7 5.3 8s.9 4.3 2.7 6"/></svg></span>Does it work in other languages?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
         <div><p>It is built for Swahili SMS from Tanzania. <span id="train-note"></span></p>
           <p>It saw no other language in training, so it does worse elsewhere: on real scam SMS in Chichewa, from Malawi, it is much less accurate.</p></div>
       </details>
       <details>
-        <summary>Can I trust the verdict?</summary>
+        <summary><span class="q-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 2.5 3.6v4.1c0 3.2 2.3 5.9 5.5 6.8 3.2-.9 5.5-3.6 5.5-6.8V3.6L8 1.5Z"/></svg></span>Can I trust the verdict?<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
         <div><p>It is a research demo, not a guarantee. On Swahili test messages it never saw in training it scores 0.994 F1 (1 would mean every scam caught with no false alarms), and stays at 0.95–0.99 when letters are disguised or words split. But heavily disguised text is treated as suspicious even when it is genuine, and scam scripts unlike anything in training can slip through.</p>
           <p>When in doubt, call your provider on its official number. The code, data and full results are on <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub</a>.</p></div>
       </details>
@@ -408,13 +458,30 @@
   </section>
 </main>
 
-<footer>
-  <div class="rule-dots"></div>
-  <div class="foot mono">
-    <span>WDYRI · <button type="button" data-egg title="Why the name?">Why Did You Redeem It?</button></span>
-    <nav><a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub ↗</a><a href="https://huggingface.co/supserrr/wdyri-afroxlmr" target="_blank" rel="noopener">Model ↗</a><a href="#privacy">Privacy</a></nav>
+<footer class="end">
+  <div class="end-top">
+    <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
+    </svg>
+    <h2>Read it twice.<br>Don't redeem it.</h2>
+    <p>Paste the message, check it here, and only then decide whether to send any money.</p>
+    <a class="pill light" href="#top" data-focus>Check a message</a>
   </div>
+  <div class="horizon">
+    <canvas class="ribbon" id="ribbon-end"></canvas>
+    <button class="wordmark" type="button" data-egg aria-label="Why is it called WDYRI?" title="Why the name?">WDYRI</button>
+  </div>
+  <nav class="foot mono" aria-label="Footer">
+    <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://huggingface.co/supserrr/wdyri-afroxlmr" target="_blank" rel="noopener">Model</a>
+    <span>© 2026 WDYRI</span>
+    <a href="https://github.com/supserrr/wdyri/blob/main/LICENSE" target="_blank" rel="noopener">MIT licence</a>
+    <a href="#privacy">Privacy</a>
+    <button type="button" data-egg>Why the name?</button>
+  </nav>
 </footer>
+
+<div class="sr-only" id="status" role="status"></div>
 
 <dialog class="egg" id="egg" aria-labelledby="egg-title">
   <div class="egg-inner">
@@ -436,6 +503,7 @@
     </div>
   </div>
 </dialog>
+
 <!-- transformers.js 4.3.0 leaves ONNX Runtime as bare imports; both resolve to one
      self-contained ONNX Runtime Web bundle (the version transformers.js 4.3.0 depends on). -->
 <script type="importmap">
@@ -444,21 +512,7 @@
   "onnxruntime-common": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.0-dev.20260914-8d85527a0/dist/ort.webgpu.bundle.min.mjs"
 } }
 </script>
-<script>
-  // A link to a question (e.g. #privacy) opens it; #why opens the easter egg.
-  const egg = document.getElementById("egg");
-  function openFromHash() {
-    if (location.hash === "#why") return egg.showModal();
-    const el = location.hash && document.getElementById(location.hash.slice(1));
-    if (el && el.tagName === "DETAILS") el.open = true;
-  }
-  addEventListener("hashchange", openFromHash);
-  openFromHash();
-
-  document.querySelectorAll("[data-egg]").forEach((b) => b.addEventListener("click", () => egg.showModal()));
-  egg.querySelector("[data-close]").addEventListener("click", () => egg.close());
-  egg.addEventListener("click", (e) => { if (e.target === egg) egg.close(); });   // click on the backdrop
-</script>
+<script type="module" src="ui.js"></script>
 <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -175,7 +175,7 @@ wdyri/
 │                    train_classical, embeddings, train_bilstm, train_transformer,
 │                    ensemble, metrics, evaluate, stress, significance, errors, figures, tables
 ├── notebooks/       01_eda … 08_shortcut_and_ensemble (analysis), colab_app (fallback demo)
-├── web/             the deployed app: index.html, app.js, preprocess.js, ngram.js (runs in the browser)
+├── web/             the deployed app: index.html, app.js, preprocess.js, ngram.js, plus ui.js and ribbon.js for the page (runs in the browser)
 ├── app/             app.py (Gradio version), settings.json, baseline_lr_char.joblib, requirements.txt
 ├── scripts/         run_all.sh, export_app.py, export_web.py, web_parity.mjs, publish_hf.py, make_notebooks.py
 ├── tests/           test_core.py (17 unit tests)

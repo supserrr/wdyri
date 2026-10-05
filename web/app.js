@@ -5,6 +5,7 @@ import { AutoTokenizer, AutoModelForSequenceClassification, env }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.web.min.js";
 import { preprocess } from "./preprocess.js";
 import { loadNgramModel } from "./ngram.js";
+import { note } from "./ui.js";
 
 env.allowLocalModels = false;
 
@@ -16,9 +17,11 @@ const ngram = loadNgramModel(lrData);
 $("#tf-name").textContent = settings.transformer_name;
 $("#train-note").textContent = `Trained on ${settings.train_note}`;
 
-let tokenizer = null, model = null, current = null;
+let tokenizer = null, model = null, current = null, checks = 0;
 $("#check").disabled = false;
-status.innerHTML = 'N-gram model ready. Loading the transformer <progress id="pg" max="100" value="0"></progress>';
+note("ngram", "N-gram model · ready");
+note("tf", "Transformer · 0%");
+status.textContent = "N-gram model ready. Loading the transformer.";
 
 const files = {};
 (async () => {
@@ -30,15 +33,16 @@ const files = {};
         if (p.status === "progress" && p.total) {
           files[p.file] = [p.loaded, p.total];
           const [l, t] = Object.values(files).reduce((a, [x, y]) => [a[0] + x, a[1] + y], [0, 0]);
-          const pg = $("#pg");
-          if (pg) pg.value = (100 * l) / t;
+          note("tf", `Transformer · ${Math.floor((100 * l) / t)}%`, { instant: true });
         }
       },
     });
+    note("tf", "Transformer · ready");
     status.textContent = "Both models ready.";
     if (current) run({ reveal: false });   // re-run a message checked before the transformer finished loading
   } catch (err) {
     console.error(err);
+    note("tf", "Transformer · unavailable");
     status.textContent = "The transformer could not be loaded; results use the n-gram model only.";
   }
 })();
@@ -108,18 +112,30 @@ async function run({ reveal = true } = {}) {
   v.querySelector("p").textContent = by.length ? `Flagged by ${by.join(" and ")}.`
     : model ? "Neither model flags it." : "The n-gram model does not flag it (transformer still loading).";
   const ex = examples.find((e) => e.text === raw && e.defend === defend);
-  v.querySelector(".note").textContent = ex ? ex.note : "";
+  v.querySelector(".note").textContent = ex ? `${ex.label}. ${ex.note}` : "";
   $("#result").hidden = false;
+  if (reveal) note("count", `Checks this visit · ${++checks}`);
+  note("l1", `Verdict · ${by.length ? "likely scam" : "looks genuine"}`);
+  note("l2", `Transformer · ${tf ? `${Math.round(100 * tf.p)}%` : "loading"}`);
+  note("l3", `N-gram model · ${Math.round(100 * lr.p)}%`);
+  note("l4", `Disguise fix · ${defend ? "on" : "off"}`);
   $("#check").disabled = false;
   if (reveal) $("#result").scrollIntoView({ block: "start" });
 }
 
 $("#check").addEventListener("click", () => run());
 $("#sms").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) run(); });
-$("#examples").replaceChildren(...examples.map((ex) => {
-  const b = document.createElement("button");
-  b.textContent = ex.label;
-  b.title = ex.note;
-  b.addEventListener("click", () => { $("#sms").value = ex.text; $("#defend").checked = ex.defend; run(); });
-  return b;
+
+// "Try an example" steps through the built-in examples, one per click.
+let nextExample = 0;
+const exampleButtons = document.querySelectorAll("[data-example]");
+const labelNext = () => exampleButtons.forEach((b) => { b.title = `Next: ${examples[nextExample].label}`; });
+exampleButtons.forEach((b) => b.addEventListener("click", () => {
+  const ex = examples[nextExample];
+  nextExample = (nextExample + 1) % examples.length;
+  labelNext();
+  $("#sms").value = ex.text;
+  $("#defend").checked = ex.defend;
+  run();
 }));
+labelNext();
