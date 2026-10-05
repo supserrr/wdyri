@@ -126,16 +126,34 @@ async function run({ reveal = true } = {}) {
 $("#check").addEventListener("click", () => run());
 $("#sms").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) run(); });
 
-// "Try an example" steps through the built-in examples, one per click.
-let nextExample = 0;
-const exampleButtons = document.querySelectorAll("[data-example]");
-const labelNext = () => exampleButtons.forEach((b) => { b.title = `Next: ${examples[nextExample].label}`; });
-exampleButtons.forEach((b) => b.addEventListener("click", () => {
-  const ex = examples[nextExample];
-  nextExample = (nextExample + 1) % examples.length;
-  labelNext();
-  $("#sms").value = ex.text;
-  $("#defend").checked = ex.defend;
-  run();
-}));
-labelNext();
+// Example chips: type the message into the box, then check it, as if pasted by hand.
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let typing = 0;
+async function typeInto(box, text) {
+  const token = ++typing;
+  if (reduceMotion) { box.value = text; return true; }
+  const step = Math.max(1, Math.ceil(text.length / 32));
+  for (let i = step; i < text.length + step; i += step) {
+    if (token !== typing) return false;   // another example was picked meanwhile
+    box.value = text.slice(0, i);
+    box.scrollTop = box.scrollHeight;
+    await new Promise((r) => setTimeout(r, 16));
+  }
+  return token === typing;
+}
+const chips = examples.map((ex) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = ex.label;
+  b.title = ex.note;
+  b.setAttribute("aria-pressed", "false");
+  b.addEventListener("click", async () => {
+    chips.forEach((c) => c.setAttribute("aria-pressed", String(c === b)));
+    $("#defend").checked = ex.defend;
+    if (await typeInto($("#sms"), ex.text)) run();
+  });
+  return b;
+});
+$("#examples").replaceChildren(...chips);
+// Editing the box by hand means it no longer shows the chosen example.
+$("#sms").addEventListener("input", () => chips.forEach((c) => c.setAttribute("aria-pressed", "false")));

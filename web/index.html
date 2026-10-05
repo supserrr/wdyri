@@ -80,10 +80,14 @@
   .island-nav .cta { background: #fff; color: #17181a; border-radius: 999px; font-weight: 500; padding: 0 13px; margin-left: 4px; }
   .island-nav .cta:hover { color: #000; background: #f2f2f2; }
 
-  /* Stage: the hero, which shrinks into the story card as you scroll */
-  .stage { position: relative; height: 300vh; }
+  /* Hero: the checker over the light ribbon; it shrinks into a card as it scrolls away */
+  .hero-wrap { position: relative; height: 100vh; height: 100svh; min-height: 820px; }
+  .hero-card { position: absolute; inset: 0; overflow: hidden; background: var(--hero-bg); will-change: clip-path; }
+  /* Story: a pinned card whose text scrolls past the ribbon */
+  .stage { position: relative; height: 260vh; }
   .stage-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-  .stage-card { position: absolute; inset: 0; background: var(--hero-bg); will-change: clip-path; }
+  .story-card { position: absolute; inset: 15vh max(24px, 12vw); overflow: hidden; isolation: isolate; border-radius: 40px; background: var(--hero-bg); }
+  .story-card .ribbon { z-index: -1; }
   .shapes { position: absolute; left: 50%; top: 46%; width: min(135vmin, 1100px); aspect-ratio: 1; translate: -50% -50%;
             pointer-events: none; opacity: 0.85;
             mask-image: radial-gradient(closest-side, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.45) 42%, transparent 70%);
@@ -118,6 +122,14 @@
                               background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: transform 0.25s var(--ease); }
   label.toggle input:checked { background: var(--dark); }
   label.toggle input:checked::after { transform: translateX(12px); }
+  .examples { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 720px; }
+  .examples .mono { color: var(--ink-3); }
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chips button { height: 32px; padding: 0 13px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.78); box-shadow: var(--ring);
+                  font-size: 13.5px; font-weight: 450; cursor: pointer; white-space: nowrap;
+                  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.2s, color 0.2s; }
+  .chips button:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.14), 0 6px 14px rgba(10, 11, 13, 0.1); }
+  .chips button[aria-pressed="true"] { background: var(--dark); color: #fcfcfc; }
   .link { margin-top: 18px; border: 0; background: none; padding: 0; cursor: pointer; font-size: 14px; line-height: 24px; color: var(--ink-2);
           display: inline-flex; align-items: center; gap: 4px; }
   .link:hover { color: var(--ink); }
@@ -130,10 +142,10 @@
            font-size: 12.5px; letter-spacing: 0.08em; color: rgba(23, 24, 26, 0.66); text-decoration: none; }
   .learn i { width: 1px; height: 38px; background-image: radial-gradient(circle, rgba(8, 0, 0, 0.4) 0.6px, transparent 0.8px); background-size: 1px 4px; }
 
-  .story-window { position: absolute; z-index: 3; inset: 0; overflow: hidden; pointer-events: none;
+  .story-window { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
                   mask-image: linear-gradient(transparent 0, #000 16%, #000 80%, transparent 100%);
                   -webkit-mask-image: linear-gradient(transparent 0, #000 16%, #000 80%, transparent 100%); }
-  .story { position: absolute; left: 50%; top: 0; width: min(600px, calc(100vw - 64px)); translate: -50% 0; opacity: 0;
+  .story { position: absolute; left: 50%; top: 0; width: min(600px, calc(100% - 48px)); translate: -50% 0;
            font-size: 17px; line-height: 1.75; font-weight: 400; color: rgba(0, 0, 0, 0.8); will-change: transform; }
   .story p { margin: 0 0 22px; }
   .story .dropcap { float: left; font-family: var(--display); font-size: 116px; line-height: 0.82; margin: 8px 18px 0 -4px;
@@ -142,6 +154,7 @@
 
   /* Sections */
   .wrap { max-width: 1048px; margin: 0 auto; padding: 96px 16px; }
+  #result { scroll-margin-top: 24px; }
   .head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 40px; }
   .head p { margin: 0; color: var(--ink-2); max-width: 520px; }
   h2.display, .verdict h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 48px); line-height: 1.15;
@@ -210,15 +223,14 @@
 
   /* Dark ending */
   .end { position: relative; overflow: hidden; isolation: isolate; background: var(--night); color: #f4f3ee; margin-top: 96px; }
-  .end-top { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22vh 16px 0; }
+  .end-top { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14vh 16px 0; }
   .end .mark { width: 76px; height: 76px; color: #fff; filter: drop-shadow(0 8px 24px rgba(255, 255, 255, 0.12)); }
   .end h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.6vw, 72px); line-height: 1.12; letter-spacing: -0.015em;
-            margin: 64px 0 0; text-wrap: balance; }
-  .end p { margin: 22vh 0 0; max-width: 440px; color: rgba(244, 243, 238, 0.55); font-size: 16px; line-height: 1.65; }
-  .end .pill.light { margin-top: 30px; }
-  .horizon { position: relative; height: min(70vh, 640px); margin-top: 4vh; }
+            margin: 40px 0 0; text-wrap: balance; }
+  .end .pill.light { margin-top: 36px; }
+  .horizon { position: relative; height: min(48vh, 440px); }
   .horizon .ribbon { z-index: -1; }
-  .wordmark { position: absolute; left: 50%; top: 52%; translate: -50% -50%; font-family: var(--display); font-size: clamp(120px, 27vw, 400px);
+  .wordmark { position: absolute; left: 50%; top: 52%; translate: -50% -50%; font-family: var(--display); font-size: clamp(110px, 22vw, 320px);
               line-height: 1; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
               white-space: nowrap; user-select: none; border: 0; background: none; padding: 0; cursor: pointer; }
   .foot { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; padding: 0 16px 40px; color: rgba(244, 243, 238, 0.5); }
@@ -227,27 +239,42 @@
   .foot a:hover, .foot button:hover { color: #fff; }
 
   /* Easter egg: where the name comes from */
-  dialog.egg { width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: 28px;
-               background: var(--card); color: var(--ink); box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.08), 0 40px 80px -24px rgba(10, 11, 13, 0.45); }
-  dialog.egg::backdrop { background: rgba(220, 223, 228, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  dialog.egg { width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 8px; border: 0; border-radius: 32px;
+               background: var(--card); color: var(--ink); overflow: auto;
+               box-shadow: 0 0 0 0.5px rgba(10, 11, 13, 0.08), 0 40px 90px -24px rgba(10, 11, 13, 0.5); }
+  dialog.egg::backdrop { background: rgba(220, 223, 228, 0.5); backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); }
   dialog.egg[open] { animation: rise 0.55s var(--ease) both; }
-  .egg-inner { display: grid; gap: 16px; padding: 28px; }
-  .egg-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .egg-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: #fff; box-shadow: var(--ring); cursor: pointer;
-               font-size: 18px; line-height: 1; color: var(--ink-2); }
-  .giftcard { position: relative; overflow: hidden; height: 150px; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column;
-              justify-content: space-between; background: linear-gradient(135deg, #202020 0%, #3b3e46 100%); color: #f4f4f2; font-family: var(--mono); }
-  .giftcard .mono { color: rgba(244, 244, 242, 0.6); }
-  .giftcard .value { font-family: var(--display); font-size: 44px; line-height: 1; }
-  .giftcard .code { font-size: 13px; letter-spacing: 0.14em; color: rgba(244, 244, 242, 0.75); }
-  .stamp { position: absolute; right: 18px; top: 50%; padding: 6px 12px; border: 2.5px solid var(--scam); border-radius: 8px;
-           background: rgba(255, 255, 255, 0.92); color: var(--scam); font-family: var(--mono); font-weight: 500; font-size: 15px;
-           letter-spacing: 0.16em; transform: translateY(-50%) rotate(-11deg); }
-  dialog.egg[open] .stamp { animation: stamp 0.5s 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
-  @keyframes stamp { from { opacity: 0; transform: translateY(-50%) rotate(-11deg) scale(2.4); } to { opacity: 1; } }
-  .egg h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6vw, 40px); line-height: 1.1; letter-spacing: -0.015em; margin: 4px 0 0; }
-  .egg p { margin: 0; color: var(--ink-2); }
-  .egg .links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+  .egg-stage { position: relative; overflow: hidden; isolation: isolate; height: 250px; border-radius: 24px; background: var(--hero-bg);
+               display: grid; place-items: center end; padding-right: 64px; }
+  .egg-stage .ribbon { z-index: -1; }
+  .egg-notes { position: absolute; left: 22px; top: 18px; color: var(--ink-3); font-size: 10.5px; line-height: 2; }
+  .egg-notes div { white-space: pre; min-height: 1em; }
+  .egg-close { position: absolute; right: 14px; top: 14px; width: 34px; height: 34px; display: grid; place-items: center; padding: 0;
+               border: 0; border-radius: 50%; background: #fff; box-shadow: var(--ring); cursor: pointer; color: var(--ink-2); }
+  .egg-close:hover { color: var(--ink); }
+  .egg-close svg { width: 14px; height: 14px; }
+  .giftcard { position: relative; width: 250px; height: 150px; border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column;
+              justify-content: space-between; transform: rotate(-4deg); text-align: left;
+              background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(18px) saturate(1.5); -webkit-backdrop-filter: blur(18px) saturate(1.5);
+              box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.8) inset, var(--ring), 0 24px 40px -22px rgba(10, 11, 13, 0.45); }
+  .giftcard .top { display: flex; justify-content: space-between; align-items: center; color: var(--ink-3); }
+  .giftcard .top svg { width: 18px; height: 18px; color: var(--ink); }
+  .giftcard .value { font-family: var(--display); font-size: 46px; line-height: 1; letter-spacing: -0.02em; }
+  .giftcard .code { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; color: var(--ink-2); }
+  .stamp { position: absolute; right: -14px; top: 46%; padding: 5px 11px; border: 2px solid var(--scam); border-radius: 8px;
+           background: rgba(255, 255, 255, 0.9); color: var(--scam); font-family: var(--mono); font-weight: 500; font-size: 13px;
+           letter-spacing: 0.16em; transform: translateY(-50%) rotate(-9deg); box-shadow: 0 6px 16px -8px rgba(198, 61, 47, 0.5); }
+  dialog.egg[open] .giftcard { animation: card-in 0.8s 0.1s var(--ease) both; }
+  dialog.egg[open] .stamp { animation: stamp 0.5s 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+  @keyframes card-in { from { opacity: 0; transform: translateY(24px) rotate(2deg) scale(0.96); } to { opacity: 1; transform: rotate(-4deg); } }
+  @keyframes stamp { from { opacity: 0; transform: translateY(-50%) rotate(-9deg) scale(2.4); } to { opacity: 1; } }
+  .egg-body { display: grid; gap: 14px; padding: 28px 24px 22px; }
+  .egg-body .chip { justify-self: start; }
+  .egg h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.015em;
+            margin: 2px 0 4px; text-wrap: balance; }
+  .egg p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
+  .egg p b { font-weight: 500; color: var(--ink); }
+  .egg .links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px; }
 
   /* Entrance */
   .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms + 150ms); }
@@ -274,6 +301,10 @@
     .sub { font-size: 15px; margin-top: 20px; }
     .learn { display: none; }
     .story { font-size: 16px; }
+    .story-card { inset: 9vh 12px; border-radius: 28px; }
+    .hero-wrap { min-height: 700px; }
+    .chips { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; width: calc(100vw - 32px); padding: 4px 2px 8px;
+             scrollbar-width: none; mask-image: linear-gradient(90deg, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
     .story .dropcap { font-size: 92px; }
     .wrap { padding: 64px 16px; }
     .model { padding: 24px 22px 8px; }
@@ -282,10 +313,13 @@
     .cta-card { border-radius: 28px; }
     details { padding: 0 16px; }
     details > div { padding-left: 0; }
+    .egg-stage { height: 220px; place-items: center; padding-right: 0; }
+    .egg-notes { display: none; }
+    .egg-body { padding: 22px 16px 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, .shapes g { animation: none; }
+    .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
     .island-nav, .mark, .bar span { transition: none; }
   }
 </style>
@@ -302,10 +336,8 @@
   <a class="cta" href="#top" data-focus>Check a message</a>
 </nav>
 
-<section class="stage" id="top" aria-label="Check a message">
-  <span id="story" style="position:absolute;top:110vh"></span>
-  <div class="stage-pin">
-    <div class="stage-card" id="stage-card">
+<header class="hero-wrap" id="top">
+    <div class="hero-card" id="hero-card">
       <canvas class="ribbon" id="ribbon-hero"></canvas>
       <svg class="shapes" viewBox="0 0 1000 1000" aria-hidden="true">
         <g><polygon points="500,320 641,388 675,540 578,662 422,662 325,540 359,388" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.2"/></g>
@@ -345,26 +377,16 @@
               Check message</button>
           </div>
         </div>
-        <button class="link rise" style="--i:3" type="button" data-example>Try an example
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+        <div class="examples rise" style="--i:3">
+          <div class="mono">Try an example</div>
+          <div class="chips" id="examples" role="group" aria-label="Example messages"></div>
+        </div>
         <div class="status-line mono rise" style="--i:3" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
-        <p class="sub rise" style="--i:4">Check a Swahili SMS for mobile-money scam patterns.<span>Before you send money, not after.</span></p>
+        <p class="sub rise" style="--i:4">Check a Swahili SMS for mobile-money scam patterns, before you send money.</p>
         <a class="learn mono rise" style="--i:5" href="#story">Learn more<i aria-hidden="true"></i></a>
       </div>
-
-      <div class="story-window" id="story-window">
-        <article class="story" id="story-text" aria-label="Why this project exists">
-          <p><span class="dropcap" aria-hidden="true">M</span>obile-money scams arrive as text messages. A relative needs help, an agent sent money by mistake, a landlord has a new number. In Tanzania a common hook is <i>"ni tumie kwa namba hii"</i>: send it to me on this number.</p>
-          <p>Published Swahili scam detectors report 98.7% to 99.86% accuracy. That sounds solved. We rebuilt them and asked a simpler question: what are they actually reading?</p>
-          <p>Mostly, the numbers. In the BongoScam data 86% of scams, and no genuine texts, contain a phone number or link. Add a phone number to a harmless message and a fine-tuned transformer called it a scam 96% of the time.</p>
-          <p><b>A detector that only reads numbers is easy to fool and quick to cry wolf.</b></p>
-          <p>So WDYRI masks every number, trains its models on messages where numbers appear on both sides, and pairs a transformer with a character model that fail on different messages. The phone-number false alarms fell from 96% to 0%.</p>
-          <p>It is still a research demo. When in doubt, call your provider on its official number.</p>
-        </article>
-      </div>
     </div>
-  </div>
-</section>
+</header>
 
 <main>
   <section id="result" class="wrap" hidden>
@@ -404,8 +426,26 @@
       </article>
     </div>
     <div class="seen-tile"><div class="mono">What the models see · numbers, amounts and links masked</div><div class="seen" id="seen"></div></div>
-    <div class="again"><button class="link" type="button" data-example>Try another example
-      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button></div>
+    <div class="again"><a class="link" href="#top" data-focus>Check another message
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></a></div>
+  </section>
+
+  <section class="stage" id="story" aria-label="Why this project exists">
+    <div class="stage-pin">
+      <div class="story-card">
+        <canvas class="ribbon" id="ribbon-story"></canvas>
+        <div class="story-window">
+        <article class="story" id="story-text" aria-label="Why this project exists">
+          <p><span class="dropcap" aria-hidden="true">M</span>obile-money scams arrive as text messages. A relative needs help, an agent sent money by mistake, a landlord has a new number. In Tanzania a common hook is <i>"ni tumie kwa namba hii"</i>: send it to me on this number.</p>
+          <p>Published Swahili scam detectors report 98.7% to 99.86% accuracy. That sounds solved. We rebuilt them and asked a simpler question: what are they actually reading?</p>
+          <p>Mostly, the numbers. In the BongoScam data 86% of scams, and no genuine texts, contain a phone number or link. Add a phone number to a harmless message and a fine-tuned transformer called it a scam 96% of the time.</p>
+          <p><b>A detector that only reads numbers is easy to fool and quick to cry wolf.</b></p>
+          <p>So WDYRI masks every number, trains its models on messages where numbers appear on both sides, and pairs a transformer with a character model that fail on different messages. The phone-number false alarms fell from 96% to 0%.</p>
+          <p>It is still a research demo. When in doubt, call your provider on its official number.</p>
+        </article>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="cta-wrap" aria-label="Check a message">
@@ -464,7 +504,6 @@
       <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
     </svg>
     <h2>Read it twice.<br>Don't redeem it.</h2>
-    <p>Paste the message, check it here, and only then decide whether to send any money.</p>
     <a class="pill light" href="#top" data-focus>Check a message</a>
   </div>
   <div class="horizon">
@@ -484,21 +523,34 @@
 <div class="sr-only" id="status" role="status"></div>
 
 <dialog class="egg" id="egg" aria-labelledby="egg-title">
-  <div class="egg-inner">
-    <div class="egg-top"><span class="chip">Why the name?</span>
-      <button class="egg-close" type="button" aria-label="Close" data-close>×</button></div>
+  <div class="egg-stage">
+    <canvas class="ribbon" id="ribbon-egg"></canvas>
+    <div class="egg-notes mono" aria-hidden="true">
+      <div data-text="// Live call · 16 Aug 2020"></div>
+      <div data-text="Caller · &quot;Steve&quot;"></div>
+      <div data-text="Card · $500 Google Play"></div>
+      <div data-text="53:33 · Redeemed"></div>
+    </div>
+    <button class="egg-close" type="button" aria-label="Close" data-close>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
     <div class="giftcard" aria-hidden="true">
-      <span class="mono">Gift card</span>
+      <div class="top"><span class="mono">Gift card</span>
+        <svg viewBox="0 0 48 48" fill="none"><path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/></svg></div>
       <span class="value">$500</span>
       <span class="code">XXXX-XXXX-XXXX-XXXX</span>
       <span class="stamp">REDEEMED</span>
     </div>
+  </div>
+  <div class="egg-body">
+    <span class="chip">Why the name?</span>
     <h2 id="egg-title">"Why did you redeem it?!"</h2>
-    <p>The name comes from the best-known meltdown in scambaiting. In a video posted on 16 August 2020, the streamer Kitboga kept a gift-card scammer nicknamed Steve on the line for hours while playing a confused older woman.</p>
-    <p>The scam only works if the victim reads the card codes out and never uses them. So at 53:33 Kitboga redeems a fake $500 Google Play card himself while Steve watches over screen share, and Steve screams the question. That line and his pleas of "do not redeem" became a meme across Twitter and TikTok.</p>
+    <p>The name comes from the best-known meltdown in scambaiting. In a video posted on <b>16 August 2020</b>, the streamer Kitboga kept a gift-card scammer nicknamed Steve on the line for hours while playing a confused older woman.</p>
+    <p>The scam only works if the victim reads the card codes out and never uses them. So at <b>53:33</b> Kitboga redeems a fake $500 Google Play card himself while Steve watches over screen share, and Steve screams the question. That line and his pleas of "do not redeem" became a meme across Twitter and TikTok.</p>
     <p>WDYRI hands the question to the other side: catch the scam message before any money moves, and leave the scammer asking.</p>
     <div class="links">
-      <a class="pill dark" href="https://www.youtube.com/watch?v=sRMMwpDTs5k&amp;t=3213s" target="_blank" rel="noopener">Watch the moment ↗</a>
+      <a class="pill dark" href="https://www.youtube.com/watch?v=sRMMwpDTs5k&amp;t=3213s" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.2v9.6c0 .5.5.8.9.5l7.4-4.8c.4-.3.4-.8 0-1L5.9 2.7c-.4-.3-.9 0-.9.5Z"/></svg>
+        Watch the moment</a>
       <a class="pill light" href="https://knowyourmeme.com/memes/why-did-you-redeem-it" target="_blank" rel="noopener">Know Your Meme ↗</a>
     </div>
   </div>
