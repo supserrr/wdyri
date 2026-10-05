@@ -179,29 +179,37 @@
   .bar span { display: block; height: 100%; width: 0; border-radius: 99px; background: rgba(10, 11, 13, 0.45); transition: width 0.7s var(--ease); }
   .bar.flag span { background: var(--scam); }
   .bar .thr { position: absolute; top: -5px; bottom: -5px; width: 1px; left: calc(var(--thr, 0.5) * 100%); background: rgba(10, 11, 13, 0.35); }
-  .drivers { background: #fff; border-radius: 20px; box-shadow: var(--ring-soft); padding: 18px 22px 20px; margin-top: 4px; }
-  .drivers-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 12px; }
-  .drivers-head > .mono { color: var(--ink-3); }
-  .seg { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--chip); }
-  .seg button { height: 26px; padding: 0 12px; border: 0; border-radius: 999px; background: none; cursor: pointer; font-size: 13px;
-                font-weight: 450; color: var(--ink-2); }
-  .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: var(--ring); }
-  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-left: auto; color: var(--ink-3); }
-  .legend b { font-weight: inherit; display: inline-flex; align-items: center; gap: 6px; }
-  .legend i { width: 7px; height: 7px; border-radius: 50%; }
-  .words { line-height: 2.15; word-break: break-word; font-size: 15px; font-weight: 400; }
-  .words span { padding: 2px 4px; border-radius: 5px; }
-  .words:empty::before { content: "The transformer is still loading; its words appear when it is ready."; color: var(--ink-3); }
-  .why-sum { margin: 0 0 12px; font-size: 15.5px; line-height: 1.55; font-weight: 400; color: var(--ink); max-width: 68ch; }
-  .why-sum b { font-weight: 550; }
-  .why-sum:empty, .why-top:empty { display: none; }
-  .why-top { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .factor { display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 11px; border-radius: 999px; font-size: 13.5px; font-weight: 450; }
-  .factor b { font-family: var(--mono); font-size: 12px; font-weight: 500; }
-  .factor.up { background: rgba(255, 45, 45, 0.1); color: #c4161c; }
-  .factor.down { background: rgba(20, 110, 255, 0.1); color: #0a58d0; }
-  .why-label { color: var(--ink-3); margin-bottom: 2px; }
-  .why-how { margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed rgba(10, 11, 13, 0.1); font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+  .drivers { background: #fff; border-radius: 20px; box-shadow: var(--ring-soft); padding: 22px 26px 22px; margin-top: 4px; }
+  .drivers-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; margin-bottom: 18px; }
+  .drivers-title { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0; color: #111; }
+  .seg { display: inline-flex; padding: 3px; border-radius: 999px; background: #eceef1; }
+  .seg button { height: 30px; padding: 0 14px; border: 0; border-radius: 999px; background: none; cursor: pointer; font-size: 14px;
+                font-weight: 500; color: #3b3d42; }
+  .seg button[aria-pressed="true"] { background: #17181a; color: #fff; }
+  .why-rows { display: grid; gap: 10px; margin-bottom: 14px; }
+  .why-row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 8px 14px; }
+  .why-row-label { font-size: 15px; font-weight: 500; color: #111; }
+  .why-row.up .why-row-label::before { content: "\2191"; color: #d0101b; margin-right: 6px; }
+  .why-row.down .why-row-label::before { content: "\2193"; color: #0a52c8; margin-right: 6px; }
+  .why-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .factor { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; font-size: 14.5px; font-weight: 500; }
+  .factor b { font-family: var(--mono); font-size: 12.5px; font-weight: 500; }
+  .factor.up { background: #ffe5e5; color: #9e0f17; }
+  .factor.down { background: #e3edff; color: #0a3f9c; }
+  .why-sum { margin: 0 0 20px; padding: 12px 14px; border-radius: 12px; background: var(--card); font-size: 15.5px; line-height: 1.5; color: #111; }
+  .why-sum b { font-weight: 600; }
+  .why-sum:empty, .why-rows:empty { display: none; }
+  .why-msg-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 4px; }
+  .why-msg-head > span:first-child { font-size: 14px; font-weight: 500; color: #111; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13.5px; color: #3b3d42; }
+  .legend b { font-weight: inherit; display: inline-flex; align-items: center; gap: 7px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; }
+  .legend i.up { background: rgba(255, 45, 45, 0.42); box-shadow: inset 0 -2px 0 #e0141c; }
+  .legend i.down { background: rgba(20, 110, 255, 0.36); box-shadow: inset 0 -2px 0 #1462e6; }
+  .words { line-height: 2.25; word-break: break-word; font-size: 16.5px; font-weight: 400; color: #111; }
+  .words span { padding: 3px 5px; border-radius: 5px; }
+  .words:empty::before { content: "The transformer is still loading. Its words appear here when it is ready."; color: #3b3d42; }
+  .why-how { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(10, 11, 13, 0.08); font-size: 13.5px; line-height: 1.5; color: #3b3d42; }
   .again { margin-top: 18px; display: flex; justify-content: center; }
 
   /* FAQ */
@@ -243,10 +251,8 @@
   dialog.egg::backdrop { background: rgba(220, 223, 228, 0.5); backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); }
   dialog.egg[open] { animation: rise 0.55s var(--ease) both; }
   .egg-stage { position: relative; overflow: hidden; isolation: isolate; height: 250px; border-radius: 24px; background: var(--hero-bg);
-               display: grid; place-items: center end; padding-right: 64px; }
+               display: grid; place-items: center; }
   .egg-stage .ribbon { z-index: -1; }
-  .egg-notes { position: absolute; left: 22px; top: 18px; color: var(--ink-3); font-size: 10.5px; line-height: 2; }
-  .egg-notes div { white-space: pre; min-height: 1em; }
   .egg-close { position: absolute; right: 14px; top: 14px; width: 34px; height: 34px; display: grid; place-items: center; padding: 0;
                border: 0; border-radius: 50%; background: #fff; box-shadow: var(--ring); cursor: pointer; color: var(--ink-2); }
   .egg-close:hover { color: var(--ink); }
@@ -324,12 +330,11 @@
     .score + .score { border-left: 0; border-top: 1px dashed rgba(10, 11, 13, 0.12); }
     .score { padding: 18px 16px 16px; }
     .prob { font-size: 44px; }
-    .drivers { padding: 16px; }
-    .legend { margin-left: 0; }
+    .drivers { padding: 18px 16px; }
+    .why-row { grid-template-columns: 1fr; gap: 6px; }
     details { padding: 0 16px; }
     details > div { padding-left: 0; }
-    .egg-stage { height: 220px; place-items: center; padding-right: 0; }
-    .egg-notes { display: none; }
+    .egg-stage { height: 220px; }
     .egg-body { padding: 22px 16px 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -419,21 +424,26 @@
       </div>
       <div class="drivers">
         <div class="drivers-head">
-          <span class="mono">What drove it</span>
+          <h3 class="drivers-title">What drove it</h3>
           <div class="seg" role="group" aria-label="Show the words for">
             <button type="button" data-words="tf" aria-pressed="true">Transformer</button><button type="button" data-words="lr" aria-pressed="false">N-gram model</button>
           </div>
-          <div class="legend mono"><b><i style="background:rgb(255,45,45)"></i>Towards scam</b><b><i style="background:rgb(20,110,255)"></i>Away</b></div>
         </div>
         <div class="why" id="why-tf">
-          <p class="why-sum"></p><div class="why-top"></div>
-          <div class="mono why-label">In the message</div><div class="words" id="words-tf"></div>
+          <div class="why-rows"></div>
+          <p class="why-sum"></p>
+          <div class="why-msg-head"><span>Your message</span>
+            <span class="legend"><b><i class="up"></i>Points to a scam</b><b><i class="down"></i>Points to genuine</b></span></div>
+          <div class="words" id="words-tf"></div>
         </div>
         <div class="why" id="why-lr" hidden>
-          <p class="why-sum"></p><div class="why-top"></div>
-          <div class="mono why-label">In the message</div><div class="words" id="words-lr"></div>
+          <div class="why-rows"></div>
+          <p class="why-sum"></p>
+          <div class="why-msg-head"><span>Your message</span>
+            <span class="legend"><b><i class="up"></i>Points to a scam</b><b><i class="down"></i>Points to genuine</b></span></div>
+          <div class="words" id="words-lr"></div>
         </div>
-        <p class="why-how">pts = how many percentage points the model's scam score falls when that word is taken out; a negative number means the score rises without it. Hover any word in the message to see its effect.</p>
+        <p class="why-how">The number on each word is how many points the scam score changes when that word is taken out.</p>
       </div>
     </div>
     <div class="again"><a class="link" href="#top" data-focus>Check another message
@@ -526,12 +536,6 @@
 <dialog class="egg" id="egg" aria-labelledby="egg-title">
   <div class="egg-stage">
     <canvas class="ribbon" id="ribbon-egg"></canvas>
-    <div class="egg-notes mono" aria-hidden="true">
-      <div data-text="// Live call · 16 Aug 2020"></div>
-      <div data-text="Caller · &quot;Steve&quot;"></div>
-      <div data-text="Card · $500 Google Play"></div>
-      <div data-text="53:33 · Redeemed"></div>
-    </div>
     <button class="egg-close" type="button" aria-label="Close" data-close>
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
     <div class="giftcard" aria-hidden="true">

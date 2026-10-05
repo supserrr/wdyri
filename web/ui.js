@@ -150,7 +150,6 @@ function openEgg() {
   if (egg.open) return;
   egg.showModal();
   try { eggRibbon ??= mountRibbon($("#ribbon-egg"), { y: 0.36, start: 5 }); } catch { /* plain background */ }
-  egg.querySelectorAll(".egg-notes div").forEach((el, i) => type(el, el.dataset.text, 450 + i * 260));
 }
 function openFromHash() {
   if (location.hash === "#why") return openEgg();

@@ -75,18 +75,19 @@ function paint(el, words, res, threshold) {
   el.querySelector(".bar span").style.width = `${100 * res.p}%`;
   el.querySelector(".flagtxt").textContent = flagged ? "Flags it" : "Passes";
   el.querySelector(".flagtxt").title = `Flags at ${Math.round(100 * threshold)}% or more`;
-  explain(words.closest(".why"), res, el.querySelector("h3").textContent.toLowerCase());
+  explain(words.closest(".why"), res);
   words.replaceChildren(...res.words.map(([w, e]) => {
     const s = document.createElement("span");
     s.textContent = w;
     s.title = Math.abs(points(e)) >= 1
       ? `${points(e) > 0 ? "Pushes towards scam" : "Pushes away from scam"}: without this word the score would be ${pct(res.p - e)}% (${signed(points(e))} points)`
       : "Little effect on the score";
-    // Vivid red pushes towards scam, vivid blue away; stronger effects get deeper colour.
-    if (Math.abs(e) >= 0.01) {
-      const a = Math.min(0.25 + Math.abs(e) * 2.2, 0.95);
-      s.style.background = e > 0 ? `rgba(255,45,45,${a})` : `rgba(20,110,255,${a})`;
-      if (a > 0.7) { s.style.color = "#fff"; s.style.fontWeight = "500"; }
+    // Vivid red tint for words pointing to a scam, blue for genuine; stronger words get a deeper
+    // tint and a solid underline. Text stays near-black so it is always easy to read.
+    if (Math.abs(points(e)) >= 1) {
+      const a = Math.min(0.14 + Math.abs(e) * 1.6, 0.5);
+      s.style.background = e > 0 ? `rgba(255,45,45,${a})` : `rgba(20,110,255,${a * 0.9})`;
+      if (Math.abs(e) >= 0.08) s.style.boxShadow = `inset 0 -2px 0 ${e > 0 ? "#e0141c" : "#1462e6"}`;
     }
     return s;
   }).flatMap((s) => [s, document.createTextNode(" ")]));
@@ -107,33 +108,38 @@ function joinWords(items) {   // [a, b, c] -> a, b and c (as bold nodes)
   });
   return out;
 }
-function explain(box, res, model) {
+function explain(box, res) {
   const ranked = res.words.map(([w, e]) => ({ w, e })).filter((x) => Math.abs(points(x.e)) >= 1);
   const up = ranked.filter((x) => x.e > 0).sort((a, b) => b.e - a.e).slice(0, 3);
-  const down = ranked.filter((x) => x.e < 0).sort((a, b) => a.e - b.e).slice(0, 2);
-  const sum = box.querySelector(".why-sum"), top = box.querySelector(".why-top");
-  const p = pct(res.p);
-  if (!up.length && !down.length) {
-    sum.replaceChildren(`No single word moved the ${model}'s score by a point or more: its ${p}% comes from the message as a whole.`);
-    top.replaceChildren();
-    return;
-  }
-  const parts = [];
-  if (up.length) parts.push(...joinWords(up), ` pushed the ${model} towards scam`);
-  if (down.length && up.length) parts.push("; ", ...joinWords(down), " pulled it away");
-  else if (down.length) parts.push(...joinWords(down), ` pulled the ${model} away from scam`);
-  parts.push(".");
-  if (up.length) parts.push(` Without ${wordName(up[0].w)}, its score would be ${pct(res.p - up[0].e)}% instead of ${p}%.`);
-  else parts.push(` Without ${wordName(down[0].w)}, its score would be ${pct(res.p - down[0].e)}% instead of ${p}%.`);
-  if (typeof parts[0] === "string") parts[0] = parts[0][0].toUpperCase() + parts[0].slice(1);
-  else parts[0].textContent = parts[0].textContent.replace(/^the /, "The ");
-  sum.replaceChildren(...parts);
-  top.replaceChildren(...[...up, ...down].map((x) => {
+  const down = ranked.filter((x) => x.e < 0).sort((a, b) => a.e - b.e).slice(0, 3);
+  const rows = box.querySelector(".why-rows"), sum = box.querySelector(".why-sum");
+  const chip = (x) => {
     const f = document.createElement("span");
     f.className = `factor ${x.e > 0 ? "up" : "down"}`;
-    f.append(PLACEHOLDER[x.w] ? PLACEHOLDER[x.w].replace(/^the /, "") : x.w, bold(`${signed(points(x.e))} pts`));
+    f.append(PLACEHOLDER[x.w] ? PLACEHOLDER[x.w].replace(/^the /, "") : x.w, bold(signed(points(x.e))));
     return f;
-  }));
+  };
+  const row = (kind, label, items) => {
+    const r = document.createElement("div");
+    r.className = `why-row ${kind}`;
+    const l = document.createElement("span");
+    l.className = "why-row-label";
+    l.textContent = label;
+    const c = document.createElement("div");
+    c.className = "why-chips";
+    c.append(...items.map(chip));
+    r.append(l, c);
+    return r;
+  };
+  rows.replaceChildren(...[up.length && row("up", "Points to a scam", up), down.length && row("down", "Points to genuine", down)].filter(Boolean));
+  const p = pct(res.p);
+  if (!up.length && !down.length) {
+    sum.replaceChildren("No single word stands out. The score comes from the message as a whole.");
+    return;
+  }
+  const top = [...up, ...down].sort((a, b) => Math.abs(b.e) - Math.abs(a.e))[0];
+  const without = pct(res.p - top.e);
+  sum.replaceChildren("Biggest effect: without ", bold(wordName(top.w)), `, the scam score would ${without < p ? "drop" : "rise"} from ${p}% to ${without}%.`);
 }
 
 // The check button shows that the analysis is running, for at least a moment.
@@ -181,7 +187,7 @@ async function check(raw, { reveal = true }) {
     $("#m-tf .flagtxt").textContent = "Loading";
     $("#words-tf").replaceChildren();
     $("#why-tf .why-sum").replaceChildren();
-    $("#why-tf .why-top").replaceChildren();
+    $("#why-tf .why-rows").replaceChildren();
   }
   const by = [];
   if (tf && tf.p >= settings.threshold_transformer) by.push("the transformer");
