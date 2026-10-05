@@ -49,10 +49,23 @@ function reveal() {
   if (revealed) return;
   revealed = true;
   setTimeout(() => {
-    document.documentElement.classList.add("ready");
+    const root = document.documentElement, loader = $(".loader");
+    const fly = $(".loader-mark"), target = $("#hero .mark");
+    const land = () => { root.classList.add("landed"); loader?.remove(); };
+    root.classList.add("ready");   // loader background fades, ribbon blooms, hero rises
+    if (reduceMotion || !fly || !target) land();
+    else {
+      // One logo throughout: the loader's mark flies to the hero's mark, then hands over.
+      const a = fly.getBoundingClientRect(), b = target.getBoundingClientRect();
+      fly.style.animation = "none";
+      fly.style.transition = "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)";
+      fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ` +
+        `${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(${b.width / a.width})`;
+      setTimeout(land, 900);
+    }
     layout();
     typeNotes();
-  }, Math.max(0, 900 - (performance.now() - loadStart)));   // let the logo finish drawing
+  }, Math.max(0, 1100 - (performance.now() - loadStart)));   // let the logo finish drawing
 }
 const maybeReveal = () => { if (fontsLoaded && appLoaded) reveal(); };
 export function appReady() { appLoaded = true; maybeReveal(); }

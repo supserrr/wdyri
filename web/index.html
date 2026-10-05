@@ -6,10 +6,11 @@
 <title>WDYRI scam SMS checker</title>
 <meta name="description" content="Check a Swahili SMS for mobile-money scam patterns. Runs entirely in your browser.">
 <meta name="theme-color" content="#ffffff">
+<style>html { background: #dfe2e6; }</style>
 <script>
   // Hold the hero behind the loader until ui.js reveals it (and never longer than 8 s).
   document.documentElement.classList.add("js");
-  setTimeout(function () { document.documentElement.classList.add("ready"); }, 8000);
+  setTimeout(function () { document.documentElement.classList.add("ready", "landed"); }, 8000);
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,27 +270,27 @@
   .egg p b { font-weight: 500; color: var(--ink); }
   .egg .links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px; }
 
-  /* Page loader */
+  /* Page loader: the logo draws itself, then flies to its place in the hero as the page appears */
   .loader { display: none; }
-  .js .loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--hero-bg);
-                transition: opacity 0.7s var(--ease), visibility 0s linear 0.7s; }
-  .loader-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; transition: transform 0.7s var(--ease), filter 0.7s var(--ease); }
-  .loader-mark { width: 64px; height: 64px; }
+  .js .loader { position: fixed; inset: 0; z-index: 100; display: block; pointer-events: none; }
+  .loader-bg { position: absolute; inset: 0; background: var(--hero-bg); transition: opacity 0.8s var(--ease); }
+  .loader-mark { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px;
+                 animation: breathe 1.6s 1.1s ease-in-out infinite; }
   .loader-mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s 0.1s var(--ease) forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
-  .loader-bar { position: relative; width: 120px; height: 2px; border-radius: 2px; overflow: hidden; background: var(--track); }
-  .loader-bar span { position: absolute; inset: 0; width: 40%; border-radius: 2px; background: var(--ink-2); animation: slide 1.1s ease-in-out infinite; }
-  @keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
-  .ready .loader { opacity: 0; visibility: hidden; pointer-events: none; }
-  .ready .loader-inner { transform: scale(1.08); filter: blur(6px); }
+  @keyframes breathe { 50% { opacity: 0.45; } }
+  .ready .loader-bg { opacity: 0; }
+  .js:not(.ready) .loader { pointer-events: auto; }
+  .landed .loader { display: none; }
+  .js:not(.landed) .mark-btn { visibility: hidden; }
   html.js:not(.ready) { overflow: hidden; }
   .js:not(.ready) .rise { animation-play-state: paused; }
   #ribbon-hero { transition: opacity 1.6s var(--ease), filter 1.2s var(--ease); }
   .js:not(.ready) #ribbon-hero { opacity: 0; filter: blur(10px); }
 
   /* Entrance */
-  .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms + 150ms); }
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+  .rise { animation: rise 0.8s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms + 250ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
   #result:not([hidden]) { animation: rise 0.7s var(--ease) both; }
 
   @media (max-width: 1100px) {
@@ -333,19 +334,16 @@
     .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
     .mark, .bar span { transition: none; }
     .pill .spinner { animation-duration: 2s; }
-    .loader-mark path { animation: none; stroke-dashoffset: 0; }
-    .loader-bar span { animation-duration: 2.4s; }
+    .loader-mark, .loader-mark path { animation: none; stroke-dashoffset: 0; }
   }
 </style>
 </head>
 <body>
 <div class="loader" aria-hidden="true">
-  <div class="loader-inner">
-    <svg class="loader-mark" viewBox="0 0 48 48" fill="none">
-      <path pathLength="1" d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="#141413" stroke-width="5.5" stroke-linejoin="round"/>
-    </svg>
-    <div class="loader-bar"><span></span></div>
-  </div>
+  <div class="loader-bg"></div>
+  <svg class="loader-mark" viewBox="0 0 48 48" fill="none">
+    <path pathLength="1" d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="rgba(0,0,0,0.875)" stroke-width="5.5" stroke-linejoin="round"/>
+  </svg>
 </div>
 <button class="dots" type="button" data-top aria-label="Back to the top"><span><i></i><i></i><i></i><i></i></span></button>
 
@@ -374,7 +372,7 @@
       </div>
 
       <div class="hero" id="hero">
-        <button class="mark-btn rise" style="--i:0" type="button" data-egg aria-label="Why is it called WDYRI?" title="Why the name?">
+        <button class="mark-btn" type="button" data-egg aria-label="Why is it called WDYRI?" title="Why the name?">
           <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
           </svg>
@@ -423,7 +421,7 @@
           <div class="seg" role="group" aria-label="Show the words for">
             <button type="button" data-words="tf" aria-pressed="true">Transformer</button><button type="button" data-words="lr" aria-pressed="false">N-gram model</button>
           </div>
-          <div class="legend mono"><b><i style="background:rgba(214,69,55,.8)"></i>Towards scam</b><b><i style="background:rgba(42,111,219,.7)"></i>Away</b></div>
+          <div class="legend mono"><b><i style="background:rgb(255,45,45)"></i>Towards scam</b><b><i style="background:rgb(20,110,255)"></i>Away</b></div>
         </div>
         <div class="words" id="words-tf"></div>
         <div class="words" id="words-lr" hidden></div>

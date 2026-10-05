@@ -79,8 +79,12 @@ function paint(el, words, res, threshold) {
     const s = document.createElement("span");
     s.textContent = w;
     s.title = `effect ${e >= 0 ? "+" : ""}${e.toFixed(3)}`;
-    const a = Math.min(Math.abs(e), 1) * 0.75;
-    if (Math.abs(e) >= 0.01) s.style.background = e > 0 ? `rgba(214,69,55,${a})` : `rgba(42,111,219,${a})`;
+    // Vivid red pushes towards scam, vivid blue away; stronger effects get deeper colour.
+    if (Math.abs(e) >= 0.01) {
+      const a = Math.min(0.25 + Math.abs(e) * 2.2, 0.95);
+      s.style.background = e > 0 ? `rgba(255,45,45,${a})` : `rgba(20,110,255,${a})`;
+      if (a > 0.7) { s.style.color = "#fff"; s.style.fontWeight = "500"; }
+    }
     return s;
   }).flatMap((s) => [s, document.createTextNode(" ")]));
 }
