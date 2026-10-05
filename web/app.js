@@ -14,7 +14,6 @@ const status = $("#status");
 const [settings, lrData, examples] = await Promise.all(
   ["settings.json", "lr_char.json", "examples.json"].map((f) => fetch(f).then((r) => r.json())));
 const ngram = loadNgramModel(lrData);
-$("#tf-name").textContent = settings.transformer_name;
 $("#train-note").textContent = `Trained on ${settings.train_note}`;
 
 let tokenizer = null, model = null, current = null, checks = 0;
@@ -65,16 +64,17 @@ async function influence(text, scorer) {
   return { p: probs[0], words: words.map((w, i) => [w, probs[0] - probs[i + 1]]) };
 }
 
-function paint(el, res, threshold) {
+function paint(el, words, res, threshold) {
   const flagged = res.p >= threshold;
+  el.classList.toggle("flagged", flagged);
+  el.classList.toggle("passed", !flagged);
   el.style.setProperty("--thr", threshold);
   el.querySelector(".prob").textContent = `${Math.round(100 * res.p)}%`;
   el.querySelector(".bar").classList.toggle("flag", flagged);
   el.querySelector(".bar span").style.width = `${100 * res.p}%`;
-  el.querySelector(".flagtxt").textContent =
-    `${flagged ? "Flags it as a scam" : "Does not flag it"} (flags at ≥ ${Math.round(100 * threshold)}%)`;
-  const box = el.querySelector(".words");
-  box.replaceChildren(...res.words.map(([w, e]) => {
+  el.querySelector(".flagtxt").textContent = flagged ? "Flags it" : "Passes";
+  el.querySelector(".flagtxt").title = `Flags at ${Math.round(100 * threshold)}% or more`;
+  words.replaceChildren(...res.words.map(([w, e]) => {
     const s = document.createElement("span");
     s.textContent = w;
     s.title = `effect ${e >= 0 ? "+" : ""}${e.toFixed(3)}`;
@@ -91,17 +91,17 @@ async function run({ reveal = true } = {}) {
   const text = preprocess(raw, { defend });
   current = { raw, defend };
   $("#check").disabled = true;
-  $("#seen").textContent = text;
   const lr = await influence(text, async (ts) => ts.map((t) => ngram.proba(t)));
-  paint($("#m-lr"), lr, settings.threshold_baseline);
+  paint($("#m-lr"), $("#words-lr"), lr, settings.threshold_baseline);
   let tf = null;
   if (model) {
     tf = await influence(text, transformerProba);
-    paint($("#m-tf"), tf, settings.threshold_transformer);
+    paint($("#m-tf"), $("#words-tf"), tf, settings.threshold_transformer);
   } else {
+    $("#m-tf").classList.remove("flagged", "passed");
     $("#m-tf .prob").textContent = "…";
-    $("#m-tf .flagtxt").textContent = "Still loading; the result will update when it is ready.";
-    $("#m-tf .words").replaceChildren();
+    $("#m-tf .flagtxt").textContent = "Loading";
+    $("#words-tf").replaceChildren();
   }
   const by = [];
   if (tf && tf.p >= settings.threshold_transformer) by.push("the transformer");
@@ -157,3 +157,10 @@ const chips = examples.map((ex) => {
 $("#examples").replaceChildren(...chips);
 // Editing the box by hand means it no longer shows the chosen example.
 $("#sms").addEventListener("input", () => chips.forEach((c) => c.setAttribute("aria-pressed", "false")));
+
+// "What drove it" shows one model's word influences at a time.
+document.querySelectorAll("[data-words]").forEach((b, _, all) => b.addEventListener("click", () => {
+  all.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  $("#words-tf").hidden = b.dataset.words !== "tf";
+  $("#words-lr").hidden = b.dataset.words !== "lr";
+}));
