@@ -3,9 +3,10 @@
 // preprocessing as training (web/preprocess.js, parity-tested against Python).
 import { preprocess } from "./preprocess.js";
 import { loadNgramModel } from "./ngram.js";
-import { note, appReady } from "./ui.js";
+import { note, appReady, settled } from "./ui.js";
 
-// Loaded in the background, so the n-gram model and the page are ready without waiting for it.
+// Loaded in the background once the page has appeared, so the n-gram model and the page
+// are ready without waiting for it.
 const TRANSFORMERS = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.web.min.js";
 
 const $ = (sel) => document.querySelector(sel);
@@ -24,6 +25,7 @@ status.textContent = "N-gram model ready. Loading the transformer.";
 const files = {};
 (async () => {
   try {
+    await settled;
     const { AutoTokenizer, AutoModelForSequenceClassification, env } = await import(TRANSFORMERS);
     env.allowLocalModels = false;
     tokenizer = await AutoTokenizer.from_pretrained(settings.model_id);
@@ -197,8 +199,6 @@ async function check(raw, { reveal = true }) {
   v.querySelector("h2").textContent = by.length ? "Likely scam" : "Looks genuine";
   v.querySelector("p").textContent = by.length ? `Flagged by ${by.join(" and ")}.`
     : model ? "Neither model flags it." : "The n-gram model does not flag it (transformer still loading).";
-  const ex = examples.find((e) => e.text === raw && e.defend === defend);
-  v.querySelector(".note").textContent = ex ? `${ex.label}. ${ex.note}` : "";
   await wait(500 - (performance.now() - started));
   $("#result").hidden = false;
   status.textContent = by.length ? "Check complete: likely scam." : "Check complete: looks genuine.";

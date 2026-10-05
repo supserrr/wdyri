@@ -30,46 +30,52 @@ vec3 spectrum(float t) {
   return mix(c7, c8, t - 7.0);
 }
 
-// Height of the ribbon's centre line at horizontal position s (0..1).
+// Height of the ribbon's centre line at horizontal position s (0..1): a slow travelling wave
+// whose overall tilt drifts, so the ribbon sometimes rises to the right and sometimes falls.
 float centre(float s, float t) {
   if (uDark > 0.5)   // a horizon: high on the left, low in the middle, rising again
     return uY + 0.02 * sin(s * 5.0 + t * 0.25) + 0.012 * sin(s * 9.0 - t * 0.2 + 2.0)
               + 0.17 * smoothstep(0.5, -0.15, s) + 0.07 * smoothstep(0.5, 1.15, s);
-  return uY + 0.03 * sin(s * 4.0 - 0.6 + t * 0.27) + 0.018 * sin(s * 8.0 + 1.0 - t * 0.21)
-            + 0.26 * smoothstep(0.5, 1.2, s) - 0.02 * smoothstep(0.0, 0.45, s);
+  float tilt = 0.10 * sin(0.13 * t + 0.6) + 0.03;
+  return uY + 0.035 * sin(5.0 * s - 0.32 * t + 0.9) + 0.02 * sin(10.0 * s + 0.21 * t + 1.7) - tilt * (s - 0.5);
 }
 
 void main() {
   float s = vUv.x, t = uTime;
   float dy = vUv.y - centre(s, t);
 
-  // The band is thinnest at a drifting focal point and fans out towards both edges;
-  // the colour order flips across the focus, like light through a twisted prism.
-  float fs = s - (0.5 + 0.07 * sin(t * 0.19));
-  float dir = clamp(fs / 0.04, -1.0, 1.0);
-  float w = 0.012 + (fs > 0.0 ? 0.17 : 0.12) * pow(abs(fs), 1.05);
+  // A 23-second colour cycle: a warm orange phase (where it starts) easing into a cool
+  // blue and cyan phase and back. The dark footer stays in its own palette.
+  float warm = uDark > 0.5 ? 0.0 : smoothstep(-0.2, 0.8, cos(6.2832 * t / 23.0));
+
+  // The band narrows towards a drifting focal point and fans out towards both edges;
+  // the colour order turns over across the focus, like light through a twisted prism.
+  float fs = s - (0.55 + 0.15 * sin(t * 0.17));
+  float dir = clamp(fs / 0.15, -1.0, 1.0);
+  float w = 0.022 + 0.10 * abs(fs);
   float d = dy / w;
-  float drift = 0.13 * sin(t * 0.23 + s * 3.1);
+  float shift = mix(-0.14, 0.16, warm) + 0.08 * sin(t * 0.23 + s * 3.1);
 
-  vec3 col = spectrum(0.5 + 0.5 * d * dir + drift);
-  float core = exp(-pow((d + 0.25 * dir) / 0.22, 2.0)) * smoothstep(0.02, 0.12, abs(fs));
-  col = mix(col, vec3(1.0), core * 0.55);
-  float streak = 0.72 + 0.28 * pow(abs(sin(d * 4.0 + t * 0.5 + s * 2.0)), 3.0);
-  float ba = clamp(exp(-pow(abs(d), 2.6)) * streak, 0.0, 1.0);
+  vec3 col = spectrum(0.5 + 0.42 * d * dir + shift);
+  col = mix(col, vec3(1.0), exp(-pow(d / 0.38, 2.0)) * 0.85);   // white-hot core
+  float streak = 0.82 + 0.18 * pow(abs(sin(d * 3.5 + t * 0.5)), 3.0);
+  float ba = clamp(exp(-pow(abs(d) / 1.05, 2.4)) * streak, 0.0, 1.0);
 
-  // Soft light around the band, then two broad hazes above and below it.
-  float soft = exp(-pow(abs(d) / 2.4, 2.0)) * 0.35;
-  vec3 softCol = spectrum(0.5 + 0.25 * d * dir + drift);
-  float ha = exp(-pow((dy - 0.08) / 0.13, 2.0));
-  float hb = exp(-pow((dy + (uDark > 0.5 ? 0.06 : 0.09)) / (uDark > 0.5 ? 0.045 : 0.13), 2.0));
-  float m1 = smoothstep(0.25, 0.85, s + 0.12 * sin(t * 0.21));
-  float m2 = smoothstep(0.30, 0.90, s - 0.12 * sin(t * 0.17 + 1.0));
-  vec3 above = mix(vec3(0.34, 0.50, 1.00), vec3(1.00, 0.60, 0.56), m1);
-  vec3 below = mix(vec3(1.00, 0.64, 0.46), vec3(0.42, 0.50, 1.00), m2);
-  float aA = ha * 0.6, aB = hb * 0.5;
+  // Soft light around the band, then broad hazes above and below it.
+  float soft = exp(-pow(abs(d) / 2.4, 2.0)) * 0.45;
+  vec3 softCol = spectrum(0.5 + 0.3 * d * dir + shift);
+  float gw = mix(0.11, 0.17, warm);
+  float ha = exp(-pow((dy - 0.06) / gw, 2.0));
+  float hb = exp(-pow((dy + 0.06) / (uDark > 0.5 ? 0.045 : gw), 2.0));
+  float m = smoothstep(0.05, 0.95, s);
+  vec3 above = mix(mix(vec3(0.42, 0.52, 1.00), vec3(0.70, 0.60, 1.00), m),
+                   mix(vec3(0.95, 0.55, 0.75), vec3(1.00, 0.40, 0.16), smoothstep(0.2, 0.7, s)), warm);
+  vec3 below = mix(mix(vec3(1.00, 0.66, 0.62), vec3(0.50, 0.58, 1.00), m), vec3(1.00, 0.36, 0.12), warm);
+  float aA = ha * mix(0.42, 0.85, warm), aB = hb * mix(0.30, 0.95, warm);
   if (uDark > 0.5) {
-    above = mix(vec3(0.25, 0.75, 0.95), vec3(0.95, 0.62, 0.25), m1);
+    above = mix(vec3(0.25, 0.75, 0.95), vec3(0.95, 0.62, 0.25), m);
     below = vec3(0.22, 0.36, 0.95);
+    aA = ha * 0.6;
     aB = hb * 0.22;
   }
   float hazeA = clamp(aA + aB * (1.0 - aA), 0.0, 1.0);

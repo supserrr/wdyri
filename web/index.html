@@ -116,7 +116,7 @@
   label.toggle input:checked { background: var(--dark); }
   label.toggle input:checked::after { transform: translateX(12px); }
   .examples { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 720px; }
-  .examples .mono { color: var(--ink-3); }
+  .examples .mono { color: #2f3135; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; }
   .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
   .chips button { height: 32px; padding: 0 13px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.78); box-shadow: var(--ring);
                   font-size: 13.5px; font-weight: 450; cursor: pointer; white-space: nowrap;
@@ -160,8 +160,6 @@
   .verdict.scam h2::before { background: var(--scam); box-shadow: 0 0 0 6px var(--scam-soft); }
   .verdict.ok h2::before { background: var(--ok); box-shadow: 0 0 0 6px var(--ok-soft); }
   .verdict p { margin: 0; color: var(--ink-2); }
-  .verdict .note:not(:empty) { font-size: 14px; color: var(--ink-2); max-width: 520px; }
-  .verdict .note:not(:empty)::before { content: "// "; font-family: var(--mono); color: var(--ink-3); }
   .result-card { background: var(--card); border-radius: 28px; padding: 8px; }
   .scores { display: grid; grid-template-columns: 1fr 1fr; }
   .score { padding: 22px 24px 18px; min-width: 0; }
@@ -294,12 +292,18 @@
   .landed .loader { display: none; }
   .js:not(.landed) .mark-btn { visibility: hidden; }
   html.js:not(.ready) { overflow: hidden; }
-  .js:not(.ready) .rise { animation-play-state: paused; }
-  #ribbon-hero { transition: opacity 1.6s var(--ease), filter 1.2s var(--ease); }
-  .js:not(.ready) #ribbon-hero { opacity: 0; filter: blur(10px); }
+  /* Hero entrance: the headline sharpens out of a blur word by word, the text box appears with
+     the first word, then the example chips and the subtitle; the light comes last. */
+  .w { display: inline-block; }
+  .js .w, .js .enter { opacity: 0; }
+  .ready .w, .ready .enter { animation: blur-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(250ms + var(--d, 0ms)); }
+  .ready .glass.enter { animation-name: glass-in; animation-duration: 0.55s; }
+  @keyframes blur-in { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
+  @keyframes glass-in { from { opacity: 0; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+  #ribbon-hero { transition: opacity 1.4s var(--ease) 0.7s; }
+  .js:not(.ready) #ribbon-hero { opacity: 0; }
 
   /* Entrance */
-  .rise { animation: rise 0.8s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms + 250ms); }
   @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
   #result:not([hidden]) { animation: rise 0.7s var(--ease) both; }
 
@@ -339,7 +343,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .rise, #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
+    #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
+    .ready .w, .ready .enter { animation: none; opacity: 1; }
     .mark, .bar span { transition: none; }
     .pill .spinner { animation-duration: 2s; }
     .loader-mark, .loader-mark path { animation: none; stroke-dashoffset: 0; }
@@ -384,9 +389,9 @@
             <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round"/>
           </svg>
         </button>
-        <h1 class="rise" style="--i:1">Why did you<br>redeem it?</h1>
-        <p class="sub rise" style="--i:2">Check a Swahili SMS for mobile-money scam patterns, before you send money.</p>
-        <div class="glass rise" style="--i:3">
+        <h1><span class="w" style="--d:0ms">Why</span> <span class="w" style="--d:90ms">did</span> <span class="w" style="--d:180ms">you</span><br><span class="w" style="--d:270ms">redeem</span> <span class="w" style="--d:360ms">it?</span></h1>
+        <p class="sub enter" style="--d:300ms">Check a Swahili SMS for mobile-money scam patterns, before you send money.</p>
+        <div class="glass enter" style="--d:0ms">
           <label for="sms" class="sr-only">SMS text</label>
           <textarea id="sms" placeholder="Paste an SMS, e.g. Iyo pesa itume kwenye namba hii ..."></textarea>
           <div class="glass-bar">
@@ -396,19 +401,19 @@
               <span class="spinner" aria-hidden="true"></span><span class="label">Check message</span></button>
           </div>
         </div>
-        <div class="examples rise" style="--i:4">
+        <div class="examples enter" style="--d:150ms">
           <div class="mono">Try an example</div>
           <div class="chips" id="examples" role="group" aria-label="Example messages"></div>
         </div>
-        <div class="status-line mono rise" style="--i:4" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
-        <a class="learn mono rise" style="--i:5" href="#story">Learn more<i aria-hidden="true"></i></a>
+        <div class="status-line mono enter" style="--d:150ms" aria-hidden="true"><span data-note="ngram">N-gram model · loading</span><span data-note="tf">Transformer · waiting</span></div>
+        <a class="learn mono enter" style="--d:450ms" href="#story">Learn more<i aria-hidden="true"></i></a>
       </div>
     </div>
 </header>
 
 <main>
   <section id="result" class="wrap" hidden>
-    <div class="verdict" id="verdict" aria-live="polite"><span class="chip">Result</span><h2></h2><p></p><div class="note"></div></div>
+    <div class="verdict" id="verdict" aria-live="polite"><span class="chip">Result</span><h2></h2><p></p></div>
     <div class="result-card">
       <div class="scores">
         <div class="score" id="m-tf">

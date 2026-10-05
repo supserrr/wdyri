@@ -56,17 +56,28 @@ function reveal() {
     if (reduceMotion || !fly || !target) land();
     else {
       // One logo throughout: the loader's mark flies to the hero's mark, then hands over.
+      // Freeze the waiting pulse where it is and ease back to full opacity, instead of
+      // cancelling it: cancelling made the logo jump whenever the pulse was mid-fade.
       const a = fly.getBoundingClientRect(), b = target.getBoundingClientRect();
+      const opacity = getComputedStyle(fly).opacity;
       fly.style.animation = "none";
-      fly.style.transition = "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)";
+      fly.style.opacity = opacity;
+      fly.getBoundingClientRect();   // commit the frozen state before animating from it
+      fly.style.transition = "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease";
+      fly.style.opacity = "1";
       fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ` +
         `${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(${b.width / a.width})`;
       setTimeout(land, 900);
     }
     layout();
     typeNotes();
+    setTimeout(settle, 1600);   // the entrance has finished
   }, Math.max(0, 1100 - (performance.now() - loadStart)));   // let the logo finish drawing
 }
+// Resolves once the page has finished appearing; app.js waits for it before starting the
+// multi-megabyte transformer download, so parsing it cannot stall the entrance animation.
+let settle;
+export const settled = new Promise((resolve) => { settle = resolve; });
 const maybeReveal = () => { if (fontsLoaded && appLoaded) reveal(); };
 export function appReady() { appLoaded = true; maybeReveal(); }
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fontsLoaded = true; maybeReveal(); });
@@ -76,7 +87,7 @@ setTimeout(reveal, 6000);   // never keep anyone waiting longer than this
 
 let heroRibbonY = 0.5;
 try {
-  mountRibbon($("#ribbon-hero"), { y: () => heroRibbonY, start: 3 });
+  mountRibbon($("#ribbon-hero"), { y: () => heroRibbonY, start: 0.5 });
   mountRibbon($("#ribbon-story"), { y: 0.5, start: 9 });
   mountRibbon($("#ribbon-end"), { dark: true, y: 0.42, start: 7 });
 } catch (err) {
@@ -94,10 +105,8 @@ function layout() {
   vw = innerWidth;
   vh = innerHeight;
   stage.style.height = `${Math.round(vh + (storyCard.offsetHeight * 0.73 + story.offsetHeight) * 1.05)}px`;
-  if (scrollY < 4) {   // the ribbon runs behind the text box
-    const r = glass.getBoundingClientRect(), h = heroCard.getBoundingClientRect();
-    heroRibbonY = clamp(1 - (r.top + r.height / 2 - h.top) / h.height, 0.2, 0.8);
-  }
+  // The ribbon runs behind the text box. Offsets ignore the entrance transforms and scrolling.
+  heroRibbonY = clamp(1 - (glass.offsetTop + glass.offsetHeight / 2) / heroCard.offsetHeight, 0.2, 0.8);
   update();
 }
 
