@@ -24,7 +24,7 @@ Built by `python -m src.data` and `python -m src.train_classical`. All text is m
 | --- | --- |
 | `processed/bongo.csv` | 1,064 masked Swahili SMS: `id, label, text, template_id, split_random, split_template` |
 | `processed/chichewa.csv` | 733 masked Chichewa SMS (336 fraud): `id, orig_id, source, label, text, template_id` |
-| `processed/eval_template.csv` | every evaluation set for the template split: validation, clean test, 9 attacked test sets, Chichewa and genuine-text controls (each with a `+norm` copy); the stress-test minimal pairs for test and validation (`stress_*`, `valstress_*`); full-intensity controls (`ctrlall_*`); attacks from a second attacker (`test_xatk_*`) |
+| `processed/eval_template.csv` | every evaluation set for the template split: validation, clean test, 9 attacked test sets, Chichewa and genuine-text controls (each with a `+norm` copy); a held-out lookalike attack the defence was not written for (`test_unseen_all`, with `+norm`); the stress-test minimal pairs for test and validation (`stress_*`, `valstress_*`); full-intensity controls (`ctrlall_*`); attacks from a second attacker (`test_xatk_*`) |
 | `processed/eval_random.csv` | validation and test sets for the random split |
 | `processed/eval_template_r1.csv`, `eval_template_r2.csv` | validation and test sets of the two fresh template-disjoint splits (E12 check) |
 | `processed/adversarial_copies_template.csv` | the 101 machine-perturbed scam copies used for adversarial training (E7), with the template of the message each was copied from |
@@ -50,8 +50,13 @@ Template-disjoint split (seed 42): train 760 (405 scam), validation 152 (81 scam
 * **Shortcut 2: length.** Every scam has at least 8 words after masking (median 12); genuine texts have a median of 7. A rule "at least 9 words" (k chosen on the training set) scores test F1 0.85. Both shortcuts are reported as baselines in E3b.
 * The Chichewa fraud set grew from 126 original messages by label-preserving rewrites (Taylor & Robert, 2025a); the files do not mark which are originals, so we also report one message per template.
 * Names in scam texts (payee names) are kept: masking them would need a Swahili name recogniser.
+* One Chichewa fraud message gives a contact email address. It is the scammer's published contact, not a victim's, so it is kept as the dataset authors released it; masking it would change one evaluation message after every model was scored.
 * The masking rules were written after looking at samples of both datasets, so they recognise Tanzanian and Malawian number and currency formats. No model, threshold or hyperparameter was tuned on the Chichewa set.
 * The Chichewa rewrites were produced by the dataset authors (Taylor & Robert, 2025a) to enlarge 126 original fraud messages; their share among the 336 fraud messages we keep is not recorded in the files. The few-shot runs (E9) add 20 or 50 of these messages to training and drop every message sharing a template with them from the test.
+
+## Licences
+
+Both licences allow redistribution of the processed, masked text committed here. The MIT notice for BongoScam and the CC BY 4.0 attribution for the Chichewa set, with the changes made, are in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
 ## Citations
 

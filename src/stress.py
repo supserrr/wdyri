@@ -21,10 +21,6 @@ import pandas as pd
 from . import config, runs
 from .metrics import recall_threshold
 
-MODELS = ["phone_rule", "nb_word_counts", "lr_word", "lr_char", "bilstm_finetuned",
-          "xlmr", "afroxlmr", "ensemble"]
-
-
 def analyse(run: pd.DataFrame, base: str = "test", prefix: str = "stress") -> dict | None:
     """Stress metrics on the test pairs (prefix "stress") or the validation pairs ("valstress")."""
     if f"{prefix}_genuine+phone" not in set(run["set"]):

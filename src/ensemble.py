@@ -38,9 +38,8 @@ SPLITS = ("template", "template_r1", "template_r2")
 
 
 def load_run(model: str, variant: str, seed: int, split: str = "template") -> pd.DataFrame | None:
-    files = sorted(config.PREDICTIONS.glob(f"{runs.run_name(model, variant, split, seed)}.csv")) + \
-        sorted(config.PREDICTIONS.glob(f"{runs.run_name(model, variant, split, seed)}__*.csv"))
-    return pd.concat([pd.read_csv(f, keep_default_na=False) for f in files]) if files else None
+    path = config.PREDICTIONS / f"{runs.run_name(model, variant, split, seed)}.csv"
+    return pd.read_csv(path, keep_default_na=False) if path.exists() else None
 
 
 def combine(a: pd.DataFrame, b: pd.DataFrame) -> pd.DataFrame:

@@ -3,14 +3,19 @@
 Run: python -m unittest discover tests
 """
 import random
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
 import numpy as np
 import pandas as pd
 
+from src import runs
+from src.download import verify
 from src.metrics import recall_threshold
-from src.perturb import CYRILLIC, ZWSP, attack, codeswitch, structural
-from src.preprocess import mask, normalise, preprocess, strip_placeholders
+from src.perturb import CYRILLIC, UNSEEN, ZWSP, attack, codeswitch, structural
+from src.preprocess import _CONFUSABLES, mask, normalise, preprocess, strip_placeholders
 from src.split import template_ids, template_split
 from src.variants import number_balanced
 
@@ -89,6 +94,13 @@ class AttackTest(unittest.TestCase):
             self.assertNotEqual(out, "tuma pesa haraka")
             self.assertEqual(out.replace(" ", "").replace("-", ""), "tumapesaharaka")
 
+    def test_held_out_lookalikes_unknown_to_the_defence(self):
+        # The E7 generalisation check is only meaningful if normalisation cannot undo it.
+        self.assertFalse({ord(c) for c in UNSEEN.values()} & set(_CONFUSABLES))
+        attacked = attack("tuma pesa kwa <PHONE> haraka", "unseen", "all", self.scorer, seed=1)
+        self.assertNotEqual(preprocess(attacked, defend=True), "tuma pesa kwa <PHONE> haraka")
+        self.assertIn("<PHONE>", attacked)
+
     def test_codeswitch(self):
         self.assertEqual(codeswitch("Tuma PESA kwenye namba hii", [], [], "all"), "Send MONEY to this number")
 
@@ -118,6 +130,37 @@ class ThresholdTest(unittest.TestCase):
         p = np.linspace(0.05, 0.95, 20)
         thr = recall_threshold(y, p)
         self.assertGreaterEqual((p >= thr).mean(), 0.95)
+
+
+class PipelineTest(unittest.TestCase):
+    def test_checksum_mismatch_stops(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bongo_scam.csv"
+            path.write_text("changed upstream")
+            with self.assertRaises(SystemExit):
+                verify(path)
+            verify(path, allow_mismatch=True)
+
+    def test_merge_keeps_one_file_per_run(self):
+        frame = pd.DataFrame({"set": ["val", "test"], "id": ["a", "b"], "label": [0, 1]})
+        extra = pd.DataFrame({"set": ["test", "stress"], "id": ["b", "c"], "label": [1, 1]})
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(runs.config, "PREDICTIONS", Path(tmp)):
+            runs.save("m", "clean", "template", 0, frame, [0.1, 0.2])
+            runs.save("m", "clean", "template", 0, extra, [0.9, 0.8], merge=True)
+            files = list(Path(tmp).glob("*.csv"))
+            self.assertEqual(len(files), 1)
+            out = pd.read_csv(files[0]).set_index(["set", "id"])["prob"]
+        self.assertEqual(out.to_dict(), {("val", "a"): 0.1, ("test", "b"): 0.9, ("stress", "c"): 0.8})
+
+    def test_bilstm_score_independent_of_batch(self):
+        import torch
+        from src.train_bilstm import BiLSTM
+        torch.manual_seed(0)
+        model = BiLSTM(torch.randn(20, 300), trainable=False).eval()
+        alone = torch.tensor([[5, 6, 7]])
+        batched = torch.tensor([[5, 6, 7, 0, 0, 0], [8, 9, 10, 11, 12, 13]])
+        with torch.no_grad():
+            self.assertAlmostEqual(float(model(alone)[0]), float(model(batched)[0]), places=5)
 
 
 if __name__ == "__main__":

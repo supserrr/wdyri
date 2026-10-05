@@ -16,7 +16,8 @@ import matplotlib.ticker
 import numpy as np
 import pandas as pd
 
-from . import config
+from . import config, runs
+from .evaluate import fewshot_pairs
 
 SURFACE, INK, INK_2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
 MODELS = {  # key: (label, colour)
@@ -97,8 +98,9 @@ def rq2_defences(summary: pd.DataFrame) -> None:
     """Scam recall on fully attacked test sets: no defence, normalisation, adversarial training."""
     models = ["nb_word_counts", "lr_char", "bilstm_finetuned", "afroxlmr"]
     s = summary[(summary["split"] == "template")]
-    fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.0), sharey=True)
-    titles = {"lookalike": "Lookalike letters", "structural": "Split / joined words", "codeswitch": "Code-switching"}
+    fig, axes = plt.subplots(1, 4, figsize=(12.0, 3.0), sharey=True)
+    titles = {"lookalike": "Lookalike letters", "structural": "Split / joined words", "codeswitch": "Code-switching",
+              "unseen": "Held-out lookalikes"}
     defences = [("No defence", "clean", "", "#898781"), ("Normalisation", "clean", "+norm", "#2a78d6"),
                 ("Adversarial training", "advtrain", "", "#eb6834")]
     width = 0.26
@@ -147,14 +149,15 @@ def rq3_transfer(summary: pd.DataFrame) -> None:
     ax1.set_xlabel(f"Fraud detection on {n_chi} Chichewa SMS (no Chichewa training)")
     ax1.set_title("Zero-shot transfer", loc="left")
     ax1.grid(axis="y", visible=False)
+    # Each few-shot run is compared with its zero-shot model on the same messages (its
+    # added examples' templates removed); the zero-shot point averages those matched scores.
+    pairs = fewshot_pairs(runs.load_all())
     ends = []
     for m in ["lr_char", "afroxlmr", "xlmr"]:
-        ys = []
-        for v in ("clean", "fewshot20", "fewshot50"):
-            r = s[(s["model"] == m) & (s["variant"] == v) & (s["set"] == "chichewa/all")]["f1"]
-            ys.append(r.mean() if len(r) else np.nan)
-        if np.isnan(ys[1:]).all():
+        p = pairs[pairs["model"] == m]
+        if p.empty:
             continue
+        ys = [p["zero_f1"].mean()] + [p[p["n_shots"] == n]["few_f1"].mean() for n in (20, 50)]
         ax2.plot([0, 20, 50], ys, color=MODELS[m][1], linewidth=2, marker="o", markersize=5,
                  markeredgecolor=SURFACE, markeredgewidth=1.2, label=MODELS[m][0])
         ends.append([ys[-1], ys[-1]])
@@ -167,7 +170,7 @@ def rq3_transfer(summary: pd.DataFrame) -> None:
     ax2.set_xticks([0, 20, 50])
     ax2.set_xlim(-3, 58)
     ax2.set_ylim(0.5, 1)
-    ax2.set_xlabel("Chichewa messages added to training")
+    ax2.set_xlabel("Chichewa messages added to training\n(each point on the same messages as its zero-shot match)")
     ax2.set_ylabel("Fraud F1")
     ax2.set_title("Few-shot (E9)", loc="left")
     ax2.legend(loc="lower right", fontsize=7.5)

@@ -25,6 +25,11 @@ A second attacker checks that results do not hinge on the char LR that picks tri
 words (white-box for a char LR, transfer for everything else):
     test_xatk_<attack>_all            test scams attacked on the trigger words of a word-count
                                       Naive Bayes attacker instead
+The normalisation defence was written knowing the lookalike attack's characters, so a
+held-out version checks whether it generalises (template split only):
+    test_unseen_all                   test scams, every trigger word disguised with lookalike
+                                      characters the defence does not know (perturb.UNSEEN)
+    test_unseen_all+norm              the same, after the normalisation defence
 """
 from __future__ import annotations
 
@@ -70,6 +75,15 @@ def build(split: str, scorer: Scorer | None = None, transfer_scorer: Scorer | No
                          *control_sets_all(test, scorer)], ignore_index=True)
         if transfer_scorer is not None:
             out = pd.concat([out, *transfer_attack_sets(test, transfer_scorer)], ignore_index=True)
+        unseen = test.copy()
+        is_scam = unseen["label"] == 1
+        unseen.loc[is_scam, "text"] = [
+            attack(row.text, "unseen", "all", scorer, seed=config.SPLIT_SEED, effects=effects[row.id])
+            for row in unseen[is_scam].itertuples()]
+        unseen = unseen.assign(set="test_unseen_all")[["set", "id", "label", "text"]]
+        out = pd.concat([out, unseen, unseen.assign(set="test_unseen_all+norm",
+                                                    text=unseen["text"].map(lambda t: preprocess(t, defend=True)))],
+                        ignore_index=True)
     # Write then rename, so a training run reading the file never sees half of it.
     tmp = path(split).with_suffix(".tmp")
     out.to_csv(tmp, index=False)

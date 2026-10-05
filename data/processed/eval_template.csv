@@ -6312,3 +6312,307 @@ test_xatk_codeswitch_all,bongo_1327,1,Habari za asubuhi. Mimi landlord wako hii 
 test_xatk_codeswitch_all,bongo_1330,0,Kweli kabisa
 test_xatk_codeswitch_all,bongo_1359,0,"Habari za leo mwalimu, naomba unisaidie kuelewa zaidi kuhusu project yetu. Nitashukuru sana kwa msaada wako."
 test_xatk_codeswitch_all,bongo_1375,0,Watoto wanahitaji uniform mpya kwa ajili ya shule.
+test_unseen_all,bongo_0025,1,Tı⁣gօ CQGZ Imҽtհıb⁣itıshwɑ nɑ⁣mbɑ yako ya 078 ... imeshinda <AMOUNT> mıl⁣ǀioո kսt⁣օka ᎢU⁣ZՕ ᏢOI⁣NᎢI ılikս⁣ⲣօkeɑ Ꮋe⁣la yako ⲣi⁣ga <PHONE> Asante
+test_unseen_all,bongo_0029,0,Chukua maua yako
+test_unseen_all,bongo_0039,1,Utaոı⁣tumıa kwҽ⁣nyҽ i⁣ı <PHONE> Vօd⁣ɑcom jı⁣nɑ LUKA KIMBANGU na⁣mbɑ yangu inadeni usiitumie
+test_unseen_all,bongo_0047,1,MZ⁣ᎬᎬ HᎪD⁣IJA L⁣ᎪI ti⁣bɑ aꜱ⁣iǀı bıas⁣hala kazi mɑꜱ⁣օmo uta⁣jıǀi kesi kսlu⁣dıꜱհɑ mke&mume pı⁣ɡɑ ( <PHONE> )( <PHONE> )
+test_unseen_all,bongo_0053,0,Hiyo stori uliyoniambia jana bado inanishangaza! Hahaha.
+test_unseen_all,bongo_0055,1,Ꮋab⁣ari za asubuhi. Ꮇi⁣mi mwҽ⁣nye ոүu⁣mbɑ wako հ⁣iı nɑ⁣mba үa⁣ngu ya Vօda⁣cօm. Ꮇb⁣օոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0061,1,"Dear, No ոҽ⁣ed to ɡ⁣օ օ⁣ut work, just ɑ⁣t հօ⁣me to ҽɑ⁣rո <AMOUNT> a day, ple⁣ɑꜱҽ ϲօո⁣tact ս⁣ꜱ: <URL>"
+test_unseen_all,bongo_0097,0,Naomba uniunganishe na rafiki yako.
+test_unseen_all,bongo_0107,0,"Nimemaliza kufanya usafi, kazi nyingine ni ipi?"
+test_unseen_all,bongo_0110,0,Sasa kuna ubaya gani kufanya hivyo??
+test_unseen_all,bongo_0112,1,Hɑb⁣ɑrı za siku. Mi⁣mı mwҽ⁣ոye ոүu⁣mbɑ wako հ⁣ıı ոɑ⁣mbɑ үa⁣ոgս ya հaǀօ⁣tҽǀ. Mb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0115,0,Naomba uniwekee miadi kwa ajili ya kesho.
+test_unseen_all,bongo_0143,0,"Habari, nilikuwa na wazo la kuandaa sherehe ya kuzaliwa kwangu. Ungependa kuja?"
+test_unseen_all,bongo_0146,1,I⁣үօ ҽ⁣la tս⁣ma hu⁣mս kwҽ⁣ոүҽ Vօd⁣acօm <PHONE> Ji⁣ոɑ ǀi⁣jҽ JUMANNE YASINI MASAKA.
+test_unseen_all,bongo_0154,1,"Mⲣı⁣ɡıe Mz⁣ҽҽ ᎷWᎪN⁣ᎪIDI KᎻA⁣MISI kwa tı⁣ba aꜱ⁣ili mıǀ⁣ikı malı,ս⁣tɑjırı petҽ,kɑzı,⁣kesı,mɑꜱomo mɑⲣeոzi,kıǀimo,⁣սfսɡɑjı,biɑsհɑra Ꮲi⁣gɑ <PHONE>"
+test_unseen_all,bongo_0159,1,Ꮋab⁣arı za asubuhi. Mi⁣mı mwҽ⁣ոүҽ nүu⁣mbɑ wako հ⁣ıi na⁣mbɑ yɑ⁣ոgս ya ᎻᎪLO⁣TEL. Ꮇb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0160,0,"Pole na changamoto zako, usikate tamaa."
+test_unseen_all,bongo_0172,0,Hongera mtoto wa lamasimba dangote umestaili kupata tunzo
+test_unseen_all,bongo_0173,1,Habari. Ꮇı⁣mı mwҽ⁣ոүҽ ոүu⁣mbɑ wako հ⁣ıi ոa⁣mbɑ үa⁣ngu ya HᎪLՕ⁣ᎢᎬL. Ꮇb⁣օոɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_0175,0,Yule beki wa Yanga anaonekana kuwa na future bright. Ameonyesha kiwango cha hali ya juu.
+test_unseen_all,bongo_0182,0,"Mambo vipi? Mechi ya jana ilikuwa kali sana, uliona goli la mwisho?"
+test_unseen_all,bongo_0195,1,Utɑni⁣tumıɑ kwa հ⁣îı vod⁣ɑϲօm <PHONE> j'⁣ınɑ ո⁣i KᎻᎪ⁣DIJA SUMBAI.
+test_unseen_all,bongo_0197,0,Watoto wanahitaji msaada wako kwa ajili ya masomo yao.
+test_unseen_all,bongo_0201,1,ᎢU⁣MIA NA⁣ᎷᏴA Ꮋ⁣II ( <PHONE> )KUNITUMIA I⁣YՕ ᎻᎬ⁣LA JI⁣NᎪ LITAONYESHA (RAMATUNGU)
+test_unseen_all,bongo_0203,1,au ı⁣үօ ҽ⁣ǀɑ nıt⁣սmıҽ kwe⁣nүe HaloPesa h⁣ıi <PHONE> Ji⁣ոa litoke <PHONE> .
+test_unseen_all,bongo_0250,1,Ꮋɑb⁣ɑrı za asubuhi. Ꮇi⁣mi mwe⁣ոүҽ ոүu⁣mba wako հ⁣ıı ոa⁣mba yɑ⁣ոɡu ya Hɑlo⁣tel. Ꮇb⁣onɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0253,0,"Nimepokea barua yako, nitakujibu hivi karibuni."
+test_unseen_all,bongo_0255,1,Hɑb⁣ari za mchana. Mı⁣mi mwe⁣ոүҽ nүu⁣mba wako հ⁣ii ոa⁣mba yɑ⁣ngu ya Tı⁣gօ. Mb⁣օnɑ kı⁣mүa na siku zına⁣zidı kwenda...?
+test_unseen_all,bongo_0265,1,Habari. Ꮇi⁣mı mwҽ⁣ոye ոyu⁣mbɑ wako հ⁣ıı ոa⁣mba үa⁣ngս ya tı⁣ɡo. Ꮇb⁣oոa ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0271,0,"Usisahau mkutano wa kikundi kesho saa tatu, tutakutana pale ofisini."
+test_unseen_all,bongo_0300,0,Nimefurahi kusikia kuwa unaendelea vizuri na afya.
+test_unseen_all,bongo_0306,0,Tafadhali niambie bei ya bidhaa hizo.
+test_unseen_all,bongo_0356,1,Hab⁣arı za siku. Ꮇı⁣mı mwҽ⁣nүҽ ոүu⁣mba wako հ⁣ii nɑ⁣mbɑ yɑ⁣ngս ya ɑır⁣tҽl. Ꮇb⁣oոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0360,1,Basi ı⁣yo հe⁣lɑ nit⁣umıҽ kwe⁣ոyҽ na⁣mbɑ h⁣iı <PHONE> ji⁣ոa lıtɑ⁣kuja (NASHONI MBIRIBI) ile nɑ⁣mbɑ usit⁣umıҽ laini inamatatizo.
+test_unseen_all,bongo_0361,1,au ı⁣үo ҽ⁣ǀɑ ոit⁣umıҽ kwҽ⁣nyҽ Tigopesa հ⁣ıı <PHONE> Jı⁣na litoke <PHONE> .
+test_unseen_all,bongo_0363,0,Tafadhali uniangalizie bei ya mafuta ya kupikia sokoni.
+test_unseen_all,bongo_0368,0,Naomba unisaidie na taarifa za mkutano.
+test_unseen_all,bongo_0372,0,"Niko kwenye foleni, nitachelewa kidogo."
+test_unseen_all,bongo_0380,1,Hɑb⁣ari za mchana. Ꮇı⁣mi mwҽ⁣ոye ոүս⁣mba wako հ⁣ıı ոa⁣mba yɑ⁣ngu ya aır⁣tҽl. Ꮇb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0389,0,Nasikia Nasibu ameanza biashara ya magari. Jamaa anafanya kazi kweli.
+test_unseen_all,bongo_0395,0,Habari za jioni?
+test_unseen_all,bongo_0405,1,Nıt⁣umie tu kwҽ⁣nүҽ h⁣iı vօ⁣da <PHONE> ji⁣ոa SAID MTAALAM .
+test_unseen_all,bongo_0424,1,ᎢU⁣ᎷIA NA⁣ᎷᏴᎪ Ꮋ⁣II ( <PHONE> )KUNITUMIA I⁣YՕ ᎻᎬ⁣LᎪ JI⁣NᎪ LITAONYESHA (JUMANNE YASINI MASAKA)
+test_unseen_all,bongo_0427,0,"Hey, naomba nitumie picha ile ya mwisho ulionyesha kwenye chat yetu."
+test_unseen_all,bongo_0434,1,Ꮋɑb⁣ɑrı za asubuhi. Ꮇı⁣mi mwe⁣ոүe nүu⁣mbɑ wako h⁣ıı nɑ⁣mba үɑ⁣nɡս ya VODA⁣ᏟOᎷ. Mb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0463,0,Nisaidie na namba ya fundi.
+test_unseen_all,bongo_0476,1,Utaոi⁣tսmia kwa h⁣îı Ꭺır⁣tҽl <PHONE> j'⁣inɑ n⁣ı HADIJA LAI.
+test_unseen_all,bongo_0510,1,Au ոit⁣սmiҽ kwҽ⁣nye AirtelMoney Nɑm⁣bɑ. <PHONE> jı⁣ոa lıtɑ⁣kujɑ LUKA KIᎷᏴ⁣ᎪNGU
+test_unseen_all,bongo_0531,0,Nakutakia siku njema yenye mafanikio.
+test_unseen_all,bongo_0542,0,Uliona outfit ya Wema jana kwenye event? Alikuwa amependeza sana.
+test_unseen_all,bongo_0545,0,"Niko njiani kurudi nyumbani, nitafika saa moja usiku."
+test_unseen_all,bongo_0560,1,"Xօ⁣rrү ոi⁣pօ xɑf⁣ɑrı ոı⁣ոɑ xh⁣ıdɑ kw⁣ҽl nɑkս⁣omba սnıx⁣ɑıdıҽ ꜱ⁣h eǀ⁣fu 9 ոıtakս⁣rҽfund ոikı⁣fika ⲣ⁣ǀx Ᏼ⁣y MWANAIDI ᏦᎻᎪMI⁣SI,ոı g⁣rⲣ mem⁣bҽr"
+test_unseen_all,bongo_0565,1,Ꮋɑb⁣ɑrı za m⁣dɑ huu. Mi⁣mı mwҽ⁣nүҽ ոүu⁣mba wako h⁣iı ոɑ⁣mba үɑ⁣ոgu ya Ꭺir⁣tҽl. Mb⁣oոa kı⁣mya na siku zinazidi kwenda...?
+test_unseen_all,bongo_0566,1,I⁣үօ ҽ⁣lɑ tս⁣ma հu⁣mս kwҽ⁣ոye ɑir⁣tҽl <PHONE> Jı⁣ոa lı⁣jҽ ALLY ISSA
+test_unseen_all,bongo_0571,0,Kwa kweli...kutunza muda ni kila kitu!!
+test_unseen_all,bongo_0577,1,Nıt⁣umıҽ tu kwe⁣nyҽ h⁣iı HAL⁣ՕᎢᎬL <PHONE> jı⁣na Ester kalobelo.
+test_unseen_all,bongo_0580,1,Utaոi⁣tսmıa kwa հ⁣îı vod⁣aϲօm <PHONE> j'⁣iոɑ ո⁣i ALLY ISSA.
+test_unseen_all,bongo_0621,1,Samahani ոaօ⁣mbɑ it⁣umҽ kwe⁣ոyҽ TI⁣GՕ <PHONE> HADIJA LAI.
+test_unseen_all,bongo_0624,1,tu⁣mɑ kwҽ⁣nүҽ ոɑ⁣mba հ⁣ii ya Ꮋaǀօ⁣Pҽsɑ <PHONE> jı⁣ոa ǀita⁣kujɑ Ester kalobelo Ukituma սոijս⁣liꜱհe
+test_unseen_all,bongo_0630,0,Nataka nikuambie jambo muhimu.
+test_unseen_all,bongo_0638,1,I⁣үo ҽ⁣la tս⁣ma hu⁣mս kwҽ⁣ոүҽ Ꮋaǀ⁣օtel <PHONE> Jı⁣na lı⁣je ᏢᎬ⁣ᎢᎬR NYANGE.
+test_unseen_all,bongo_0648,0,Safi sana jorum
+test_unseen_all,bongo_0674,0,"Nimemaliza kazi niliyotumwa, naweza kurudi nyumbani?"
+test_unseen_all,bongo_0685,0,Naomba unitumie namba ya huyo fundi.
+test_unseen_all,bongo_0697,1,Ꮋab⁣ɑrı za m⁣dɑ huu. Ꮇi⁣mı mwҽ⁣ոүe nyu⁣mbɑ wako հ⁣iı ոa⁣mbɑ yɑ⁣ոɡu ya air⁣tҽǀ. Mb⁣oոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0701,0,"Nakupenda zaidi ya jana, na kila siku upendo wangu unaongezeka."
+test_unseen_all,bongo_0706,1,Ꮋɑb⁣arı za siku. Ꮇi⁣mi mwe⁣ոye nyս⁣mbɑ wako հ⁣iı ոa⁣mba үa⁣ոgu ya VՕDA⁣ᏟՕᎷ. Ꮇb⁣օոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0719,1,Ꮋab⁣ari za mchana. Ꮇi⁣mi mwe⁣nүe nүս⁣mba wako հ⁣iı ոɑ⁣mbɑ yɑ⁣ոɡս ya HᎪLO⁣ᎢEL. Ꮇb⁣ona kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_0721,1,Utani⁣tսmia. kwe⁣mүe ոɑ⁣mbɑ <PHONE> ya AIR⁣ᎢᎬL jı⁣na Ester kalobelo.
+test_unseen_all,bongo_0724,1,Ꮋab⁣ɑri za m⁣dɑ huu. Ꮇı⁣mi mwe⁣ոyҽ ոүս⁣mba wako h⁣ıi ոɑ⁣mbɑ yɑ⁣ոgu ya Ti⁣ɡo. Ꮇb⁣oոa kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_0729,1,Utɑnı⁣tսmıa kwa հ⁣îı vօd⁣acom <PHONE> j'⁣ına n⁣ı LINUSI MALALO.
+test_unseen_all,bongo_0741,0,Ningependa kujua kama uko tayari kwa mkutano ule wa biashara ndogo ndogo. Tafadhali nijulishe.
+test_unseen_all,bongo_0749,1,Hab⁣ɑri za muda. Mı⁣mı mwe⁣nүҽ ոүս⁣mba wako h⁣ıı ոa⁣mba yɑ⁣ոɡս ya ᎻᎪLՕ⁣ᎢEL. Mb⁣օnɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0769,1,<PHONE> Jı⁣ոɑ litakuja RAMATUNGU Nit⁣umıe kwҽ⁣nyҽ հı⁣yօ Ti⁣ɡօ
+test_unseen_all,bongo_0770,1,Hab⁣arı za asubuhi. Mi⁣mı mwҽ⁣nyҽ ոyս⁣mbɑ wako h⁣ıı nɑ⁣mbɑ yɑ⁣nɡu ya vօda⁣com. Ꮇb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0778,1,Ꮋɑb⁣ɑrı za muda. Ꮇi⁣mi mwe⁣ոүҽ ոүս⁣mba wako h⁣ıı ոɑ⁣mbɑ үɑ⁣ոɡu ya Vօda⁣com. Ꮇb⁣օոa ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0787,1,Basi i⁣үօ հҽ⁣ǀɑ nit⁣սmıҽ kwe⁣ոүe nɑ⁣mbɑ հ⁣iı <PHONE> ji⁣ոa ǀitɑ⁣kսja (JOACHIM KAPUFI) ile nɑ⁣mbɑ uꜱit⁣umıҽ lɑ⁣ıոı inamatatizo.
+test_unseen_all,bongo_0795,0,Pole sanaa kaka kwa yote
+test_unseen_all,bongo_0806,1,Ꮋɑb⁣arı za m⁣dɑ huu. Mı⁣mı mwe⁣ոyҽ nүu⁣mbɑ wako հ⁣ıi ոɑ⁣mbɑ үa⁣ոgu ya ᎢI⁣GO. Ꮇb⁣onɑ kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_0807,1,Ꭺ⁣u nit⁣umiҽ kwҽ⁣ոүҽ AirtelMoney Nɑm⁣bɑ. <PHONE> jı⁣ոɑ ǀıtɑ⁣kսjɑ NASHONI MBIRIBI
+test_unseen_all,bongo_0818,0,Barikiwa sana kaka
+test_unseen_all,bongo_0819,0,Nipigie ukiwa tayari kwa mazungumzo.
+test_unseen_all,bongo_0835,0,Unaweza kunisaidia kuelewa swali la pili la assignment? Limekuwa gumu kidogo.
+test_unseen_all,bongo_0840,1,Basi ı⁣yo hҽ⁣lɑ ոıt⁣umıҽ kwҽ⁣ոyҽ nɑ⁣mbɑ հ⁣iı <PHONE> jı⁣nɑ ǀıtɑ⁣kսja (MARIAM NDUGAI) ile ոɑ⁣mbɑ uꜱıt⁣սmıe laini inamatatizo.
+test_unseen_all,bongo_0855,1,Ꮋɑb⁣arı za m⁣dɑ huu. Ꮇı⁣mı mwe⁣ոye ոүս⁣mbɑ wako հ⁣ıı ոa⁣mba үa⁣ոɡu ya Halo⁣teǀ. Ꮇb⁣onɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_0856,0,Nitafurahi kuzungumza nawe tena hivi karibuni.
+test_unseen_all,bongo_0864,1,Utaոı⁣tumiɑ kwҽ⁣ոүe ı⁣ı <PHONE> ɑır⁣tel ji⁣ոa PEREGIA FILIPO ոa⁣mba yɑ⁣ոɡս inadeni usiitumie
+test_unseen_all,bongo_0871,1,tu⁣mɑ kwe⁣ոyҽ nɑ⁣mba h⁣ıı ya Ꮋɑlօ⁣Ꮲҽsa <PHONE> ji⁣ոa lıtɑ⁣kuja JUMA SIKAREKO Ukituma uոiju⁣ǀıꜱhҽ
+test_unseen_all,bongo_0872,0,"Samahani, sikuweza kupokea simu yako."
+test_unseen_all,bongo_0904,0,Naomba unisaidie na kazi hii ngumu.
+test_unseen_all,bongo_0905,1,Utɑnı⁣tսmiɑ kwҽ⁣nүҽ ı⁣i <PHONE> ᎢI⁣GՕ jı⁣nɑ SAID MTAALAM ոɑ⁣mba үɑ⁣ոɡu inadeni usiitumie
+test_unseen_all,bongo_0909,1,Nıt⁣սmıҽ tu kwҽ⁣nүe հ⁣ii Ꭺır⁣tel <PHONE> ji⁣ոɑ JOACHIM KAPUFI.
+test_unseen_all,bongo_0917,1,Ꮋɑb⁣ɑrı za asubuhi. Mı⁣mı mwҽ⁣ոүҽ ոүս⁣mbɑ wako h⁣iı nɑ⁣mbɑ yɑ⁣nɡս ya Ti⁣ɡօ. Ꮇb⁣օոɑ ki⁣mүɑ na siku ziոɑ⁣zıdi kwenda...?
+test_unseen_all,bongo_0918,1,Nit⁣umıe tu kwҽ⁣ոye հ⁣ıı Ꭲı⁣ɡօ <PHONE> jı⁣nɑ SALOME KALUNGA.
+test_unseen_all,bongo_0950,0,Umesikia udaku wa jamaa?
+test_unseen_all,bongo_0955,1,Ꭲս⁣miɑ na⁣mbɑ հ⁣ıı ya Ti⁣ɡo <PHONE> kutuma հi⁣үo ⲣҽ⁣ꜱɑ jı⁣na ᏢᎬ⁣ᎢER NYANGE
+test_unseen_all,bongo_0956,0,Asante kwa ujumbe wako. Nitakutembelea nyumbani mwishoni mwa wiki ili tuzungumze zaidi kuhusu yale uliyoniambia.
+test_unseen_all,bongo_0971,0,"Nimeona video mpya ya Mbosso na Jovial, ni kali sana. Wamevuka level nyingine."
+test_unseen_all,bongo_0983,0,Nitakutumia ujumbe kamili wa taarifa ulizohitaji.
+test_unseen_all,bongo_0989,1,tս⁣ma kwҽ⁣ոyҽ nɑ⁣mba h⁣iı ya Ꮋɑǀօ⁣Pҽsɑ <PHONE> ji⁣ոɑ ǀıtɑ⁣kuja LINUSI ᎷAL⁣ALՕ Ukituma սոijս⁣ǀishҽ
+test_unseen_all,bongo_0994,0,Naomba niitumie picha ya leo.
+test_unseen_all,bongo_1003,1,"Xօ⁣rrү ni⁣pօ xɑf⁣ɑrı nı⁣ոɑ xհ⁣ıdɑ kw⁣ҽǀ ոakս⁣օmba uոix⁣ɑıdıҽ s⁣հ ҽǀ⁣fu 9 ոitaku⁣refսnd nikı⁣fikɑ ⲣ⁣lx Ᏼ⁣y NᎪS⁣ᎻONI ᎷBIRI⁣ᏴI,ոi ɡ⁣rⲣ mҽm⁣bҽr"
+test_unseen_all,bongo_1006,0,"Nashukuru kwa kunitumia hiyo fedha, nitaitumia kwa ajili ya gharama za matibabu."
+test_unseen_all,bongo_1012,1,Ꮋɑb⁣ɑri za muda. Ꮇı⁣mi mwҽ⁣ոүҽ nyu⁣mbɑ wako հ⁣ii nɑ⁣mba yɑ⁣ngս ya Ꭺır⁣teǀ. Mb⁣onɑ ki⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_1015,0,"Je, tunaweza kutoka pamoja wikiendi hii? Nina mipango mazuri kwetu."
+test_unseen_all,bongo_1022,1,Ꮋab⁣arı za mchana. Ꮇi⁣mi mwe⁣ոүe nyս⁣mbɑ wako հ⁣ıi ոa⁣mba yɑ⁣nɡս ya Voda⁣ϲօm. Mb⁣օnɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_1037,0,"Usiku mwema, tutaongea kesho."
+test_unseen_all,bongo_1040,0,"Bro, mechi ya jana ilikosa ladha bila magoli ya kutosha."
+test_unseen_all,bongo_1042,1,Ꮲҽ⁣sɑ tս⁣mɑ kwa ոɑ⁣mba հ⁣ii <PHONE> ji⁣ոa JOACHIM KAPUFI
+test_unseen_all,bongo_1047,1,Utanı⁣tսmıɑ kwҽ⁣nүe ı⁣ı <PHONE> Vod⁣ɑcom jı⁣nɑ ALLY ISSA ոa⁣mba yɑ⁣ոgս inadeni usiitumie
+test_unseen_all,bongo_1050,0,"Usiku wa jana ulikuwa wa kupendeza sana, asante kwa kuwa nami."
+test_unseen_all,bongo_1052,1,<PHONE> Ji⁣ոɑ ǀıta⁣kսjɑ JENEROZA ROCK BENEDICTO Nit⁣umıe kwe⁣nүe հi⁣үօ Ꮋɑǀ⁣օtҽǀ
+test_unseen_all,bongo_1059,0,"Ule mpira wa jana, Tottenham walionekana kupotea kabisa!"
+test_unseen_all,bongo_1071,0,"Huwezi fananisha Neymar na Mbappe. Wote ni bora, lakini Mbappe ana kasi ya kipekee."
+test_unseen_all,bongo_1090,0,Hali ya afya yako ikoje sasa?
+test_unseen_all,bongo_1104,1,Tս⁣miɑ ոa⁣mba հ⁣ıi ya հɑl⁣օtҽl <PHONE> kutuma հi⁣үօ Ꮋҽ⁣lɑ ji⁣nɑ JENEROZA ROCK BENEDICTO
+test_unseen_all,bongo_1115,0,Uko wapi sasa? Ningependa kukuona kabla sijarudi nyumbani.
+test_unseen_all,bongo_1123,0,"Nitafika nyumbani mapema, tafadhali niandalie chakula."
+test_unseen_all,bongo_1125,0,unyama sana man
+test_unseen_all,bongo_1127,1,Habari. Ꮇi⁣mi mwҽ⁣ոyҽ ոyս⁣mba wako h⁣ıi ոɑ⁣mbɑ үa⁣ոgu ya VODA⁣CՕᎷ. Ꮇb⁣օnɑ kı⁣mya na siku zinazidi kwenda...?
+test_unseen_all,bongo_1131,1,հe⁣ǀɑ tս⁣mɑ kwa nɑ⁣mbɑ h⁣iı <PHONE> jı⁣ոɑ MWANAIDI KHAMISI
+test_unseen_all,bongo_1134,1,Hɑb⁣ɑri za siku. Ꮇı⁣mi mwҽ⁣nye nүս⁣mbɑ wako հ⁣iı ոa⁣mbɑ үɑ⁣ոgս ya ᎢI⁣GՕ. Ꮇb⁣օոa ki⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_1135,0,Hii beef ya Diamond na Ali Kiba itaisha lini? Wote wana vipaji vya kipekee.
+test_unseen_all,bongo_1136,1,ᎷᏢI⁣GIᎬ MZ⁣EᎬ JU⁣ᎷA ᏚIᏦA⁣REKO WA TI⁣ᏴA ᎪᏚI⁣LI. MALI. PE⁣TᎬ. NYO⁣ᎢᎪ. UZAZI. KUPᎪN⁣DIᏚHWᎪ CHEO KAZINI. ᏦULU⁣DISHᎪ MALI ILIYO⁣PՕᎢᎬA. NᎪ⁣ᎷᏴᎪ <PHONE>
+test_unseen_all,bongo_1138,1,Utaոı⁣tսmia kwҽ⁣ոүҽ ı⁣ı <PHONE> ɑir⁣tҽl jı⁣na JOACHIM KAPUFI ոa⁣mbɑ үa⁣nɡu inadeni uꜱıı⁣tumiҽ
+test_unseen_all,bongo_1140,1,Nit⁣սmiҽ tu kwҽ⁣nүe h⁣ıı Tı⁣ɡօ <PHONE> jı⁣ոa HOSEA MKUMBUKWA.
+test_unseen_all,bongo_1154,1,I⁣yօ Ꮋe⁣ǀɑ ıt⁣սmҽ հս⁣mu kwe⁣ոүe հɑl⁣otҽl <PHONE> jı⁣ոa ǀi⁣je JOACHIM KAPUFI.
+test_unseen_all,bongo_1155,0,Bado sijashangaa kuhusu ushindi wa City jana. Ni kawaida yao kucheza vizuri.
+test_unseen_all,bongo_1171,1,Ꭲս⁣miɑ nɑ⁣mbɑ հ⁣ıı ya hal⁣օteǀ <PHONE> kutuma hı⁣үօ ҽ⁣ǀɑ ji⁣ոa JENEROZA ROCK BENEDICTO
+test_unseen_all,bongo_1181,1,Utaոi⁣tսmiɑ kwa h⁣îı ᎢI⁣GO <PHONE> j'⁣iոa ո⁣ı ALLY ISSA.
+test_unseen_all,bongo_1185,1,Hɑb⁣ɑrı za mchana. Mı⁣mı mwҽ⁣ոүe ոүu⁣mba wako հ⁣ıı ոɑ⁣mbɑ үɑ⁣ngu ya vօ⁣dɑ. Ꮇb⁣օnɑ kı⁣mya na siku zıոɑ⁣zıdı kwenda...?
+test_unseen_all,bongo_1194,0,Nipigie nikimaliza kikao changu.
+test_unseen_all,bongo_1195,1,Ꮋab⁣ɑri za mda huu. Ꮇı⁣mi mwҽ⁣ոүҽ nүս⁣mba wako հ⁣ii ոa⁣mba үɑ⁣ոgu ya vօda⁣com. Ꮇb⁣onɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all,bongo_1198,0,Tafadhali nikumbushie tarehe ya harusi.
+test_unseen_all,bongo_1204,1,Hab⁣ɑrı za asubuhi. Mı⁣mi mwҽ⁣nүe ոүս⁣mbɑ wako հ⁣iı ոa⁣mba yɑ⁣ոɡu ya air⁣tҽǀ. Mb⁣օnɑ kı⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_1220,1,Utɑոı⁣tumıɑ kwҽ⁣ոүҽ ı⁣i <PHONE> ᎻᎪL⁣ՕTEL jı⁣na JENEROZA ROCK BENEDICTO nɑ⁣mbɑ yɑ⁣ոgu inadeni uꜱıi⁣tսmıe
+test_unseen_all,bongo_1233,1,I⁣үo e⁣lɑ tս⁣ma հu⁣mu kwҽ⁣ոүҽ Ꭲı⁣ɡօ <PHONE> Jı⁣na lı⁣jҽ ALLY ISSA
+test_unseen_all,bongo_1236,0,Tafadhali andika ratiba ya kesho.
+test_unseen_all,bongo_1240,1,Ꮋɑb⁣arı za mchana. Ꮇı⁣mı mwe⁣ոyҽ nyս⁣mba wako h⁣ıı ոa⁣mbɑ yɑ⁣ոɡս ya ti⁣gօ. Ꮇb⁣oոa kı⁣myɑ na siku zınɑ⁣zıdı kwenda...?
+test_unseen_all,bongo_1244,0,"Leo niko busy kidogo, lakini nitakupigia simu baadae."
+test_unseen_all,bongo_1249,0,"Je, unafikiri Man United wana nafasi ya kushinda ligi msimu huu?"
+test_unseen_all,bongo_1253,0,Mtu hafi kwa sababu anaumwa mtu anakufa muda wake ukifika Allah ajaalie shifaa wagonjwa wote na atujaalie mwisho mwema amiin
+test_unseen_all,bongo_1260,0,"Ninataka kujifunza zaidi kutoka kwako, asante kwa msaada wako."
+test_unseen_all,bongo_1262,0,Nakuelewa kaka mwaka juzi nilipata vimawe kwenye urethra but God is awesome nilirecover tuwe tunakunywa sana maji wapendwa na tusibanie mkojo
+test_unseen_all,bongo_1278,1,Ꮋɑb⁣ari za muda. Mı⁣mi mwҽ⁣ոүҽ ոүս⁣mba wako h⁣iı na⁣mbɑ үa⁣ոɡu ya tı⁣ɡo. Ꮇb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all,bongo_1285,0,"Kuna msanii mpya anatrend, lakini watu wanasema style yake ni copy ya wengine."
+test_unseen_all,bongo_1293,1,I⁣үօ ⲣҽ⁣sɑ ıt⁣umҽ հu⁣mu kwҽ⁣ոyҽ հɑǀ⁣oteǀ <PHONE> jı⁣na ǀi⁣jҽ FEBU SHADI WILISON.
+test_unseen_all,bongo_1316,0,Ninapenda wimbo wa marioo!
+test_unseen_all,bongo_1327,1,Hab⁣ɑrı za asubuhi. Ꮇı⁣mı mwҽ⁣ոүҽ nүս⁣mbɑ wako հ⁣ii ոa⁣mba үɑ⁣ոɡս ya vօ⁣dɑ. Ꮇb⁣oոɑ kı⁣myɑ na siku zıոɑ⁣zıdı kwenda...?
+test_unseen_all,bongo_1330,0,Kweli kabisa
+test_unseen_all,bongo_1359,0,"Habari za leo mwalimu, naomba unisaidie kuelewa zaidi kuhusu project yetu. Nitashukuru sana kwa msaada wako."
+test_unseen_all,bongo_1375,0,Watoto wanahitaji uniform mpya kwa ajili ya shule.
+test_unseen_all+norm,bongo_0025,1,Tı⁣gօ CQGZ Imҽtհıb⁣itıshwɑ nɑ⁣mbɑ yako ya 078 ... imeshinda <AMOUNT> mıl⁣ǀioո kսt⁣օka ᎢU⁣ZՕ ᏢOI⁣NᎢI ılikս⁣ⲣօkeɑ Ꮋe⁣la yako ⲣi⁣ga <PHONE> Asante
+test_unseen_all+norm,bongo_0029,0,Chukua maua yako
+test_unseen_all+norm,bongo_0039,1,Utaոı⁣tumıa kwҽ⁣nyҽ i⁣ı <PHONE> Vօd⁣ɑcom jı⁣nɑ LUKA KIMBANGU na⁣mbɑ yangu inadeni usiitumie
+test_unseen_all+norm,bongo_0047,1,MZ⁣ᎬᎬ HᎪD⁣IJA L⁣ᎪI ti⁣bɑ aꜱ⁣iǀı bıas⁣hala kazi mɑꜱ⁣օmo uta⁣jıǀi kesi kսlu⁣dıꜱհɑ mke&mume pı⁣ɡɑ ( <PHONE> )( <PHONE> )
+test_unseen_all+norm,bongo_0053,0,Hiyo stori uliyoniambia jana bado inanishangaza! Hahaha.
+test_unseen_all+norm,bongo_0055,1,Ꮋab⁣ari za asubuhi. Ꮇi⁣mi mwҽ⁣nye ոүu⁣mbɑ wako հ⁣iı nɑ⁣mba үa⁣ngu ya Vօda⁣cօm. Ꮇb⁣օոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0061,1,"Dear, No ոҽ⁣ed to ɡ⁣օ օ⁣ut work, just ɑ⁣t հօ⁣me to ҽɑ⁣rո <AMOUNT> a day, ple⁣ɑꜱҽ ϲօո⁣tact ս⁣ꜱ: <URL>"
+test_unseen_all+norm,bongo_0097,0,Naomba uniunganishe na rafiki yako.
+test_unseen_all+norm,bongo_0107,0,"Nimemaliza kufanya usafi, kazi nyingine ni ipi?"
+test_unseen_all+norm,bongo_0110,0,Sasa kuna ubaya gani kufanya hivyo??
+test_unseen_all+norm,bongo_0112,1,Hɑb⁣ɑrı za siku. Mi⁣mı mwҽ⁣ոye ոүu⁣mbɑ wako հ⁣ıı ոɑ⁣mbɑ үa⁣ոgս ya հaǀօ⁣tҽǀ. Mb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0115,0,Naomba uniwekee miadi kwa ajili ya kesho.
+test_unseen_all+norm,bongo_0143,0,"Habari, nilikuwa na wazo la kuandaa sherehe ya kuzaliwa kwangu. Ungependa kuja?"
+test_unseen_all+norm,bongo_0146,1,I⁣үօ ҽ⁣la tս⁣ma hu⁣mս kwҽ⁣ոүҽ Vօd⁣acօm <PHONE> Ji⁣ոɑ ǀi⁣jҽ JUMANNE YASINI MASAKA.
+test_unseen_all+norm,bongo_0154,1,"Mⲣı⁣ɡıe Mz⁣ҽҽ ᎷWᎪN⁣ᎪIDI KᎻA⁣MISI kwa tı⁣ba aꜱ⁣ili mıǀ⁣ikı malı,ս⁣tɑjırı petҽ,kɑzı,⁣kesı,mɑꜱomo mɑⲣeոzi,kıǀimo,⁣սfսɡɑjı,biɑsհɑra Ꮲi⁣gɑ <PHONE>"
+test_unseen_all+norm,bongo_0159,1,Ꮋab⁣arı za asubuhi. Mi⁣mı mwҽ⁣ոүҽ nүu⁣mbɑ wako հ⁣ıi na⁣mbɑ yɑ⁣ոgս ya ᎻᎪLO⁣TEL. Ꮇb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0160,0,"Pole na changamoto zako, usikate tamaa."
+test_unseen_all+norm,bongo_0172,0,Hongera mtoto wa lamasimba dangote umestaili kupata tunzo
+test_unseen_all+norm,bongo_0173,1,Habari. Ꮇı⁣mı mwҽ⁣ոүҽ ոүu⁣mbɑ wako հ⁣ıi ոa⁣mbɑ үa⁣ngu ya HᎪLՕ⁣ᎢᎬL. Ꮇb⁣օոɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0175,0,Yule beki wa Yanga anaonekana kuwa na future bright. Ameonyesha kiwango cha hali ya juu.
+test_unseen_all+norm,bongo_0182,0,"Mambo vipi? Mechi ya jana ilikuwa kali sana, uliona goli la mwisho?"
+test_unseen_all+norm,bongo_0195,1,Utɑni⁣tumıɑ kwa հ⁣îı vod⁣ɑϲօm <PHONE> j'⁣ınɑ ո⁣i KᎻᎪ⁣DIJA SUMBAI.
+test_unseen_all+norm,bongo_0197,0,Watoto wanahitaji msaada wako kwa ajili ya masomo yao.
+test_unseen_all+norm,bongo_0201,1,ᎢU⁣MIA NA⁣ᎷᏴA Ꮋ⁣II ( <PHONE> )KUNITUMIA I⁣YՕ ᎻᎬ⁣LA JI⁣NᎪ LITAONYESHA (RAMATUNGU)
+test_unseen_all+norm,bongo_0203,1,au ı⁣үօ ҽ⁣ǀɑ nıt⁣սmıҽ kwe⁣nүe HaloPesa h⁣ıi <PHONE> Ji⁣ոa litoke <PHONE> .
+test_unseen_all+norm,bongo_0250,1,Ꮋɑb⁣ɑrı za asubuhi. Ꮇi⁣mi mwe⁣ոүҽ ոүu⁣mba wako հ⁣ıı ոa⁣mba yɑ⁣ոɡu ya Hɑlo⁣tel. Ꮇb⁣onɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0253,0,"Nimepokea barua yako, nitakujibu hivi karibuni."
+test_unseen_all+norm,bongo_0255,1,Hɑb⁣ari za mchana. Mı⁣mi mwe⁣ոүҽ nүu⁣mba wako հ⁣ii ոa⁣mba yɑ⁣ngu ya Tı⁣gօ. Mb⁣օnɑ kı⁣mүa na siku zına⁣zidı kwenda...?
+test_unseen_all+norm,bongo_0265,1,Habari. Ꮇi⁣mı mwҽ⁣ոye ոyu⁣mbɑ wako հ⁣ıı ոa⁣mba үa⁣ngս ya tı⁣ɡo. Ꮇb⁣oոa ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0271,0,"Usisahau mkutano wa kikundi kesho saa tatu, tutakutana pale ofisini."
+test_unseen_all+norm,bongo_0300,0,Nimefurahi kusikia kuwa unaendelea vizuri na afya.
+test_unseen_all+norm,bongo_0306,0,Tafadhali niambie bei ya bidhaa hizo.
+test_unseen_all+norm,bongo_0356,1,Hab⁣arı za siku. Ꮇı⁣mı mwҽ⁣nүҽ ոүu⁣mba wako հ⁣ii nɑ⁣mbɑ yɑ⁣ngս ya ɑır⁣tҽl. Ꮇb⁣oոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0360,1,Basi ı⁣yo հe⁣lɑ nit⁣umıҽ kwe⁣ոyҽ na⁣mbɑ h⁣iı <PHONE> ji⁣ոa lıtɑ⁣kuja (NASHONI MBIRIBI) ile nɑ⁣mbɑ usit⁣umıҽ laini inamatatizo.
+test_unseen_all+norm,bongo_0361,1,au ı⁣үo ҽ⁣ǀɑ ոit⁣umıҽ kwҽ⁣nyҽ Tigopesa հ⁣ıı <PHONE> Jı⁣na litoke <PHONE> .
+test_unseen_all+norm,bongo_0363,0,Tafadhali uniangalizie bei ya mafuta ya kupikia sokoni.
+test_unseen_all+norm,bongo_0368,0,Naomba unisaidie na taarifa za mkutano.
+test_unseen_all+norm,bongo_0372,0,"Niko kwenye foleni, nitachelewa kidogo."
+test_unseen_all+norm,bongo_0380,1,Hɑb⁣ari za mchana. Ꮇı⁣mi mwҽ⁣ոye ոүս⁣mba wako հ⁣ıı ոa⁣mba yɑ⁣ngu ya aır⁣tҽl. Ꮇb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0389,0,Nasikia Nasibu ameanza biashara ya magari. Jamaa anafanya kazi kweli.
+test_unseen_all+norm,bongo_0395,0,Habari za jioni?
+test_unseen_all+norm,bongo_0405,1,Nıt⁣umie tu kwҽ⁣nүҽ h⁣iı vօ⁣da <PHONE> ji⁣ոa SAID MTAALAM .
+test_unseen_all+norm,bongo_0424,1,ᎢU⁣ᎷIA NA⁣ᎷᏴᎪ Ꮋ⁣II ( <PHONE> )KUNITUMIA I⁣YՕ ᎻᎬ⁣LᎪ JI⁣NᎪ LITAONYESHA (JUMANNE YASINI MASAKA)
+test_unseen_all+norm,bongo_0427,0,"Hey, naomba nitumie picha ile ya mwisho ulionyesha kwenye chat yetu."
+test_unseen_all+norm,bongo_0434,1,Ꮋɑb⁣ɑrı za asubuhi. Ꮇı⁣mi mwe⁣ոүe nүu⁣mbɑ wako h⁣ıı nɑ⁣mba үɑ⁣nɡս ya VODA⁣ᏟOᎷ. Mb⁣onɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0463,0,Nisaidie na namba ya fundi.
+test_unseen_all+norm,bongo_0476,1,Utaոi⁣tսmia kwa h⁣îı Ꭺır⁣tҽl <PHONE> j'⁣inɑ n⁣ı HADIJA LAI.
+test_unseen_all+norm,bongo_0510,1,Au ոit⁣սmiҽ kwҽ⁣nye AirtelMoney Nɑm⁣bɑ. <PHONE> jı⁣ոa lıtɑ⁣kujɑ LUKA KIᎷᏴ⁣ᎪNGU
+test_unseen_all+norm,bongo_0531,0,Nakutakia siku njema yenye mafanikio.
+test_unseen_all+norm,bongo_0542,0,Uliona outfit ya Wema jana kwenye event? Alikuwa amependeza sana.
+test_unseen_all+norm,bongo_0545,0,"Niko njiani kurudi nyumbani, nitafika saa moja usiku."
+test_unseen_all+norm,bongo_0560,1,"Xօ⁣rrү ոi⁣pօ xɑf⁣ɑrı ոı⁣ոɑ xh⁣ıdɑ kw⁣ҽl nɑkս⁣omba սnıx⁣ɑıdıҽ ꜱ⁣h eǀ⁣fu 9 ոıtakս⁣rҽfund ոikı⁣fika ⲣ⁣ǀx Ᏼ⁣y MWANAIDI ᏦᎻᎪMI⁣SI,ոı g⁣rⲣ mem⁣bҽr"
+test_unseen_all+norm,bongo_0565,1,Ꮋɑb⁣ɑrı za m⁣dɑ huu. Mi⁣mı mwҽ⁣nүҽ ոүu⁣mba wako h⁣iı ոɑ⁣mba үɑ⁣ոgu ya Ꭺir⁣tҽl. Mb⁣oոa kı⁣mya na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0566,1,I⁣үօ ҽ⁣lɑ tս⁣ma հu⁣mս kwҽ⁣ոye ɑir⁣tҽl <PHONE> Jı⁣ոa lı⁣jҽ ALLY ISSA
+test_unseen_all+norm,bongo_0571,0,Kwa kweli...kutunza muda ni kila kitu!!
+test_unseen_all+norm,bongo_0577,1,Nıt⁣umıҽ tu kwe⁣nyҽ h⁣iı HAL⁣ՕᎢᎬL <PHONE> jı⁣na Ester kalobelo.
+test_unseen_all+norm,bongo_0580,1,Utaոi⁣tսmıa kwa հ⁣îı vod⁣aϲօm <PHONE> j'⁣iոɑ ո⁣i ALLY ISSA.
+test_unseen_all+norm,bongo_0621,1,Samahani ոaօ⁣mbɑ it⁣umҽ kwe⁣ոyҽ TI⁣GՕ <PHONE> HADIJA LAI.
+test_unseen_all+norm,bongo_0624,1,tu⁣mɑ kwҽ⁣nүҽ ոɑ⁣mba հ⁣ii ya Ꮋaǀօ⁣Pҽsɑ <PHONE> jı⁣ոa ǀita⁣kujɑ Ester kalobelo Ukituma սոijս⁣liꜱհe
+test_unseen_all+norm,bongo_0630,0,Nataka nikuambie jambo muhimu.
+test_unseen_all+norm,bongo_0638,1,I⁣үo ҽ⁣la tս⁣ma hu⁣mս kwҽ⁣ոүҽ Ꮋaǀ⁣օtel <PHONE> Jı⁣na lı⁣je ᏢᎬ⁣ᎢᎬR NYANGE.
+test_unseen_all+norm,bongo_0648,0,Safi sana jorum
+test_unseen_all+norm,bongo_0674,0,"Nimemaliza kazi niliyotumwa, naweza kurudi nyumbani?"
+test_unseen_all+norm,bongo_0685,0,Naomba unitumie namba ya huyo fundi.
+test_unseen_all+norm,bongo_0697,1,Ꮋab⁣ɑrı za m⁣dɑ huu. Ꮇi⁣mı mwҽ⁣ոүe nyu⁣mbɑ wako հ⁣iı ոa⁣mbɑ yɑ⁣ոɡu ya air⁣tҽǀ. Mb⁣oոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0701,0,"Nakupenda zaidi ya jana, na kila siku upendo wangu unaongezeka."
+test_unseen_all+norm,bongo_0706,1,Ꮋɑb⁣arı za siku. Ꮇi⁣mi mwe⁣ոye nyս⁣mbɑ wako հ⁣iı ոa⁣mba үa⁣ոgu ya VՕDA⁣ᏟՕᎷ. Ꮇb⁣օոɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0719,1,Ꮋab⁣ari za mchana. Ꮇi⁣mi mwe⁣nүe nүս⁣mba wako հ⁣iı ոɑ⁣mbɑ yɑ⁣ոɡս ya HᎪLO⁣ᎢEL. Ꮇb⁣ona kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0721,1,Utani⁣tսmia. kwe⁣mүe ոɑ⁣mbɑ <PHONE> ya AIR⁣ᎢᎬL jı⁣na Ester kalobelo.
+test_unseen_all+norm,bongo_0724,1,Ꮋab⁣ɑri za m⁣dɑ huu. Ꮇı⁣mi mwe⁣ոyҽ ոүս⁣mba wako h⁣ıi ոɑ⁣mbɑ yɑ⁣ոgu ya Ti⁣ɡo. Ꮇb⁣oոa kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0729,1,Utɑnı⁣tսmıa kwa հ⁣îı vօd⁣acom <PHONE> j'⁣ına n⁣ı LINUSI MALALO.
+test_unseen_all+norm,bongo_0741,0,Ningependa kujua kama uko tayari kwa mkutano ule wa biashara ndogo ndogo. Tafadhali nijulishe.
+test_unseen_all+norm,bongo_0749,1,Hab⁣ɑri za muda. Mı⁣mı mwe⁣nүҽ ոүս⁣mba wako h⁣ıı ոa⁣mba yɑ⁣ոɡս ya ᎻᎪLՕ⁣ᎢEL. Mb⁣օnɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0769,1,<PHONE> Jı⁣ոɑ litakuja RAMATUNGU Nit⁣umıe kwҽ⁣nyҽ հı⁣yօ Ti⁣ɡօ
+test_unseen_all+norm,bongo_0770,1,Hab⁣arı za asubuhi. Mi⁣mı mwҽ⁣nyҽ ոyս⁣mbɑ wako h⁣ıı nɑ⁣mbɑ yɑ⁣nɡu ya vօda⁣com. Ꮇb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0778,1,Ꮋɑb⁣ɑrı za muda. Ꮇi⁣mi mwe⁣ոүҽ ոүս⁣mba wako h⁣ıı ոɑ⁣mbɑ үɑ⁣ոɡu ya Vօda⁣com. Ꮇb⁣օոa ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0787,1,Basi i⁣үօ հҽ⁣ǀɑ nit⁣սmıҽ kwe⁣ոүe nɑ⁣mbɑ հ⁣iı <PHONE> ji⁣ոa ǀitɑ⁣kսja (JOACHIM KAPUFI) ile nɑ⁣mbɑ uꜱit⁣umıҽ lɑ⁣ıոı inamatatizo.
+test_unseen_all+norm,bongo_0795,0,Pole sanaa kaka kwa yote
+test_unseen_all+norm,bongo_0806,1,Ꮋɑb⁣arı za m⁣dɑ huu. Mı⁣mı mwe⁣ոyҽ nүu⁣mbɑ wako հ⁣ıi ոɑ⁣mbɑ үa⁣ոgu ya ᎢI⁣GO. Ꮇb⁣onɑ kı⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0807,1,Ꭺ⁣u nit⁣umiҽ kwҽ⁣ոүҽ AirtelMoney Nɑm⁣bɑ. <PHONE> jı⁣ոɑ ǀıtɑ⁣kսjɑ NASHONI MBIRIBI
+test_unseen_all+norm,bongo_0818,0,Barikiwa sana kaka
+test_unseen_all+norm,bongo_0819,0,Nipigie ukiwa tayari kwa mazungumzo.
+test_unseen_all+norm,bongo_0835,0,Unaweza kunisaidia kuelewa swali la pili la assignment? Limekuwa gumu kidogo.
+test_unseen_all+norm,bongo_0840,1,Basi ı⁣yo hҽ⁣lɑ ոıt⁣umıҽ kwҽ⁣ոyҽ nɑ⁣mbɑ հ⁣iı <PHONE> jı⁣nɑ ǀıtɑ⁣kսja (MARIAM NDUGAI) ile ոɑ⁣mbɑ uꜱıt⁣սmıe laini inamatatizo.
+test_unseen_all+norm,bongo_0855,1,Ꮋɑb⁣arı za m⁣dɑ huu. Ꮇı⁣mı mwe⁣ոye ոүս⁣mbɑ wako հ⁣ıı ոa⁣mba үa⁣ոɡu ya Halo⁣teǀ. Ꮇb⁣onɑ ki⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_0856,0,Nitafurahi kuzungumza nawe tena hivi karibuni.
+test_unseen_all+norm,bongo_0864,1,Utaոı⁣tumiɑ kwҽ⁣ոүe ı⁣ı <PHONE> ɑır⁣tel ji⁣ոa PEREGIA FILIPO ոa⁣mba yɑ⁣ոɡս inadeni usiitumie
+test_unseen_all+norm,bongo_0871,1,tu⁣mɑ kwe⁣ոyҽ nɑ⁣mba h⁣ıı ya Ꮋɑlօ⁣Ꮲҽsa <PHONE> ji⁣ոa lıtɑ⁣kuja JUMA SIKAREKO Ukituma uոiju⁣ǀıꜱhҽ
+test_unseen_all+norm,bongo_0872,0,"Samahani, sikuweza kupokea simu yako."
+test_unseen_all+norm,bongo_0904,0,Naomba unisaidie na kazi hii ngumu.
+test_unseen_all+norm,bongo_0905,1,Utɑnı⁣tսmiɑ kwҽ⁣nүҽ ı⁣i <PHONE> ᎢI⁣GՕ jı⁣nɑ SAID MTAALAM ոɑ⁣mba үɑ⁣ոɡu inadeni usiitumie
+test_unseen_all+norm,bongo_0909,1,Nıt⁣սmıҽ tu kwҽ⁣nүe հ⁣ii Ꭺır⁣tel <PHONE> ji⁣ոɑ JOACHIM KAPUFI.
+test_unseen_all+norm,bongo_0917,1,Ꮋɑb⁣ɑrı za asubuhi. Mı⁣mı mwҽ⁣ոүҽ ոүս⁣mbɑ wako h⁣iı nɑ⁣mbɑ yɑ⁣nɡս ya Ti⁣ɡօ. Ꮇb⁣օոɑ ki⁣mүɑ na siku ziոɑ⁣zıdi kwenda...?
+test_unseen_all+norm,bongo_0918,1,Nit⁣umıe tu kwҽ⁣ոye հ⁣ıı Ꭲı⁣ɡօ <PHONE> jı⁣nɑ SALOME KALUNGA.
+test_unseen_all+norm,bongo_0950,0,Umesikia udaku wa jamaa?
+test_unseen_all+norm,bongo_0955,1,Ꭲս⁣miɑ na⁣mbɑ հ⁣ıı ya Ti⁣ɡo <PHONE> kutuma հi⁣үo ⲣҽ⁣ꜱɑ jı⁣na ᏢᎬ⁣ᎢER NYANGE
+test_unseen_all+norm,bongo_0956,0,Asante kwa ujumbe wako. Nitakutembelea nyumbani mwishoni mwa wiki ili tuzungumze zaidi kuhusu yale uliyoniambia.
+test_unseen_all+norm,bongo_0971,0,"Nimeona video mpya ya Mbosso na Jovial, ni kali sana. Wamevuka level nyingine."
+test_unseen_all+norm,bongo_0983,0,Nitakutumia ujumbe kamili wa taarifa ulizohitaji.
+test_unseen_all+norm,bongo_0989,1,tս⁣ma kwҽ⁣ոyҽ nɑ⁣mba h⁣iı ya Ꮋɑǀօ⁣Pҽsɑ <PHONE> ji⁣ոɑ ǀıtɑ⁣kuja LINUSI ᎷAL⁣ALՕ Ukituma սոijս⁣ǀishҽ
+test_unseen_all+norm,bongo_0994,0,Naomba niitumie picha ya leo.
+test_unseen_all+norm,bongo_1003,1,"Xօ⁣rrү ni⁣pօ xɑf⁣ɑrı nı⁣ոɑ xհ⁣ıdɑ kw⁣ҽǀ ոakս⁣օmba uոix⁣ɑıdıҽ s⁣հ ҽǀ⁣fu 9 ոitaku⁣refսnd nikı⁣fikɑ ⲣ⁣lx Ᏼ⁣y NᎪS⁣ᎻONI ᎷBIRI⁣ᏴI,ոi ɡ⁣rⲣ mҽm⁣bҽr"
+test_unseen_all+norm,bongo_1006,0,"Nashukuru kwa kunitumia hiyo fedha, nitaitumia kwa ajili ya gharama za matibabu."
+test_unseen_all+norm,bongo_1012,1,Ꮋɑb⁣ɑri za muda. Ꮇı⁣mi mwҽ⁣ոүҽ nyu⁣mbɑ wako հ⁣ii nɑ⁣mba yɑ⁣ngս ya Ꭺır⁣teǀ. Mb⁣onɑ ki⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1015,0,"Je, tunaweza kutoka pamoja wikiendi hii? Nina mipango mazuri kwetu."
+test_unseen_all+norm,bongo_1022,1,Ꮋab⁣arı za mchana. Ꮇi⁣mi mwe⁣ոүe nyս⁣mbɑ wako հ⁣ıi ոa⁣mba yɑ⁣nɡս ya Voda⁣ϲօm. Mb⁣օnɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1037,0,"Usiku mwema, tutaongea kesho."
+test_unseen_all+norm,bongo_1040,0,"Bro, mechi ya jana ilikosa ladha bila magoli ya kutosha."
+test_unseen_all+norm,bongo_1042,1,Ꮲҽ⁣sɑ tս⁣mɑ kwa ոɑ⁣mba հ⁣ii <PHONE> ji⁣ոa JOACHIM KAPUFI
+test_unseen_all+norm,bongo_1047,1,Utanı⁣tսmıɑ kwҽ⁣nүe ı⁣ı <PHONE> Vod⁣ɑcom jı⁣nɑ ALLY ISSA ոa⁣mba yɑ⁣ոgս inadeni usiitumie
+test_unseen_all+norm,bongo_1050,0,"Usiku wa jana ulikuwa wa kupendeza sana, asante kwa kuwa nami."
+test_unseen_all+norm,bongo_1052,1,<PHONE> Ji⁣ոɑ ǀıta⁣kսjɑ JENEROZA ROCK BENEDICTO Nit⁣umıe kwe⁣nүe հi⁣үօ Ꮋɑǀ⁣օtҽǀ
+test_unseen_all+norm,bongo_1059,0,"Ule mpira wa jana, Tottenham walionekana kupotea kabisa!"
+test_unseen_all+norm,bongo_1071,0,"Huwezi fananisha Neymar na Mbappe. Wote ni bora, lakini Mbappe ana kasi ya kipekee."
+test_unseen_all+norm,bongo_1090,0,Hali ya afya yako ikoje sasa?
+test_unseen_all+norm,bongo_1104,1,Tս⁣miɑ ոa⁣mba հ⁣ıi ya հɑl⁣օtҽl <PHONE> kutuma հi⁣үօ Ꮋҽ⁣lɑ ji⁣nɑ JENEROZA ROCK BENEDICTO
+test_unseen_all+norm,bongo_1115,0,Uko wapi sasa? Ningependa kukuona kabla sijarudi nyumbani.
+test_unseen_all+norm,bongo_1123,0,"Nitafika nyumbani mapema, tafadhali niandalie chakula."
+test_unseen_all+norm,bongo_1125,0,unyama sana man
+test_unseen_all+norm,bongo_1127,1,Habari. Ꮇi⁣mi mwҽ⁣ոyҽ ոyս⁣mba wako h⁣ıi ոɑ⁣mbɑ үa⁣ոgu ya VODA⁣CՕᎷ. Ꮇb⁣օnɑ kı⁣mya na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1131,1,հe⁣ǀɑ tս⁣mɑ kwa nɑ⁣mbɑ h⁣iı <PHONE> jı⁣ոɑ MWANAIDI KHAMISI
+test_unseen_all+norm,bongo_1134,1,Hɑb⁣ɑri za siku. Ꮇı⁣mi mwҽ⁣nye nүս⁣mbɑ wako հ⁣iı ոa⁣mbɑ үɑ⁣ոgս ya ᎢI⁣GՕ. Ꮇb⁣օոa ki⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1135,0,Hii beef ya Diamond na Ali Kiba itaisha lini? Wote wana vipaji vya kipekee.
+test_unseen_all+norm,bongo_1136,1,ᎷᏢI⁣GIᎬ MZ⁣EᎬ JU⁣ᎷA ᏚIᏦA⁣REKO WA TI⁣ᏴA ᎪᏚI⁣LI. MALI. PE⁣TᎬ. NYO⁣ᎢᎪ. UZAZI. KUPᎪN⁣DIᏚHWᎪ CHEO KAZINI. ᏦULU⁣DISHᎪ MALI ILIYO⁣PՕᎢᎬA. NᎪ⁣ᎷᏴᎪ <PHONE>
+test_unseen_all+norm,bongo_1138,1,Utaոı⁣tսmia kwҽ⁣ոүҽ ı⁣ı <PHONE> ɑir⁣tҽl jı⁣na JOACHIM KAPUFI ոa⁣mbɑ үa⁣nɡu inadeni uꜱıı⁣tumiҽ
+test_unseen_all+norm,bongo_1140,1,Nit⁣սmiҽ tu kwҽ⁣nүe h⁣ıı Tı⁣ɡօ <PHONE> jı⁣ոa HOSEA MKUMBUKWA.
+test_unseen_all+norm,bongo_1154,1,I⁣yօ Ꮋe⁣ǀɑ ıt⁣սmҽ հս⁣mu kwe⁣ոүe հɑl⁣otҽl <PHONE> jı⁣ոa ǀi⁣je JOACHIM KAPUFI.
+test_unseen_all+norm,bongo_1155,0,Bado sijashangaa kuhusu ushindi wa City jana. Ni kawaida yao kucheza vizuri.
+test_unseen_all+norm,bongo_1171,1,Ꭲս⁣miɑ nɑ⁣mbɑ հ⁣ıı ya hal⁣օteǀ <PHONE> kutuma hı⁣үօ ҽ⁣ǀɑ ji⁣ոa JENEROZA ROCK BENEDICTO
+test_unseen_all+norm,bongo_1181,1,Utaոi⁣tսmiɑ kwa h⁣îı ᎢI⁣GO <PHONE> j'⁣iոa ո⁣ı ALLY ISSA.
+test_unseen_all+norm,bongo_1185,1,Hɑb⁣ɑrı za mchana. Mı⁣mı mwҽ⁣ոүe ոүu⁣mba wako հ⁣ıı ոɑ⁣mbɑ үɑ⁣ngu ya vօ⁣dɑ. Ꮇb⁣օnɑ kı⁣mya na siku zıոɑ⁣zıdı kwenda...?
+test_unseen_all+norm,bongo_1194,0,Nipigie nikimaliza kikao changu.
+test_unseen_all+norm,bongo_1195,1,Ꮋab⁣ɑri za mda huu. Ꮇı⁣mi mwҽ⁣ոүҽ nүս⁣mba wako հ⁣ii ոa⁣mba үɑ⁣ոgu ya vօda⁣com. Ꮇb⁣onɑ ki⁣mүa na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1198,0,Tafadhali nikumbushie tarehe ya harusi.
+test_unseen_all+norm,bongo_1204,1,Hab⁣ɑrı za asubuhi. Mı⁣mi mwҽ⁣nүe ոүս⁣mbɑ wako հ⁣iı ոa⁣mba yɑ⁣ոɡu ya air⁣tҽǀ. Mb⁣օnɑ kı⁣myɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1220,1,Utɑոı⁣tumıɑ kwҽ⁣ոүҽ ı⁣i <PHONE> ᎻᎪL⁣ՕTEL jı⁣na JENEROZA ROCK BENEDICTO nɑ⁣mbɑ yɑ⁣ոgu inadeni uꜱıi⁣tսmıe
+test_unseen_all+norm,bongo_1233,1,I⁣үo e⁣lɑ tս⁣ma հu⁣mu kwҽ⁣ոүҽ Ꭲı⁣ɡօ <PHONE> Jı⁣na lı⁣jҽ ALLY ISSA
+test_unseen_all+norm,bongo_1236,0,Tafadhali andika ratiba ya kesho.
+test_unseen_all+norm,bongo_1240,1,Ꮋɑb⁣arı za mchana. Ꮇı⁣mı mwe⁣ոyҽ nyս⁣mba wako h⁣ıı ոa⁣mbɑ yɑ⁣ոɡս ya ti⁣gօ. Ꮇb⁣oոa kı⁣myɑ na siku zınɑ⁣zıdı kwenda...?
+test_unseen_all+norm,bongo_1244,0,"Leo niko busy kidogo, lakini nitakupigia simu baadae."
+test_unseen_all+norm,bongo_1249,0,"Je, unafikiri Man United wana nafasi ya kushinda ligi msimu huu?"
+test_unseen_all+norm,bongo_1253,0,Mtu hafi kwa sababu anaumwa mtu anakufa muda wake ukifika Allah ajaalie shifaa wagonjwa wote na atujaalie mwisho mwema amiin
+test_unseen_all+norm,bongo_1260,0,"Ninataka kujifunza zaidi kutoka kwako, asante kwa msaada wako."
+test_unseen_all+norm,bongo_1262,0,Nakuelewa kaka mwaka juzi nilipata vimawe kwenye urethra but God is awesome nilirecover tuwe tunakunywa sana maji wapendwa na tusibanie mkojo
+test_unseen_all+norm,bongo_1278,1,Ꮋɑb⁣ari za muda. Mı⁣mi mwҽ⁣ոүҽ ոүս⁣mba wako h⁣iı na⁣mbɑ үa⁣ոɡu ya tı⁣ɡo. Ꮇb⁣օոɑ kı⁣mүɑ na siku zinazidi kwenda...?
+test_unseen_all+norm,bongo_1285,0,"Kuna msanii mpya anatrend, lakini watu wanasema style yake ni copy ya wengine."
+test_unseen_all+norm,bongo_1293,1,I⁣үօ ⲣҽ⁣sɑ ıt⁣umҽ հu⁣mu kwҽ⁣ոyҽ հɑǀ⁣oteǀ <PHONE> jı⁣na ǀi⁣jҽ FEBU SHADI WILISON.
+test_unseen_all+norm,bongo_1316,0,Ninapenda wimbo wa marioo!
+test_unseen_all+norm,bongo_1327,1,Hab⁣ɑrı za asubuhi. Ꮇı⁣mı mwҽ⁣ոүҽ nүս⁣mbɑ wako հ⁣ii ոa⁣mba үɑ⁣ոɡս ya vօ⁣dɑ. Ꮇb⁣oոɑ kı⁣myɑ na siku zıոɑ⁣zıdı kwenda...?
+test_unseen_all+norm,bongo_1330,0,Kweli kabisa
+test_unseen_all+norm,bongo_1359,0,"Habari za leo mwalimu, naomba unisaidie kuelewa zaidi kuhusu project yetu. Nitashukuru sana kwa msaada wako."
+test_unseen_all+norm,bongo_1375,0,Watoto wanahitaji uniform mpya kwa ajili ya shule.

@@ -13,7 +13,11 @@ Usage:
     python -m src.train_transformer --model afroxlmr --variant clean --seeds 13 42 2026
     python -m src.train_transformer --model afroxlmr --seeds 42 --save   # keeps the weights in models/
     python -m src.train_transformer --model afroxlmr --seeds 42 --only-sets stress_ --from-saved
-        # adds the stress-test sets to an existing run, using its saved weights
+        # scores sets added later (here the stress tests) with a run's saved weights and
+        # merges them into the run's prediction file; fails if the weights are missing
+
+Device: CPU by default, because every reported run was trained on CPU and GPU
+kernels give slightly different numbers. Set WDYRI_DEVICE=cuda (or mps) for speed.
 """
 from __future__ import annotations
 
@@ -32,8 +36,8 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, get_
 
 from . import config, runs, variants
 
-DEVICE = torch.device("mps" if torch.backends.mps.is_available()
-                      else "cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device(os.environ.get("WDYRI_DEVICE", "cpu"))
+DEFAULT_LR = 3e-5
 
 
 def encode(tokenizer, texts, max_len: int):
@@ -61,17 +65,19 @@ def train_one(model_key: str, variant: str, split: str, seed: int, lr: float, ep
     np.random.seed(seed)
     name = config.TRANSFORMERS[model_key]
     train, val, rows = variants.frames(split, variant, seed)
-    tag = None
     if only_sets:
-        # Extra sets for an existing run go to their own file; the run's main file is untouched.
         prefixes = tuple(p for p in only_sets.split(",") if p)
         rows = rows[rows["set"].str.startswith(prefixes)]
-        tag = "+".join(p.strip("_") for p in prefixes)
-    saved = config.MODELS / runs.run_name(model_key, variant, split, seed)
-    if from_saved and saved.exists():
+    run_variant = variant if lr == DEFAULT_LR else f"{variant}_lr{lr:g}"
+    saved = config.MODELS / runs.run_name(model_key, run_variant, split, seed)
+    if from_saved:
+        # Never fall back to training: the new sets must come from the same weights as the rest.
+        if not saved.exists():
+            raise FileNotFoundError(f"--from-saved: no saved weights at {saved} (train with --save first)")
         tokenizer = AutoTokenizer.from_pretrained(saved)
         model = AutoModelForSequenceClassification.from_pretrained(saved).to(DEVICE)
-        runs.save(model_key, variant, split, seed, rows, predict(model, tokenizer, rows.text, max_len), tag=tag)
+        runs.save(model_key, run_variant, split, seed, rows, predict(model, tokenizer, rows.text, max_len),
+                  merge=only_sets is not None)
         return {"history": [], "best_val_f1": None, "from_saved": True}
     tokenizer = AutoTokenizer.from_pretrained(name)
     model = AutoModelForSequenceClassification.from_pretrained(name, num_labels=2).to(DEVICE)
@@ -110,8 +116,8 @@ def train_one(model_key: str, variant: str, split: str, seed: int, lr: float, ep
             if bad >= patience:
                 break
     model.load_state_dict(best)
-    runs.save(model_key, variant if lr == DEFAULT_LR else f"{variant}_lr{lr:g}", split, seed,
-              rows, predict(model, tokenizer, rows.text, max_len), tag=tag)
+    runs.save(model_key, run_variant, split, seed, rows, predict(model, tokenizer, rows.text, max_len),
+              merge=only_sets is not None)
     if save:
         model.save_pretrained(saved)
         tokenizer.save_pretrained(saved)
@@ -121,7 +127,12 @@ def train_one(model_key: str, variant: str, split: str, seed: int, lr: float, ep
     return {"history": history, "best_val_f1": best_key[0]}
 
 
-DEFAULT_LR = 3e-5
+def log_run(log, info: dict) -> None:
+    """One line per training run: a rerun replaces its earlier line instead of adding a duplicate."""
+    key = lambda d: (d["model"], d["variant"], d["split"], d["seed"], d["lr"])  # noqa: E731
+    lines = [json.loads(line) for line in log.read_text().splitlines() if line] if log.exists() else []
+    lines = [d for d in lines if key(d) != key(info)] + [info]
+    log.write_text("".join(json.dumps(d) + "\n" for d in lines))
 
 
 def main() -> None:
@@ -147,10 +158,9 @@ def main() -> None:
                         info = train_one(model_key, variant, split, seed, lr, save=args.save,
                                          only_sets=args.only_sets, from_saved=args.from_saved)
                         info.update(model=model_key, variant=variant, split=split, seed=seed, lr=lr,
-                                    seconds=round(time.time() - start), only_sets=args.only_sets)
+                                    seconds=round(time.time() - start))
                         if not info.get("from_saved"):
-                            with log.open("a") as fh:
-                                fh.write(json.dumps(info) + "\n")
+                            log_run(log, info)
                         print(json.dumps(info), flush=True)
 
 

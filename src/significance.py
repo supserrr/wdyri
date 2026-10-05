@@ -39,6 +39,7 @@ COMPARISONS = [
     ("Plain ensemble vs char LR, full lookalike attack F1", ("ensemble", "clean"), ("lr_char", "clean"), "test_lookalike_all", "f1"),
     ("Plain ensemble vs char LR, full structural attack F1", ("ensemble", "clean"), ("lr_char", "clean"), "test_structural_all", "f1"),
     ("Normalisation vs none, word LR under full lookalike", ("lr_word", "clean"), ("lr_word", "clean"), ("test_lookalike_all+norm", "test_lookalike_all"), "f1"),
+    ("Normalisation vs none, word LR under held-out lookalikes", ("lr_word", "clean"), ("lr_word", "clean"), ("test_unseen_all+norm", "test_unseen_all"), "f1"),
     ("Number-balanced vs clean AfroXLMR, Chichewa F1", ("afroxlmr", "counterfactual"), ("afroxlmr", "clean"), "chichewa", "f1"),
     ("Number-balanced vs clean AfroXLMR, Chichewa precision", ("afroxlmr", "counterfactual"), ("afroxlmr", "clean"), "chichewa", "precision"),
     ("Number-balanced vs clean AfroXLMR, Swahili test F1", ("afroxlmr", "counterfactual"), ("afroxlmr", "clean"), "test", "f1"),

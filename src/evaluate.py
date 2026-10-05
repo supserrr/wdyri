@@ -8,7 +8,9 @@ seed, evaluation set) and results/experiments.csv with the mean and standard
 deviation over seeds. Thresholds:
   * f1, precision, recall at the default 0.5 threshold (comparable to prior work)
   * *_op columns at the operating point: the threshold chosen on validation to
-    catch at least 95% of scams, then applied unchanged to every other set
+    catch at least 95% of scams, then applied unchanged to every other set. It
+    never exceeds 0.5, and on this data every run already catches 95% of
+    validation scams at 0.5, so in practice it is 0.5 everywhere.
 """
 from __future__ import annotations
 
@@ -140,6 +142,26 @@ def summarise(table: pd.DataFrame, ci: pd.DataFrame) -> pd.DataFrame:
     out = mean.join(std, rsuffix="_sd")
     out["n_seeds"] = table.groupby(keys).size()
     return out.reset_index().merge(ci, on=keys, how="left")
+
+
+def fewshot_pairs(preds: pd.DataFrame) -> pd.DataFrame:
+    """E9 on equal footing: each few-shot run and its zero-shot model, on the same Chichewa messages.
+
+    Adding Chichewa examples removes their templates from the test, so a few-shot
+    run is scored on fewer messages (about 713 for +20, 683 for +50). The zero-shot
+    model (same seed; the deterministic char LR has one run) is scored on exactly
+    those messages, so the gain is not mixed with a change of test set.
+    """
+    chi = preds[(preds["split"] == "template") & (preds["set"] == "chichewa")]
+    rows = []
+    for (model, variant, seed), few in chi[chi["variant"].str.startswith("fewshot")].groupby(["model", "variant", "seed"]):
+        zero = chi[(chi["model"] == model) & (chi["variant"] == "clean")]
+        zero = zero[zero["seed"] == (seed if seed in set(zero["seed"]) else zero["seed"].iloc[0])]
+        zero = zero[zero["id"].isin(few["id"])]
+        rows.append({"model": model, "n_shots": int(variant.removeprefix("fewshot")), "seed": seed,
+                     "n_messages": len(few), "zero_f1": scores(zero["label"], zero["prob"])["f1"],
+                     "few_f1": scores(few["label"], few["prob"])["f1"]})
+    return pd.DataFrame(rows)
 
 
 def main() -> None:

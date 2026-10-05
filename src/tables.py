@@ -10,9 +10,8 @@ import json
 import numpy as np
 import pandas as pd
 
-from sklearn.metrics import f1_score
-
 from . import config, runs
+from .evaluate import fewshot_pairs
 
 NAMES = {
     "majority": "Majority class", "phone_rule": "Phone rule", "length_rule": "Length rule", "nb_word_counts": "Naive Bayes, word counts",
@@ -79,12 +78,16 @@ def main() -> None:
                      cell(s, m, v, "template", "test", "recall_op"),
                      cell(s, m, v, "template", "chichewa/all"),
                      cell(s, m, v, "template", "chichewa/all", "pr_auc")])
+    thr = by_seed.loc[by_seed["split"].str.startswith("template"), "threshold_op"]
+    op_note = ("every run already catches that share at 0.5, so the threshold is 0.5 throughout and these are the "
+               "0.5 values" if (thr == 0.5).all() else f"thresholds range from {thr.min():.2f} to {thr.max():.2f}")
     parts.append("## Main results (template-disjoint split)\n\nScam F1 at threshold 0.5 unless noted; "
                  "neural models are mean ± sd over 3 seeds; *95% CI* is a bootstrap interval over test messages "
-                 "(averaged over seeds). *Per template* keeps one test message per template; "
-                 "*op.* is the operating point chosen on validation (>= 95% scam recall).\n\n" + md(rows, [
-                     "Model", "Test F1", "95% CI", "Test F1 (per template)", "Test PR-AUC", "Precision (op.)",
-                     "Recall (op.)", "Chichewa F1 (zero-shot)", "Chichewa PR-AUC"]))
+                 "(averaged over seeds). *Per template* keeps one test message per template. *Precision* and "
+                 f"*recall* use the operating point chosen on validation (>= 95% scam recall, never above 0.5); {op_note}."
+                 "\n\n" + md(rows, [
+                     "Model", "Test F1", "95% CI", "Test F1 (per template)", "Test PR-AUC", "Precision",
+                     "Recall", "Chichewa F1 (zero-shot)", "Chichewa PR-AUC"]))
 
     # E1 + E2
     acc = tuning["published_accuracy"]
@@ -132,14 +135,18 @@ def main() -> None:
         if s[(s.model == m) & (s.variant == variant)].empty:
             continue
         row = [label(m, variant)]
-        for a in ("lookalike", "structural", "codeswitch"):
+        for a in ("lookalike", "structural", "codeswitch", "unseen"):
             row.append(cell(s, m, variant, "template", f"test_{a}_all", "rel_f1_drop"))
             row.append(cell(s, m, variant, "template", f"test_{a}_all+norm", "rel_f1_drop"))
         rows.append(row)
     parts.append("## E6-E7: relative F1 drop under the strongest attacks (all trigger words)\n\n"
                  "(F1 clean - F1 attacked) / F1 clean; negative = the attack made the scam easier to catch. "
-                 "*+norm*: with the normalisation defence.\n\n" + md(rows, [
-                     "Model", "Lookalike", "Lookalike +norm", "Structural", "Structural +norm", "Code-switch", "Code-switch +norm"]))
+                 "*+norm*: with the normalisation defence. The defence's lookup table was written knowing the "
+                 "lookalike attack's characters, so *Lookalike +norm* is a best case; *Held-out lookalike* disguises "
+                 "the same words with characters the defence does not know (`perturb.UNSEEN`). The adversarially "
+                 "trained AfroXLMR was not saved, so it has no held-out score.\n\n" + md(rows, [
+                     "Model", "Lookalike", "Lookalike +norm", "Structural", "Structural +norm", "Code-switch",
+                     "Code-switch +norm", "Held-out lookalike", "Held-out lookalike +norm"]))
 
     # E6 with a different attacker (word-count NB picks the trigger words)
     rows = []
@@ -163,12 +170,10 @@ def main() -> None:
     rows = []
     for m in ["majority", "phone_rule", "nb_word_counts", "lr_char", "bilstm_finetuned", "xlmr", "afroxlmr"]:
         rows.append([NAMES[m], cell(s, m, "clean", "template", "chichewa/all"), cell(s, m, "clean", "template", "chichewa/dchi"),
-                     cell(s, m, "clean", "template", "chichewa/dedup"), cell(s, m, "clean", "template", "chichewa/all", "pr_auc"),
-                     cell(s, m, "fewshot20", "template", "chichewa/all"), cell(s, m, "fewshot50", "template", "chichewa/all")])
-    parts.append("## E8-E9: Swahili to Chichewa transfer (RQ3)\n\nFraud F1. *D-CHI*: the balanced fraud/normal part; "
-                 "*per template*: one message per template; few-shot columns add 20 or 50 Chichewa messages to training "
-                 "(their templates removed from the test).\n\n" + md(rows, [
-                     "Model", "All 733", "D-CHI only", "Per template", "PR-AUC (all)", "+20 Chichewa", "+50 Chichewa"]))
+                     cell(s, m, "clean", "template", "chichewa/dedup"), cell(s, m, "clean", "template", "chichewa/all", "pr_auc")])
+    parts.append("## E8: Swahili to Chichewa transfer, zero-shot (RQ3)\n\nFraud F1. *D-CHI*: the balanced fraud/normal part; "
+                 "*per template*: one message per template. Few-shot results (E9) are in *E9 on the same messages* "
+                 "below.\n\n" + md(rows, ["Model", "All 733", "D-CHI only", "Per template", "PR-AUC (all)"]))
 
     # E10 stress tests
     st_path = config.RESULTS / "stress_tests.csv"
@@ -248,29 +253,21 @@ def main() -> None:
                          "Lookalike (all)", "Structural (all)", "Code-switch (all)"]))
 
     # E9 on equal footing: zero-shot vs few-shot on exactly the same Chichewa messages
-    preds = runs.load_all()
-    chi_preds = preds[(preds.split == "template") & (preds.set == "chichewa")]
+    pairs = fewshot_pairs(runs.load_all())
     rows = []
     for m in ["lr_char", "xlmr", "afroxlmr"]:
         row = [NAMES[m]]
         for n in (20, 50):
-            zs, fs = [], []
-            for seed in config.SEEDS:
-                few = chi_preds[(chi_preds.model == m) & (chi_preds.variant == f"fewshot{n}") & (chi_preds.seed == seed)]
-                zero_seed = 0 if m == "lr_char" else seed
-                zero = chi_preds[(chi_preds.model == m) & (chi_preds.variant == "clean") & (chi_preds.seed == zero_seed)]
-                if few.empty or zero.empty:
-                    continue
-                zero = zero[zero.id.isin(few.id)]
-                zs.append(f1_score(zero.label, zero.prob >= 0.5))
-                fs.append(f1_score(few.label, few.prob >= 0.5))
-            row += [fmt(np.mean(zs), np.std(zs, ddof=1), len(zs)) if zs else "-",
-                    fmt(np.mean(fs), np.std(fs, ddof=1), len(fs)) if fs else "-"]
+            p = pairs[(pairs.model == m) & (pairs.n_shots == n)]
+            row += [fmt(p.zero_f1.mean(), p.zero_f1.std(), len(p)) if len(p) else "-",
+                    fmt(p.few_f1.mean(), p.few_f1.std(), len(p)) if len(p) else "-"]
         rows.append(row)
+    sizes = {n: round(pairs[pairs.n_shots == n].n_messages.mean()) for n in (20, 50)}
     parts.append("## E9 on the same messages\n\nAdding Chichewa examples removes their templates from the test, so the "
-                 "few-shot test sets are smaller (about 713 and 683 messages). Here the zero-shot model is scored on exactly "
-                 "the same messages as each few-shot run.\n\n" + md(rows, [
-                     "Model", "Zero-shot (same 713)", "+20 Chichewa", "Zero-shot (same 683)", "+50 Chichewa"]))
+                 f"few-shot test sets are smaller (about {sizes[20]} and {sizes[50]} messages). Here the zero-shot model is "
+                 "scored on exactly the same messages as each few-shot run.\n\n" + md(rows, [
+                     "Model", f"Zero-shot (same {sizes[20]})", "+20 Chichewa", f"Zero-shot (same {sizes[50]})",
+                     "+50 Chichewa"]))
 
     # Confusion matrices at the operating point
     rows = []

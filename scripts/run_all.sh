@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Reproduce every result in docs/results.md, in order.
+# Needs Python 3.12 with requirements.txt, and Node.js 18+ for the JavaScript parity check.
 # Classical models take a few minutes; each transformer run took 5-14 minutes
-# on a laptop CPU (a GPU is much faster).
+# on a laptop CPU. Training uses the CPU, as for the reported runs; WDYRI_DEVICE=cuda
+# (or mps) is much faster but gives slightly different numbers.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -16,8 +18,9 @@ python -m src.train_bilstm --emb random frozen finetuned --variant clean
 python -m src.train_bilstm --emb finetuned frozen --variant advtrain
 python -m src.train_bilstm --emb finetuned --variant strip counterfactual
 
-# Transformers. Weights are saved (--save) for the clean and number-balanced runs,
-# which the app, the stress tests and notebook 07 reuse.
+# Transformers. Every run scores every evaluation set, stress tests and controls included.
+# Weights are saved (--save) for the clean and number-balanced runs, which the app and
+# notebook 07 reuse.
 python -m src.train_transformer --model afroxlmr xlmr --variant clean --save                  # E5, E6, E8, E10
 python -m src.train_transformer --model afroxlmr --variant counterfactual --save               # E11
 python -m src.train_transformer --model afroxlmr --variant advtrain strip                      # E7, E3b

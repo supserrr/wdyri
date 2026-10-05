@@ -4,6 +4,9 @@ Architecture (per message):
     tokens -> embedding (300-d fastText) -> BiLSTM (2 x 128) -> max-pool over time
            -> dropout 0.3 -> linear -> sigmoid = P(scam)
 
+Sequences are packed, so neither direction of the LSTM reads padding and a
+message gets the same score whatever else is in its batch.
+
 Embedding variants (E4):
     random     trained from scratch; words unseen in training map to <unk>
     frozen     fastText vectors, never updated
@@ -38,7 +41,10 @@ class BiLSTM(nn.Module):
         self.out = nn.Linear(2 * hidden, 1)
 
     def forward(self, ids: torch.Tensor) -> torch.Tensor:
-        h, _ = self.lstm(self.emb(ids))                       # (batch, time, 2*hidden)
+        lengths = (ids != PAD).sum(dim=1).clamp(min=1).cpu()
+        packed = nn.utils.rnn.pack_padded_sequence(self.emb(ids), lengths, batch_first=True, enforce_sorted=False)
+        h, _ = self.lstm(packed)
+        h, _ = nn.utils.rnn.pad_packed_sequence(h, batch_first=True, total_length=ids.shape[1])  # (batch, time, 2*hidden)
         h = h.masked_fill((ids == PAD).unsqueeze(-1), -1e4)   # padding never wins the max
         pooled = h.max(dim=1).values                           # strongest signal per feature
         return self.out(self.drop(pooled)).squeeze(-1)         # logit; sigmoid gives P(scam)
@@ -56,8 +62,8 @@ class Vocab:
         return ids or [UNK]
 
 
-def build_vocab(emb: str, train_texts: list[str], cache: dict[str, np.ndarray]):
-    rng = np.random.default_rng(0)
+def build_vocab(emb: str, train_texts: list[str], cache: dict[str, np.ndarray], seed: int = 0):
+    rng = np.random.default_rng(seed)  # random init differs per seed, like the rest of the model
     if emb == "random":
         tokens = sorted({t for text in train_texts for t in tokenize(text)})
         weights = rng.normal(0, 0.1, (len(tokens) + 2, DIM))
@@ -91,7 +97,7 @@ def predict(model: BiLSTM, vocab: Vocab, texts) -> np.ndarray:
 def train_one(emb: str, variant: str, split: str, seed: int, cache, max_epochs: int = 30, patience: int = 4):
     torch.manual_seed(seed)
     train, val, rows = variants.frames(split, variant, seed)
-    vocab, weights = build_vocab(emb, train.text.tolist(), cache)
+    vocab, weights = build_vocab(emb, train.text.tolist(), cache, seed)
     model = BiLSTM(weights, trainable=(emb != "frozen"))
 
     emb_params = [p for p in model.emb.parameters() if p.requires_grad]

@@ -6,6 +6,7 @@ comparison,metric,difference,ci_low,ci_high,p_value,seed_pairs,test
 "Plain ensemble vs char LR, full lookalike attack F1",f1,0.2310,0.1422,0.3284,0.0000,3,paired bootstrap
 "Plain ensemble vs char LR, full structural attack F1",f1,0.1351,0.0480,0.2547,0.0000,3,paired bootstrap
 "Normalisation vs none, word LR under full lookalike",f1,0.5175,0.4011,0.6364,0.0000,1,paired bootstrap
+"Normalisation vs none, word LR under held-out lookalikes",f1,0.0000,0.0000,0.0000,1.0000,1,paired bootstrap
 "Number-balanced vs clean AfroXLMR, Chichewa F1",f1,-0.0025,-0.0498,0.0340,0.9927,3,paired bootstrap
 "Number-balanced vs clean AfroXLMR, Chichewa precision",precision,-0.0643,-0.1216,-0.0242,0.0000,3,paired bootstrap
 "Number-balanced vs clean AfroXLMR, Swahili test F1",f1,0.0441,0.0000,0.1263,0.0587,3,paired bootstrap

@@ -116,7 +116,6 @@ def main() -> None:
     #    "attacker": char LR with C=100, trained on the template split's training
     #    data. It is kept separate from the tuned models so the attack text never
     #    changes when a grid changes (it is white-box only for a char LR with C=100).
-    lr_char = fitted[("lr_char", "template")]
     train_t, _, _ = split_frames(bongo, "template")
     attacker = build("lr", "char").set_params(clf__C=100.0).fit(train_t.text, train_t.label)
     joblib.dump(attacker, config.MODELS / "attacker_lr_char.joblib")

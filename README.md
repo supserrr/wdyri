@@ -44,7 +44,7 @@ The models form a ladder: rule baselines and Naive Bayes, character n-gram logis
 - **The models lean on phone numbers.** 86% of scams and no genuine texts contain a phone number or link. Adding a phone number to a genuine message makes fine-tuned AfroXLMR call it a scam 96% of the time.
 - **A targeted fix works.** Training with numbers in both classes cuts those false alarms to 0%, and misses on scams with their number removed from 20% to 2%.
 - **Two models beat one.** The deployed ensemble scores test F1 0.994 and keeps 0.95–0.99 under lookalike-letter and split-word attacks.
-- **Chichewa transfer is weak.** Zero-shot fraud F1 is 0.46–0.74; twenty Chichewa examples lift the character n-gram model from 0.65 to 0.82.
+- **Chichewa transfer is weak.** Zero-shot fraud F1 is 0.46–0.75; twenty Chichewa examples lift the character n-gram model from 0.65 to 0.82.
 
 | System (template-disjoint test split) | Test F1 | Chichewa F1 (zero-shot) |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ The [live app](https://huggingface.co/spaces/supserrr/wdyri) is a free static Sp
 
 ## Getting started
 
-You need Python 3.12. Everything runs on a laptop CPU, where each transformer run takes 5–14 minutes; a GPU is much faster.
+You need Python 3.12, and Node.js 18+ for the browser-parity check. Everything runs on a laptop CPU, where each transformer run takes 5–14 minutes; `WDYRI_DEVICE=cuda` is much faster but gives slightly different numbers.
 
 ```bash
 python3.12 -m venv .venv && source .venv/bin/activate
@@ -108,4 +108,4 @@ wdyri/
 | [Reproduce](docs/reproduce.md) | the full pipeline and repository layout |
 | [References](docs/references.md) | papers, datasets and acknowledgements |
 
-Design choices and their reasons are logged in [DECISIONS.md](DECISIONS.md), dataset details are in [data/README.md](data/README.md), and every results table is in [results/tables.md](results/tables.md).
+Design choices and their reasons are logged in [DECISIONS.md](DECISIONS.md), dataset details are in [data/README.md](data/README.md), dataset and model licences are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and every results table is in [results/tables.md](results/tables.md).

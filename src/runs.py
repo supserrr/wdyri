@@ -19,14 +19,21 @@ def run_name(model: str, variant: str, split: str, seed: int) -> str:
 
 
 def save(model: str, variant: str, split: str, seed: int, frame: pd.DataFrame, prob,
-         tag: str | None = None) -> None:
-    """Write one run's predictions. A `tag` adds extra sets to a run in a separate file."""
+         merge: bool = False) -> None:
+    """Write one run's predictions to its file.
+
+    `merge` adds sets to the run's existing file (replacing any message scored
+    again) instead of overwriting it, so a run always has exactly one file.
+    """
     out = frame[["set", "id", "label"]].copy()
     out["prob"] = prob
     out = out.assign(model=model, variant=variant, split=split, seed=seed)[COLUMNS]
-    suffix = f"__{tag}" if tag else ""
-    out.to_csv(config.PREDICTIONS / f"{run_name(model, variant, split, seed)}{suffix}.csv",
-               index=False, float_format="%.6f")
+    path = config.PREDICTIONS / f"{run_name(model, variant, split, seed)}.csv"
+    if merge and path.exists():
+        old = pd.read_csv(path, keep_default_na=False)
+        old = old[~old.set_index(["set", "id"]).index.isin(out.set_index(["set", "id"]).index)]
+        out = pd.concat([old, out], ignore_index=True)
+    out.to_csv(path, index=False, float_format="%.6f")
 
 
 def load_all() -> pd.DataFrame:

@@ -32,6 +32,20 @@ CYRILLIC = {
 DIGITS = {"a": "4", "e": "3", "i": "1", "o": "0", "s": "5", "A": "4", "E": "3", "I": "1", "O": "0", "S": "5"}
 ZWSP = "​"
 
+# Held-out lookalikes for the E7 generalisation check: letters from other scripts
+# (Latin IPA, Armenian, Cherokee, Coptic, other Cyrillic and Greek forms) that also
+# pass for Latin ones, and a different invisible character. The normalisation
+# defence was written knowing CYRILLIC, DIGITS and ZWSP; it knows none of these,
+# so this attack measures whether the defence generalises. It is not one of the
+# ATTACKS, so the adversarial training copies never contain it.
+UNSEEN = {
+    "a": "ɑ", "c": "ϲ", "e": "ҽ", "g": "ɡ", "h": "հ", "i": "ı", "l": "ǀ",
+    "n": "ո", "o": "օ", "p": "ⲣ", "s": "ꜱ", "u": "ս", "y": "ү",
+    "A": "Ꭺ", "B": "Ᏼ", "C": "Ꮯ", "E": "Ꭼ", "H": "Ꮋ", "K": "Ꮶ", "M": "Ꮇ",
+    "O": "Օ", "P": "Ꮲ", "S": "Ꮪ", "T": "Ꭲ",
+}
+INVISIBLE_UNSEEN = "⁣"  # INVISIBLE SEPARATOR
+
 # 30 Swahili scam phrases and an English rendering, taken from the words that
 # separate scams from genuine texts in the BongoScam training data. Longer
 # phrases come first so "kwenye namba hii" wins over "namba".
@@ -118,6 +132,26 @@ def lookalike(text: str, targets: list[int], rng: random.Random) -> str:
     return " ".join(tokens)
 
 
+def _unseen_word(word: str, rng: random.Random) -> str:
+    chars = list(word)
+    swappable = [i for i, ch in enumerate(chars) if ch in UNSEEN]
+    for i in swappable:
+        if rng.random() < 0.6:
+            chars[i] = UNSEEN[chars[i]]
+    if swappable and chars == list(word):
+        chars[swappable[0]] = UNSEEN[word[swappable[0]]]
+    mid = max(1, len(chars) // 2)
+    return "".join(chars[:mid]) + INVISIBLE_UNSEEN + "".join(chars[mid:])
+
+
+def unseen_lookalike(text: str, targets: list[int], rng: random.Random) -> str:
+    """The lookalike attack with held-out characters (E7 generalisation check)."""
+    tokens = text.split(" ")
+    for i in targets:
+        tokens[i] = _unseen_word(tokens[i], rng)
+    return " ".join(tokens)
+
+
 def structural(text: str, targets: list[int], rng: random.Random) -> str:
     """Split a word into letters ("t u m a", "M-P-E-S-A") or glue it to its neighbour."""
     tokens = text.split(" ")
@@ -201,4 +235,6 @@ def attack(text: str, kind: str, intensity: str, scorer: Scorer, seed: int = 0,
         return structural(text, targets, rng)
     if kind == "codeswitch":
         return codeswitch(text, targets, effects, intensity)
+    if kind == "unseen":
+        return unseen_lookalike(text, targets, rng)
     raise ValueError(kind)
