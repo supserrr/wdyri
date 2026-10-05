@@ -6,16 +6,16 @@ Needs a Hugging Face account and a write token:
     python scripts/publish_hf.py --user supserrr
 
 Creates (or updates):
-    https://huggingface.co/<user>/wdyri-afroxlmr          the model the app loads by name
-    https://huggingface.co/spaces/<user>/wdyri            the public Gradio app
+    https://huggingface.co/<user>/wdyri-afroxlmr          the model (PyTorch + browser ONNX)
+    https://huggingface.co/spaces/<user>/wdyri            the public app (static, runs in the browser)
+
+Run scripts/export_app.py and scripts/export_web.py first.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sys
-import tempfile
 from pathlib import Path
 
 from huggingface_hub import HfApi
@@ -52,21 +52,6 @@ number is not, by itself, evidence of a scam (experiment E11 in the repository).
 Code and results: https://github.com/supserrr/wdyri
 """
 
-SPACE_CARD = """---
-title: WDYRI Swahili Scam SMS Checker
-emoji: 🛡️
-colorFrom: blue
-colorTo: red
-sdk: gradio
-sdk_version: 6.29.1
-python_version: "3.12"
-app_file: app.py
-pinned: false
-license: mit
----
-
-Paste a Swahili SMS to check it for mobile-money scam patterns. Code: https://github.com/supserrr/wdyri
-"""
 
 
 def main() -> None:
@@ -88,21 +73,19 @@ def main() -> None:
     (model_dir / "wdyri_run.json").write_text(json.dumps({"run": settings["transformer_run"]}) + "\n")
     (model_dir / "README.md").write_text(MODEL_CARD.format(
         base=base, threshold=settings["threshold_transformer"], n_train=train["scam"] + train["not scam"]))
-    api.upload_folder(repo_id=model_id, folder_path=model_dir, commit_message="Upload fine-tuned model")
+    api.upload_folder(repo_id=model_id, folder_path=model_dir, commit_message="Upload fine-tuned model",
+                      ignore_patterns=["onnx/*"])
+
+    # The browser model (scripts/export_web.py) goes next to the PyTorch weights.
+    api.upload_file(repo_id=model_id, path_or_fileobj=model_dir / "onnx" / "model_quantized.onnx",
+                    path_in_repo="onnx/model_quantized.onnx", commit_message="Add browser (ONNX) model")
     print("model:", f"https://huggingface.co/{model_id}")
 
+    # Gradio Spaces now need a paid plan, so the app is a static Space: the page in
+    # web/ runs both models in the visitor's browser.
     space_id = f"{args.user}/{args.space}"
-    api.create_repo(space_id, repo_type="space", space_sdk="gradio", exist_ok=True)
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp = Path(tmp)
-        for name in ("app.py", "settings.json", "baseline_lr_char.joblib", "requirements.txt"):
-            shutil.copy(ROOT / "app" / name, tmp / name)
-        (tmp / "src").mkdir()
-        for name in ("__init__.py", "preprocess.py", "perturb.py"):
-            shutil.copy(ROOT / "src" / name, tmp / "src" / name)
-        (tmp / "README.md").write_text(SPACE_CARD)
-        api.upload_folder(repo_id=space_id, repo_type="space", folder_path=tmp, commit_message="Deploy app")
-    api.add_space_variable(space_id, "WDYRI_MODEL", model_id)
+    api.create_repo(space_id, repo_type="space", space_sdk="static", exist_ok=True)
+    api.upload_folder(repo_id=space_id, repo_type="space", folder_path=ROOT / "web", commit_message="Deploy app")
     print("space:", f"https://huggingface.co/spaces/{space_id}")
 
 

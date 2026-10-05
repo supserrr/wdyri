@@ -1,0 +1,8 @@
+{
+  "preprocess_texts": 4401,
+  "masked_identical": 1,
+  "defended_identical": 1,
+  "ngram_messages": 6313,
+  "ngram_decision_agreement": 1,
+  "ngram_max_prob_diff": 4.982869771241738e-7
+}

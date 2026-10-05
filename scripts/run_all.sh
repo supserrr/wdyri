@@ -33,5 +33,7 @@ python -m src.errors                      # error buckets
 python -m src.figures
 python -m src.tables                      # results/tables.md and the README results table
 python scripts/export_app.py --variant counterfactual --baseline-variant counterfactual   # chosen on validation stress pairs
+python scripts/export_web.py              # browser model (ONNX) + JS assets, with a parity check
+node scripts/web_parity.mjs               # JavaScript preprocessing and n-gram model vs Python
 python scripts/make_notebooks.py
 for nb in notebooks/0*.ipynb; do jupyter nbconvert --to notebook --execute --inplace "$nb"; done

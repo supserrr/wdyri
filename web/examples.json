@@ -1,0 +1,44 @@
+[
+ {
+  "label": "Genuine message",
+  "text": "Nitapika wali na mboga leo jioni, unanunua nyama au mimi nibebe?",
+  "defend": false,
+  "note": "Passes."
+ },
+ {
+  "label": "Genuine + phone number",
+  "text": "Nitapika wali na mboga leo jioni, unanunua nyama au mimi nibebe? Nipigie 0712345678",
+  "defend": false,
+  "note": "Still passes: the number shortcut is gone (E10-E11)."
+ },
+ {
+  "label": "Classic scam",
+  "text": "Iyo pesa itume kwenye namba hii 0712345678 jina litakuja JUMA ALLY",
+  "defend": false,
+  "note": "Both models flag it."
+ },
+ {
+  "label": "Disguised scam",
+  "text": "Xо​rrу ni​ро хаf​ari nі​na xh​іda kw​еl nаku​оmbа unіx​а1d1e ѕ​h elfu 9 nіtаku​rеfund nіki​fika р​lх В​y НАМ​І5I RAMADHANI,ni g​rр mеm​bеr",
+  "defend": false,
+  "note": "Lookalike letters fool the n-gram model; the transformer still flags it (E6)."
+ },
+ {
+  "label": "Disguised + defence",
+  "text": "Xо​rrу ni​ро хаf​ari nі​na xh​іda kw​еl nаku​оmbа unіx​а1d1e ѕ​h elfu 9 nіtаku​rеfund nіki​fika р​lх В​y НАМ​І5I RAMADHANI,ni g​rр mеm​bеr",
+  "defend": true,
+  "note": "With the normalisation defence on, the n-gram model recovers (E7)."
+ },
+ {
+  "label": "Landlord impersonation",
+  "text": "Habari za asubuhi. Mimi mwenye nyumba wako hii namba yangu ya Vodacom. Mbona kimya na siku zinazidi kwenda...?",
+  "defend": false,
+  "note": "No number or link: the transformer misses it, the n-gram model catches it (E12)."
+ },
+ {
+  "label": "Chichewa scam",
+  "text": "MIRACLE MONEY: lowani mpingo wathu wa satanic kuti mulemele. imbani phone ku nambala iyi 0999000000 kuti mujoine",
+  "defend": false,
+  "note": "No Chichewa in training: only the transformer flags it (E8)."
+ }
+]

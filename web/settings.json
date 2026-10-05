@@ -1,0 +1,9 @@
+{
+ "transformer_name": "AfroXLMR base, fine-tuned, number-balanced",
+ "transformer_run": "afroxlmr__counterfactual__template__s42",
+ "threshold_transformer": 0.5,
+ "baseline_run": "lr_char__counterfactual__template__s0",
+ "threshold_baseline": 0.5,
+ "train_note": "760 Tanzanian Swahili SMS from the BongoScam dataset (405 scam, 355 genuine).",
+ "model_id": "supserrr/wdyri-afroxlmr"
+}

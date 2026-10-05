@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WDYRI scam SMS checker</title>
+<meta name="description" content="Check a Swahili SMS for mobile-money scam patterns. Runs entirely in your browser.">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f6f2; --surface: #ffffff; --ink: #141413; --ink-2: #4d4c48; --muted: #87867f;
+    --line: #e3e1d8; --accent: #2a6fdb; --scam: #c8372d; --scam-bg: #fbe9e7; --ok: #1d7a3e; --ok-bg: #e6f4ea;
+    --warm: 214, 69, 55; --cool: 42, 111, 219;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #141413; --surface: #1e1e1c; --ink: #f4f3ee; --ink-2: #c9c7bd; --muted: #8f8d85;
+      --line: #34332f; --accent: #6ea2f5; --scam: #f08a7e; --scam-bg: #3a1f1c; --ok: #6fcf8f; --ok-bg: #1b3324;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  textarea { width: 100%; min-height: 96px; resize: vertical; padding: 12px; border-radius: 8px;
+             border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 12px; }
+  button { font: inherit; border-radius: 8px; border: 1px solid var(--line); background: var(--surface);
+           color: var(--ink); padding: 8px 14px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  button:disabled { opacity: 0.55; cursor: wait; }
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; }
+  .examples button { font-size: 0.88rem; padding: 6px 10px; }
+  label.check { display: flex; gap: 8px; align-items: center; color: var(--ink-2); font-size: 0.95rem; }
+  .status { font-size: 0.88rem; color: var(--muted); }
+  progress { width: 160px; height: 8px; vertical-align: middle; }
+  .verdict { border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--line); }
+  .verdict.scam { background: var(--scam-bg); border-color: var(--scam); }
+  .verdict.ok { background: var(--ok-bg); border-color: var(--ok); }
+  .verdict h2 { margin: 0 0 4px; font-size: 1.25rem; }
+  .verdict p { margin: 0; color: var(--ink-2); }
+  .note { font-size: 0.92rem; color: var(--ink-2); margin-top: 8px; font-style: italic; }
+  .models { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .model h3 { margin: 0 0 2px; font-size: 1rem; }
+  .model .what { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; }
+  .prob { font-size: 1.8rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .bar { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; margin: 6px 0 4px; }
+  .bar span { display: block; height: 100%; background: var(--muted); }
+  .bar.flag span { background: var(--scam); }
+  .flagtxt { font-size: 0.9rem; color: var(--ink-2); }
+  .words { line-height: 2.1; margin-top: 10px; word-break: break-word; }
+  .words span { padding: 2px 3px; border-radius: 4px; }
+  .seen { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88rem; color: var(--ink-2);
+          background: var(--bg); padding: 8px 10px; border-radius: 6px; word-break: break-word; }
+  .legend { font-size: 0.85rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin: 0 4px 0 10px; }
+  footer { font-size: 0.88rem; color: var(--muted); margin-top: 28px; }
+  footer a { color: var(--accent); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>WDYRI: Why Did You Redeem It?</h1>
+  <p class="sub">Check a Swahili SMS for mobile-money scam patterns. Two models that fail on different messages
+    read it: a fine-tuned African-language transformer and a character n-gram model. The message is flagged if
+    either one flags it.</p>
+
+  <div class="card">
+    <label for="sms" class="status">SMS text</label>
+    <textarea id="sms" placeholder="e.g. Iyo pesa itume kwenye namba hii ..."></textarea>
+    <div class="row">
+      <button id="check" class="primary" disabled>Check message</button>
+      <label class="check"><input type="checkbox" id="defend"> Undo disguise tricks first (lookalike letters, s p a c e d words)</label>
+    </div>
+    <div class="row status" id="status">Loading the n-gram model...</div>
+  </div>
+
+  <div class="card">
+    <div class="status" style="margin-bottom:8px">Try an example</div>
+    <div class="examples" id="examples"></div>
+  </div>
+
+  <section id="result" hidden>
+    <div class="verdict" id="verdict"><h2></h2><p></p><div class="note"></div></div>
+    <div class="models">
+      <div class="card model" id="m-tf">
+        <h3>Transformer</h3><div class="what" id="tf-name"></div>
+        <div class="prob"></div><div class="bar"><span></span></div><div class="flagtxt"></div>
+        <div class="words"></div>
+      </div>
+      <div class="card model" id="m-lr">
+        <h3>Character n-gram model</h3><div class="what">logistic regression on character 2-5-grams, number-balanced</div>
+        <div class="prob"></div><div class="bar"><span></span></div><div class="flagtxt"></div>
+        <div class="words"></div>
+      </div>
+    </div>
+    <div class="legend">Word influence (remove the word and see how the scam probability changes):
+      <i style="background:rgba(214,69,55,.55)"></i>pushes towards scam <i style="background:rgba(42,111,219,.45)"></i>pushes away</div>
+    <div class="card" style="margin-top:16px">
+      <div class="status" style="margin-bottom:6px">What the models see (numbers, amounts and links masked)</div>
+      <div class="seen" id="seen"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Privacy:</strong> everything runs in your browser. Your message is never sent anywhere or stored.
+      The transformer (about 360 MB) downloads once and is cached by your browser.</p>
+    <p id="train-note"></p>
+    <p>Research demo, not a guarantee: when in doubt, call your provider on its official number.
+      Code, data, results and limits: <a href="https://github.com/supserrr/wdyri">github.com/supserrr/wdyri</a> ·
+      model: <a href="https://huggingface.co/supserrr/wdyri-afroxlmr">supserrr/wdyri-afroxlmr</a></p>
+  </footer>
+</main>
+<!-- transformers.js 4.3.0 leaves ONNX Runtime as bare imports; both resolve to one
+     self-contained ONNX Runtime Web bundle (the version transformers.js 4.3.0 depends on). -->
+<script type="importmap">
+{ "imports": {
+  "onnxruntime-web/webgpu": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.0-dev.20260914-8d85527a0/dist/ort.webgpu.bundle.min.mjs",
+  "onnxruntime-common": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.0-dev.20260914-8d85527a0/dist/ort.webgpu.bundle.min.mjs"
+} }
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

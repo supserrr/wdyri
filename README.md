@@ -5,7 +5,7 @@
 | | |
 | --- | --- |
 | GitHub repository | https://github.com/supserrr/wdyri |
-| Live app | https://huggingface.co/spaces/supserrr/wdyri |
+| Live app | https://huggingface.co/spaces/supserrr/wdyri (runs in your browser) |
 | Fine-tuned model | https://huggingface.co/supserrr/wdyri-afroxlmr |
 | Demo video | *to be added* |
 | Fallback demo | [notebooks/colab_app.ipynb](notebooks/colab_app.ipynb) (runs the same app on Colab with a public link) |
@@ -141,14 +141,15 @@ Every error of the main runs is sorted into a bucket by `src/errors.py` ([result
 
 ## Deployment
 
-A Gradio app on a free Hugging Face Space ([app/app.py](app/app.py)). Paste an SMS and get a verdict from the deployed E12 ensemble: the fine-tuned AfroXLMR and the char LR, both trained number-balanced, shown side by side and flagged if either flags. Highlighted words show what drove each model (leave-one-word-out occlusion), and the masked text shows exactly what the models saw.
+**Live app: https://huggingface.co/spaces/supserrr/wdyri** (a free static Space). Paste an SMS and get a verdict from the deployed E12 ensemble: the fine-tuned AfroXLMR and the char LR, both trained number-balanced, shown side by side and flagged if either flags. Highlighted words show what drove each model (leave-one-word-out occlusion), and the masked text shows exactly what the models saw.
 
-* **Wiring:** `app.py` loads the transformer from a local copy of the evaluated run or from the Hub by name (`supserrr/wdyri-afroxlmr`), checks a run marker so it never serves an older upload under the wrong name, and falls back to n-gram-only mode instead of crashing; the char LR loads with `joblib`. Both call the same `preprocess()` from `src/` as training; thresholds come from validation (`app/settings.json`).
+* **Why in the browser:** Hugging Face now charges for Gradio and Docker Spaces on CPU, while static Spaces are free and never sleep. So both models run client-side ([web/](web/)): AfroXLMR through [transformers.js](https://huggingface.co/docs/transformers.js) and ONNX Runtime Web, the char LR through a JavaScript re-implementation of its exported weights. Nothing the user types leaves the browser.
+* **Same model, smaller file:** plain 8-bit quantisation broke the transformer (74% decision agreement with PyTorch), because RoBERTa-family activations have outlier channels. [scripts/export_web.py](scripts/export_web.py) instead quantises only the embedding table to 8 bits and stores the other weights in fp16 (1.1 GB → 364 MB), keeping all computation in fp32. It agrees with PyTorch on 99.7% of 1,460 evaluation messages (100% on the Swahili test set; mean probability difference 0.002; `results/web_parity.json`).
+* **Same preprocessing, verified:** [web/preprocess.js](web/preprocess.js) ports `src/preprocess.py` with Python's Unicode regex semantics, and [web/ngram.js](web/ngram.js) re-implements scikit-learn's char-n-gram TF-IDF and logistic regression. [scripts/web_parity.mjs](scripts/web_parity.mjs) checks them against Python: masking and the defence are identical on all 4,401 distinct texts, and the n-gram model matches on 100% of 6,313 decisions (largest probability difference 5e-07; `results/web_parity_js.json`).
 * **Chosen on validation, never on test:** among the plain and number-balanced members, the validation stress pairs favoured both number-balanced (0% false alarms and 0% misses, against 10% false alarms with a plain char LR and 96% with a plain AfroXLMR).
 * **Built-in examples,** each showing something different: a genuine message (passes); the same message with a phone number (still passes: the shortcut is gone); a classic scam (both flag); a "help me" scam disguised with lookalike letters by the project's own attack code (only the transformer flags it); the same with the defence on (both flag); the landlord scam (only the n-gram model flags it); a Chichewa scam (only the transformer flags it).
-* **Known behaviour:** heavily disguised text is treated as suspicious even when genuine (70-75% of fully disguised genuine test texts are flagged), a defensible red flag but not reading through the disguise.
-* **Privacy:** nothing is logged; numbers are masked before any model sees them.
-* **Fallback:** free Spaces sleep when idle; [notebooks/colab_app.ipynb](notebooks/colab_app.ipynb) launches the same app with `share=True`.
+* **Known behaviour:** heavily disguised text is treated as suspicious even when genuine (70-75% of fully disguised genuine test texts are flagged), a defensible red flag but not reading through the disguise. The first visit downloads the 364 MB model once; the n-gram model answers immediately meanwhile.
+* **Python version of the app:** [app/app.py](app/app.py) is the same ensemble in Gradio (`python app/app.py`), and [notebooks/colab_app.ipynb](notebooks/colab_app.ipynb) runs it on Colab with a public link as a fallback.
 
 ## Reproduce
 
@@ -174,8 +175,9 @@ wdyri/
 │                    train_classical, embeddings, train_bilstm, train_transformer,
 │                    ensemble, metrics, evaluate, stress, significance, errors, figures, tables
 ├── notebooks/       01_eda … 08_shortcut_and_ensemble (analysis), colab_app (fallback demo)
-├── app/             app.py (Gradio), settings.json, baseline_lr_char.joblib, requirements.txt
-├── scripts/         run_all.sh, export_app.py, publish_hf.py, make_notebooks.py
+├── web/             the deployed app: index.html, app.js, preprocess.js, ngram.js (runs in the browser)
+├── app/             app.py (Gradio version), settings.json, baseline_lr_char.joblib, requirements.txt
+├── scripts/         run_all.sh, export_app.py, export_web.py, web_parity.mjs, publish_hf.py, make_notebooks.py
 ├── tests/           test_core.py (17 unit tests)
 └── results/         experiments.csv, tables.md, significance.csv, stress_tests.csv, figures/, predictions/
 ```

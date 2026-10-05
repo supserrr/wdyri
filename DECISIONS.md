@@ -98,7 +98,9 @@ One line per choice and why. These are the viva notes: every number in the repor
 
 | Choice | Why |
 | --- | --- |
-| Gradio on a free Hugging Face Space | Free, public link; the model loads from the Hub by name. |
+| A static Hugging Face Space that runs both models in the browser (transformers.js + ONNX Runtime Web; a JavaScript port of the char LR) | Gradio and Docker Spaces on CPU now need a paid plan; static Spaces are free, never sleep, and keep every message on the user's device. The Gradio app stays for local and Colab use. |
+| Browser model: 8-bit embedding table + fp16 weight storage, fp32 compute (364 MB) | Full 8-bit dynamic quantisation dropped agreement with PyTorch to 74% (outlier activations); this scheme agrees on 99.7% of evaluation messages. |
+| JavaScript preprocessing and n-gram model checked against Python on every message (`scripts/web_parity.mjs`) | The app must see text exactly as the models did in training; Python's Unicode `\w`, `\d` and `\b` are spelled out explicitly in JavaScript. |
 | The app's verdict is the E12 ensemble: number-balanced AfroXLMR (seed 42) OR number-balanced char LR, both shown | The two fail on different messages; the number-balanced members were chosen on the validation stress pairs, never on test. |
 | The app falls back from the Hub model to a local copy, then to the n-gram model alone | A missing or private Hub model must not crash the demo. |
 | Same `preprocess()` as training, imported from `src/` | The app cannot drift from the experiments. |
