@@ -19,6 +19,16 @@
     "not scam": 497
   },
   "bongo_words_median": 11.0,
+  "share_with_phone_or_link": {
+    "scam": 0.8589065255731922,
+    "not scam": 0.0
+  },
+  "phone_rule_f1_all_messages": 0.9240986717267552,
+  "words_min_scam": 8,
+  "words_median": {
+    "scam": 12.0,
+    "not scam": 7.0
+  },
   "bongo_templates": 909,
   "bongo_templates_with_2plus": 73,
   "bongo_messages_in_shared_templates": 228,

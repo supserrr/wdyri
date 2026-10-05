@@ -1,6 +1,6 @@
 model,variant,split,seed,set,id,label,prob
 nb_char,repeat,random,2,test,bongo_0005,1,1.000000
-nb_char,repeat,random,2,test,bongo_0009,1,0.007359
+nb_char,repeat,random,2,test,bongo_0009,1,0.002587
 nb_char,repeat,random,2,test,bongo_0010,1,1.000000
 nb_char,repeat,random,2,test,bongo_0040,1,1.000000
 nb_char,repeat,random,2,test,bongo_0043,1,1.000000
@@ -17,9 +17,9 @@ nb_char,repeat,random,2,test,bongo_0083,1,1.000000
 nb_char,repeat,random,2,test,bongo_0101,1,1.000000
 nb_char,repeat,random,2,test,bongo_0104,0,0.000000
 nb_char,repeat,random,2,test,bongo_0107,0,0.000000
-nb_char,repeat,random,2,test,bongo_0119,0,0.000162
+nb_char,repeat,random,2,test,bongo_0119,0,0.000042
 nb_char,repeat,random,2,test,bongo_0128,1,1.000000
-nb_char,repeat,random,2,test,bongo_0140,0,0.000001
+nb_char,repeat,random,2,test,bongo_0140,0,0.000000
 nb_char,repeat,random,2,test,bongo_0143,0,0.000000
 nb_char,repeat,random,2,test,bongo_0144,0,0.000000
 nb_char,repeat,random,2,test,bongo_0145,0,0.000000
@@ -30,7 +30,7 @@ nb_char,repeat,random,2,test,bongo_0205,1,1.000000
 nb_char,repeat,random,2,test,bongo_0207,1,1.000000
 nb_char,repeat,random,2,test,bongo_0208,0,0.000000
 nb_char,repeat,random,2,test,bongo_0209,0,0.000000
-nb_char,repeat,random,2,test,bongo_0219,0,0.006722
+nb_char,repeat,random,2,test,bongo_0219,0,0.004246
 nb_char,repeat,random,2,test,bongo_0223,1,1.000000
 nb_char,repeat,random,2,test,bongo_0226,1,1.000000
 nb_char,repeat,random,2,test,bongo_0232,0,0.000000
@@ -55,7 +55,7 @@ nb_char,repeat,random,2,test,bongo_0354,0,0.000000
 nb_char,repeat,random,2,test,bongo_0367,0,0.000000
 nb_char,repeat,random,2,test,bongo_0376,0,0.000000
 nb_char,repeat,random,2,test,bongo_0388,0,0.000000
-nb_char,repeat,random,2,test,bongo_0395,0,0.000067
+nb_char,repeat,random,2,test,bongo_0395,0,0.000006
 nb_char,repeat,random,2,test,bongo_0405,1,1.000000
 nb_char,repeat,random,2,test,bongo_0419,1,1.000000
 nb_char,repeat,random,2,test,bongo_0428,1,1.000000
@@ -70,7 +70,7 @@ nb_char,repeat,random,2,test,bongo_0470,0,0.000000
 nb_char,repeat,random,2,test,bongo_0521,1,1.000000
 nb_char,repeat,random,2,test,bongo_0539,0,0.000000
 nb_char,repeat,random,2,test,bongo_0559,0,0.000000
-nb_char,repeat,random,2,test,bongo_0561,0,0.003485
+nb_char,repeat,random,2,test,bongo_0561,0,0.001407
 nb_char,repeat,random,2,test,bongo_0564,1,1.000000
 nb_char,repeat,random,2,test,bongo_0578,1,1.000000
 nb_char,repeat,random,2,test,bongo_0590,0,0.000000
@@ -85,9 +85,9 @@ nb_char,repeat,random,2,test,bongo_0686,0,0.000000
 nb_char,repeat,random,2,test,bongo_0687,0,0.000000
 nb_char,repeat,random,2,test,bongo_0688,1,1.000000
 nb_char,repeat,random,2,test,bongo_0699,0,0.000000
-nb_char,repeat,random,2,test,bongo_0705,0,0.000014
+nb_char,repeat,random,2,test,bongo_0705,0,0.000001
 nb_char,repeat,random,2,test,bongo_0706,1,1.000000
-nb_char,repeat,random,2,test,bongo_0725,0,0.000260
+nb_char,repeat,random,2,test,bongo_0725,0,0.000031
 nb_char,repeat,random,2,test,bongo_0735,0,0.000000
 nb_char,repeat,random,2,test,bongo_0743,1,1.000000
 nb_char,repeat,random,2,test,bongo_0749,1,1.000000
@@ -97,7 +97,7 @@ nb_char,repeat,random,2,test,bongo_0779,1,1.000000
 nb_char,repeat,random,2,test,bongo_0801,0,0.000000
 nb_char,repeat,random,2,test,bongo_0812,0,0.000000
 nb_char,repeat,random,2,test,bongo_0813,1,1.000000
-nb_char,repeat,random,2,test,bongo_0815,0,0.000001
+nb_char,repeat,random,2,test,bongo_0815,0,0.000000
 nb_char,repeat,random,2,test,bongo_0821,0,0.000000
 nb_char,repeat,random,2,test,bongo_0825,1,1.000000
 nb_char,repeat,random,2,test,bongo_0833,0,0.000000
@@ -110,8 +110,8 @@ nb_char,repeat,random,2,test,bongo_0893,1,1.000000
 nb_char,repeat,random,2,test,bongo_0895,1,1.000000
 nb_char,repeat,random,2,test,bongo_0896,0,0.000000
 nb_char,repeat,random,2,test,bongo_0899,1,1.000000
-nb_char,repeat,random,2,test,bongo_0904,0,0.000049
-nb_char,repeat,random,2,test,bongo_0907,0,0.000747
+nb_char,repeat,random,2,test,bongo_0904,0,0.000004
+nb_char,repeat,random,2,test,bongo_0907,0,0.000436
 nb_char,repeat,random,2,test,bongo_0909,1,1.000000
 nb_char,repeat,random,2,test,bongo_0918,1,1.000000
 nb_char,repeat,random,2,test,bongo_0921,1,1.000000
@@ -123,7 +123,7 @@ nb_char,repeat,random,2,test,bongo_0999,1,1.000000
 nb_char,repeat,random,2,test,bongo_1009,0,0.000000
 nb_char,repeat,random,2,test,bongo_1010,0,0.000000
 nb_char,repeat,random,2,test,bongo_1014,0,0.000000
-nb_char,repeat,random,2,test,bongo_1018,0,0.000024
+nb_char,repeat,random,2,test,bongo_1018,0,0.000006
 nb_char,repeat,random,2,test,bongo_1031,0,0.000000
 nb_char,repeat,random,2,test,bongo_1038,1,1.000000
 nb_char,repeat,random,2,test,bongo_1040,0,0.000000
@@ -133,7 +133,7 @@ nb_char,repeat,random,2,test,bongo_1053,1,1.000000
 nb_char,repeat,random,2,test,bongo_1057,1,1.000000
 nb_char,repeat,random,2,test,bongo_1059,0,0.000000
 nb_char,repeat,random,2,test,bongo_1098,0,0.000000
-nb_char,repeat,random,2,test,bongo_1114,0,0.079899
+nb_char,repeat,random,2,test,bongo_1114,0,0.066064
 nb_char,repeat,random,2,test,bongo_1118,1,1.000000
 nb_char,repeat,random,2,test,bongo_1121,0,0.000000
 nb_char,repeat,random,2,test,bongo_1124,0,0.000000
@@ -143,7 +143,7 @@ nb_char,repeat,random,2,test,bongo_1191,0,0.000000
 nb_char,repeat,random,2,test,bongo_1192,1,1.000000
 nb_char,repeat,random,2,test,bongo_1208,0,0.000000
 nb_char,repeat,random,2,test,bongo_1210,1,1.000000
-nb_char,repeat,random,2,test,bongo_1216,0,0.067715
+nb_char,repeat,random,2,test,bongo_1216,0,0.041664
 nb_char,repeat,random,2,test,bongo_1219,0,0.000000
 nb_char,repeat,random,2,test,bongo_1245,1,1.000000
 nb_char,repeat,random,2,test,bongo_1256,0,0.000000
@@ -152,7 +152,7 @@ nb_char,repeat,random,2,test,bongo_1270,1,1.000000
 nb_char,repeat,random,2,test,bongo_1271,1,1.000000
 nb_char,repeat,random,2,test,bongo_1298,0,0.000000
 nb_char,repeat,random,2,test,bongo_1306,1,1.000000
-nb_char,repeat,random,2,test,bongo_1336,0,0.013154
+nb_char,repeat,random,2,test,bongo_1336,0,0.008613
 nb_char,repeat,random,2,test,bongo_1339,0,0.000000
 nb_char,repeat,random,2,test,bongo_1340,1,1.000000
 nb_char,repeat,random,2,test,bongo_1351,1,1.000000
