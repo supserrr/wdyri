@@ -84,13 +84,39 @@ function paint(el, words, res, threshold) {
   }).flatMap((s) => [s, document.createTextNode(" ")]));
 }
 
-async function run({ reveal = true } = {}) {
+// The check button shows that the analysis is running, for at least a moment.
+const wait = (ms) => new Promise((r) => setTimeout(r, Math.max(0, ms)));
+function setChecking(on) {
+  const b = $("#check");
+  b.disabled = on;
+  b.classList.toggle("loading", on);
+  b.setAttribute("aria-busy", String(on));
+  b.querySelector(".label").textContent = on ? "Checking…" : "Check message";
+  if (on) status.textContent = "Checking the message.";
+}
+
+let busy = false, pending = null;
+async function run(opts = {}) {
+  if (busy) { pending = opts; return; }   // run again once the current check finishes
   const raw = $("#sms").value.trim();
   if (!raw) return;
+  busy = true;
+  setChecking(true);
+  try {
+    await check(raw, opts);
+  } finally {
+    busy = false;
+    setChecking(false);
+  }
+  if (pending) { const next = pending; pending = null; run(next); }
+}
+
+async function check(raw, { reveal = true }) {
+  const started = performance.now();
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));   // paint the loading state first
   const defend = $("#defend").checked;
   const text = preprocess(raw, { defend });
   current = { raw, defend };
-  $("#check").disabled = true;
   const lr = await influence(text, async (ts) => ts.map((t) => ngram.proba(t)));
   paint($("#m-lr"), $("#words-lr"), lr, settings.threshold_baseline);
   let tf = null;
@@ -113,13 +139,14 @@ async function run({ reveal = true } = {}) {
     : model ? "Neither model flags it." : "The n-gram model does not flag it (transformer still loading).";
   const ex = examples.find((e) => e.text === raw && e.defend === defend);
   v.querySelector(".note").textContent = ex ? `${ex.label}. ${ex.note}` : "";
+  await wait(500 - (performance.now() - started));
   $("#result").hidden = false;
+  status.textContent = by.length ? "Check complete: likely scam." : "Check complete: looks genuine.";
   if (reveal) note("count", `Checks this visit · ${++checks}`);
   note("l1", `Verdict · ${by.length ? "likely scam" : "looks genuine"}`);
   note("l2", `Transformer · ${tf ? `${Math.round(100 * tf.p)}%` : "loading"}`);
   note("l3", `N-gram model · ${Math.round(100 * lr.p)}%`);
   note("l4", `Disguise fix · ${defend ? "on" : "off"}`);
-  $("#check").disabled = false;
   if (reveal) $("#result").scrollIntoView({ block: "start" });
 }
 
