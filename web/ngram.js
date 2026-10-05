@@ -3,6 +3,10 @@
 // TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5), lowercase=True,
 // sublinear_tf=True) followed by LogisticRegression. scripts/web_parity.mjs
 // checks it against the Python probabilities on every evaluation message.
+import { WHITESPACE } from "./preprocess.js";
+
+const RUNS_RE = new RegExp(`[${WHITESPACE}][${WHITESPACE}]+`, "gu");   // scikit-learn's \s\s+
+const SPLIT_RE = new RegExp(`[${WHITESPACE}]+`, "u");                  // Python's str.split()
 
 export function loadNgramModel(data) {
   const [minN, maxN] = data.ngram_range;
@@ -11,9 +15,9 @@ export function loadNgramModel(data) {
   // scikit-learn's _char_wb_ngrams: pad each word with spaces, take n-grams within it.
   function ngrams(text) {
     if (data.lowercase) text = text.toLowerCase();
-    text = text.replace(/\s\s+/gu, " ");
+    text = text.replace(RUNS_RE, " ");
     const out = [];
-    for (const word of text.split(/\s+/u).filter(Boolean)) {
+    for (const word of text.split(SPLIT_RE).filter(Boolean)) {
       const w = Array.from(" " + word + " ");   // code points, like Python strings
       for (let n = minN; n <= maxN; n++) {
         let offset = 0;

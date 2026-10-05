@@ -9,12 +9,11 @@
 2. A parity check: the quantised ONNX model against PyTorch on the test,
    attacked and Chichewa sets (results/web_parity.json).
 3. The char n-gram logistic regression to web/lr_char.json (vocabulary, idf,
-   weights), which web/model.js re-implements exactly.
+   weights), which web/ngram.js re-implements exactly.
 """
 from __future__ import annotations
 
 import json
-import shutil
 import sys
 from pathlib import Path
 
@@ -37,6 +36,10 @@ SETTINGS = json.loads((ROOT / "app" / "settings.json").read_text())
 WEB = ROOT / "web"
 PARITY_SETS = ["test", "test_lookalike_all", "test_structural_all", "test_codeswitch_all", "chichewa",
                "stress_genuine+phone", "stress_scam-number"]
+# Characters on which Python's and JavaScript's regex classes differ (whitespace, case
+# mapping), so the JavaScript parity test covers them even though no message has them.
+EDGE_CASES = ["tuma\ufeffpesa", "tuma\x85pesa\x1c 0712345678", "Tsh\u3000 50,000 www.example.com/a\x1cb",
+              "piga\u2028simu\x1f\x1e0999000000", "MK\u00a01,500 kwa \u0130DD\u0130 \u03a3\u0391\u03a3"]
 
 
 def export_transformer() -> Path:
@@ -117,6 +120,8 @@ def export_lr() -> None:
     (WEB / "lr_char.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     # Reference outputs for the JavaScript parity test (scripts/web_parity.mjs).
     ev = pd.read_csv(config.DATA_PROCESSED / "eval_template.csv", keep_default_na=False)
+    edge = pd.DataFrame({"set": "edge", "id": [f"edge_{i}" for i in range(len(EDGE_CASES))], "text": EDGE_CASES})
+    ev = pd.concat([ev, edge], ignore_index=True)
     ref = ev.assign(prob=pipe.predict_proba(ev["text"].tolist())[:, data["positive_class_index"]])
     ref[["set", "id", "text", "prob"]].to_json(config.CACHE / "web_lr_reference.json", orient="records",
                                                force_ascii=False)
@@ -129,6 +134,7 @@ def preprocess_reference() -> None:
     from src.preprocess import preprocess
     texts = load_bongo_raw()["raw_text"].tolist() + load_chichewa_raw()["raw_text"].tolist()
     texts += pd.read_csv(config.DATA_PROCESSED / "eval_template.csv", keep_default_na=False)["text"].tolist()
+    texts += EDGE_CASES
     ref = [{"raw": t, "masked": preprocess(t), "defended": preprocess(t, defend=True)} for t in dict.fromkeys(texts)]
     (config.CACHE / "web_preprocess_reference.json").write_text(json.dumps(ref, ensure_ascii=False))
     print(f"preprocess reference: {len(ref)} distinct texts")
@@ -174,9 +180,6 @@ def main() -> None:
     preprocess_reference()
     src = export_transformer()
     print(json.dumps(parity(src), indent=2))
-    for name in ("config.json", "tokenizer.json", "tokenizer_config.json"):
-        if not (src / name).exists():
-            shutil.copy(config.MODELS / SETTINGS["transformer_run"] / name, src / name)
 
 
 if __name__ == "__main__":

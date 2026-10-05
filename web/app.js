@@ -163,6 +163,7 @@ function setChecking(on) {
 
 let busy = false, pending = null;
 async function run(opts = {}) {
+  finishTyping();   // pressed while an example is still typing: check the whole example
   if (busy) { pending = opts; return; }   // run again once the current check finishes
   const raw = $("#sms").value.trim();
   if (!raw) return;
@@ -221,18 +222,27 @@ $("#sms").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaK
 
 // Example chips: type the message into the box, as if pasted by hand; the user then presses Check.
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-let typing = 0;
+let typing = 0, typingTarget = null;
 async function typeInto(box, text) {
   const token = ++typing;
-  if (reduceMotion) { box.value = text; return true; }
+  typingTarget = { box, text };
+  if (reduceMotion) { finishTyping(); return true; }
   const step = Math.max(1, Math.ceil(text.length / 32));
   for (let i = step; i < text.length + step; i += step) {
-    if (token !== typing) return false;   // another example was picked meanwhile
+    if (token !== typing) return false;   // another example was picked, or Check finished it
     box.value = text.slice(0, i);
     box.scrollTop = box.scrollHeight;
     await new Promise((r) => setTimeout(r, 16));
   }
-  return token === typing;
+  typingTarget = null;
+  return true;
+}
+// Ends the typing effect at once, with the whole example in the box.
+function finishTyping() {
+  if (!typingTarget) return;
+  typing++;
+  typingTarget.box.value = typingTarget.text;
+  typingTarget = null;
 }
 const chips = examples.map((ex) => {
   const b = document.createElement("button");

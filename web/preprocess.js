@@ -4,10 +4,15 @@
 //
 // Python's re module treats \w, \d and \b as Unicode-aware for str patterns;
 // JavaScript's are ASCII-only, so they are spelled out with Unicode properties.
+// Python's \s (str.isspace) also differs from JavaScript's: it includes U+001C-U+001F
+// and U+0085 but not U+FEFF, so whitespace is spelled out too.
 
 const W = "[\\p{L}\\p{N}_]";                       // Python's \w for str
 const D = "\\p{Nd}";                               // Python's \d for str
 const B = `(?:(?<=${W})(?!${W})|(?<!${W})(?=${W}))`; // Python's \b
+export const WHITESPACE = "\\t\\n\\v\\f\\r\\x1c-\\x20\\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000";
+const S = `[${WHITESPACE}]`;                          // Python's \s for str
+const NS = `[^${WHITESPACE}]`;                       // Python's \S for str
 
 export const PHONE = "<PHONE>";
 export const AMOUNT = "<AMOUNT>";
@@ -15,8 +20,8 @@ export const URL = "<URL>";
 export const PLACEHOLDERS = [PHONE, AMOUNT, URL];
 
 const URL_RE = new RegExp(
-  "(?:https?://|www\\.)\\S+" +
-  `|${B}(?:wa\\.me|bit\\.ly|t\\.me|tinyurl\\.com|chat\\.whatsapp\\.com)/\\S*`,
+  `(?:https?://|www\\.)${NS}+` +
+  `|${B}(?:wa\\.me|bit\\.ly|t\\.me|tinyurl\\.com|chat\\.whatsapp\\.com)/${NS}*`,
   "giu");
 
 const PHONE_RE = new RegExp(`(?<!${D})\\+?${D}(?:[ .\\-]?${D}){8,13}(?!${D})`, "gu");
@@ -24,13 +29,13 @@ const PHONE_RE = new RegExp(`(?<!${D})\\+?${D}(?:[ .\\-]?${D}){8,13}(?!${D})`, "
 const CURRENCY = "(?:tshs?|tzs|shs?|ksh|mwk|mk|usd|k)";
 const NUMBER = `${D}{1,3}(?:,${D}{3})+(?:\\.${D}+)?|${D}+(?:\\.${D}+)?`;
 const AMOUNT_RE = new RegExp(
-  `${B}${CURRENCY}\\.?\\s?-?\\s?(?:${NUMBER})(?:\\s?/=)?` +
-  `|${B}(?:${NUMBER})\\s?(?:${CURRENCY}|/=|shilingi|shillings?|kwacha)${B}` +
-  `|(?<![${"\\p{Nd}"}.])${D}+\\s?/=` +
+  `${B}${CURRENCY}\\.?${S}?-?${S}?(?:${NUMBER})(?:${S}?/=)?` +
+  `|${B}(?:${NUMBER})${S}?(?:${CURRENCY}|/=|shilingi|shillings?|kwacha)${B}` +
+  `|(?<![${"\\p{Nd}"}.])${D}+${S}?/=` +
   `|${B}${D}{1,3}(?:,${D}{3})+(?:\\.${D}+)?${B}|${B}${D}{5,8}${B}`,
   "giu");
 
-const SPACES_RE = /\s+/gu;
+const SPACES_RE = new RegExp(`${S}+`, "gu");
 
 export function mask(text) {
   text = text.replace(URL_RE, ` ${URL} `);
