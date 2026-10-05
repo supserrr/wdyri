@@ -372,37 +372,37 @@
     <div class="section-head faq-head">
       <span class="chip">FAQ</span>
       <h2 class="display">How it works</h2>
-      <p>Quick answers on privacy, the two models and what the verdict can and cannot tell you.</p>
+      <p>What happens to your message, how the check works and how far to trust it.</p>
     </div>
     <div class="faq">
+      <details>
+        <summary>How does it decide if a message is a scam?</summary>
+        <div><p>Two models read your message and each gives the chance that it is a scam. One is a transformer fine-tuned on Swahili SMS (AfroXLMR), which reads the words in context. The other is a character n-gram model, which looks at short runs of letters.</p>
+          <p>They tend to be wrong on different messages, so the message is flagged if either one flags it. That is why the result shows both of them, and why they sometimes disagree.</p></div>
+      </details>
       <details id="privacy">
         <summary>Is my message sent anywhere?</summary>
         <div><p>No. Everything runs in your browser: your message is never sent anywhere or stored.</p>
           <p>The transformer (about 360 MB) downloads once and your browser caches it. The n-gram model answers immediately while it loads.</p></div>
       </details>
       <details>
-        <summary>Why two models?</summary>
-        <div><p>Two models that fail on different messages read it: a fine-tuned AfroXLMR transformer and a character n-gram logistic regression. The message is flagged if either one flags it.</p>
-          <p>On the held-out test set this ensemble scores scam F1 0.994 and keeps 0.95–0.99 under lookalike-letter and split-word attacks.</p></div>
-      </details>
-      <details>
-        <summary>Why do numbers show up as &lt;PHONE&gt; or &lt;AMOUNT&gt;?</summary>
-        <div><p>Phone numbers, amounts and links are masked before the models read the text. In the BongoScam data 86% of scams, and no genuine texts, contain a phone number or link, so models learn that "contains a number" means scam: adding a phone number to a genuine message made a plainly fine-tuned AfroXLMR call it a scam 96% of the time.</p>
-          <p>Both deployed models were trained number-balanced, which brought that false-alarm rate to 0%.</p></div>
-      </details>
-      <details>
         <summary>What does "Undo disguise tricks" do?</summary>
-        <div><p>It removes invisible characters, maps lookalike Cyrillic and Greek letters back to Latin ones, undoes digit swaps such as 4 for a, and rejoins s p a c e d words before the models read the text.</p></div>
+        <div><p>Scammers disguise words so filters miss them. This removes invisible characters, turns lookalike Cyrillic and Greek letters back into Latin ones, undoes digit swaps such as 4 for a, and rejoins s p a c e d words before the models read the text.</p></div>
       </details>
       <details>
-        <summary>What was it trained on?</summary>
-        <div><p id="train-note"></p>
-          <p>Code, data, experiments and limits are in the <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub repository</a>; the model is <a href="https://huggingface.co/supserrr/wdyri-afroxlmr" target="_blank" rel="noopener">supserrr/wdyri-afroxlmr</a>.</p></div>
+        <summary>Why are numbers replaced with &lt;PHONE&gt; and &lt;AMOUNT&gt;?</summary>
+        <div><p>Before reading, the models replace phone numbers, amounts and links with &lt;PHONE&gt;, &lt;AMOUNT&gt; and &lt;URL&gt;.</p>
+          <p>In the training data 86% of scams, and no genuine texts, contain a phone number or link, so a model can learn that any number means scam. A transformer trained without a fix for this called a genuine message a scam 96% of the time once a phone number was added. Both models here were trained with numbers in both kinds of message, which brought that to 0%.</p></div>
+      </details>
+      <details>
+        <summary>Does it work in other languages?</summary>
+        <div><p>It is built for Swahili SMS from Tanzania. <span id="train-note"></span></p>
+          <p>It saw no other language in training, so it does worse elsewhere: on real scam SMS in Chichewa, from Malawi, it is much less accurate.</p></div>
       </details>
       <details>
         <summary>Can I trust the verdict?</summary>
-        <div><p>It is a research demo, not a guarantee. Heavily disguised text is treated as suspicious even when it is genuine, and scam scripts unlike anything in training can slip through.</p>
-          <p>When in doubt, call your provider on its official number.</p></div>
+        <div><p>It is a research demo, not a guarantee. On Swahili test messages it never saw in training it scores 0.994 F1 (1 would mean every scam caught with no false alarms), and stays at 0.95–0.99 when letters are disguised or words split. But heavily disguised text is treated as suspicious even when it is genuine, and scam scripts unlike anything in training can slip through.</p>
+          <p>When in doubt, call your provider on its official number. The code, data and full results are on <a href="https://github.com/supserrr/wdyri" target="_blank" rel="noopener">GitHub</a>.</p></div>
       </details>
     </div>
   </section>
