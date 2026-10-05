@@ -10,19 +10,32 @@ const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const smooth = reduceMotion ? "auto" : "smooth";
 
-// --- Typed notes ---------------------------------------------------------------
+// --- Corner notes -------------------------------------------------------------------
+// Two small live logs, one near the top and one near the bottom. Each types itself in line
+// by line, holds for a while, fades out, then types in again in the opposite corner; the two
+// run on different clocks so they never switch together. app.js updates their lines.
 
-const timers = new WeakMap();
-function type(el, text, delay = 0) {
-  clearTimeout(timers.get(el));
-  if (reduceMotion) { el.textContent = text; return; }
-  let i = 0;
-  const step = () => {
-    el.textContent = text.slice(0, ++i);
-    if (i < text.length) timers.set(el, setTimeout(step, 22));
-  };
+const CHAR_MS = 26, FADE_MS = 600, GAP_MS = 700;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const typing = new WeakMap();
+
+// Types `text` into `el` one character at a time; resolves when done (or when replaced).
+function typeText(el, text) {
+  const token = {};
+  typing.set(el, token);
+  el.dataset.typed = "";
+  if (reduceMotion) { el.textContent = text; el.dataset.typed = "1"; return Promise.resolve(); }
   el.textContent = "";
-  timers.set(el, setTimeout(step, delay));
+  return new Promise((resolve) => {
+    let i = 0;
+    const step = () => {
+      if (typing.get(el) !== token) return resolve();
+      el.textContent = text.slice(0, ++i);
+      if (i < text.length) setTimeout(step, CHAR_MS);
+      else { el.dataset.typed = "1"; resolve(); }
+    };
+    text ? step() : (el.dataset.typed = "1", resolve());
+  });
 }
 
 // Updates every element showing the note `key`; `instant` skips the typing effect.
@@ -30,13 +43,45 @@ export function note(key, text, { instant = false } = {}) {
   for (const el of $$(`[data-note="${key}"]`)) {
     if (el.dataset.text === text) continue;
     el.dataset.text = text;
-    if (instant) { clearTimeout(timers.get(el)); el.textContent = text; } else type(el, text);
+    const block = el.closest(".notes");
+    if (!block) { el.textContent = text; continue; }            // the one-line status on phones
+    if (!el.dataset.typed) continue;                              // the block types it when it gets there
+    if (instant) { typing.set(el, {}); el.textContent = text; }
+    else typeText(el, text);
   }
 }
 
-$$(".notes div").forEach((el) => { el.dataset.text = el.textContent; el.textContent = ""; });
-function typeNotes() {
-  $$(".notes div").forEach((el, i) => { if (!el.textContent) type(el, el.dataset.text, 700 + i * 240); });
+const noteBlocks = $$(".notes");
+noteBlocks.forEach((b) => b.querySelectorAll("div").forEach((el) => {
+  el.dataset.text ??= el.textContent;
+  el.textContent = "";
+}));
+
+async function typeBlock(block) {
+  const lines = [...block.querySelectorAll("div")];
+  lines.forEach((el) => { typing.set(el, {}); el.textContent = ""; el.dataset.typed = ""; });
+  block.classList.remove("fading");
+  for (const el of lines) await typeText(el, el.dataset.text);
+}
+
+async function cycleNotes(block, { delay, hold, side }) {
+  await sleep(delay);
+  await typeBlock(block);
+  if (reduceMotion) return;   // stays put
+  for (;;) {
+    await sleep(hold);
+    block.classList.add("fading");
+    await sleep(FADE_MS + GAP_MS);
+    side = side === "left" ? "right" : "left";
+    block.classList.toggle("right", side === "right");
+    await typeBlock(block);
+  }
+}
+
+function startNotes() {
+  const [top, bottom] = noteBlocks;
+  if (top) cycleNotes(top, { delay: 700, hold: 9000, side: "left" });
+  if (bottom) cycleNotes(bottom, { delay: 1600, hold: 12500, side: "left" });
 }
 
 // --- Page loader -------------------------------------------------------------------
@@ -70,7 +115,7 @@ function reveal() {
       setTimeout(land, 900);
     }
     layout();
-    typeNotes();
+    startNotes();
     setTimeout(settle, 1600);   // the entrance has finished
   }, Math.max(0, 1100 - (performance.now() - loadStart)));   // let the logo finish drawing
 }
@@ -97,7 +142,7 @@ try {
 // --- Hero shrinking away, story text scrolling through its card ------------------------
 
 const heroWrap = $(".hero-wrap"), heroCard = $("#hero-card"), hero = $("#hero"), glass = $(".glass");
-const notes = $$(".notes");
+const notesLayer = $(".notes-layer");
 const stage = $("#story"), storyCard = $(".story-card"), story = $("#story-text");
 let vw = innerWidth, vh = innerHeight;
 
@@ -119,7 +164,7 @@ function update() {
   hero.style.opacity = fade;
   hero.style.transform = fade < 1 ? `scale(${1 - k * 0.04})` : "";
   hero.inert = fade < 0.3;
-  for (const n of notes) n.style.opacity = fade;
+  if (notesLayer) notesLayer.style.opacity = fade;
 
   const q = clamp(-stage.getBoundingClientRect().top / (stage.offsetHeight - vh), 0, 1);
   const h = storyCard.offsetHeight, top = h * 0.85, end = h * 0.12 - story.offsetHeight;

@@ -18,8 +18,8 @@ varying vec2 vUv;
 vec3 spectrum(float t) {
   t = clamp(t, 0.0, 1.0) * 8.0;
   vec3 c0 = vec3(0.20, 0.33, 1.00), c1 = vec3(0.30, 0.72, 1.00), c2 = vec3(0.70, 0.97, 1.00);
-  vec3 c3 = vec3(1.00, 1.00, 0.97), c4 = vec3(1.00, 0.93, 0.45), c5 = vec3(1.00, 0.62, 0.20);
-  vec3 c6 = vec3(0.98, 0.30, 0.25), c7 = vec3(0.90, 0.28, 0.70), c8 = vec3(0.45, 0.35, 1.00);
+  vec3 c3 = vec3(1.00, 1.00, 0.97), c4 = vec3(1.00, 0.95, 0.62), c5 = vec3(1.00, 0.58, 0.72);
+  vec3 c6 = vec3(0.95, 0.32, 0.55), c7 = vec3(0.85, 0.30, 0.78), c8 = vec3(0.45, 0.35, 1.00);
   if (t < 1.0) return mix(c0, c1, t);
   if (t < 2.0) return mix(c1, c2, t - 1.0);
   if (t < 3.0) return mix(c2, c3, t - 2.0);
@@ -44,7 +44,7 @@ void main() {
   float s = vUv.x, t = uTime;
   float dy = vUv.y - centre(s, t);
 
-  // A 23-second colour cycle: a warm orange phase (where it starts) easing into a cool
+  // A 23-second colour cycle: a rose phase (where it starts) easing into a cool
   // blue and cyan phase and back. The dark footer stays in its own palette.
   float warm = uDark > 0.5 ? 0.0 : smoothstep(-0.2, 0.8, cos(6.2832 * t / 23.0));
 
@@ -69,11 +69,11 @@ void main() {
   float hb = exp(-pow((dy + 0.06) / (uDark > 0.5 ? 0.045 : gw), 2.0));
   float m = smoothstep(0.05, 0.95, s);
   vec3 above = mix(mix(vec3(0.42, 0.52, 1.00), vec3(0.70, 0.60, 1.00), m),
-                   mix(vec3(0.95, 0.55, 0.75), vec3(1.00, 0.40, 0.16), smoothstep(0.2, 0.7, s)), warm);
-  vec3 below = mix(mix(vec3(1.00, 0.66, 0.62), vec3(0.50, 0.58, 1.00), m), vec3(1.00, 0.36, 0.12), warm);
-  float aA = ha * mix(0.42, 0.85, warm), aB = hb * mix(0.30, 0.95, warm);
+                   mix(vec3(0.82, 0.62, 1.00), vec3(1.00, 0.58, 0.74), smoothstep(0.2, 0.7, s)), warm);
+  vec3 below = mix(mix(vec3(1.00, 0.70, 0.78), vec3(0.50, 0.58, 1.00), m), vec3(1.00, 0.60, 0.76), warm);
+  float aA = ha * mix(0.42, 0.55, warm), aB = hb * mix(0.30, 0.55, warm);
   if (uDark > 0.5) {
-    above = mix(vec3(0.25, 0.75, 0.95), vec3(0.95, 0.62, 0.25), m);
+    above = mix(vec3(0.25, 0.75, 0.95), vec3(0.72, 0.45, 0.98), m);
     below = vec3(0.22, 0.36, 0.95);
     aA = ha * 0.6;
     aB = hb * 0.22;
