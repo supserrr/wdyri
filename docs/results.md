@@ -30,6 +30,7 @@ Template-disjoint split (no scam script in both train and test). Full tables for
 ![RQ2 attacks](../results/figures/rq2_attacks.png)
 ![RQ2 defences](../results/figures/rq2_defences.png)
 ![RQ3](../results/figures/rq3_transfer.png)
+![Transformer training curves](../results/figures/training_curves.png)
 
 ## Experiments
 

@@ -62,7 +62,7 @@ def rq1_repeated_splits(by_seed: pd.DataFrame) -> None:
     ax.set_xticks(range(len(order)), [MODELS[m][0].replace(" (", "\n(") for m in order])
     ax.set_ylabel("Scam F1 on test")
     ax.set_title("RQ1: random splits flatter character n-gram models most", loc="left")
-    ax.legend(loc="lower right", ncol=2)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2)   # below the axis, clear of every point
     ax.grid(axis="x", visible=False)
     save(fig, "rq1_repeated_splits")
 
@@ -87,10 +87,11 @@ def rq2_attacks(summary: pd.DataFrame) -> None:
         ax.set_xticks(xs, xl)
         ax.set_title(title, loc="left")
     axes[0].set_ylabel("Relative F1 drop (%)")
-    axes[0].legend(loc="upper left", fontsize=7.5)
     fig.suptitle("RQ2: disguise breaks word-based models; transformers are not hurt (see the E6 control for why)",
                  x=0.01, ha="left", fontweight="bold", fontsize=10.5)
     fig.tight_layout()
+    handles, labels = axes[0].get_legend_handles_labels()   # one legend under the panels, clear of the lines
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, 0.0), ncol=len(labels), fontsize=7.5)
     save(fig, "rq2_attacks")
 
 
@@ -219,6 +220,49 @@ def e10_stress(stress: pd.DataFrame) -> None:
     save(fig, "e10_stress_tests")
 
 
+def training_curves() -> None:
+    """Validation F1 and loss per epoch for every logged transformer run on the template split."""
+    log = pd.read_json(config.RESULTS / "transformer_log.jsonl", lines=True)
+    styles = {("xlmr", "clean"): ("XLM-R", MODELS["xlmr"][1], "-"),
+              ("afroxlmr", "clean"): ("AfroXLMR", MODELS["afroxlmr"][1], "-"),
+              ("afroxlmr", "counterfactual"): ("AfroXLMR, number-balanced", "#9c3d6e", "--")}
+    log = log[(log["split"] == "template") & log.apply(lambda r: (r["model"], r["variant"]) in styles, axis=1)]
+    log = log.assign(order=log.apply(lambda r: list(styles).index((r["model"], r["variant"])), axis=1)).sort_values(["order", "seed"])
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 3.6), gridspec_kw={"width_ratios": [1, 1.15]})
+    seen = set()
+    for row, (_, run) in enumerate(log.iterrows()):
+        label, colour, dash = styles[(run["model"], run["variant"])]
+        hist = pd.DataFrame(run["history"])
+        best = hist.sort_values(["val_f1", "val_loss"], ascending=[False, True]).iloc[0]   # the epoch kept
+        # (a) one row per run: dark = F1 1.000, pale = 0.994 (one validation error in 152), ring = epoch kept
+        for _, h in hist.iterrows():
+            ax1.scatter(h["epoch"], row, s=70, color=colour, alpha=1.0 if h["val_f1"] >= 0.9999 else 0.3, zorder=3)
+        ax1.scatter(best["epoch"], row, s=170, facecolor="none", edgecolor=INK, linewidth=1.2, zorder=4)
+        # (b) validation loss per epoch
+        name = None if label in seen else label
+        seen.add(label)
+        ax2.plot(hist["epoch"], hist["val_loss"], color=colour, linestyle=dash, linewidth=1.6, marker="o", markersize=3.5,
+                 label=name)
+        ax2.scatter([best["epoch"]], [best["val_loss"]], s=60, facecolor="none", edgecolor=INK, linewidth=1.2, zorder=4)
+    ax1.set_yticks(range(len(log)), [f"{styles[(r.model, r.variant)][0]}, seed {r.seed}" for r in log.itertuples()])
+    ax1.invert_yaxis()
+    ax1.set_xticks(range(1, 6))
+    ax1.set_xlim(0.5, 5.5)
+    ax1.set_xlabel("Epoch (dark: F1 1.000; pale: 0.994, one error in 152)")
+    ax1.set_title("(a) Validation F1 per run", loc="left")
+    ax1.grid(axis="y", visible=False)
+    ax2.set_yscale("log")
+    ax2.set_xticks(range(1, 6))
+    ax2.set_xlabel("Epoch")
+    ax2.set_ylabel("Validation loss (log scale)")
+    ax2.set_title("(b) Validation loss", loc="left")
+    ax2.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3, fontsize=7.5)   # below, clear of the lines
+    fig.suptitle("Validation F1 is 0.99 to 1.00 from the first epoch in every run; rings mark the epoch kept",
+                 x=0.01, ha="left", fontweight="bold", fontsize=10.5)
+    fig.tight_layout()
+    save(fig, "training_curves")
+
+
 def main() -> None:
     summary = pd.read_csv(config.RESULTS / "experiments.csv")
     by_seed = pd.read_csv(config.RESULTS / "experiments_by_seed.csv")
@@ -226,6 +270,7 @@ def main() -> None:
     rq2_attacks(summary)
     rq2_defences(summary)
     rq3_transfer(summary)
+    training_curves()
     stress = config.RESULTS / "stress_tests.csv"
     if stress.exists():
         e10_stress(pd.read_csv(stress))
