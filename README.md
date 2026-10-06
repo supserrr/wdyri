@@ -43,7 +43,7 @@ The models form a ladder: rule baselines and Naive Bayes, character n-gram logis
 - **The published score reproduces.** Naive Bayes reaches 98.68% accuracy, matching BongoScam's 98.7%.
 - **The models lean on phone numbers.** 86% of scams and no genuine texts contain a phone number or link. Adding a phone number to a genuine message makes fine-tuned AfroXLMR call it a scam 96% of the time.
 - **A targeted fix works.** Training with numbers in both classes cuts those false alarms to 0%, and misses on scams with their number removed from 20% to 2%.
-- **Two models are harder to fool than one.** The deployed ensemble scores test F1 0.994 and keeps 0.95–0.99 under lookalike-letter and split-word attacks, where the number-balanced n-gram model on its own falls to 0.50–0.72.
+- **Two models are harder to fool than one.** The deployed ensemble scores test F1 0.994 and keeps 0.95–0.99 under lookalike-letter and split-word attacks, where the number-balanced n-gram model on its own falls to 0.50–0.72. On clean text the two are level (0.994 vs 0.988).
 - **Chichewa transfer is weak.** Zero-shot fraud F1 is 0.46–0.75; twenty Chichewa examples lift the character n-gram model from 0.65 to 0.82.
 
 | System (template-disjoint test split) | Test F1 | Chichewa F1 (zero-shot) |
@@ -51,6 +51,7 @@ The models form a ladder: rule baselines and Naive Bayes, character n-gram logis
 | Phone rule: "contains a number" | 0.744 | 0.681 |
 | Naive Bayes, word counts (published baseline) | 0.982 | 0.608 |
 | Logistic regression, character 2–5-grams | 0.968 | 0.651 |
+| Logistic regression, character 2–5-grams, number-balanced | 0.988 | 0.146 |
 | AfroXLMR base | 0.776 ± 0.021 | 0.719 ± 0.019 |
 | AfroXLMR base, number-balanced | 0.820 ± 0.035 | 0.716 ± 0.033 |
 | **Ensemble, both number-balanced (deployed)** | **0.994** | 0.715 ± 0.034 |

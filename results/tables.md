@@ -20,6 +20,7 @@ Scam F1 at threshold 0.5 unless noted; neural models are mean ± sd over 3 seeds
 | BiLSTM, fastText fine-tuned | 0.763 ± 0.000 | [0.68, 0.84] | 0.990 ± 0.000 | 0.980 ± 0.003 | 1.000 ± 0.000 | 0.617 ± 0.000 | 0.750 ± 0.011 | 0.800 ± 0.023 |
 | XLM-R base | 0.759 ± 0.007 | [0.67, 0.83] | 0.983 ± 0.011 | 0.871 ± 0.035 | 0.987 ± 0.022 | 0.617 ± 0.000 | 0.717 ± 0.012 | 0.654 ± 0.090 |
 | AfroXLMR base | 0.776 ± 0.021 | [0.70, 0.84] | 0.990 ± 0.000 | 0.958 ± 0.038 | 1.000 ± 0.000 | 0.634 ± 0.029 | 0.719 ± 0.019 | 0.805 ± 0.042 |
+| Log. regression, char 2-5, number-balanced (E11) | 0.988 | [0.97, 1.00] | 0.980 | 0.994 | 0.988 | 0.988 | 0.146 | 0.581 |
 | AfroXLMR base, number-balanced (E11) | 0.820 ± 0.035 | [0.75, 0.88] | 0.990 ± 0.000 | 0.985 ± 0.015 | 1.000 ± 0.000 | 0.696 ± 0.050 | 0.716 ± 0.033 | 0.649 ± 0.005 |
 | Ensemble: char LR OR AfroXLMR | 0.968 ± 0.000 | [0.94, 0.99] | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.938 ± 0.000 | 0.720 ± 0.018 | 0.805 ± 0.043 |
 | Ensemble: char LR OR number-balanced AfroXLMR | 0.968 ± 0.000 | [0.94, 0.99] | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.938 ± 0.000 | 0.737 ± 0.017 | 0.648 ± 0.005 |
@@ -171,6 +172,7 @@ Difference = first system minus second. Paired bootstrap: 1,000 resamples of mes
 | Char LR +50 Chichewa vs AfroXLMR +50, F1 | f1 | +0.010 | [-0.017, +0.035] | 0.480 | paired bootstrap |
 | Deployed ensemble vs number-balanced AfroXLMR, Swahili test F1 | f1 | +0.174 | [+0.093, +0.272] | < 0.001 | paired bootstrap |
 | Deployed ensemble vs char LR, Swahili test F1 | f1 | +0.026 | [+0.000, +0.060] | 0.047 | paired bootstrap |
+| Deployed ensemble vs number-balanced char LR, Swahili test F1 | f1 | +0.006 | [+0.000, +0.020] | 0.373 | paired bootstrap |
 | Deployed ensemble vs number-balanced char LR, full lookalike attack F1 | f1 | +0.468 | [+0.340, +0.599] | < 0.001 | paired bootstrap |
 | Deployed ensemble vs char LR, full lookalike attack F1 | f1 | +0.229 | [+0.126, +0.333] | < 0.001 | paired bootstrap |
 | Deployed ensemble vs char LR, lookalike with NB attacker F1 | f1 | +0.218 | [+0.144, +0.304] | < 0.001 | paired bootstrap |

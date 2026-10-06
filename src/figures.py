@@ -97,6 +97,7 @@ def rq2_attacks(summary: pd.DataFrame) -> None:
 
 def rq2_defences(summary: pd.DataFrame) -> None:
     """Scam recall on fully attacked test sets: no defence, normalisation, adversarial training."""
+    SHORT = {"nb_word_counts": "Word NB", "lr_char": "Char LR", "bilstm_finetuned": "BiLSTM + fastText", "afroxlmr": "AfroXLMR base"}
     models = ["nb_word_counts", "lr_char", "bilstm_finetuned", "afroxlmr"]
     s = summary[(summary["split"] == "template")]
     fig, axes = plt.subplots(1, 4, figsize=(12.0, 3.0), sharey=True)
@@ -114,7 +115,7 @@ def rq2_defences(summary: pd.DataFrame) -> None:
         clean = [s[(s["model"] == m) & (s["variant"] == "clean") & (s["set"] == "test")]["recall"].mean() for m in models]
         ax.hlines(clean, np.arange(len(models)) - 0.45, np.arange(len(models)) + 0.45, color=INK, linewidth=1.2,
                   zorder=4, label="Clean test (no attack)" if attack == "lookalike" else None)
-        ax.set_xticks(range(len(models)), [MODELS[m][0].split(" (")[0].replace("Log. regression", "Log. reg.") for m in models],
+        ax.set_xticks(range(len(models)), [SHORT.get(m, MODELS[m][0]) for m in models],
                       rotation=20, ha="right")
         ax.set_ylim(0, 1.05)
         ax.set_title(title, loc="left")

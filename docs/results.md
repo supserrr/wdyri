@@ -17,6 +17,7 @@ Template-disjoint split (no scam script in both train and test). Full tables for
 | BiLSTM, fastText fine-tuned | 0.763 ± 0.000 | [0.68, 0.84] | 0.990 ± 0.000 | 0.980 ± 0.003 | 1.000 ± 0.000 | 0.617 ± 0.000 | 0.750 ± 0.011 | 0.800 ± 0.023 |
 | XLM-R base | 0.759 ± 0.007 | [0.67, 0.83] | 0.983 ± 0.011 | 0.871 ± 0.035 | 0.987 ± 0.022 | 0.617 ± 0.000 | 0.717 ± 0.012 | 0.654 ± 0.090 |
 | AfroXLMR base | 0.776 ± 0.021 | [0.70, 0.84] | 0.990 ± 0.000 | 0.958 ± 0.038 | 1.000 ± 0.000 | 0.634 ± 0.029 | 0.719 ± 0.019 | 0.805 ± 0.042 |
+| Log. regression, char 2-5, number-balanced (E11) | 0.988 | [0.97, 1.00] | 0.980 | 0.994 | 0.988 | 0.988 | 0.146 | 0.581 |
 | AfroXLMR base, number-balanced (E11) | 0.820 ± 0.035 | [0.75, 0.88] | 0.990 ± 0.000 | 0.985 ± 0.015 | 1.000 ± 0.000 | 0.696 ± 0.050 | 0.716 ± 0.033 | 0.649 ± 0.005 |
 | Ensemble: char LR OR AfroXLMR | 0.968 ± 0.000 | [0.94, 0.99] | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.938 ± 0.000 | 0.720 ± 0.018 | 0.805 ± 0.043 |
 | Ensemble: char LR OR number-balanced AfroXLMR | 0.968 ± 0.000 | [0.94, 0.99] | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.938 ± 0.000 | 0.737 ± 0.017 | 0.648 ± 0.005 |
@@ -47,8 +48,8 @@ Template-disjoint split (no scam script in both train and test). Full tables for
 | E8 | RQ3 transfer | Swahili-trained rungs on Chichewa | fraud F1, PR-AUC | trained models 0.46-0.75 (phone rule 0.68, length rule 0.72); AfroXLMR PR-AUC 0.81 vs XLM-R 0.65 (p < 0.001); fastText BiLSTM 0.80 |
 | E9 | RQ3 few-shot | + 20 / 50 Chichewa messages, scored on the same messages | fraud F1 | char LR 0.65 → 0.82 → 0.88; AfroXLMR 0.72 → 0.75 → 0.87; XLM-R 0.72 → 0.70 → 0.78 (AfroXLMR vs XLM-R p < 0.001; char LR vs AfroXLMR n.s.) |
 | E10 | Shortcut diagnosis | minimal pairs: + number on genuine, − number on scams | false alarms, misses | AfroXLMR 96% / 20%; XLM-R 40% / 15%; BiLSTM 28% / 2%; char LR 15% / 2%; word LR 1% / 2% |
-| E11 | Shortcut fix | number-balanced counterfactual training | stress tests, F1 everywhere | AfroXLMR 0% / 2%, BiLSTM 0% / 0%; AfroXLMR test PR-AUC 0.958 → 0.985 (F1 0.78 → 0.82, n.s.), Chichewa precision -0.06; char LR weaker under lookalike; BiLSTM weaker under code-switching and on Chichewa |
-| E12 | Combination | char LR OR AfroXLMR (plain and number-balanced), chosen on validation; 2 fresh splits; 2 attackers | scam F1 | deployed (both number-balanced): test 0.994, lookalike 0.963, split words 0.948; fresh splits 0.994 and 0.988; +0.18-0.23 over char LR under attack (p < 0.001 where tested) |
+| E11 | Shortcut fix | number-balanced counterfactual training | stress tests, F1 everywhere | AfroXLMR 0% / 2%, BiLSTM 0% / 0%; AfroXLMR test PR-AUC 0.958 → 0.985 (F1 0.78 → 0.82, n.s.), Chichewa precision -0.06; char LR test F1 0.968 → 0.988 (catches the 5 landlord messages it missed, one new miss and one new false alarm); char LR weaker under lookalike; BiLSTM weaker under code-switching and on Chichewa |
+| E12 | Combination | char LR OR AfroXLMR (plain and number-balanced), chosen on validation; 2 fresh splits; 2 attackers | scam F1 | deployed (both number-balanced): test 0.994, lookalike 0.963, split words 0.948; fresh splits 0.994 and 0.988; level with the number-balanced char LR on clean test (+0.006, p = 0.37); +0.18-0.23 over char LR under attack (p < 0.001 where tested) |
 
 ## Error analysis
 
@@ -67,6 +68,7 @@ Every error of the main runs is sorted into a bucket by `src/errors.py` ([result
 * **Small, easy data with undocumented provenance.** 1,064 Swahili messages; the genuine texts read like composed chat, and two shortcuts (numbers, length) separate the classes. In-language scores overstate real-world performance.
 * **One split for most neural comparisons.** Validation F1 saturates, so neural comparisons rest on one template-disjoint test set (152 messages) dominated by one script. We add per-template views, bootstrap intervals, significance tests and two fresh splits for the transformer and the ensemble, but not ten re-drawn splits for every neural model.
 * **Attacks.** The main trigger words come from a char-LR attacker (white-box for a char LR); a second, Naive Bayes attacker gives the same picture but changes only 84% of scams. Adversarial training uses the same attack code, and the normalisation table covers the attack's characters, so E7 measures robustness to known tricks: on held-out lookalikes normalisation recovers nothing. Transformers resist disguise largely by flagging odd text, including genuine text.
+* **Minimal pairs test one edit.** E10 appends a bare `<PHONE>` to the end of a genuine text. A number inside the scam hook *"kwa namba hii"* still trips the number-balanced AfroXLMR: in the live app *"Mama, nimefika salama Dodoma. Nipigie jioni kwa namba hii 0754123456 tuongee."* scores 92%, and 0% without the number.
 * **Chichewa.** The fraud set is partly rewritten by its authors and originals are not marked; our masking rules were written after looking at both datasets.
 * **Post-hoc ensemble and a test-informed tuning revision.** The ensemble idea came from test-set errors (fresh splits and validation-based selection reduce but do not remove that bias), and one change of the classical tuning protocol was prompted by a test result.
 * **No sender metadata or conversation context,** which impersonation scams need.

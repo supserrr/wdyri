@@ -15,6 +15,7 @@ comparison,metric,difference,ci_low,ci_high,p_value,seed_pairs,test
 "Char LR +50 Chichewa vs AfroXLMR +50, F1",f1,0.0096,-0.0171,0.0355,0.4800,3,paired bootstrap
 "Deployed ensemble vs number-balanced AfroXLMR, Swahili test F1",f1,0.1742,0.0935,0.2723,0.0000,3,paired bootstrap
 "Deployed ensemble vs char LR, Swahili test F1",f1,0.0257,0.0001,0.0604,0.0473,3,paired bootstrap
+"Deployed ensemble vs number-balanced char LR, Swahili test F1",f1,0.0062,0.0000,0.0204,0.3730,3,paired bootstrap
 "Deployed ensemble vs number-balanced char LR, full lookalike attack F1",f1,0.4676,0.3403,0.5994,0.0000,3,paired bootstrap
 "Deployed ensemble vs char LR, full lookalike attack F1",f1,0.2287,0.1260,0.3333,0.0000,3,paired bootstrap
 "Deployed ensemble vs char LR, lookalike with NB attacker F1",f1,0.2179,0.1436,0.3036,0.0000,3,paired bootstrap

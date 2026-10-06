@@ -26,7 +26,7 @@ VARIANT_NAMES = {"clean": "", "counterfactual": ", number-balanced (E11)", "stri
                  "advtrain": " + adversarial training"}
 LADDER = [(m, "clean") for m in ["majority", "phone_rule", "length_rule", "nb_word_counts", "nb_char", "lr_word", "lr_char",
                                  "bilstm_random", "bilstm_frozen", "bilstm_finetuned", "xlmr", "afroxlmr"]]
-LADDER += [("afroxlmr", "counterfactual"), ("ensemble", "clean"), ("ensemble_cf", "clean"), ("ensemble_cf2", "clean")]
+LADDER += [("lr_char", "counterfactual"), ("afroxlmr", "counterfactual"), ("ensemble", "clean"), ("ensemble_cf", "clean"), ("ensemble_cf2", "clean")]
 
 
 def label(model: str, variant: str) -> str:

@@ -49,6 +49,7 @@ COMPARISONS = [
     # the deployed ensemble: number-balanced char LR OR number-balanced AfroXLMR (chosen on validation)
     ("Deployed ensemble vs number-balanced AfroXLMR, Swahili test F1", ("ensemble_cf2", "clean"), ("afroxlmr", "counterfactual"), "test", "f1"),
     ("Deployed ensemble vs char LR, Swahili test F1", ("ensemble_cf2", "clean"), ("lr_char", "clean"), "test", "f1"),
+    ("Deployed ensemble vs number-balanced char LR, Swahili test F1", ("ensemble_cf2", "clean"), ("lr_char", "counterfactual"), "test", "f1"),
     ("Deployed ensemble vs number-balanced char LR, full lookalike attack F1", ("ensemble_cf2", "clean"), ("lr_char", "counterfactual"), "test_lookalike_all", "f1"),
     ("Deployed ensemble vs char LR, full lookalike attack F1", ("ensemble_cf2", "clean"), ("lr_char", "clean"), "test_lookalike_all", "f1"),
     ("Deployed ensemble vs char LR, lookalike with NB attacker F1", ("ensemble_cf2", "clean"), ("lr_char", "clean"), "test_xatk_lookalike_all", "f1"),
