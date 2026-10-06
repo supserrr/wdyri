@@ -41,8 +41,8 @@ datasets: [henrydioniz/swahili-sms-detection-dataset]
 Trained with number-balanced counterfactual edits so that the presence of a phone
 number is not, by itself, evidence of a scam (experiment E11 in the repository).
 
-* Labels: `0` = not scam, `1` = scam. Use the decision threshold {threshold} (chosen on validation to
-  catch at least 95% of scams), not 0.5, to match the reported results.
+* Labels: `0` = not scam, `1` = scam. Use the decision threshold {threshold} to match the reported results:
+  the highest threshold up to 0.5 that still catches at least 95% of validation scams.
 * Input must go through the project's `preprocess()` (phone numbers, amounts and links are masked).
 * Training data: the BongoScam dataset (MIT licence), template-disjoint split, {n_train} messages.
 * Known blind spots: impersonation scams with no money words (landlord "this is my new number"),

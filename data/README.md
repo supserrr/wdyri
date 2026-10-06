@@ -4,7 +4,7 @@ Two public datasets, used for different jobs. They are never mixed.
 
 | Dataset | Language | Rows | Labels | Used for | Licence | Source |
 | --- | --- | --- | --- | --- | --- | --- |
-| BongoScam / Swahili SMS Detection Dataset (Dioniz, 2024) | Swahili (Tanzania) | 1,508 | scam 1,000 / trust 508 | training, validation, in-language test | MIT | [Kaggle](https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset) |
+| BongoScam / Swahili SMS Detection Dataset (Dioniz, 2024a) | Swahili (Tanzania) | 1,508 | scam 1,000 / trust 508 | training, validation, in-language test | MIT | [Kaggle](https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset) |
 | SMS Fraud Classification dataset for Chichewa (Taylor & Robert, 2025b) | Chichewa (Malawi) | 824 (sheets `D_CHI` + `telcoSMS_CHI`) | fraud 338 / normal 486 | zero-shot transfer test only (RQ3) | CC BY 4.0 | [Zenodo 10.5281/zenodo.14607454](https://doi.org/10.5281/zenodo.14607454) |
 
 ## Get the raw files

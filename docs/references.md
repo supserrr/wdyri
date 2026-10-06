@@ -14,7 +14,9 @@ Chiuseni, D., Bahizire, A., Hama, S., & Ndibwile, J. D. (2026). *Adversarial rob
 
 Conneau, A., Khandelwal, K., Goyal, N., Chaudhary, V., Wenzek, G., Guzmán, F., Grave, E., Ott, M., Zettlemoyer, L., & Stoyanov, V. (2020). Unsupervised cross-lingual representation learning at scale. In *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics* (pp. 8440-8451). https://doi.org/10.18653/v1/2020.acl-main.747
 
-Dioniz, H. (2024). *Swahili SMS detection dataset* [Data set]. Kaggle. https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset
+Dioniz, H. (2024a). *Swahili SMS detection dataset* [Data set]. Kaggle. https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset
+
+Dioniz, H. (2024b). *BongoScam: Ni tumie kwa namba hii SMS detection with machine learning* [Computer software]. GitHub. https://github.com/Henryle-hd/BongoScamDetection
 
 Dodge, J., Ilharco, G., Schwartz, R., Farhadi, A., Hajishirzi, H., & Smith, N. (2020). *Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping* (arXiv:2002.06305). arXiv. https://arxiv.org/abs/2002.06305
 
@@ -26,7 +28,7 @@ Eger, S., Şahin, G. G., Rücklé, A., Lee, J.-U., Schulz, C., Mesgar, M., Swarn
 
 Elangovan, A., He, J., & Verspoor, K. (2021). Memorization vs. generalization: Quantifying data leakage in NLP performance evaluation. In *Proceedings of the 16th Conference of the European Chapter of the ACL* (pp. 1325-1335). https://aclanthology.org/2021.eacl-main.113
 
-Geirhos, R., Jacobsen, J.-H., Michaelis, C., Zemel, R., Brendel, W., Bethge, M., & Wichmann, F. A. (2020). Shortcut learning in deep neural networks. *Nature Machine Intelligence, 2*, 665-673. https://doi.org/10.1038/s42256-020-00257-z
+Geirhos, R., Jacobsen, J.-H., Michaelis, C., Zemel, R., Brendel, W., Bethge, M., & Wichmann, F. A. (2020). Shortcut learning in deep neural networks. *Nature Machine Intelligence, 2*(11), 665-673. https://doi.org/10.1038/s42256-020-00257-z
 
 Gorman, K., & Bedrick, S. (2019). We need to talk about standard splits. In *Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics* (pp. 2786-2791). https://doi.org/10.18653/v1/P19-1267
 
@@ -36,7 +38,7 @@ Gururangan, S., Swayamdipta, S., Levy, O., Schwartz, R., Bowman, S. R., & Smith,
 
 Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory. *Neural Computation, 9*(8), 1735-1780. https://doi.org/10.1162/neco.1997.9.8.1735
 
-Hu, J., Ruder, S., Siddhant, A., Neubig, G., Firat, O., & Johnson, M. (2020). XTREME: A massively multilingual multi-task benchmark for evaluating cross-lingual generalization. In *Proceedings of the 37th International Conference on Machine Learning* (PMLR 119, pp. 4411-4421). https://proceedings.mlr.press/v119/hu20b.html
+Hu, J., Ruder, S., Siddhant, A., Neubig, G., Firat, O., & Johnson, M. (2020). XTREME: A massively multilingual multi-task benchmark for evaluating cross-lingual generalisation. In *Proceedings of the 37th International Conference on Machine Learning* (PMLR 119, pp. 4411-4421). https://proceedings.mlr.press/v119/hu20b.html
 
 Hugging Face. (2026). *Transformers.js* (Version 4.3.0) [Computer software]. https://github.com/huggingface/transformers.js
 
@@ -50,6 +52,8 @@ Lauscher, A., Ravishankar, V., Vulić, I., & Glavaš, G. (2020). From zero to he
 
 Mambina, I. S., Ndibwile, J. D., & Michael, K. F. (2022). Classifying Swahili smishing attacks for mobile money users: A machine-learning approach. *IEEE Access, 10*, 83061-83074. https://doi.org/10.1109/ACCESS.2022.3196464
 
+Mambina, I. S., Ndibwile, J. D., Uwimpuhwe, D., & Michael, K. F. (2024). Uncovering SMS spam in Swahili text using deep learning approaches. *IEEE Access, 12*, 25164-25175. https://doi.org/10.1109/ACCESS.2024.3365193
+
 McCoy, R. T., Pavlick, E., & Linzen, T. (2019). Right for the wrong reasons: Diagnosing syntactic heuristics in natural language inference. In *Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics* (pp. 3428-3448). https://aclanthology.org/P19-1334
 
 Mosbach, M., Andriushchenko, M., & Klakow, D. (2021). On the stability of fine-tuning BERT: Misconceptions, explanations, and strong baselines. In *International Conference on Learning Representations (ICLR 2021)*. https://arxiv.org/abs/2006.04884
@@ -58,7 +62,7 @@ Njame, R. A., Sanga, G., & Tende, I. (2026). A machine-learning model for phishi
 
 Ogueji, K., Zhu, Y., & Lin, J. (2021). Small data? No problem! Exploring the viability of pretrained multilingual language models for low-resourced languages. In *Proceedings of the 1st Workshop on Multilingual Representation Learning* (pp. 116-126). https://doi.org/10.18653/v1/2021.mrl-1.11
 
-ONNX Runtime developers. (2026). *ONNX Runtime* (Version 1.30.0) [Computer software]. https://onnxruntime.ai
+ONNX Runtime developers. (2026). *ONNX Runtime* (Version 1.30.0) and *ONNX Runtime Web* (Version 1.31.0-dev.20260914) [Computer software]. https://onnxruntime.ai
 
 Paszke, A., et al. (2019). PyTorch: An imperative style, high-performance deep learning library. In *Advances in Neural Information Processing Systems 32* (pp. 8024-8035). https://arxiv.org/abs/1912.01703
 
@@ -76,7 +80,7 @@ Schuster, M., & Paliwal, K. K. (1997). Bidirectional recurrent neural networks. 
 
 Søgaard, A., Ebert, S., Bastings, J., & Filippova, K. (2021). We need to talk about random splits. In *Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume* (pp. 1823-1832). https://doi.org/10.18653/v1/2021.eacl-main.156
 
-Taylor, A., & Robert, A. (2025a). Using machine learning to detect fraudulent SMSs in Chichewa. In *Integrating AI in Science, Management, and Technology (AISMT 2025)*, Communications in Computer and Information Science, vol. 2699. Springer. https://doi.org/10.1007/978-3-032-08260-2_12
+Taylor, A., & Robert, A. (2025a). Using machine learning to detect fraudulent SMSs in Chichewa. In *Integrating AI in Science, Management, and Technology (AISMT 2025)* (Communications in Computer and Information Science, Vol. 2699, pp. 143-169). Springer. https://doi.org/10.1007/978-3-032-08260-2_12
 
 Taylor, A., & Robert, A. (2025b). *SMS fraud classification dataset for Chichewa* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.14607454
 

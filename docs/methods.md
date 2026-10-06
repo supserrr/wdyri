@@ -4,7 +4,7 @@
 
 | Dataset | Language | Size used | Role | Licence |
 | --- | --- | --- | --- | --- |
-| [BongoScam](https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset) (Dioniz, 2024) | Swahili, Tanzania | 1,508 raw → 1,064 after cleaning (567 scam, 497 genuine) | train / validation / test | MIT |
+| [BongoScam](https://www.kaggle.com/datasets/henrydioniz/swahili-sms-detection-dataset) (Dioniz, 2024a) | Swahili, Tanzania | 1,508 raw → 1,064 after cleaning (567 scam, 497 genuine) | train / validation / test | MIT |
 | [Chichewa SMS fraud](https://doi.org/10.5281/zenodo.14607454) (Taylor & Robert, 2025b) | Chichewa, Malawi | 824 raw → 733 (336 fraud) | zero-shot transfer test only | CC BY 4.0 |
 
 Cleaning: drop exact duplicates, mask phone numbers / amounts / links as `<PHONE>`, `<AMOUNT>`, `<URL>`, drop messages that become identical, group near-duplicate *templates* (character 5-gram Jaccard ≥ 0.8), then make a random and a template-disjoint 70/15/15 split. Data quality, provenance, both shortcuts (numbers and length) and other limits: [data/README.md](../data/README.md). Every design choice and its reason: [DECISIONS.md](../DECISIONS.md).
