@@ -9,6 +9,7 @@ const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
 const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const smooth = reduceMotion ? "auto" : "smooth";
+clearTimeout(window.heroFallback);   // this module runs the entrance from here (see index.html)
 
 // --- Corner notes -------------------------------------------------------------------
 // Two small live logs, one near the top and one near the bottom. Each types itself in line
@@ -85,8 +86,11 @@ function startNotes() {
 }
 
 // --- Page loader -------------------------------------------------------------------
-// The loader stays up until the fonts and the n-gram model (with the example chips) are
-// ready, so the hero appears in one piece; then the ribbon fades in and the hero rises.
+// The loader stays up until the hero's fonts and the n-gram model (with the example chips)
+// are ready, so the hero appears in one piece; then the ribbon fades in and the hero rises.
+// Waiting for the hero's own fonts, not document.fonts.ready: on a slow phone connection
+// that can resolve before the web fonts arrive, and the late swap moved the hero under
+// the flying logo.
 
 const loadStart = performance.now();
 let fontsLoaded = false, appLoaded = false, revealed = false;
@@ -96,23 +100,33 @@ function reveal() {
   setTimeout(() => {
     const root = document.documentElement, loader = $(".loader");
     const fly = $(".loader-mark"), target = $("#hero .mark");
-    const land = () => { root.classList.add("landed"); loader?.remove(); };
+    let landed = false;
+    const land = () => { if (landed) return; landed = true; root.classList.add("landed"); loader?.remove(); };
     root.classList.add("ready");   // loader background fades, ribbon blooms, hero rises
     if (reduceMotion || !fly || !target) land();
     else {
       // One logo throughout: the loader's mark flies to the hero's mark, then hands over.
       // Freeze the waiting pulse where it is and ease back to full opacity, instead of
       // cancelling it: cancelling made the logo jump whenever the pulse was mid-fade.
-      const a = fly.getBoundingClientRect(), b = target.getBoundingClientRect();
-      const opacity = getComputedStyle(fly).opacity;
+      // The target is measured on every frame, so the logo still lands exactly on the
+      // hero's mark if the hero moves during the flight (a late font, a phone's toolbar).
+      const a = fly.getBoundingClientRect(), opacity = parseFloat(getComputedStyle(fly).opacity) || 1;
       fly.style.animation = "none";
       fly.style.opacity = opacity;
-      fly.getBoundingClientRect();   // commit the frozen state before animating from it
-      fly.style.transition = "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease";
-      fly.style.opacity = "1";
-      fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ` +
-        `${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(${b.width / a.width})`;
-      setTimeout(land, 900);
+      const DURATION = 850, started = performance.now();
+      const ease = (t) => 1 - Math.pow(1 - t, 4);
+      const step = (now) => {
+        if (landed) return;
+        const t = clamp((now - started) / DURATION, 0, 1), e = ease(t);
+        const b = target.getBoundingClientRect();
+        const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
+        fly.style.transform = `translate(${dx * e}px, ${dy * e}px) scale(${1 + (b.width / a.width - 1) * e})`;
+        fly.style.opacity = String(opacity + (1 - opacity) * clamp(t / 0.4, 0, 1));
+        if (t < 1) requestAnimationFrame(step);
+        else land();
+      };
+      requestAnimationFrame(step);
+      setTimeout(land, DURATION + 600);   // a background tab gets no frames
     }
     layout();
     startNotes();
@@ -125,7 +139,10 @@ let settle;
 export const settled = new Promise((resolve) => { settle = resolve; });
 const maybeReveal = () => { if (fontsLoaded && appLoaded) reveal(); };
 export function appReady() { appLoaded = true; maybeReveal(); }
-(document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fontsLoaded = true; maybeReveal(); });
+const HERO_FONTS = ['400 48px "Faculty Glyphic"', "400 16px Inter", '400 12px "Geist Mono"'];
+(document.fonts ? Promise.all(HERO_FONTS.map((f) => document.fonts.load(f))) : Promise.resolve())
+  .catch(() => {})   // a font that fails to load falls back; never block the page on it
+  .then(() => { fontsLoaded = true; maybeReveal(); });
 setTimeout(reveal, 6000);   // never keep anyone waiting longer than this
 
 // --- Ribbons -------------------------------------------------------------------
@@ -156,7 +173,10 @@ function layout() {
 }
 
 function update() {
-  const k = easeOut(clamp(scrollY / (heroWrap.offsetHeight * 0.7), 0, 1));
+  // When the hero is taller than the screen (short phones, landscape), it only starts to
+  // shrink and fade once its bottom is in view, so everything in it can be reached.
+  const below = Math.max(0, heroWrap.offsetHeight - vh);
+  const k = easeOut(clamp((scrollY - below) / (Math.min(heroWrap.offsetHeight, vh) * 0.7), 0, 1));
   const small = vw < 720;
   const y = k * (small ? 10 : 24), x = k * (small ? 10 : Math.max(24, vw * 0.06)), r = k * (small ? 28 : 40);
   heroCard.style.clipPath = k > 0 ? `inset(${y}px ${x}px round ${r}px)` : "none";

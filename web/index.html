@@ -8,9 +8,10 @@
 <meta name="theme-color" content="#ffffff">
 <style>html { background: #dfe2e6; }</style>
 <script>
-  // Hold the hero behind the loader until ui.js reveals it (and never longer than 8 s).
+  // Hold the hero behind the loader until ui.js reveals it. If ui.js never runs (a failed
+  // download), show the page anyway after 8 s; ui.js cancels this as soon as it starts.
   document.documentElement.classList.add("js");
-  setTimeout(function () { document.documentElement.classList.add("ready", "landed"); }, 8000);
+  window.heroFallback = setTimeout(function () { document.documentElement.classList.add("ready", "landed"); }, 8000);
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,8 +75,8 @@
   .ribbon { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 
   /* Hero: the checker over the light ribbon; it shrinks into a card as it scrolls away */
-  .hero-wrap { position: relative; height: 100vh; height: 100svh; min-height: 820px; }
-  .hero-card { position: absolute; inset: 0; overflow: hidden; background: var(--hero-bg); will-change: clip-path; }
+  .hero-wrap { position: relative; }
+  .hero-card { position: relative; overflow: hidden; background: var(--hero-bg); will-change: clip-path; }
   /* Story: a pinned card whose text scrolls past the ribbon */
   .stage { position: relative; height: 260vh; }
   .stage-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
@@ -95,8 +96,9 @@
   .notes-top { left: 64px; top: 58px; }
   .notes-bottom { left: 64px; bottom: 56px; }
   .notes.right { left: auto; right: 64px; text-align: right; }
-  .hero { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center;
-          text-align: center; padding: 72px 24px 120px; will-change: transform, opacity; }
+  /* At least one screen tall, taller if the content needs it, so nothing is cut off on short screens */
+  .hero { position: relative; z-index: 3; min-height: 100vh; min-height: max(100svh, 820px); display: flex; flex-direction: column;
+          align-items: center; justify-content: center; text-align: center; padding: 72px 24px 120px; will-change: transform, opacity; }
   .mark-btn { display: block; margin: 0 0 26px; padding: 4px; border: 0; border-radius: 14px; background: none; color: var(--ink); cursor: pointer; }
   .mark { display: block; width: 58px; height: 58px; transition: transform 0.45s var(--ease); }
   .mark-btn:hover .mark { transform: rotate(-10deg) scale(1.06); }
@@ -169,7 +171,7 @@
   .score + .score { border-left: 1px dashed rgba(10, 11, 13, 0.12); }
   .score-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
   .score h3 { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; margin: 0 0 2px; }
-  .score .mono { color: var(--ink-3); font-size: 10.5px; }
+  .score .mono { display: block; color: var(--ink-3); font-size: 10.5px; line-height: 1.5; }
   .flagtxt { flex: none; display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px; background: var(--chip);
              font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
   .score.flagged .flagtxt { background: var(--scam-soft); color: var(--scam); }
@@ -209,7 +211,8 @@
   .legend i.down { background: rgba(20, 110, 255, 0.36); box-shadow: inset 0 -2px 0 #1462e6; }
   .words { line-height: 2.25; word-break: break-word; font-size: 16.5px; font-weight: 400; color: #111; }
   .words span { padding: 3px 5px; border-radius: 5px; }
-  .words:empty::before { content: "The transformer is still loading. Its words appear here when it is ready."; color: #3b3d42; }
+  .words:empty::before { content: "The transformer is still loading. Its words appear here when it is ready."; display: block;
+                         color: #3b3d42; font-size: 15px; line-height: 1.55; padding: 4px 0; }
   .why-how { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(10, 11, 13, 0.08); font-size: 13.5px; line-height: 1.5; color: #3b3d42; }
   .again { margin-top: 18px; display: flex; justify-content: center; }
 
@@ -287,7 +290,7 @@
   .loader-bg { position: absolute; inset: 0; background: var(--hero-bg); transition: opacity 0.8s var(--ease); }
   .loader-mark { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px;
                  animation: breathe 1.6s 1.1s ease-in-out infinite; }
-  .loader-mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s 0.1s var(--ease) forwards; }
+  .loader-mark path { stroke-dasharray: var(--len, 160); stroke-dashoffset: var(--len, 160); animation: draw 0.9s 0.1s var(--ease) forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
   @keyframes breathe { 50% { opacity: 0.45; } }
   .ready .loader-bg { opacity: 0; }
@@ -321,14 +324,14 @@
     .sub { margin-bottom: 28px; }
   }
   @media (max-width: 640px) {
-    .hero { padding: 64px 16px 24px; }
+    .hero { min-height: 100vh; min-height: 100svh; padding: 64px 16px 28px; }
     .mark { width: 48px; height: 48px; }
     .glass-bar .pill { flex: 1; }
     .sub { font-size: 15px; margin-bottom: 30px; }
     .learn { display: none; }
     .story { font-size: 16px; }
     .story-card { inset: 9vh 12px; border-radius: 28px; }
-    .hero-wrap { min-height: 700px; }
+    .wordmark { font-size: 24vw; }
     .chips { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; width: calc(100vw - 32px); padding: 4px 2px 8px;
              scrollbar-width: none; mask-image: linear-gradient(90deg, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
     .story .dropcap { font-size: 92px; }
@@ -344,6 +347,17 @@
     .egg-stage { height: 220px; }
     .egg-body { padding: 22px 16px 16px; }
   }
+  /* Short phones (and phones in landscape): tighten the hero so it fits on one screen where it can */
+  @media (max-width: 640px) and (max-height: 740px), (max-height: 500px) {
+    .hero { min-height: 100vh; min-height: 100svh; padding-top: 36px; padding-bottom: 20px; }
+    .mark-btn { margin-bottom: 14px; }
+    .mark { width: 42px; height: 42px; }
+    h1 { font-size: 40px; margin-bottom: 10px; }
+    .sub { margin-bottom: 20px; font-size: 14.5px; }
+    textarea { min-height: 84px; }
+    .examples { margin-top: 14px; gap: 8px; }
+    .status-line { margin-top: 8px; }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     #result:not([hidden]), dialog.egg[open], dialog.egg[open] .stamp, dialog.egg[open] .giftcard, .shapes g { animation: none; }
@@ -358,9 +372,13 @@
 <div class="loader" aria-hidden="true">
   <div class="loader-bg"></div>
   <svg class="loader-mark" viewBox="0 0 48 48" fill="none">
-    <path pathLength="1" d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="rgba(0,0,0,0.875)" stroke-width="5.5" stroke-linejoin="round"/>
+    <path d="M12 7h24a8 8 0 0 1 8 8v13a8 8 0 0 1-8 8H24l-9 7v-7h-3a8 8 0 0 1-8-8V15a8 8 0 0 1 8-8Z" stroke="rgba(0,0,0,0.875)" stroke-width="5.5" stroke-linejoin="round"/>
   </svg>
 </div>
+<script>
+  // The stroke draws itself over its real length (pathLength is not honoured everywhere).
+  (function () { var p = document.querySelector(".loader-mark path"); if (p && p.getTotalLength) p.style.setProperty("--len", Math.ceil(p.getTotalLength() + 1)); })();
+</script>
 
 <header class="hero-wrap" id="top">
     <div class="hero-card" id="hero-card">
