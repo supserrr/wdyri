@@ -65,7 +65,7 @@ The [live app](https://huggingface.co/spaces/supserrr/wdyri) is a free static Sp
 
 - **Fallback demo:** [notebooks/colab_app.ipynb](notebooks/colab_app.ipynb) runs the same ensemble on Colab with a public link.
 - **Locally:** `python app/app.py` runs it with Gradio.
-- **Demo video:** to be added.
+- **Demo video:** [watch on YouTube](https://youtu.be/-evEAtiSujw).
 
 > [!IMPORTANT]
 > WDYRI is a research demo, not a guarantee. When in doubt about a message, call your provider on its official number.
