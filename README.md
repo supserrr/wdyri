@@ -102,6 +102,7 @@ wdyri/
 
 | Page | Contents |
 | --- | --- |
+| [Report (PDF)](docs/WDYRI_Report.pdf) | the full written report |
 | [Research questions and contributions](docs/research.md) | the problem, prior work, what is new, findings and related work |
 | [Data and models](docs/methods.md) | datasets, cleaning, splits, the model ladder and training settings |
 | [Results](docs/results.md) | main results table, figures, experiments E1–E12, error analysis and limitations |
